@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    `maven-publish`
 }
 
 android {
@@ -55,4 +56,31 @@ dependencies {
     testImplementation(libs.junit4)
     testImplementation(libs.google.tuth)
     testImplementation(libs.mockk)
+
+}
+
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://github.com/dautovicharis/Charts")
+                credentials {
+                    username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                    password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+                }
+            }
+        }
+
+        publications {
+            create<MavenPublication>("gpr") {
+                from(components["release"])
+                run {
+                    groupId = "com.hd.charts"
+                    artifactId = "charts"
+                    version = "0.1.0-dev1"
+                }
+            }
+        }
+    }
 }
