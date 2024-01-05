@@ -1,4 +1,4 @@
-package com.hd.charts.lib.piechart
+package com.hd.charts.piechart
 
 import android.util.Log
 import androidx.compose.ui.input.pointer.PointerInputChange

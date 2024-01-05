@@ -1,4 +1,4 @@
-package com.hd.charts.lib.piechart
+package com.hd.charts.piechart
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.aspectRatio

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.hd.charts.lib"
+    namespace = "com.hd.charts"
     compileSdk = 34
 
     defaultConfig {

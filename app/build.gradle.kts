@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.hd.charts"
+    namespace = "com.hd.charts.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.hd.charts"
+        applicationId = "com.hd.charts.app"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

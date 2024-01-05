@@ -1,4 +1,4 @@
-package com.hd.charts.lib.piechart
+package com.hd.charts.piechart
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.tween
@@ -21,7 +21,7 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
-import com.hd.charts.lib.theme.HDChartViewTheme
+import com.hd.charts.theme.HDChartViewTheme
 
 // Constants
 private const val ANIMATION_DURATION = 500

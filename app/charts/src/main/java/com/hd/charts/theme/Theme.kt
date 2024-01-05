@@ -1,4 +1,4 @@
-package com.hd.charts.lib.theme
+package com.hd.charts.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
