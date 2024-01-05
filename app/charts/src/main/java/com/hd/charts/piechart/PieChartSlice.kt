@@ -1,4 +1,4 @@
-package com.hd.charts.lib.piechart
+package com.hd.charts.piechart
 
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateFloatAsState
@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hd.charts.lib.theme.HDChartViewTheme
+import com.hd.charts.theme.HDChartViewTheme
 
 internal data class PieSlice(
     val startDeg: Float,

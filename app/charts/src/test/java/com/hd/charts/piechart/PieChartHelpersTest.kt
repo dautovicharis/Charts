@@ -1,4 +1,4 @@
-package com.hd.charts.lib.piechart
+package com.hd.charts.piechart
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.PointerInputChange

@@ -1,4 +1,4 @@
-package com.hd.charts.ui.theme
+package com.hd.charts.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

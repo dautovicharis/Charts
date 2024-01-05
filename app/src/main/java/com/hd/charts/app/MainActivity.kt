@@ -1,4 +1,4 @@
-package com.hd.charts
+package com.hd.charts.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -16,16 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hd.charts.lib.R
-import com.hd.charts.lib.piechart.PieChartView
-import com.hd.charts.ui.theme.HDChartViewTheme
-import com.hd.charts.lib.R as libR
+import com.hd.charts.R
+import com.hd.charts.piechart.PieChartView
+import com.hd.charts.app.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HDChartViewTheme {
+            AppTheme {
                 View()
             }
         }
@@ -52,7 +51,7 @@ private fun View() {
                 data = listOf(
                     8.0, 23.0, 54.0, 32.0, 12.0, 37.0
                 ),
-                title = stringResource(id = libR.string.pie_chart),
+                title = stringResource(id = R.string.pie_chart),
                 legend = stringResource(id = R.string.legend)
             )
         }
@@ -62,7 +61,7 @@ private fun View() {
 @Preview
 @Composable
 fun Preview() {
-    HDChartViewTheme() {
+    AppTheme {
         View()
     }
 }
