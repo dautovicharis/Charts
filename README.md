@@ -11,6 +11,7 @@ Inspired by: https://github.com/AppPear/ChartView
 
 Add it in your *settings.gradle.kts* at the end of repositories:
 
+```kotlin
     dependencyResolutionManagement {
         repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
         repositories {
@@ -19,10 +20,14 @@ Add it in your *settings.gradle.kts* at the end of repositories:
             maven(url = "https://jitpack.io")
         }
     }
+```
+
 
 **Step 2**. Add the dependency
-
+```kotlin
     implementation("com.github.dautovicharis:Charts:{version}")
+```
+
 
 # Supported charts
 - Pie
