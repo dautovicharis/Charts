@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.theme.HDChartViewTheme
@@ -41,7 +42,9 @@ internal fun PieChartSlice(
     index: Int,
     pieSliceStyle: PieSliceStyle
 ) {
-    var show by remember { mutableStateOf(false) }
+
+    val isPreview = LocalInspectionMode.current
+    var show by remember { mutableStateOf(isPreview) }
     val scale by animateFloatAsState(
         targetValue = if (show) MAX_SCALE else MIN_SCALE,
         animationSpec = TweenSpec(
