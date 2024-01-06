@@ -19,7 +19,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hd.charts.theme.HDChartViewTheme
+import com.hd.charts.theme.ChartsDefaultTheme
 
 internal data class PieSlice(
     val startDeg: Float,
@@ -97,7 +97,7 @@ private fun PieSlicePreview() {
 @Preview
 @Composable
 private fun PieSliceDefault() {
-    HDChartViewTheme(darkTheme = false, dynamicColor = false) {
+    ChartsDefaultTheme(darkTheme = false, dynamicColor = false) {
         PieSlicePreview()
     }
 }
@@ -105,7 +105,7 @@ private fun PieSliceDefault() {
 @Preview
 @Composable
 private fun PieSliceDark() {
-    HDChartViewTheme(darkTheme = true, dynamicColor = false) {
+    ChartsDefaultTheme(darkTheme = true, dynamicColor = false) {
         PieSlicePreview()
     }
 }
@@ -113,7 +113,7 @@ private fun PieSliceDark() {
 @Preview
 @Composable
 private fun PieSliceDynamic() {
-    HDChartViewTheme(darkTheme = false, dynamicColor = true) {
+    ChartsDefaultTheme(darkTheme = false, dynamicColor = true) {
         PieSlicePreview()
     }
 }

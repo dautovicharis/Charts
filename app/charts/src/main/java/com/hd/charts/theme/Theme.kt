@@ -75,7 +75,7 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 @Composable
-internal fun HDChartViewTheme(
+internal fun ChartsDefaultTheme(
         darkTheme: Boolean = isSystemInDarkTheme(),
         // Dynamic color is available on Android 12+
         dynamicColor: Boolean = false,
