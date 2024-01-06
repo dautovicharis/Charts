@@ -1,5 +1,7 @@
 # Charts
 
+[![Release](https://jitpack.io/v/dautovicharis/Charts.svg)](https://jitpack.io/#dautovicharis/Charts)
+
 Inspired by: https://github.com/AppPear/ChartView
 
 Supported charts:
