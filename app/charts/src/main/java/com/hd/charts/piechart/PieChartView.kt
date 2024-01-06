@@ -27,30 +27,31 @@ fun PieChartView(
     sliceStyle: PieSliceStyle = Defaults.pieSliceStyle()
 ) {
     var currentTitle by remember { mutableStateOf(title) }
-
-    Column(
-        modifier = chartViewsStyle.modifierMain
-    ) {
-        Text(
-            modifier = chartViewsStyle.modifierTopTitle,
-            text = currentTitle,
-            style = chartViewsStyle.styleTitle
-        )
-        PieChart(
-            data = data,
-            chartStyle = chartStyle,
-            pieSliceStyle = sliceStyle
+    ChartsDefaultTheme {
+        Column(
+            modifier = chartViewsStyle.modifierMain
         ) {
-            currentTitle = when (it) {
-                NO_SELECTION -> title
-                else -> data[it].toString()
+            Text(
+                modifier = chartViewsStyle.modifierTopTitle,
+                text = currentTitle,
+                style = chartViewsStyle.styleTitle
+            )
+            PieChart(
+                data = data,
+                chartStyle = chartStyle,
+                pieSliceStyle = sliceStyle
+            ) {
+                currentTitle = when (it) {
+                    NO_SELECTION -> title
+                    else -> data[it].toString()
+                }
             }
+            Text(
+                modifier = chartViewsStyle.modifierLegend,
+                text = legend,
+                style = chartViewsStyle.styleLegend
+            )
         }
-        Text(
-            modifier = chartViewsStyle.modifierLegend,
-            text = legend,
-            style = chartViewsStyle.styleLegend
-        )
     }
 }
 
