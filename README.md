@@ -7,5 +7,5 @@ Supported charts:
 
 https://github.com/dautovicharis/Charts/assets/7049715/2be8025f-4840-4207-bfd2-3dfc814fed63
 
-- Line
-- Bar
+- Line (TO DO)
+- Bar (TO DO)
