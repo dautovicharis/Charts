@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -63,11 +65,14 @@ afterEvaluate {
     publishing {
         repositories {
             maven {
-                name = "GitHubPackages"
-                url = uri("https://github.com/dautovicharis/Charts")
+                name = "Charts"
+                url = uri("https://maven.pkg.github.com/dautovicharis/Charts")
                 credentials {
-                    username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                    password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+                    val localProperties = Properties()
+                    localProperties.load(rootProject.file("local.properties").reader())
+
+                    username = localProperties.getProperty("gpr.user") ?: System.getenv("USERNAME")
+                    password = localProperties.getProperty("gpr.key") ?: System.getenv("TOKEN")
                 }
             }
         }
@@ -77,7 +82,7 @@ afterEvaluate {
                 from(components["release"])
                 run {
                     groupId = "com.hd.charts"
-                    artifactId = "charts"
+                    artifactId = "all"
                     version = "0.1.0-dev1"
                 }
             }
