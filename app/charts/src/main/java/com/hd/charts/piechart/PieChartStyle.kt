@@ -65,7 +65,7 @@ object Defaults {
     fun pieChartViewStyle(
         backgroundColor: Color = MaterialTheme.colorScheme.surface,
         corner: Dp = 20.dp,
-        shadow: Dp = 20.dp,
+        shadow: Dp = 15.dp,
         titleStyle: TextStyle = TextStyle(
             fontSize = 20.sp,
             color = MaterialTheme.colorScheme.onBackground,
@@ -81,7 +81,7 @@ object Defaults {
         modifierTitle: Modifier = Modifier.padding(top = 10.dp, start = 15.dp),
         modifierLegend: Modifier = Modifier.padding(bottom = 10.dp, start = 15.dp),
         modifierMain: Modifier = Modifier
-            .shadow(elevation = shadow)
+            .shadow(elevation = shadow, shape = RoundedCornerShape(corner))
             .background(
                 color = backgroundColor,
                 shape = RoundedCornerShape(corner)
