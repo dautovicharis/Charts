@@ -65,7 +65,7 @@ publishing {
             afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.dautovicharis"
-                artifactId = "all"
+                artifactId = "charts"
                 version = "0.1.0-dev3"
             }
         }
