@@ -52,7 +52,7 @@ dependencies {
 
     // Compose
     implementation(platform(libs.androidx.compose.bom))
-    debugImplementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.ui.tooling)
 
     // Testing
     testImplementation(libs.junit4)
