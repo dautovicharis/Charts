@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
-import com.hd.charts.theme.HDChartViewTheme
+import com.hd.charts.theme.ChartsDefaultTheme
 
 @Composable
 fun PieChartView(
@@ -72,7 +72,7 @@ private fun PieChartViewPreview() {
 @Preview
 @Composable
 private fun PieChartViewDefault() {
-    HDChartViewTheme(darkTheme = false, dynamicColor = false) {
+    ChartsDefaultTheme(darkTheme = false, dynamicColor = false) {
         PieChartViewPreview()
     }
 }
@@ -80,7 +80,7 @@ private fun PieChartViewDefault() {
 @Preview
 @Composable
 private fun PieChartViewDark() {
-    HDChartViewTheme(darkTheme = true, dynamicColor = false) {
+    ChartsDefaultTheme(darkTheme = true, dynamicColor = false) {
         PieChartViewPreview()
     }
 }
@@ -88,7 +88,7 @@ private fun PieChartViewDark() {
 @Preview
 @Composable
 private fun PieChartViewDynamic() {
-    HDChartViewTheme(darkTheme = false, dynamicColor = true) {
+    ChartsDefaultTheme(darkTheme = false, dynamicColor = true) {
         PieChartViewPreview()
     }
 }

@@ -21,7 +21,7 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
-import com.hd.charts.theme.HDChartViewTheme
+import com.hd.charts.theme.ChartsDefaultTheme
 
 // Constants
 private const val ANIMATION_DURATION = 500
@@ -134,7 +134,7 @@ private fun PieChartPreview() {
 @Preview
 @Composable
 private fun PieChartDefault() {
-    HDChartViewTheme(darkTheme = false, dynamicColor = false) {
+    ChartsDefaultTheme(darkTheme = false, dynamicColor = false) {
         PieChartPreview()
     }
 }
@@ -142,7 +142,7 @@ private fun PieChartDefault() {
 @Preview
 @Composable
 private fun PieChartDark() {
-    HDChartViewTheme(darkTheme = true, dynamicColor = false) {
+    ChartsDefaultTheme(darkTheme = true, dynamicColor = false) {
         PieChartPreview()
     }
 }
@@ -150,7 +150,7 @@ private fun PieChartDark() {
 @Preview
 @Composable
 private fun PieChartDynamic() {
-    HDChartViewTheme(darkTheme = true, dynamicColor = true) {
+    ChartsDefaultTheme(darkTheme = true, dynamicColor = true) {
         PieChartPreview()
     }
 }
