@@ -8,6 +8,7 @@ Inspired by: https://github.com/AppPear/ChartView
 
 # Instalation
 **Step 1**. Add the JitPack repository to your build file
+
 Add it in your *settings.gradle.kts* at the end of repositories:
 
     dependencyResolutionManagement {
