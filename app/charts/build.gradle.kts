@@ -62,12 +62,11 @@ dependencies {
 publishing {
     publications {
         register<MavenPublication>("release") {
-
             afterEvaluate {
                 from(components["release"])
-                groupId = "com.hd.charts"
+                groupId = "com.github.dautovicharis"
                 artifactId = "all"
-                version = "0.1.0-dev2"
+                version = "0.1.0-dev3"
             }
         }
     }
