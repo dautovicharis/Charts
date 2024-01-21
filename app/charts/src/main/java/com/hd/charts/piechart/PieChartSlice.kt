@@ -29,8 +29,8 @@ internal data class PieSlice(
 )
 
 // Constants
-private const val ANIMATION_DURATION = 400
-private const val ANIMATION_DELAY_OFFSET = 40
+private const val ANIMATION_DURATION = 500
+private const val ANIMATION_DELAY_OFFSET = 100
 private const val STROKE_WIDTH = 5f
 private const val MAX_SCALE = 1f
 private const val MIN_SCALE = 0f
