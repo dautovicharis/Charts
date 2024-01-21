@@ -1,5 +1,6 @@
 # Charts
 [![Release](https://jitpack.io/v/dautovicharis/Charts.svg)](https://jitpack.io/#dautovicharis/Charts)
+[![Build Status](https://app.bitrise.io/app/f39bc4b7-b9d5-4cd4-acdc-52ea437a5572/status.svg?token=TD1J6ggkVG6oquDKIFnQLA&branch=master)](https://app.bitrise.io/app/f39bc4b7-b9d5-4cd4-acdc-52ea437a5572)
 
 
 This is a simple chart library built with Jetpack Compose.
