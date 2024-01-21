@@ -33,12 +33,22 @@ Add it in your *settings.gradle.kts* at the end of repositories:
 # Supported charts
 - Pie
 
-https://github.com/dautovicharis/Charts/assets/7049715/fa1d46dc-5f89-45cb-af80-c5178af75c05
+
+
+
+https://github.com/dautovicharis/Charts/assets/7049715/1fcc0339-735e-4c81-9c78-3cffb20ad567
+
 
 
 - Line
 
-https://github.com/dautovicharis/Charts/assets/7049715/c6dfe982-9bf6-4311-803a-5dfa50333bdf
+
+
+
+https://github.com/dautovicharis/Charts/assets/7049715/57e33004-f17b-4741-82d1-a4b06dca86e8
+
 
 
 - Bar (TO DO)
+
+
