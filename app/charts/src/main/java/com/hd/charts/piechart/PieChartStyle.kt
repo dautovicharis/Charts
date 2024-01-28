@@ -78,7 +78,7 @@ object Defaults {
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.Medium
         ),
-        modifierTitle: Modifier = Modifier.padding(top = 10.dp, start = 15.dp),
+        modifierTitle: Modifier = Modifier.padding(top = 10.dp, start = 15.dp, bottom = 25.dp),
         modifierLegend: Modifier = Modifier.padding(bottom = 10.dp, start = 15.dp),
         modifierMain: Modifier = Modifier
             .shadow(elevation = shadow, shape = RoundedCornerShape(corner))
