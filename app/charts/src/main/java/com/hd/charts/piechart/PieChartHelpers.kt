@@ -1,6 +1,5 @@
 package com.hd.charts.piechart
 
-import android.util.Log
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.center

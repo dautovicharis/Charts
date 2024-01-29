@@ -26,7 +26,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import com.hd.charts.theme.ChartsDefaultTheme
+import com.hd.charts.common.theme.ChartsDefaultTheme
 
 private const val ANIMATION_TARGET = 1.0f
 internal const val NO_SELECTION = -1

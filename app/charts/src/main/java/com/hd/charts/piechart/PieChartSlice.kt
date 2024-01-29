@@ -19,7 +19,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hd.charts.theme.ChartsDefaultTheme
+import com.hd.charts.common.theme.ChartsDefaultTheme
 
 internal data class PieSlice(
     val startDeg: Float,

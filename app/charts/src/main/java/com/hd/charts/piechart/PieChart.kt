@@ -21,7 +21,7 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
-import com.hd.charts.theme.ChartsDefaultTheme
+import com.hd.charts.common.theme.ChartsDefaultTheme
 
 // Constants
 private const val ANIMATION_DURATION = 500

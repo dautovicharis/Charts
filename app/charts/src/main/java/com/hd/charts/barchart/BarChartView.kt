@@ -18,7 +18,7 @@ import com.hd.charts.R
 import com.hd.charts.common.style.ChartViewDefaults
 import com.hd.charts.common.style.ChartViewStyle
 import com.hd.charts.barchart.Defaults as BarChartDefaults
-import com.hd.charts.theme.ChartsDefaultTheme
+import com.hd.charts.common.theme.ChartsDefaultTheme
 
 @Composable
 fun BarChartView(

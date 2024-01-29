@@ -1,4 +1,4 @@
-package com.hd.charts.theme
+package com.hd.charts.common.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
