@@ -24,6 +24,7 @@ object Defaults {
     fun lineChartStyle(
         modifier: Modifier = Modifier
             .wrapContentSize()
+            .padding(top = 10.dp)
             .aspectRatio(1f),
         pointColor: Color = MaterialTheme.colorScheme.tertiary,
         lineColor: Color = MaterialTheme.colorScheme.primary,
