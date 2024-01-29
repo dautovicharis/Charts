@@ -47,11 +47,6 @@ fun PieChartView(
                     else -> data[it].toString()
                 }
             }
-            Text(
-                modifier = chartViewsStyle.modifierLegend,
-                text = legend,
-                style = chartViewsStyle.styleLegend
-            )
         }
     }
 }
@@ -65,8 +60,7 @@ private fun PieChartViewPreview() {
     ) {
         PieChartView(
             data = listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0),
-            title = stringResource(id = R.string.pie_chart),
-            legend = stringResource(id = R.string.legend)
+            title = stringResource(id = R.string.pie_chart)
         )
     }
 }
