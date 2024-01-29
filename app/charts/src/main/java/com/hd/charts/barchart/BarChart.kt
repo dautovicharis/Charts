@@ -69,7 +69,8 @@ fun BarChart(
                     getSelectedIndex(
                         position = change.position,
                         values = values,
-                        size = size)
+                        size = size
+                    )
                 onValueChanged(selectedIndex)
             },
             onDragEnd = {
@@ -82,13 +83,13 @@ fun BarChart(
 
         values.forEachIndexed { index, value ->
             val spacing = style.space.toPx()
-            val barWidth = (size.width - values.size * spacing) / values.size
+            val barWidthWithSpacing = (size.width - spacing * (values.size - 1)) / values.size
 
             val finalBarHeight = size.height * (abs(value) / (maxValue - minValue))
             val barHeight = lerp(0f, finalBarHeight, progress[index].value)
 
             val top = if (value >= 0) baselineY - barHeight else baselineY
-            val left = spacing + (barWidth + spacing) * index
+            val left = (barWidthWithSpacing + spacing) * index
 
             val selectedBarScale = if (index == selectedIndex) MAX_SCALE else DEFAULT_SCALE
 
@@ -96,7 +97,7 @@ fun BarChart(
                 color = barColor,
                 topLeft = Offset(x = left, y = top),
                 size = Size(
-                    width = barWidth * selectedBarScale,
+                    width = barWidthWithSpacing * selectedBarScale,
                     height = barHeight * selectedBarScale
                 )
             )
