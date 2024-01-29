@@ -16,13 +16,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
 import com.hd.charts.theme.ChartsDefaultTheme
+import com.hd.charts.common.style.ChartViewDefaults
+import com.hd.charts.common.style.ChartViewStyle
 
 @Composable
 fun PieChartView(
     data: List<Double>,
     title: String,
-    legend: String,
-    chartViewsStyle: PieChartViewStyle = Defaults.pieChartViewStyle(),
+    chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
     chartStyle: PieChartStyle = Defaults.pieChartStyle(),
     sliceStyle: PieSliceStyle = Defaults.pieSliceStyle()
 ) {

@@ -15,16 +15,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
-import com.hd.charts.piechart.Defaults
+import com.hd.charts.common.style.ChartViewDefaults
+import com.hd.charts.common.style.ChartViewStyle
 import com.hd.charts.barchart.Defaults as BarChartDefaults
-import com.hd.charts.piechart.PieChartViewStyle
 import com.hd.charts.theme.ChartsDefaultTheme
 
 @Composable
 fun BarChartView(
     data: List<Float>,
     title: String,
-    chartViewsStyle: PieChartViewStyle = Defaults.pieChartViewStyle(),
+    chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
     chartStyle: BarChartStyle = BarChartDefaults.barChartStyle()
 ) {
     var currentTitle by remember { mutableStateOf(title) }
