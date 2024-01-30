@@ -34,13 +34,13 @@ class LineChartHelpersTest {
     fun testScaleValues() {
         // Arrange
         val testCases = hashMapOf(
-            Pair(listOf(10, 20, 30, 40, 50), Size(40f, 40f))
+            Pair(listOf(10.0, 20.0, 30.0, 40.0, 50.0), Size(40f, 40f))
                     to listOf(0.0f, 10.0f, 20.0f, 30.0f, 40.0f),
 
-            Pair(listOf(-5, 0, 5, 10, 15), Size(30f, 30f))
+            Pair(listOf(-5.0, 0.0, 5.0, 10.0, 15.0), Size(30f, 30f))
                     to listOf(0.0f, 7.5f, 15.0f, 22.5f, 30.0f),
 
-            Pair(listOf(100, 200, 300, 400, 500), Size(100f, 100f))
+            Pair(listOf(100.0, 200.0, 300.0, 400.0, 500.0), Size(100f, 100f))
                     to listOf(0.0f, 25.0f, 50.0f, 75.0f, 100.0f)
         )
 

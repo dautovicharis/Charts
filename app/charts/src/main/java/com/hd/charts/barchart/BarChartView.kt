@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
+import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartViewDefaults
 import com.hd.charts.common.style.ChartViewStyle
 import com.hd.charts.barchart.Defaults as BarChartDefaults
@@ -22,7 +23,7 @@ import com.hd.charts.common.theme.ChartsDefaultTheme
 
 @Composable
 fun BarChartView(
-    data: List<Float>,
+    chartData: ChartData,
     title: String,
     chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
     chartStyle: BarChartStyle = BarChartDefaults.barChartStyle()
@@ -39,10 +40,10 @@ fun BarChartView(
                 style = chartViewsStyle.styleTitle
             )
 
-            BarChart(values = data, style = chartStyle) {
+            BarChart(chartData = chartData, style = chartStyle) {
                 currentTitle = when (it) {
                     NO_SELECTION -> title
-                    else -> data[it].toString()
+                    else -> chartData.labels[it]
                 }
             }
         }
@@ -57,7 +58,7 @@ private fun BarChartViewPreview() {
             .wrapContentHeight(),
     ) {
         BarChartView(
-            data = listOf(-300f, 50f, 20f, 1f, 15f, -30f, 50f, 35f, 25f, 40f, 500f),
+            chartData = ChartData.fromFloatList(listOf(-300f, 50f, 20f, 1f, 15f, -30f, 50f, 35f, 25f, 40f, 500f)),
             title = stringResource(id = R.string.bar_chart)
         )
     }

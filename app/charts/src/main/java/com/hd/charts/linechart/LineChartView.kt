@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
+import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartViewDefaults
 import com.hd.charts.common.style.ChartViewStyle
 import com.hd.charts.common.theme.ChartsDefaultTheme
@@ -22,7 +23,7 @@ import com.hd.charts.linechart.Defaults as LineChartDefaults
 
 @Composable
 fun LineChartView(
-    data: List<Int>,
+    data: ChartData,
     title: String,
     chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
     chartStyle: LineChartStyle = LineChartDefaults.lineChartStyle()
@@ -38,10 +39,10 @@ fun LineChartView(
             style = chartViewsStyle.styleTitle
         )
 
-        LineChart(values = data, style = chartStyle) {
+        LineChart(chartData = data, style = chartStyle) {
             currentTitle = when (it) {
                 NO_SELECTION -> title
-                else -> data[it].toString()
+                else -> data.labels[it]
             }
         }
     }
@@ -55,7 +56,7 @@ private fun LineChartViewPreview() {
             .wrapContentHeight(),
     ) {
         LineChartView(
-            data = listOf(8, 23, 54, 32, 12, 37, 7, 23, 43),
+            data = ChartData.fromIntList(listOf(8, 23, 54, 32, 12, 37, 7, 23, 43)),
             title = stringResource(id = R.string.line_chart),
             chartStyle = LineChartDefaults.lineChartStyle()
         )

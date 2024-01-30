@@ -25,6 +25,7 @@ import com.hd.charts.R
 import com.hd.charts.app.ui.theme.AppTheme
 import com.hd.charts.barchart.BarChartView
 import com.hd.charts.barchart.Defaults
+import com.hd.charts.common.model.ChartData
 import com.hd.charts.linechart.Defaults.lineChartStyle
 import com.hd.charts.linechart.LineChartView
 import com.hd.charts.piechart.PieChartView
@@ -58,18 +59,18 @@ private fun View() {
         ) {
 
             PieChartView(
-                data = listOf(
+                chartData = ChartData.fromDoubleList(listOf(
                     8.0, 23.0, 54.0, 32.0, 12.0, 37.0
-                ),
+                ), postfix = " °C"),
                 title = stringResource(id = R.string.pie_chart)
             )
 
             Spacer(modifier = Modifier.height(20.dp))
 
             LineChartView(
-                data = listOf(
+                data = ChartData.fromIntList(listOf(
                     8, 23, 54, 32, 12, 37, 7, 23, 43
-                ),
+                )),
                 chartStyle = lineChartStyle(
                     bezier = true,
                     showPoints = false
@@ -80,9 +81,9 @@ private fun View() {
             Spacer(modifier = Modifier.height(20.dp))
 
             BarChartView(
-                data = listOf(
+                chartData = ChartData.fromFloatList(listOf(
                     -8.0f, 23.0f, 54.0f, 12.0f, 37.0f, -100f
-                ),
+                )),
                 title = stringResource(id = R.string.bar_chart),
                 chartStyle = Defaults.barChartStyle(modifier = Modifier
                     .size(200.dp)

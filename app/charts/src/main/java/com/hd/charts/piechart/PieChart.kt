@@ -21,6 +21,7 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
+import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.theme.ChartsDefaultTheme
 
 // Constants
@@ -31,12 +32,12 @@ internal const val NO_SELECTION = -1
 
 @Composable
 internal fun PieChart(
-    data: List<Double>,
+    chartData: ChartData,
     chartStyle: PieChartStyle,
     pieSliceStyle: PieSliceStyle,
     onSliceTouched: (Int) -> Unit = {},
 ) {
-    val slices = remember(data) { data.createPieSlices() }
+    val slices = remember(chartData) { createPieSlices(chartData) }
     var currentSelectionIndex by remember { mutableIntStateOf(NO_SELECTION) }
 
     val transition =
@@ -95,11 +96,11 @@ private fun getSelectedIndex(
     }
 }
 
-private fun List<Double>.createPieSlices(): List<PieSlice> {
+private fun createPieSlices(data: ChartData): List<PieSlice> {
     return mutableListOf<PieSlice>().apply {
         var lastEndDeg = 0.0
-        val maxValue = sum()
-        for (slice in this@createPieSlices) {
+        val maxValue = data.points.sum()
+        for (slice in data.points) {
             val normalized = slice / maxValue
             val startDeg = lastEndDeg
             val endDeg = lastEndDeg + (normalized * 360)
@@ -124,7 +125,7 @@ private fun PieChartPreview() {
             .wrapContentHeight()
     ) {
         PieChart(
-            data = listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0),
+            chartData = ChartData.fromDoubleList(listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)),
             chartStyle = Defaults.pieChartStyle(),
             pieSliceStyle = Defaults.pieSliceStyle()
         )

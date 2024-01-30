@@ -20,6 +20,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.util.lerp
+import com.hd.charts.common.model.ChartData
 import kotlin.math.abs
 
 private const val ANIMATION_TARGET = 1.0f
@@ -27,7 +28,7 @@ internal const val NO_SELECTION = -1
 private const val DEFAULT_SCALE = 1f
 private const val MAX_SCALE = 1.1f
 
-private fun getSelectedIndex(position: Offset, values: List<Float>, size: IntSize): Int {
+private fun getSelectedIndex(position: Offset, values: List<Double>, size: IntSize): Int {
     val barWidth = size.width / values.size
     val index = (position.x / (barWidth)).toInt()
     return index.coerceIn(0, values.size - 1)
@@ -35,13 +36,13 @@ private fun getSelectedIndex(position: Offset, values: List<Float>, size: IntSiz
 
 @Composable
 fun BarChart(
-    values: List<Float>,
+    chartData: ChartData,
     style: BarChartStyle,
     onValueChanged: (Int) -> Unit = {}
 ) {
     val barColor = style.barColor
     val progress = remember {
-        values.map { Animatable(0f) }
+        chartData.points.map { Animatable(0f) }
     }
 
     LaunchedEffect(Unit) {
@@ -57,8 +58,8 @@ fun BarChart(
             )
         }
     }
-    val maxValue = values.maxOrNull() ?: 0f
-    val minValue = values.minOrNull() ?: 0f
+    val maxValue = chartData.points.max()
+    val minValue = chartData.points.min()
 
     var selectedIndex by remember { mutableStateOf(-1) }
 
@@ -68,7 +69,7 @@ fun BarChart(
                 selectedIndex =
                     getSelectedIndex(
                         position = change.position,
-                        values = values,
+                        values = chartData.points,
                         size = size
                     )
                 onValueChanged(selectedIndex)
@@ -81,12 +82,12 @@ fun BarChart(
     }) {
         val baselineY = size.height * (maxValue / (maxValue - minValue))
 
-        values.forEachIndexed { index, value ->
+        chartData.points.forEachIndexed { index, value ->
             val spacing = style.space.toPx()
-            val barWidthWithSpacing = (size.width - spacing * (values.size - 1)) / values.size
+            val barWidthWithSpacing = (size.width - spacing * (chartData.points.size - 1)) / chartData.points.size
 
             val finalBarHeight = size.height * (abs(value) / (maxValue - minValue))
-            val barHeight = lerp(0f, finalBarHeight, progress[index].value)
+            val barHeight = lerp(0f, finalBarHeight.toFloat(), progress[index].value)
 
             val top = if (value >= 0) baselineY - barHeight else baselineY
             val left = (barWidthWithSpacing + spacing) * index
@@ -95,7 +96,7 @@ fun BarChart(
 
             drawRect(
                 color = barColor,
-                topLeft = Offset(x = left, y = top),
+                topLeft = Offset(x = left, y = top.toFloat()),
                 size = Size(
                     width = barWidthWithSpacing * selectedBarScale,
                     height = barHeight * selectedBarScale
@@ -113,7 +114,7 @@ fun BarChartPreview() {
         modifier = Modifier.wrapContentSize()
     ) {
         BarChart(
-            values = data,
+            chartData = ChartData.fromFloatList(data),
             style = Defaults.barChartStyle()
         )
     }

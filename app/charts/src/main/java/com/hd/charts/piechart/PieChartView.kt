@@ -15,13 +15,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
+import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartViewDefaults
 import com.hd.charts.common.style.ChartViewStyle
 import com.hd.charts.common.theme.ChartsDefaultTheme
 
 @Composable
 fun PieChartView(
-    data: List<Double>,
+    chartData: ChartData,
     title: String,
     chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
     chartStyle: PieChartStyle = Defaults.pieChartStyle(),
@@ -38,13 +39,13 @@ fun PieChartView(
                 style = chartViewsStyle.styleTitle
             )
             PieChart(
-                data = data,
+                chartData = chartData,
                 chartStyle = chartStyle,
                 pieSliceStyle = sliceStyle
             ) {
                 currentTitle = when (it) {
                     NO_SELECTION -> title
-                    else -> data[it].toString()
+                    else -> chartData.labels[it]
                 }
             }
         }
@@ -59,7 +60,7 @@ private fun PieChartViewPreview() {
             .wrapContentHeight(),
     ) {
         PieChartView(
-            data = listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0),
+            chartData = ChartData.fromDoubleList(listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)),
             title = stringResource(id = R.string.pie_chart)
         )
     }

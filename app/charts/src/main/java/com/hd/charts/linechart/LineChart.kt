@@ -26,6 +26,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.theme.ChartsDefaultTheme
 
 private const val ANIMATION_TARGET = 1.0f
@@ -33,14 +34,14 @@ internal const val NO_SELECTION = -1
 
 @Composable
 fun LineChart(
-    values: List<Int> = emptyList(),
+    chartData: ChartData,
     style: LineChartStyle,
     onValueChanged: (Int) -> Unit = {},
 ) {
     val touchX = remember { mutableFloatStateOf(0f) }
     val dragging = remember { mutableStateOf(false) }
     val progress = remember {
-        values.map { Animatable(0f) }
+        chartData.points.map { Animatable(0f) }
     }
 
     LaunchedEffect(Unit) {
@@ -72,7 +73,7 @@ fun LineChart(
             )
 
         }, onDraw = {
-        val scaledValues = scaleValues(values = values, size = size)
+        val scaledValues = scaleValues(values = chartData.points, size = size)
         drawChartPath(
             values = scaledValues,
             size = size,
@@ -218,7 +219,7 @@ private fun DrawScope.drawPathPoints(
 private fun LineChartPreview() {
     ChartsDefaultTheme {
         LineChart(
-            values = listOf(20, 50, 60, -60, 40, 60, 120, 50),
+            chartData = ChartData.fromIntList(listOf(20, 50, 60, -60, 40, 60, 120, 50)),
             style = LineChartStyle(
                 modifier = Modifier
                     .fillMaxSize()
@@ -237,7 +238,7 @@ private fun LineChartPreview() {
 private fun LineChartBezierPreview() {
     ChartsDefaultTheme {
         LineChart(
-            values = listOf(20, 60, -20, 100, -50, 200),
+            chartData = ChartData.fromIntList(listOf(20, 60, -20, 100, -50, 200)),
             style = LineChartStyle(
                 modifier = Modifier
                     .fillMaxSize()

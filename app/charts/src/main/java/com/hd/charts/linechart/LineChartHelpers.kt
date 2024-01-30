@@ -27,12 +27,12 @@ internal fun findNearestPoint(
     return Offset(touchX, size.height - interpolatedY)
 }
 
-internal fun scaleValues(values: List<Int>, size: Size): List<Float> {
+internal fun scaleValues(values: List<Double>, size: Size): List<Float> {
     val minValue = values.min()
     val maxValue = values.max()
     val valueRange = maxValue - minValue
-    val scale = if (valueRange != 0) size.height / valueRange else 1f
+    val scale = if (valueRange != 0.0) size.height / valueRange else 1.0
     return values.map { value ->
-        (value - minValue) * scale
+        ((value - minValue) * scale).toFloat()
     }
 }
