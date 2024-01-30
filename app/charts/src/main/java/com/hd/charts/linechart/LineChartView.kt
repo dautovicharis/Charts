@@ -31,19 +31,21 @@ fun LineChartView(
 ) {
     var currentTitle by remember { mutableStateOf(title) }
 
-    Column(
-        modifier = chartViewsStyle.modifierMain
-    ) {
-        Text(
-            modifier = chartViewsStyle.modifierTopTitle,
-            text = currentTitle,
-            style = chartViewsStyle.styleTitle
-        )
+    ChartsDefaultTheme {
+        Column(
+            modifier = chartViewsStyle.modifierMain
+        ) {
+            Text(
+                modifier = chartViewsStyle.modifierTopTitle,
+                text = currentTitle,
+                style = chartViewsStyle.styleTitle
+            )
 
-        LineChart(chartData = data, style = chartStyle) {
-            currentTitle = when (it) {
-                NO_SELECTION -> title
-                else -> data.labels[it]
+            LineChart(chartData = data, style = chartStyle) {
+                currentTitle = when (it) {
+                    NO_SELECTION -> title
+                    else -> data.labels[it]
+                }
             }
         }
     }
