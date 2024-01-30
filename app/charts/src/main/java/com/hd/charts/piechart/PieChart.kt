@@ -17,18 +17,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntSize
+import com.hd.charts.common.ANIMATION_DURATION
+import com.hd.charts.common.DEFAULT_SCALE
+import com.hd.charts.common.MAX_SCALE
+import com.hd.charts.common.NO_SELECTION
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.theme.ChartsDefaultTheme
 
-// Constants
-private const val ANIMATION_DURATION = 500
-private const val DEFAULT_SCALE = 1f
-private const val MAX_SCALE = 1.1f
-internal const val NO_SELECTION = -1
 
 @Composable
 internal fun PieChart(

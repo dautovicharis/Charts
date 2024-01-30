@@ -20,20 +20,20 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.util.lerp
+import com.hd.charts.common.ANIMATION_DURATION
+import com.hd.charts.common.ANIMATION_DURATION_OFFSET
+import com.hd.charts.common.ANIMATION_TARGET
+import com.hd.charts.common.DEFAULT_SCALE
+import com.hd.charts.common.MAX_SCALE
+import com.hd.charts.common.NO_SELECTION
 import com.hd.charts.common.model.ChartData
 import kotlin.math.abs
-
-private const val ANIMATION_TARGET = 1.0f
-internal const val NO_SELECTION = -1
-private const val DEFAULT_SCALE = 1f
-private const val MAX_SCALE = 1.1f
 
 private fun getSelectedIndex(position: Offset, values: List<Double>, size: IntSize): Int {
     val barWidth = size.width / values.size
     val index = (position.x / (barWidth)).toInt()
     return index.coerceIn(0, values.size - 1)
 }
-
 @Composable
 fun BarChart(
     chartData: ChartData,
@@ -46,12 +46,11 @@ fun BarChart(
     }
 
     LaunchedEffect(Unit) {
-        val durationOffset = 100
         progress.forEachIndexed { index, segmentProgress ->
             segmentProgress.animateTo(
                 targetValue = ANIMATION_TARGET,
                 animationSpec = tween(
-                    durationMillis = 200 + durationOffset * index,
+                    durationMillis = ANIMATION_DURATION + ANIMATION_DURATION_OFFSET * index,
                     delayMillis = 0,
                     easing = FastOutSlowInEasing
                 )

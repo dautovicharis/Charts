@@ -1,7 +1,8 @@
 package com.hd.charts.piechart
 
-import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,9 +17,10 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.hd.charts.common.ANIMATION_DURATION
+import com.hd.charts.common.ANIMATION_DURATION_OFFSET
 import com.hd.charts.common.theme.ChartsDefaultTheme
 
 internal data class PieSlice(
@@ -29,8 +31,6 @@ internal data class PieSlice(
 )
 
 // Constants
-private const val ANIMATION_DURATION = 500
-private const val ANIMATION_DELAY_OFFSET = 100
 private const val STROKE_WIDTH = 5f
 private const val MAX_SCALE = 1f
 private const val MIN_SCALE = 0f
@@ -42,17 +42,18 @@ internal fun PieChartSlice(
     index: Int,
     pieSliceStyle: PieSliceStyle
 ) {
+    var show by remember { mutableStateOf(false) }
 
-    val isPreview = LocalInspectionMode.current
-    var show by remember { mutableStateOf(isPreview) }
     val scale by animateFloatAsState(
         targetValue = if (show) MAX_SCALE else MIN_SCALE,
-        animationSpec = TweenSpec(
-            durationMillis = ANIMATION_DURATION,
-            delay = (index) * ANIMATION_DELAY_OFFSET
+        animationSpec = tween(
+            durationMillis = ANIMATION_DURATION + ANIMATION_DURATION_OFFSET * index,
+            delayMillis = (index) * ANIMATION_DURATION_OFFSET,
+            easing = FastOutSlowInEasing
         ),
         label = "scaleAnimation"
     )
+
 
     Canvas(modifier = Modifier
         .fillMaxSize()

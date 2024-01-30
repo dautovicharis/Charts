@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
+import com.hd.charts.common.NO_SELECTION
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartViewDefaults
 import com.hd.charts.common.style.ChartViewStyle
