@@ -29,11 +29,6 @@ import com.hd.charts.common.NO_SELECTION
 import com.hd.charts.common.model.ChartData
 import kotlin.math.abs
 
-private fun getSelectedIndex(position: Offset, values: List<Double>, size: IntSize): Int {
-    val barWidth = size.width / values.size
-    val index = (position.x / (barWidth)).toInt()
-    return index.coerceIn(0, values.size - 1)
-}
 @Composable
 fun BarChart(
     chartData: ChartData,
