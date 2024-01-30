@@ -76,44 +76,6 @@ internal fun PieChart(
     }
 }
 
-private fun getSelectedIndex(
-    change: PointerInputChange,
-    size: IntSize,
-    slices: List<PieSlice>
-): Int {
-    return when (isPointInCircle(point = change, size = size)) {
-        true -> {
-            val touchDegree = degree(point = change, size = size)
-            slices
-                .indexOfFirst { it.startDeg < touchDegree && it.endDeg > touchDegree }
-                .takeIf { it != NO_SELECTION } ?: NO_SELECTION
-        }
-
-        else -> NO_SELECTION
-    }
-}
-
-private fun createPieSlices(data: ChartData): List<PieSlice> {
-    return mutableListOf<PieSlice>().apply {
-        var lastEndDeg = 0.0
-        val maxValue = data.points.sum()
-        for (slice in data.points) {
-            val normalized = slice / maxValue
-            val startDeg = lastEndDeg
-            val endDeg = lastEndDeg + (normalized * 360)
-            lastEndDeg = endDeg
-            add(
-                PieSlice(
-                    startDeg = startDeg.toFloat(),
-                    endDeg = endDeg.toFloat(),
-                    value = slice,
-                    normalizedValue = normalized
-                )
-            )
-        }
-    }
-}
-
 @Composable
 private fun PieChartPreview() {
     Row(
