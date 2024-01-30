@@ -9,6 +9,12 @@ This is a simple chart library built with Jetpack Compose.
 
 Inspired by: https://github.com/AppPear/ChartView
 
+# Features
+- Animations
+- M3 theme support
+- Customizable chart styles
+- Various data set support
+
 # Instalation
 **Step 1**. Add the JitPack repository to your build file
 
