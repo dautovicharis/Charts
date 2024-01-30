@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Immutable
@@ -19,12 +20,13 @@ class LineChartStyle internal constructor(
     val showPoints: Boolean
 )
 
-object Defaults {
+object LineChartDefaults {
     @Composable
     fun lineChartStyle(
+        padding: Dp = 15.dp,
         modifier: Modifier = Modifier
             .wrapContentSize()
-            .padding(top = 10.dp)
+            .padding(padding)
             .aspectRatio(1f),
         pointColor: Color = MaterialTheme.colorScheme.tertiary,
         lineColor: Color = MaterialTheme.colorScheme.primary,

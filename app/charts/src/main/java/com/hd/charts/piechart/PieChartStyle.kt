@@ -23,7 +23,7 @@ class PieChartStyle internal constructor(
     val modifier: Modifier
 )
 
-object Defaults {
+object PieChartDefaults {
     @Composable
     fun pieSliceStyle(
         backgroundColor: Color = MaterialTheme.colorScheme.primary,
@@ -36,7 +36,7 @@ object Defaults {
     }
 
     @Composable
-    fun pieChartStyle(padding: Dp = 25.dp): PieChartStyle {
+    fun pieChartStyle(padding: Dp = 15.dp): PieChartStyle {
         return PieChartStyle(
             modifier = Modifier
                 .wrapContentSize()

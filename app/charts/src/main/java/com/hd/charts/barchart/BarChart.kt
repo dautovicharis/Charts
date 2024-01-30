@@ -18,7 +18,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.util.lerp
 import com.hd.charts.common.ANIMATION_DURATION
 import com.hd.charts.common.ANIMATION_DURATION_OFFSET
@@ -109,7 +108,7 @@ fun BarChartPreview() {
     ) {
         BarChart(
             chartData = ChartData.fromFloatList(data),
-            style = Defaults.barChartStyle()
+            style = BarChartDefaults.barChartStyle()
         )
     }
 }

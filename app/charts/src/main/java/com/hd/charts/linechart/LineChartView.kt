@@ -20,7 +20,6 @@ import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartViewDefaults
 import com.hd.charts.common.style.ChartViewStyle
 import com.hd.charts.common.theme.ChartsDefaultTheme
-import com.hd.charts.linechart.Defaults as LineChartDefaults
 
 @Composable
 fun LineChartView(

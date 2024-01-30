@@ -85,8 +85,8 @@ private fun PieChartPreview() {
     ) {
         PieChart(
             chartData = ChartData.fromDoubleList(listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)),
-            chartStyle = Defaults.pieChartStyle(),
-            pieSliceStyle = Defaults.pieSliceStyle()
+            chartStyle = PieChartDefaults.pieChartStyle(),
+            pieSliceStyle = PieChartDefaults.pieSliceStyle()
         )
     }
 }

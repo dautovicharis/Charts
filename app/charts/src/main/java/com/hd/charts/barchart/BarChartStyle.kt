@@ -1,5 +1,6 @@
 package com.hd.charts.barchart
 
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -17,12 +18,13 @@ class BarChartStyle internal constructor(
     val space: Dp,
 )
 
-object Defaults {
+object BarChartDefaults {
     @Composable
     fun barChartStyle(
         padding: Dp = 15.dp,
         modifier: Modifier = Modifier
             .padding(padding)
+            .aspectRatio(1f)
             .fillMaxSize(),
         barColor: Color = MaterialTheme.colorScheme.primary,
         space: Dp = 10.dp

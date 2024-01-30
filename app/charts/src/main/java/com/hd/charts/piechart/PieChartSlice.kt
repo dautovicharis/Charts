@@ -90,7 +90,7 @@ private fun PieSlicePreview() {
             startDeg = 0f,
             endDeg = 90f,
             index = 0,
-            pieSliceStyle = Defaults.pieSliceStyle()
+            pieSliceStyle = PieChartDefaults.pieSliceStyle()
         )
     }
 }

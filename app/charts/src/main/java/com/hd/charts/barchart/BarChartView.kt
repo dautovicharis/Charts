@@ -19,7 +19,6 @@ import com.hd.charts.common.NO_SELECTION
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartViewDefaults
 import com.hd.charts.common.style.ChartViewStyle
-import com.hd.charts.barchart.Defaults as BarChartDefaults
 import com.hd.charts.common.theme.ChartsDefaultTheme
 
 @Composable

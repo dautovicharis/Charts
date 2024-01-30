@@ -26,8 +26,8 @@ fun PieChartView(
     chartData: ChartData,
     title: String,
     chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
-    chartStyle: PieChartStyle = Defaults.pieChartStyle(),
-    sliceStyle: PieSliceStyle = Defaults.pieSliceStyle()
+    chartStyle: PieChartStyle = PieChartDefaults.pieChartStyle(),
+    sliceStyle: PieSliceStyle = PieChartDefaults.pieSliceStyle()
 ) {
     var currentTitle by remember { mutableStateOf(title) }
     ChartsDefaultTheme {
