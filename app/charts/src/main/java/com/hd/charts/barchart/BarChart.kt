@@ -74,16 +74,17 @@ fun BarChart(
         )
     }) {
         val baselineY = size.height * (maxValue / (maxValue - minValue))
+        val dataSize = chartData.points.size
 
         chartData.points.forEachIndexed { index, value ->
             val spacing = style.space.toPx()
-            val barWidthWithSpacing = (size.width - spacing * (chartData.points.size - 1)) / chartData.points.size
+            val barWidth = (size.width - spacing * (dataSize - 1)) / dataSize
 
             val finalBarHeight = size.height * (abs(value) / (maxValue - minValue))
             val barHeight = lerp(0f, finalBarHeight.toFloat(), progress[index].value)
 
             val top = if (value >= 0) baselineY - barHeight else baselineY
-            val left = (barWidthWithSpacing + spacing) * index
+            val left = (barWidth + spacing) * index
 
             val selectedBarScale = if (index == selectedIndex) MAX_SCALE else DEFAULT_SCALE
 
@@ -91,7 +92,7 @@ fun BarChart(
                 color = barColor,
                 topLeft = Offset(x = left, y = top.toFloat()),
                 size = Size(
-                    width = barWidthWithSpacing * selectedBarScale,
+                    width = barWidth * selectedBarScale,
                     height = barHeight * selectedBarScale
                 )
             )
