@@ -26,8 +26,7 @@ fun PieChartView(
     chartData: ChartData,
     title: String,
     chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
-    chartStyle: PieChartStyle = PieChartDefaults.pieChartStyle(),
-    sliceStyle: PieSliceStyle = PieChartDefaults.pieSliceStyle()
+    chartStyle: PieChartStyle = PieChartDefaults.pieChartStyle()
 ) {
     var currentTitle by remember { mutableStateOf(title) }
     ChartsDefaultTheme {
@@ -41,8 +40,7 @@ fun PieChartView(
             )
             PieChart(
                 chartData = chartData,
-                chartStyle = chartStyle,
-                pieSliceStyle = sliceStyle
+                style = chartStyle
             ) {
                 currentTitle = when (it) {
                     NO_SELECTION -> title
@@ -62,7 +60,10 @@ private fun PieChartViewPreview() {
     ) {
         PieChartView(
             chartData = ChartData.fromDoubleList(listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)),
-            title = stringResource(id = R.string.pie_chart)
+            title = stringResource(id = R.string.pie_chart),
+            chartStyle = PieChartDefaults.pieChartStyle(
+                donutPercentage = 50f
+            )
         )
     }
 }

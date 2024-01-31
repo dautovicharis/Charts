@@ -14,7 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.drawscope.Fill
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +34,7 @@ internal data class PieSlice(
     val normalizedValue: Double
 )
 
+
 // Constants
 private const val STROKE_WIDTH = 5f
 private const val MAX_SCALE = 1f
@@ -40,7 +45,7 @@ internal fun PieChartSlice(
     startDeg: Float,
     endDeg: Float,
     index: Int,
-    pieSliceStyle: PieSliceStyle
+    style: PieChartStyle
 ) {
     var show by remember { mutableStateOf(false) }
 
@@ -62,18 +67,44 @@ internal fun PieChartSlice(
             show = true
         }) {
         if (show) {
-            drawArc(
-                color = pieSliceStyle.backgroundColor,
-                startAngle = startDeg,
-                sweepAngle = endDeg - startDeg,
-                useCenter = true,
-                style = Fill
+            val outerPath = Path().apply {
+                moveTo(center.x, center.y)
+                arcTo(
+                    rect = Rect(Offset.Zero, size),
+                    startAngleDegrees = startDeg,
+                    sweepAngleDegrees = endDeg - startDeg,
+                    forceMoveTo = false
+                )
+                close()
+            }
+
+            val totalRadius = size.width / 2
+            val percentage = style.donutHolePercentage
+            val innerRadius = totalRadius * (percentage / 100f)
+            val innerDiameter = innerRadius * 2
+            val innerPath = Path().apply {
+                addOval(
+                    Rect(
+                        center - Offset(innerRadius, innerRadius),
+                        Size(innerDiameter, innerDiameter)
+                    )
+                )
+            }
+
+            val combinedPath = Path.combine(
+                PathOperation.Difference,
+                outerPath,
+                innerPath
             )
-            drawArc(
-                color = pieSliceStyle.strokeColor,
-                startAngle = startDeg,
-                sweepAngle = endDeg - startDeg,
-                useCenter = true,
+
+            drawPath(
+                path = combinedPath,
+                color = style.backgroundColor
+            )
+
+            drawPath(
+                path = outerPath,
+                color = style.strokeColor,
                 style = Stroke(width = STROKE_WIDTH)
             )
         }
@@ -90,7 +121,7 @@ private fun PieSlicePreview() {
             startDeg = 0f,
             endDeg = 90f,
             index = 0,
-            pieSliceStyle = PieChartDefaults.pieSliceStyle()
+            style = PieChartDefaults.pieChartStyle()
         )
     }
 }
