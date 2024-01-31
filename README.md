@@ -42,17 +42,18 @@ Add it in your *settings.gradle.kts* at the end of repositories:
 ### Pie
 ```kotlin
 @Composable
-private fun AddPieChart () {
+private fun AddPieChart (donutPercentage: Float = 0f) {
     PieChartView(
         chartData = ChartData.fromDoubleList(listOf(
             8.0, 23.0, 54.0, 32.0, 12.0, 37.0
         ), postfix = " °C"),
         title = stringResource(id = R.string.pie_chart),
-        chartStyle = PieChartDefaults.pieChartStyle()
+        chartStyle = PieChartDefaults.pieChartStyle( donutPercentage = donutPercentage)
     )
 }
 ```
-![Untitled design](https://github.com/dautovicharis/Charts/assets/7049715/7147b4ba-d16a-42bb-ac63-6a868f76813d)
+![Untitled design-6](https://github.com/dautovicharis/Charts/assets/7049715/77c21283-1ed9-4935-8845-d831f2a8be8e)
+
 
 
 ### Line
