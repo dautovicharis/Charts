@@ -30,8 +30,7 @@ import com.hd.charts.common.theme.ChartsDefaultTheme
 @Composable
 internal fun PieChart(
     chartData: ChartData,
-    chartStyle: PieChartStyle,
-    pieSliceStyle: PieSliceStyle,
+    style: PieChartStyle,
     onSliceTouched: (Int) -> Unit = {},
 ) {
     val slices = remember(chartData) { createPieSlices(chartData) }
@@ -45,7 +44,7 @@ internal fun PieChart(
         if (it == NO_SELECTION) DEFAULT_SCALE else MAX_SCALE
     }
 
-    Box(modifier = chartStyle.modifier
+    Box(modifier = style.modifier
         .pointerInput(Unit) {
             detectDragGestures(onDragEnd = {
                 currentSelectionIndex = NO_SELECTION
@@ -68,7 +67,7 @@ internal fun PieChart(
                         startDeg = slice.startDeg,
                         endDeg = slice.endDeg,
                         index = i,
-                        pieSliceStyle = pieSliceStyle
+                        style = style
                     )
                 }
             }
@@ -85,8 +84,7 @@ private fun PieChartPreview() {
     ) {
         PieChart(
             chartData = ChartData.fromDoubleList(listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)),
-            chartStyle = PieChartDefaults.pieChartStyle(),
-            pieSliceStyle = PieChartDefaults.pieSliceStyle()
+            style = PieChartDefaults.pieChartStyle()
         )
     }
 }
