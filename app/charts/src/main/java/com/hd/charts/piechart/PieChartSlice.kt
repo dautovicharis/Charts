@@ -62,18 +62,44 @@ internal fun PieChartSlice(
             show = true
         }) {
         if (show) {
-            drawArc(
-                color = pieSliceStyle.backgroundColor,
-                startAngle = startDeg,
-                sweepAngle = endDeg - startDeg,
-                useCenter = true,
-                style = Fill
+            val outerPath = Path().apply {
+                moveTo(center.x, center.y)
+                arcTo(
+                    rect = Rect(Offset.Zero, size),
+                    startAngleDegrees = startDeg,
+                    sweepAngleDegrees = endDeg - startDeg,
+                    forceMoveTo = false
+                )
+                close()
+            }
+
+            val totalRadius = size.width / 2
+            val percentage = style.donutHolePercentage
+            val innerRadius = totalRadius * (percentage / 100f)
+            val innerDiameter = innerRadius * 2
+            val innerPath = Path().apply {
+                addOval(
+                    Rect(
+                        center - Offset(innerRadius, innerRadius),
+                        Size(innerDiameter, innerDiameter)
+                    )
+                )
+            }
+
+            val combinedPath = Path.combine(
+                PathOperation.Difference,
+                outerPath,
+                innerPath
             )
-            drawArc(
-                color = pieSliceStyle.strokeColor,
-                startAngle = startDeg,
-                sweepAngle = endDeg - startDeg,
-                useCenter = true,
+
+            drawPath(
+                path = combinedPath,
+                color = style.backgroundColor
+            )
+
+            drawPath(
+                path = outerPath,
+                color = style.strokeColor,
                 style = Stroke(width = STROKE_WIDTH)
             )
         }
