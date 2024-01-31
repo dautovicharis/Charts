@@ -58,9 +58,14 @@ private fun View() {
 
         ) {
 
+            // PieChart
             AddPieChart()
             Spacer(modifier = Modifier.height(20.dp))
 
+            AddPieChart(donutPercentage = 50f)
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // LineChart
             AddLineChart()
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -70,18 +75,19 @@ private fun View() {
             AddLineChart(showPoints = true)
             Spacer(modifier = Modifier.height(20.dp))
 
+            // BarChart
             AddBarChart()
         }
     }
 }
 @Composable
-private fun AddPieChart () {
+private fun AddPieChart (donutPercentage: Float = 0f) {
     PieChartView(
         chartData = ChartData.fromDoubleList(listOf(
             8.0, 23.0, 54.0, 32.0, 12.0, 37.0
         ), postfix = " °C"),
         title = stringResource(id = R.string.pie_chart),
-        chartStyle = PieChartDefaults.pieChartStyle()
+        chartStyle = PieChartDefaults.pieChartStyle( donutPercentage = donutPercentage)
     )
 }
 
