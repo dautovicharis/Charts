@@ -92,6 +92,10 @@ private fun AddBarChart() {
 ```
 ![Untitled design-5](https://github.com/dautovicharis/Charts/assets/7049715/ad4a597c-ebe0-42df-9168-a08cbf3fb994)
 
+### Stacked Bar
+<img src="https://github.com/dautovicharis/Charts/assets/7049715/d549ec4b-c9d3-4526-8282-5b3328f0b1fb" width="300" alt="Stacked Chart">
+
+
 # App demo
 Code: https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/MainActivity.kt
 
