@@ -2,9 +2,10 @@ package com.hd.charts.barchart
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
+import com.hd.charts.barstackedchart.StackedChartData
 
-internal fun getSelectedIndex(position: Offset, values: List<Double>, size: IntSize): Int {
-    val barWidth = size.width / values.size
+internal fun getSelectedIndex(position: Offset, dataSize: Int, canvasSize: IntSize): Int {
+    val barWidth = canvasSize.width / dataSize
     val index = (position.x / (barWidth)).toInt()
-    return index.coerceIn(0, values.size - 1)
+    return index.coerceIn(0, dataSize - 1)
 }

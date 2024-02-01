@@ -40,7 +40,7 @@ class BarChartHelpersTest {
 
         testCases.forEach { testCase ->
             // Act
-            val result = getSelectedIndex(testCase.position, testCase.values, testCase.size)
+            val result = getSelectedIndex(testCase.position, testCase.values.size, testCase.size)
 
             // Assert
             assertThat(result).isEqualTo(testCase.expectedIndex)
