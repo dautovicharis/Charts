@@ -100,5 +100,9 @@ https://github.com/dautovicharis/Charts/assets/7049715/a5d5f337-6c83-4853-8dd1-c
 
 https://github.com/dautovicharis/Charts/assets/7049715/1677bbfe-77ff-4af7-ae8e-bf8ea8e836c3
 
+# Contributions
+Feel free to create an issue for any suggestions, improvement ideas, feature requests, or bug fixes. 
+If you have any questions, please DM me: https://www.linkedin.com/in/dautovicharis/
+
 
 
