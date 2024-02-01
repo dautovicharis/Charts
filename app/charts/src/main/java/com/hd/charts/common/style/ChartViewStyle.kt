@@ -2,6 +2,7 @@ package com.hd.charts.common.style
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -20,7 +21,9 @@ import androidx.compose.ui.unit.sp
 class ChartViewStyle internal constructor(
     val modifierMain: Modifier,
     val styleTitle: TextStyle,
-    val modifierTopTitle: Modifier
+    val modifierTopTitle: Modifier,
+    val modifierLegend: Modifier,
+    val padding: Dp
 )
 
 object ChartViewDefaults {
@@ -29,24 +32,30 @@ object ChartViewDefaults {
         backgroundColor: Color = MaterialTheme.colorScheme.surface,
         corner: Dp = 20.dp,
         shadow: Dp = 15.dp,
+        padding: Dp = 15.dp,
         titleStyle: TextStyle = TextStyle(
             fontSize = 20.sp,
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.ExtraBold
         ),
-        modifierTitle: Modifier = Modifier.padding(top = 10.dp, start = 15.dp),
+        modifierTitle: Modifier = Modifier.padding(top = padding, start = padding),
         modifierMain: Modifier = Modifier
             .shadow(elevation = shadow, shape = RoundedCornerShape(corner))
             .background(
                 color = backgroundColor,
                 shape = RoundedCornerShape(corner)
-            )
+            ),
+        modifierLegend: Modifier = Modifier
+            .wrapContentSize()
+            .padding(start = padding, end = padding, bottom = padding)
     ): ChartViewStyle {
         return ChartViewStyle(
             modifierMain = modifierMain,
             styleTitle = titleStyle,
-            modifierTopTitle = modifierTitle
+            modifierTopTitle = modifierTitle,
+            modifierLegend = modifierLegend,
+            padding = padding
         )
     }
 }

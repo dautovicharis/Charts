@@ -62,8 +62,8 @@ fun BarChart(
                 selectedIndex =
                     getSelectedIndex(
                         position = change.position,
-                        values = chartData.points,
-                        size = size
+                        dataSize = chartData.points.count(),
+                        canvasSize = size
                     )
                 onValueChanged(selectedIndex)
             },
