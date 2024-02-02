@@ -1,32 +1,58 @@
 package com.hd.charts.app.demo
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
-import com.hd.charts.app.MainView
+import com.hd.charts.app.ScrollView
+import com.hd.charts.common.ChartStyle
 import com.hd.charts.common.model.ChartData
-import com.hd.charts.piechart.PieChartDefaults
 import com.hd.charts.piechart.PieChartView
+import com.hd.charts.piechart.PieChartViewStyle
 
 @Composable
 fun AddPieChartDemo() {
-    MainView {
-        // Default
-        AddPieChart()
+    val chartColor = MaterialTheme.colorScheme.primary
+    val backgroundColorView = MaterialTheme.colorScheme.surface
+    val strokeColor = MaterialTheme.colorScheme.surface
 
-        Spacer(modifier = Modifier.height(20.dp))
+    ScrollView {
+        // Default
+        val defaultStyle = ChartStyle.pieChart.apply {
+            this.chartViewStyle {
+                this.backgroundColor = backgroundColorView
+                this.cornerRadius = 20.dp
+                this.shadow = 15.dp
+                this.innerPadding = 15.dp
+                this.outerPadding = 20.dp
+                this.width = 250.dp
+            }
+            this.pieChartStyle {
+                this.chartColor = chartColor
+                this.strokeColor = strokeColor
+                this.donutPercentage = 0f
+            }
+        }.build()
+
+        AddPieChart(defaultStyle)
 
         // Donut
-        AddPieChart(50f)
+        val donutStyle = ChartStyle.pieChart.apply {
+            chartViewStyle {
+                this.outerPadding = 15.dp
+            }
+
+            pieChartStyle {
+                this.donutPercentage = 50f
+            }
+        }.build()
+        AddPieChart(donutStyle)
     }
 }
 
 @Composable
-private fun AddPieChart(donutPercentage: Float = 0f) {
+private fun AddPieChart(style: PieChartViewStyle) {
     PieChartView(
         chartData = ChartData.fromDoubleList(
             listOf(
@@ -34,6 +60,6 @@ private fun AddPieChart(donutPercentage: Float = 0f) {
             ), postfix = " °C"
         ),
         title = stringResource(id = R.string.pie_chart),
-        chartStyle = PieChartDefaults.pieChartStyle(donutPercentage = donutPercentage)
+        style = style
     )
 }
