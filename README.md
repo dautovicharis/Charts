@@ -51,6 +51,7 @@ Add it in your *settings.gradle.kts* at the end of repositories:
     <td><img src="https://github.com/dautovicharis/Charts/assets/7049715/4947a345-a100-431e-82e9-e9e46ada0990" alt="pie-chart-default" width="100%" width="auto"></td>
     <td>
       <pre lang="Kotlin"><code>
+TO DO
       </code></pre>
     </td>
   </tr>
@@ -59,6 +60,7 @@ Add it in your *settings.gradle.kts* at the end of repositories:
     <td><img src="https://github.com/dautovicharis/Charts/assets/7049715/d77a1bc0-4d1e-4d57-bb2a-fc86f736ef9b" alt="pie-chart-donut" width="100%" width="auto"></td>
     <td>
      <pre lang="Kotlin"><code>
+TO DO
       </code></pre>
     </td>
   </tr>
