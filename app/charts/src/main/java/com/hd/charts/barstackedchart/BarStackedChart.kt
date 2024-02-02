@@ -19,6 +19,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.hd.charts.barchart.getSelectedIndex
 import com.hd.charts.common.ANIMATION_DURATION
@@ -37,7 +38,7 @@ data class StackedChartData(
 @Composable
 internal fun StackedBarChart(
     chartData: List<StackedChartData>,
-    style: StackedBarChartStyle,
+    style: StackedBarChartStyleInternal,
     colors: List<Color> = generateColorShades(style.barColor, chartData.first().data.points.size),
     onValueChanged: (Int) -> Unit = {}
 ) {
@@ -110,6 +111,14 @@ internal fun StackedBarChart(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewStackedBarChart() {
+    val style = StackedBarChartViewStyle.StackedBarChartStyleBuilder().apply {
+        chartViewStyle { }
+        stackedBarChartStyle {
+            barColor = Color.Blue
+            space = 8.dp
+        }
+    }.build()
+
     val chartData = listOf(
         StackedChartData(
             label = "Cherry St.",
@@ -138,7 +147,7 @@ private fun PreviewStackedBarChart() {
     ) {
         StackedBarChart(
             chartData = chartData,
-            style = StackedBarChartDefaults.barChartStyle()
+            style = StackedBarChartDefaults.barChartStyle(style = style)
         )
     }
 }
