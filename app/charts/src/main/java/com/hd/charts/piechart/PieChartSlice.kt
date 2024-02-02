@@ -7,6 +7,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +46,7 @@ internal fun PieChartSlice(
     startDeg: Float,
     endDeg: Float,
     index: Int,
-    style: PieChartStyle
+    style: PieChartStyleInternal
 ) {
     var show by remember { mutableStateOf(false) }
 
@@ -113,6 +114,17 @@ internal fun PieChartSlice(
 
 @Composable
 private fun PieSlicePreview() {
+    val chartColor = MaterialTheme.colorScheme.primary
+    val strokeColor = MaterialTheme.colorScheme.surface
+
+    val style = PieChartViewStyle.PieChartStyleBuilder().apply {
+        pieChartStyle {
+            this.chartColor = chartColor
+            this.strokeColor = strokeColor
+            this.donutPercentage = 0f
+        }
+    }.build()
+
     Row(
         modifier = Modifier
             .size(300.dp)
@@ -121,7 +133,7 @@ private fun PieSlicePreview() {
             startDeg = 0f,
             endDeg = 90f,
             index = 0,
-            style = PieChartDefaults.pieChartStyle()
+            style = PieChartDefaults.pieChartStyle(style)
         )
     }
 }
