@@ -6,8 +6,6 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableFloatState
@@ -15,10 +13,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -35,9 +31,9 @@ import com.hd.charts.common.theme.ChartsDefaultTheme
 
 
 @Composable
-fun LineChart(
+internal fun LineChart(
     chartData: ChartData,
-    style: LineChartStyle,
+    style: LineChartStyleInternal,
     onValueChanged: (Int) -> Unit = {},
 ) {
     val touchX = remember { mutableFloatStateOf(0f) }
@@ -90,7 +86,7 @@ fun LineChart(
 private fun DrawScope.drawChartPath(
     values: List<Float>,
     size: Size,
-    style: LineChartStyle,
+    style: LineChartStyleInternal,
     progress: List<Animatable<Float, AnimationVector1D>>,
     dragging: MutableState<Boolean>,
     touchX: MutableFloatState,
@@ -198,7 +194,7 @@ private fun Path.drawBezier(
 private fun DrawScope.drawPathPoints(
     size: Size,
     values: List<Float>,
-    style: LineChartStyle,
+    style: LineChartStyleInternal,
     progress: List<Animatable<Float, AnimationVector1D>>
 ) {
     for (i in 1 until values.size) {
@@ -218,18 +214,20 @@ private fun DrawScope.drawPathPoints(
 @Preview(showBackground = true)
 @Composable
 private fun LineChartPreview() {
+    val style = LineChartViewStyle.LineChartStyleBuilder().apply {
+        chartViewStyle {
+            width = 300.dp
+        }
+        lineChartStyle {
+            bezier = true
+            showPoints = true
+        }
+    }.build()
+
     ChartsDefaultTheme {
         LineChart(
             chartData = ChartData.fromIntList(listOf(20, 50, 60, -60, 40, 60, 120, 50)),
-            style = LineChartStyle(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(10.dp),
-                pointColor = Color.Red,
-                lineColor = Color.Blue,
-                bezier = false,
-                showPoints = true
-            )
+            style = LineChartDefaults.lineChartStyle(style = style)
         )
     }
 }
@@ -237,18 +235,21 @@ private fun LineChartPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun LineChartBezierPreview() {
+
+    val style = LineChartViewStyle.LineChartStyleBuilder().apply {
+        chartViewStyle {
+            width = 300.dp
+        }
+        lineChartStyle {
+            bezier = true
+            showPoints = true
+        }
+    }.build()
+
     ChartsDefaultTheme {
         LineChart(
             chartData = ChartData.fromIntList(listOf(20, 60, -20, 100, -50, 200)),
-            style = LineChartStyle(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(10.dp),
-                pointColor = Color.Red,
-                lineColor = Color.Blue,
-                bezier = true,
-                showPoints = false
-            )
+            style = LineChartDefaults.lineChartStyle(style = style)
         )
     }
 }

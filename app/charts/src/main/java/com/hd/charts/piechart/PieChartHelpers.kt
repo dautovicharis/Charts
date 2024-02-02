@@ -57,7 +57,7 @@ internal fun degree(point: PointerInputChange, size: IntSize): Double {
     val isInTopRight = dx >= 0 && dy <= 0
 
     // Adjust the degree based on the quadrant
-    val degree =  when {
+    val degree = when {
         isInBottomRight -> acuteDegree
         isInBottomLeft -> 180.0 - abs(acuteDegree)
         isInTopLeft -> 180.0 + abs(acuteDegree)

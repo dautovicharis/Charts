@@ -18,6 +18,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.hd.charts.common.ANIMATION_DURATION
 import com.hd.charts.common.ANIMATION_DURATION_OFFSET
@@ -29,9 +30,9 @@ import com.hd.charts.common.model.ChartData
 import kotlin.math.abs
 
 @Composable
-fun BarChart(
+internal fun BarChart(
     chartData: ChartData,
-    style: BarChartStyle,
+    style: BarChartStyleInternal,
     onValueChanged: (Int) -> Unit = {}
 ) {
     val barColor = style.barColor
@@ -103,13 +104,19 @@ fun BarChart(
 @Composable
 @Preview
 fun BarChartPreview() {
+    val style = BarChartViewStyle.BarChartStyleBuilder().apply {
+        barChartStyle {
+            space = 8.dp
+        }
+    }.build()
+
     val data = listOf(100f, -50f, -5f, -60f, -1f, -30f, -50f, -35f, -25f, -40f, 100f)
     Column(
         modifier = Modifier.wrapContentSize()
     ) {
         BarChart(
             chartData = ChartData.fromFloatList(data),
-            style = BarChartDefaults.barChartStyle()
+            style = BarChartDefaults.barChartStyle(style)
         )
     }
 }

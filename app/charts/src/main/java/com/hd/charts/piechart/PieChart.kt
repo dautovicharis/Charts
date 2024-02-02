@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -30,7 +31,7 @@ import com.hd.charts.common.theme.ChartsDefaultTheme
 @Composable
 internal fun PieChart(
     chartData: ChartData,
-    style: PieChartStyle,
+    style: PieChartStyleInternal,
     onSliceTouched: (Int) -> Unit = {},
 ) {
     val slices = remember(chartData) { createPieSlices(chartData) }
@@ -77,14 +78,27 @@ internal fun PieChart(
 
 @Composable
 private fun PieChartPreview() {
+    val chartColor = MaterialTheme.colorScheme.primary
+    val strokeColor = MaterialTheme.colorScheme.surface
+
+    val style = PieChartViewStyle.PieChartStyleBuilder().apply {
+        pieChartStyle {
+            this.chartColor = chartColor
+            this.strokeColor = strokeColor
+            this.donutPercentage = 0f
+        }
+    }.build()
+
     Row(
         modifier = Modifier
             .wrapContentWidth()
             .wrapContentHeight()
     ) {
         PieChart(
-            chartData = ChartData.fromDoubleList(listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)),
-            style = PieChartDefaults.pieChartStyle()
+            chartData = ChartData.fromDoubleList(
+                listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)
+            ),
+            style = PieChartDefaults.pieChartStyle(style)
         )
     }
 }

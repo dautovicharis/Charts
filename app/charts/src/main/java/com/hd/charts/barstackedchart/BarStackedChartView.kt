@@ -5,7 +5,6 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
@@ -28,15 +27,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
 import com.hd.charts.common.NO_SELECTION
+import com.hd.charts.common.composable.ChartView
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartViewDefaults
-import com.hd.charts.common.style.ChartViewStyle
+import com.hd.charts.common.style.ChartViewStyleInternal
 import com.hd.charts.common.theme.ChartsDefaultTheme
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun LegendItem(
-    chartViewsStyle: ChartViewStyle,
+    chartViewsStyle: ChartViewStyleInternal,
     legend: List<String>,
     colors: List<Color> = emptyList(),
     labels: List<String> = emptyList()
@@ -80,9 +80,14 @@ fun StackedBarChartView(
     chartData: List<StackedChartData>,
     title: String,
     legend: List<String>,
-    chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
-    chartStyle: StackedBarChartStyle = StackedBarChartDefaults.barChartStyle()
+    style: StackedBarChartViewStyle
 ) {
+
+    val chartViewStyle: ChartViewStyleInternal =
+        ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
+    val chartStyle: StackedBarChartStyleInternal =
+        StackedBarChartDefaults.barChartStyle(style = style)
+
     var currentTitle by remember { mutableStateOf(title) }
     var labels by remember { mutableStateOf(listOf<String>()) }
 
@@ -90,19 +95,18 @@ fun StackedBarChartView(
         true -> {
             generateColorShades(chartStyle.barColor, chartData.first().data.points.size)
         }
+
         else -> {
             chartStyle.colors
         }
     }
 
     ChartsDefaultTheme {
-        Column(
-            modifier = chartViewsStyle.modifierMain
-        ) {
+        ChartView(chartViewsStyle = chartViewStyle) {
             Text(
-                modifier = chartViewsStyle.modifierTopTitle,
+                modifier = chartViewStyle.modifierTopTitle,
                 text = currentTitle,
-                style = chartViewsStyle.styleTitle
+                style = chartViewStyle.styleTitle
             )
 
             StackedBarChart(chartData = chartData, style = chartStyle, colors = colors) {
@@ -118,7 +122,7 @@ fun StackedBarChartView(
             }
 
             LegendItem(
-                chartViewsStyle = chartViewsStyle,
+                chartViewsStyle = chartViewStyle,
                 colors = colors,
                 legend = legend,
                 labels = labels
@@ -129,6 +133,15 @@ fun StackedBarChartView(
 
 @Composable
 private fun StackedBarChartViewPreview() {
+    val barColor = MaterialTheme.colorScheme.primary
+
+    val style = StackedBarChartViewStyle.StackedBarChartStyleBuilder().apply {
+        stackedBarChartStyle {
+            this.barColor = barColor
+            this.space = 8.dp
+        }
+    }.build()
+
     val legendLabels = listOf(
         "Jan", "Feb", "Mar"
     )
@@ -165,7 +178,8 @@ private fun StackedBarChartViewPreview() {
         StackedBarChartView(
             chartData = chartData,
             legend = legendLabels,
-            title = stringResource(id = R.string.bar_stacked_chart)
+            title = stringResource(id = R.string.bar_stacked_chart),
+            style = style
         )
     }
 }
