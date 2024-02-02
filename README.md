@@ -40,20 +40,29 @@ Add it in your *settings.gradle.kts* at the end of repositories:
 
 # Supported charts
 ### Pie
-```kotlin
-@Composable
-private fun AddPieChart (donutPercentage: Float = 0f) {
-    PieChartView(
-        chartData = ChartData.fromDoubleList(listOf(
-            8.0, 23.0, 54.0, 32.0, 12.0, 37.0
-        ), postfix = " °C"),
-        title = stringResource(id = R.string.pie_chart),
-        chartStyle = PieChartDefaults.pieChartStyle( donutPercentage = donutPercentage)
-    )
-}
-```
-![Untitled design-6](https://github.com/dautovicharis/Charts/assets/7049715/77c21283-1ed9-4935-8845-d831f2a8be8e)
-
+<table style="width: 100%; table-layout: fixed;">
+  <tr>
+    <th>Pie Chart</th>
+    <th>Demo</th>
+    <th>Code Snippet</th>
+  </tr>
+  <tr>
+    <td>Default Pie Chart</td>
+    <td><img src="https://github.com/dautovicharis/Charts/assets/7049715/4947a345-a100-431e-82e9-e9e46ada0990" alt="pie-chart-default" width="100%" width="auto"></td>
+    <td>
+      <pre lang="Kotlin"><code>
+      </code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Donut Pie Chart</td>
+    <td><img src="https://github.com/dautovicharis/Charts/assets/7049715/d77a1bc0-4d1e-4d57-bb2a-fc86f736ef9b" alt="pie-chart-donut" width="100%" width="auto"></td>
+    <td>
+     <pre lang="Kotlin"><code>
+      </code></pre>
+    </td>
+  </tr>
+</table>
 
 
 ### Line
@@ -76,7 +85,6 @@ private fun AddLineChart (bezier: Boolean = false, showPoints: Boolean = false) 
 ![Untitled design-2](https://github.com/dautovicharis/Charts/assets/7049715/f87d7e38-b097-43c5-87cb-8a9102f57e07)
 
 
-
 ### Bar
 ```kotlin
 @Composable
@@ -93,16 +101,61 @@ private fun AddBarChart() {
 ![Untitled design-5](https://github.com/dautovicharis/Charts/assets/7049715/ad4a597c-ebe0-42df-9168-a08cbf3fb994)
 
 ### Stacked Bar
-<img src="https://github.com/dautovicharis/Charts/assets/7049715/d549ec4b-c9d3-4526-8282-5b3328f0b1fb" width="300" alt="Stacked Chart">
+#### Default
+![stacked-bar-default](https://github.com/dautovicharis/Charts/assets/7049715/13fee725-f926-4cb6-8f89-a6ea723f9898)
+
+
+#### Custom colors
+![stacked-bar-custom-color](https://github.com/dautovicharis/Charts/assets/7049715/4e959bca-4b4f-4fae-95d5-1b57ddf4b98e)
+
+
+```kotlin
+@Composable
+private fun AddStackedBarChart(colors: List<Color> = emptyList()) {
+
+    val legendLabels = listOf(
+        "Jan", "Feb", "Mar"
+    )
+
+    val labelPrefix = "$"
+    val chartData = listOf(
+        StackedChartData(
+            label = "Cherry St.",
+            data = ChartData.fromFloatList(listOf(8261.68f, 4810.34f, 1536.57f), prefix = labelPrefix)
+        ),
+        StackedChartData(
+            label = "Strawberry Mall",
+            data = ChartData.fromFloatList(listOf(7875.87f, 3126.58f, 2019.81f), prefix = labelPrefix)
+        ),
+        StackedChartData(
+            label = "Peach St.",
+            data = ChartData.fromFloatList(listOf(4990.23f, 4923.48f, 1472.59f), prefix = labelPrefix)
+        ),
+        StackedChartData(
+            label = "Lime Av.",
+            data = ChartData.fromFloatList(listOf(4658.42f, 2955.55f, 1390.55f), prefix = labelPrefix)
+        ),
+        StackedChartData(
+            label = "Apple Rd.",
+            data = ChartData.fromFloatList(listOf(3952f, 1858.46f, 917.9f), prefix = labelPrefix)
+        )
+    )
+
+
+    StackedBarChartView(
+        chartData = chartData,
+        title = stringResource(id = R.string.bar_stacked_chart),
+        legend = legendLabels,
+        chartStyle = StackedBarChartDefaults.barChartStyle(
+            colors = colors)
+    )
+}
+```
 
 
 # App demo
 Code: https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/MainActivity.kt
 
-
-https://github.com/dautovicharis/Charts/assets/7049715/a5d5f337-6c83-4853-8dd1-caf7c498bc13
-
-https://github.com/dautovicharis/Charts/assets/7049715/1677bbfe-77ff-4af7-ae8e-bf8ea8e836c3
 
 # Contributions
 Feel free to create an issue for any suggestions, improvement ideas, feature requests, or bug fixes. 
