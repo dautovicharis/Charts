@@ -1,6 +1,5 @@
 package com.hd.charts.linechart
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -16,31 +15,33 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
 import com.hd.charts.common.NO_SELECTION
+import com.hd.charts.common.composable.ChartView
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartViewDefaults
-import com.hd.charts.common.style.ChartViewStyle
+import com.hd.charts.common.style.ChartViewStyleInternal
 import com.hd.charts.common.theme.ChartsDefaultTheme
+
 
 @Composable
 fun LineChartView(
     data: ChartData,
     title: String,
-    chartViewsStyle: ChartViewStyle = ChartViewDefaults.chartViewStyle(),
-    chartStyle: LineChartStyle = LineChartDefaults.lineChartStyle()
+    style: LineChartViewStyle
 ) {
     var currentTitle by remember { mutableStateOf(title) }
+    val chartViewStyle: ChartViewStyleInternal =
+        ChartViewDefaults.chartViewStyle(style.chartViewStyle)
+    val lineChartStyle: LineChartStyleInternal = LineChartDefaults.lineChartStyle(style)
 
     ChartsDefaultTheme {
-        Column(
-            modifier = chartViewsStyle.modifierMain
-        ) {
+        ChartView(chartViewsStyle = chartViewStyle) {
             Text(
-                modifier = chartViewsStyle.modifierTopTitle,
+                modifier = chartViewStyle.modifierTopTitle,
                 text = currentTitle,
-                style = chartViewsStyle.styleTitle
+                style = chartViewStyle.styleTitle
             )
 
-            LineChart(chartData = data, style = chartStyle) {
+            LineChart(chartData = data, style = lineChartStyle) {
                 currentTitle = when (it) {
                     NO_SELECTION -> title
                     else -> data.labels[it]
@@ -52,6 +53,16 @@ fun LineChartView(
 
 @Composable
 private fun LineChartViewPreview() {
+    val style = LineChartViewStyle.LineChartStyleBuilder().apply {
+        chartViewStyle {
+            width = 300.dp
+        }
+        lineChartStyle {
+            bezier = true
+            showPoints = true
+        }
+    }
+
     Row(
         modifier = Modifier
             .width(300.dp)
@@ -60,7 +71,7 @@ private fun LineChartViewPreview() {
         LineChartView(
             data = ChartData.fromIntList(listOf(8, 23, 54, 32, 12, 37, 7, 23, 43)),
             title = stringResource(id = R.string.line_chart),
-            chartStyle = LineChartDefaults.lineChartStyle()
+            style = style.build()
         )
     }
 }
