@@ -11,6 +11,7 @@ googleTuth = "1.2.0"
 mockk = "1.13.7"
 compose-ui-util = "1.6.0"
 compose-navigation = "2.7.6"
+dokka = "1.9.10"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,9 +31,10 @@ google-tuth = { group = "com.google.truth", name = "truth", version.ref = "googl
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 androidx-ui-util = { group = "androidx.compose.ui", name = "ui-util", version.ref = "compose-ui-util" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation" }
+dokkaAndroid = { group = "org.jetbrains.dokka", name="android-documentation-plugin", version.ref = "dokka" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
