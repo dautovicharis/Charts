@@ -3,6 +3,7 @@ package com.hd.charts.barchart
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
 import com.google.common.truth.Truth.assertThat
+import com.hd.charts.internal.barchart.getSelectedIndex
 import org.junit.Test
 
 class BarChartHelpersTest {

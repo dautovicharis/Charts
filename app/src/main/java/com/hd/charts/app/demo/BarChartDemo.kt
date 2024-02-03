@@ -6,9 +6,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
-import com.hd.charts.barchart.BarChartView
-import com.hd.charts.common.ChartStyle
+import com.hd.charts.BarChartView
 import com.hd.charts.common.model.ChartData
+import com.hd.charts.common.style.ChartStyle
 
 @Composable
 fun AddSimpleBarChartDemo() {

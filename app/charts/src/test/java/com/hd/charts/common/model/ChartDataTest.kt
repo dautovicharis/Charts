@@ -1,6 +1,7 @@
 package com.hd.charts.common.model
 
 import com.google.common.truth.Truth.assertThat
+import com.hd.charts.common.model.ChartData
 import org.junit.Test
 
 class ChartDataTest {
