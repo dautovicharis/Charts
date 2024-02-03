@@ -26,7 +26,7 @@ internal class ChartViewStyleInternal internal constructor(
     val styleTitle: TextStyle,
     val modifierTopTitle: Modifier,
     val modifierLegend: Modifier,
-    val padding: Dp,
+    val innerPadding: Dp,
     val width: Dp
 )
 
@@ -37,25 +37,25 @@ internal object ChartViewDefaults {
     ): ChartViewStyleInternal {
 
         val width = style.width ?: Dp.Infinity
-        val viewPadding = style.outerPadding ?: 20.dp
-        val padding = style.innerPadding ?: 15.dp
-        val corner = style.cornerRadius ?: 20.dp
+        val outerPadding = style.outerPadding ?: 20.dp
+        val innerPadding = style.innerPadding ?: 15.dp
+        val cornerRadius = style.cornerRadius ?: 20.dp
         val shadow = style.shadow ?: 15.dp
         val backgroundColor = style.backgroundColor ?: MaterialTheme.colorScheme.surface
 
-        val modifierTitle: Modifier = Modifier.padding(top = padding, start = padding)
+        val modifierTitle: Modifier = Modifier.padding(top = innerPadding, start = innerPadding)
 
         val modifierLegend: Modifier = Modifier
             .wrapContentSize()
-            .padding(start = padding, end = padding, bottom = padding)
+            .padding(start = innerPadding, end = innerPadding, bottom = innerPadding)
 
         val modifierMain: Modifier = Modifier
             .wrapContentHeight()
-            .padding(viewPadding)
-            .shadow(elevation = shadow, shape = RoundedCornerShape(corner))
+            .padding(outerPadding)
+            .shadow(elevation = shadow, shape = RoundedCornerShape(cornerRadius))
             .background(
                 color = backgroundColor,
-                shape = RoundedCornerShape(corner)
+                shape = RoundedCornerShape(cornerRadius)
             )
 
         val updatedModifierMain = when (width) {
@@ -75,7 +75,7 @@ internal object ChartViewDefaults {
             styleTitle = titleStyle,
             modifierTopTitle = modifierTitle,
             modifierLegend = modifierLegend,
-            padding = padding,
+            innerPadding = innerPadding,
             width = width
         )
     }

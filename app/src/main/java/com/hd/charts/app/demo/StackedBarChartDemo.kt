@@ -1,28 +1,59 @@
 package com.hd.charts.app.demo
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
-import com.hd.charts.app.ScrollView
 import com.hd.charts.StackedBarChartView
 import com.hd.charts.StackedChartData
+import com.hd.charts.app.ScrollView
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartStyle
+import com.hd.charts.style.StackedBarChartViewStyle
+
+/*
+Default style for the StackedBarChartView, that demonstrates available style options.
+The default values match those set in the library.
+*/
+@Composable
+private fun defaultStyle(): StackedBarChartViewStyle.StackedBarChartStyleBuilder {
+    val barColor = MaterialTheme.colorScheme.primary
+    val backgroundColor = MaterialTheme.colorScheme.surface
+
+    return ChartStyle.stackedBar.apply {
+        stackedBarChartStyle {
+            this.barColor = barColor
+            this.space = 10.dp
+
+            // `this.colors`
+            //  If not provided, default colors are internally generated based on the primary color.
+            //  Check  `generateColorShades` function.
+        }
+
+        chartViewStyle {
+            this.width = Dp.Infinity
+            this.outerPadding = 20.dp
+            this.innerPadding = 15.dp
+            this.cornerRadius = 20.dp
+            this.shadow = 15.dp
+            this.backgroundColor = backgroundColor
+        }
+    }
+}
 
 @Composable
 fun AddStackedBarChartDemo() {
 
     ScrollView {
         // Default
-        AddStackedBarChart()
-
-        Spacer(modifier = Modifier.height(20.dp))
+        defaultStyle().apply {
+            chartViewStyle {
+                this.width = 200.dp
+            }
+            AddStackedBarChart(build())
+        }
 
         // Custom colors
         val colors = listOf(
@@ -30,24 +61,20 @@ fun AddStackedBarChartDemo() {
             MaterialTheme.colorScheme.secondary,
             MaterialTheme.colorScheme.tertiary
         )
-        AddStackedBarChart(colors)
+        defaultStyle().apply {
+            chartViewStyle {
+                this.width = 200.dp
+            }
+            stackedBarChartStyle {
+                this.colors = colors
+            }
+            AddStackedBarChart(build())
+        }
     }
 }
 
 @Composable
-private fun AddStackedBarChart(colors: List<Color> = emptyList()) {
-
-    val style = ChartStyle.stackedBar.apply {
-        chartViewStyle {
-            this.width = 250.dp
-        }
-
-        stackedBarChartStyle {
-            this.colors = colors
-        }
-    }.build()
-
-
+private fun AddStackedBarChart(style: StackedBarChartViewStyle) {
     val legendLabels = listOf(
         "Jan", "Feb", "Mar"
     )
