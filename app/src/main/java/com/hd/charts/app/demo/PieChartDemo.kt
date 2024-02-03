@@ -3,51 +3,66 @@ package com.hd.charts.app.demo
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.hd.charts.PieChartView
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.common.style.ChartStyle
-import com.hd.charts.PieChartView
 import com.hd.charts.style.PieChartViewStyle
+
+/*
+Default style for the PieChartView, that demonstrates available style options.
+The default values match those set in the library.
+*/
+@Composable
+private fun defaultStyle(): PieChartViewStyle.PieChartStyleBuilder {
+    val strokeColor = MaterialTheme.colorScheme.surface
+    val chartColor = MaterialTheme.colorScheme.primary
+    val backgroundColor = MaterialTheme.colorScheme.surface
+
+    return ChartStyle.pieChart.apply {
+        pieChartStyle {
+            this.strokeColor = strokeColor
+            this.donutPercentage = 0f
+            this.chartColor = chartColor
+        }
+
+        chartViewStyle {
+            this.width = Dp.Infinity
+            this.outerPadding = 20.dp
+            this.innerPadding = 15.dp
+            this.cornerRadius = 20.dp
+            this.shadow = 15.dp
+            this.backgroundColor = backgroundColor
+        }
+    }
+}
 
 @Composable
 fun AddPieChartDemo() {
-    val chartColor = MaterialTheme.colorScheme.primary
-    val backgroundColorView = MaterialTheme.colorScheme.surface
-    val strokeColor = MaterialTheme.colorScheme.surface
-
     ScrollView {
         // Default
-        val defaultStyle = ChartStyle.pieChart.apply {
-            this.chartViewStyle {
-                this.backgroundColor = backgroundColorView
-                this.cornerRadius = 20.dp
-                this.shadow = 15.dp
-                this.innerPadding = 15.dp
-                this.outerPadding = 20.dp
-                this.width = 250.dp
+        defaultStyle().apply {
+            chartViewStyle {
+                this.width = 200.dp
             }
-            this.pieChartStyle {
-                this.chartColor = chartColor
-                this.strokeColor = strokeColor
-                this.donutPercentage = 0f
-            }
-        }.build()
 
-        AddPieChart(defaultStyle)
+            AddPieChart(style = build())
+        }
 
         // Donut
-        val donutStyle = ChartStyle.pieChart.apply {
+        defaultStyle().apply {
             chartViewStyle {
-                this.outerPadding = 15.dp
+                this.width = 200.dp
             }
 
             pieChartStyle {
                 this.donutPercentage = 50f
             }
-        }.build()
-        AddPieChart(donutStyle)
+            AddPieChart(style = build())
+        }
     }
 }
 
