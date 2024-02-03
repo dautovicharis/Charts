@@ -27,21 +27,21 @@ internal object PieChartDefaults {
         style: PieChartViewStyle
     ): PieChartStyleInternal {
 
-        val backgroundColor = style.pieChartStyle.chartColor ?: MaterialTheme.colorScheme.primary
+        val chartColor = style.pieChartStyle.chartColor ?: MaterialTheme.colorScheme.primary
         val strokeColor = style.pieChartStyle.strokeColor ?: MaterialTheme.colorScheme.surface
-        val padding = style.chartViewStyle.innerPadding ?: 15.dp
+        val innerPadding = style.chartViewStyle.innerPadding ?: 15.dp
         val donutPercentage = style.pieChartStyle.donutPercentage ?: 0f
 
         return PieChartStyleInternal(
             modifier = Modifier
                 .wrapContentSize()
-                .padding(padding)
+                .padding(innerPadding)
                 .aspectRatio(1f),
             donutHolePercentage = donutPercentage.coerceIn(
                 DONUT_MIN_PERCENTAGE,
                 DONUT_MAX_PERCENTAGE
             ),
-            backgroundColor = backgroundColor,
+            backgroundColor = chartColor,
             strokeColor = strokeColor
         )
     }
