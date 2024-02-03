@@ -4,6 +4,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.unit.IntSize
 import com.google.common.truth.Truth
+import com.hd.charts.internal.piechart.degree
+import com.hd.charts.internal.piechart.isPointInCircle
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Test

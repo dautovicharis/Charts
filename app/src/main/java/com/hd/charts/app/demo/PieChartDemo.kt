@@ -6,10 +6,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
-import com.hd.charts.common.ChartStyle
 import com.hd.charts.common.model.ChartData
-import com.hd.charts.piechart.PieChartView
-import com.hd.charts.piechart.PieChartViewStyle
+import com.hd.charts.common.style.ChartStyle
+import com.hd.charts.PieChartView
+import com.hd.charts.style.PieChartViewStyle
 
 @Composable
 fun AddPieChartDemo() {

@@ -3,6 +3,8 @@ package com.hd.charts.linechart
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import com.google.common.truth.Truth.assertThat
+import com.hd.charts.internal.linechart.findNearestPoint
+import com.hd.charts.internal.linechart.scaleValues
 import org.junit.Test
 
 class LineChartHelpersTest {

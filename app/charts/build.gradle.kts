@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     `maven-publish`
+    alias(libs.plugins.dokka)
 }
 
 android {
@@ -58,7 +59,22 @@ dependencies {
     testImplementation(libs.google.tuth)
     testImplementation(libs.mockk)
 
+    // Documentation
+    dokkaPlugin(libs.dokkaAndroid)
 }
+
+// https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/
+tasks.dokkaHtml.configure {
+    outputDirectory.set(project.rootDir.resolve("docs"))
+    dokkaSourceSets {
+        configureEach {
+            includeNonPublic.set(false)
+            skipEmptyPackages.set(true)
+            skipDeprecated.set(false)
+        }
+    }
+}
+
 
 publishing {
     publications {

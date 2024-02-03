@@ -8,11 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.hd.charts.R
 import com.hd.charts.app.ScrollView
-import com.hd.charts.barstackedchart.StackedBarChartView
-import com.hd.charts.barstackedchart.StackedChartData
-import com.hd.charts.common.ChartStyle
+import com.hd.charts.StackedBarChartView
+import com.hd.charts.StackedChartData
 import com.hd.charts.common.model.ChartData
+import com.hd.charts.common.style.ChartStyle
 
 @Composable
 fun AddStackedBarChartDemo() {
@@ -90,7 +91,7 @@ private fun AddStackedBarChart(colors: List<Color> = emptyList()) {
 
     StackedBarChartView(
         chartData = chartData,
-        title = stringResource(id = com.hd.charts.R.string.bar_stacked_chart),
+        title = stringResource(id = R.string.bar_stacked_chart),
         legend = legendLabels,
         style = style
     )
