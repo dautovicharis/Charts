@@ -154,9 +154,13 @@ private fun DrawScope.drawChartPath(
             scaledValues = values,
             size = size
         )
+        val draggingCircleOffset = Offset(
+            nearestPoint.x.coerceIn(0f, canvasWidth),
+            nearestPoint.y.coerceIn(0f, canvasHeight)
+        )
 
         drawCircle(
-            center = nearestPoint,
+            center = draggingCircleOffset,
             radius = 15f,
             color = style.pointColor
         )
