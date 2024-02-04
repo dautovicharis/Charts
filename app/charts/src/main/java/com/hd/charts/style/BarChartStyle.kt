@@ -36,7 +36,7 @@ class BarChartStyle(
     val barColor: Color? = null,
     val space: Dp? = null
 ) {
-    class BarChartStyleBuilder {
+    class Builder {
         var barColor: Color? = null
         var space: Dp? = null
 
