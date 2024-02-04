@@ -1,4 +1,4 @@
-package com.hd.charts.internal.barchart
+package com.hd.charts.internal.style
 
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize

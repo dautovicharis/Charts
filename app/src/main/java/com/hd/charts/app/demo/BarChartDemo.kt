@@ -9,7 +9,7 @@ import com.hd.charts.BarChartView
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
 import com.hd.charts.common.model.ChartData
-import com.hd.charts.common.style.ChartStyle
+import com.hd.charts.ChartStyle
 import com.hd.charts.style.BarChartViewStyle
 
 /*
@@ -17,7 +17,7 @@ Default style for the BarChartView, that demonstrates available style options.
 The default values match those set in the library.
 */
 @Composable
-private fun defaultStyle(): BarChartViewStyle.BarChartStyleBuilder {
+private fun defaultStyle(): BarChartViewStyle.Builder {
     val barColor = MaterialTheme.colorScheme.primary
     val backgroundColor = MaterialTheme.colorScheme.surface
 

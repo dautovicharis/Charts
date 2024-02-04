@@ -10,15 +10,15 @@ class BarChartViewStyle private constructor(
     val chartViewStyle: ChartViewStyle,
     val barChartStyle: BarChartStyle
 ) {
-    class BarChartStyleBuilder {
+    class Builder {
         private val chartViewStyleBuilder = ChartViewStyle.ChartViewStyleBuilder()
-        private val barChartStyleBuilder = BarChartStyle.BarChartStyleBuilder()
+        private val barChartStyleBuilder = BarChartStyle.Builder()
 
         fun chartViewStyle(block: ChartViewStyle.ChartViewStyleBuilder.() -> Unit) {
             chartViewStyleBuilder.apply(block)
         }
 
-        fun barChartStyle(block: BarChartStyle.BarChartStyleBuilder.() -> Unit) {
+        fun barChartStyle(block: BarChartStyle.Builder.() -> Unit) {
             barChartStyleBuilder.apply(block)
         }
 
@@ -33,10 +33,10 @@ class BarChartViewStyle private constructor(
 
 @Immutable
 class BarChartStyle(
-    val barColor: Color? = null,
-    val space: Dp? = null
+    val barColor: Color?,
+    val space: Dp?
 ) {
-    class BarChartStyleBuilder {
+    class Builder {
         var barColor: Color? = null
         var space: Dp? = null
 

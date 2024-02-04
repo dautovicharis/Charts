@@ -20,8 +20,8 @@ import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.common.style.ChartViewStyleInternal
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.linechart.LineChart
-import com.hd.charts.internal.linechart.LineChartDefaults
-import com.hd.charts.internal.linechart.LineChartStyleInternal
+import com.hd.charts.internal.style.LineChartDefaults
+import com.hd.charts.internal.style.LineChartStyleInternal
 import com.hd.charts.style.LineChartViewStyle
 
 
@@ -56,7 +56,7 @@ fun LineChartView(
 
 @Composable
 private fun LineChartViewPreview() {
-    val style = LineChartViewStyle.LineChartStyleBuilder().apply {
+    val style = LineChartViewStyle.Builder().apply {
         chartViewStyle {
             width = 300.dp
         }

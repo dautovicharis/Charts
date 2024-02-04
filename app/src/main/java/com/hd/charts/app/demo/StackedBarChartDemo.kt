@@ -10,7 +10,7 @@ import com.hd.charts.StackedBarChartView
 import com.hd.charts.StackedChartData
 import com.hd.charts.app.ScrollView
 import com.hd.charts.common.model.ChartData
-import com.hd.charts.common.style.ChartStyle
+import com.hd.charts.ChartStyle
 import com.hd.charts.style.StackedBarChartViewStyle
 
 /*
@@ -18,7 +18,7 @@ Default style for the StackedBarChartView, that demonstrates available style opt
 The default values match those set in the library.
 */
 @Composable
-private fun defaultStyle(): StackedBarChartViewStyle.StackedBarChartStyleBuilder {
+private fun defaultStyle(): StackedBarChartViewStyle.Builder {
     val barColor = MaterialTheme.colorScheme.primary
     val backgroundColor = MaterialTheme.colorScheme.surface
 
