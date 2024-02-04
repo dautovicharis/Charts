@@ -13,6 +13,13 @@ Inspired by: https://github.com/AppPear/ChartView
 
 # Documentation
 Public API: https://dautovicharis.github.io/Charts/
+<details open>
+<summary>Generate documentation</summary>
+
+```kotlin
+./gradlew dokkaHtml
+```
+</details>
 
 # Features
 - Animations
