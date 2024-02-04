@@ -32,9 +32,9 @@ class PieChartViewStyle private constructor(
 
 @Immutable
 class PieChartStyle(
-    val chartColor: Color? = null,
-    val strokeColor: Color? = null,
-    val donutPercentage: Float? = null
+    val chartColor: Color?,
+    val strokeColor: Color?,
+    val donutPercentage: Float?
 ) {
     class Builder {
         var chartColor: Color? = null

@@ -33,9 +33,9 @@ class StackedBarChartViewStyle private constructor(
 
 @Immutable
 class StackedBarChartStyle(
-    val barColor: Color? = null,
-    val space: Dp? = null,
-    val colors: List<Color> = emptyList()
+    val barColor: Color?,
+    val space: Dp?,
+    val colors: List<Color>
 ) {
     class Builder {
         var barColor: Color? = null

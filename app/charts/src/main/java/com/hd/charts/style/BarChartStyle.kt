@@ -33,8 +33,8 @@ class BarChartViewStyle private constructor(
 
 @Immutable
 class BarChartStyle(
-    val barColor: Color? = null,
-    val space: Dp? = null
+    val barColor: Color?,
+    val space: Dp?
 ) {
     class Builder {
         var barColor: Color? = null

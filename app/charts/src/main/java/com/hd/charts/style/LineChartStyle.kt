@@ -32,10 +32,10 @@ class LineChartViewStyle private constructor(
 
 @Immutable
 class LineChartStyle(
-    val pointColor: Color? = null,
-    val lineColor: Color? = null,
-    val bezier: Boolean? = null,
-    val showPoints: Boolean? = null
+    val pointColor: Color?,
+    val lineColor: Color?,
+    val bezier: Boolean?,
+    val showPoints: Boolean?
 ) {
     class Builder {
         var pointColor: Color? = null

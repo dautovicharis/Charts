@@ -48,7 +48,7 @@ fun StackedBarChartView(
     var currentTitle by remember { mutableStateOf(title) }
     var labels by remember { mutableStateOf(listOf<String>()) }
 
-    val colors = when (chartStyle.colors.isEmpty()) {
+    val colors = when (chartStyle.colors.isNullOrEmpty()) {
         true -> {
             generateColorShades(chartStyle.barColor, chartData.first().data.points.size)
         }
