@@ -13,6 +13,13 @@ Inspired by: https://github.com/AppPear/ChartView
 
 # Documentation
 Public API: https://dautovicharis.github.io/Charts/
+<details open>
+<summary>Generate documentation</summary>
+
+```kotlin
+./gradlew dokkaHtml
+```
+</details>
 
 # Features
 - Animations
@@ -59,7 +66,10 @@ Add it in your *settings.gradle.kts* at the end of repositories:
 ![stacked-bar-merged](https://github.com/dautovicharis/Charts/assets/7049715/09161564-88de-479f-9be8-aa7c134faffa)
 
 # Examples
-[Code Examples](https://github.com/dautovicharis/Charts/tree/main/app/src/main/java/com/hd/charts/app/demo)
+- [Pie Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/PieChartDemo.kt)
+- [Line Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/LineChartDemo.kt)
+- [Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/BarChartDemo.kt)
+- [Stacked Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/StackedBarChartDemo.kt)
 
 
 # Contributions
