@@ -21,8 +21,8 @@ import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.common.style.ChartViewStyleInternal
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.barchart.BarChart
-import com.hd.charts.internal.barchart.BarChartDefaults
-import com.hd.charts.internal.barchart.BarChartStyleInternal
+import com.hd.charts.internal.style.BarChartDefaults
+import com.hd.charts.internal.style.BarChartStyleInternal
 import com.hd.charts.style.BarChartViewStyle
 
 @Composable
@@ -59,7 +59,7 @@ fun BarChartView(
 private fun BarChartViewPreview() {
     val barColor = MaterialTheme.colorScheme.primary
 
-    val style = BarChartViewStyle.BarChartStyleBuilder().apply {
+    val style = BarChartViewStyle.Builder().apply {
         barChartStyle {
             this.barColor = barColor
             this.space = 8.dp

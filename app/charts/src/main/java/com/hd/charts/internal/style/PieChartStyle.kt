@@ -1,4 +1,4 @@
-package com.hd.charts.internal.piechart
+package com.hd.charts.internal.style
 
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding

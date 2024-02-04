@@ -27,6 +27,8 @@ import com.hd.charts.internal.common.DEFAULT_SCALE
 import com.hd.charts.internal.common.MAX_SCALE
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.common.model.ChartData
+import com.hd.charts.internal.style.BarChartDefaults
+import com.hd.charts.internal.style.BarChartStyleInternal
 import com.hd.charts.style.BarChartViewStyle
 import kotlin.math.abs
 
@@ -105,7 +107,7 @@ internal fun BarChart(
 @Composable
 @Preview
 internal fun BarChartPreview() {
-    val style = BarChartViewStyle.BarChartStyleBuilder().apply {
+    val style = BarChartViewStyle.Builder().apply {
         barChartStyle {
             space = 8.dp
         }

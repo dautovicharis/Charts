@@ -9,15 +9,15 @@ class LineChartViewStyle private constructor(
     val chartViewStyle: ChartViewStyle,
     val lineChartStyle: LineChartStyle
 ) {
-    class LineChartStyleBuilder {
+    class Builder {
         private val chartViewStyleBuilder = ChartViewStyle.ChartViewStyleBuilder()
-        private val lineChartStyleBuilder = LineChartStyle.LineChartStyleBuilder()
+        private val lineChartStyleBuilder = LineChartStyle.Builder()
 
         fun chartViewStyle(block: ChartViewStyle.ChartViewStyleBuilder.() -> Unit) {
             chartViewStyleBuilder.apply(block)
         }
 
-        fun lineChartStyle(block: LineChartStyle.LineChartStyleBuilder.() -> Unit) {
+        fun lineChartStyle(block: LineChartStyle.Builder.() -> Unit) {
             lineChartStyleBuilder.apply(block)
         }
 
@@ -37,7 +37,7 @@ class LineChartStyle(
     val bezier: Boolean? = null,
     val showPoints: Boolean? = null
 ) {
-    class LineChartStyleBuilder {
+    class Builder {
         var pointColor: Color? = null
         var lineColor: Color? = null
         var bezier: Boolean? = null
