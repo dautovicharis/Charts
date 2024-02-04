@@ -25,7 +25,7 @@ import com.hd.charts.internal.common.style.ChartViewStyleInternal
 internal fun LegendItem(
     chartViewsStyle: ChartViewStyleInternal,
     legend: List<String>,
-    colors: List<Color> = emptyList(),
+    colors: List<Color>,
     labels: List<String> = emptyList()
 ) {
     FlowRow(

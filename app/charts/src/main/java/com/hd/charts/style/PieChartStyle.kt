@@ -9,15 +9,15 @@ class PieChartViewStyle private constructor(
     val chartViewStyle: ChartViewStyle,
     val pieChartStyle: PieChartStyle
 ) {
-    class PieChartStyleBuilder {
+    class Builder {
         private val chartViewStyleBuilder = ChartViewStyle.ChartViewStyleBuilder()
-        private val pieChartStyleBuilder = PieChartStyle.PieChartStyleBuilder()
+        private val pieChartStyleBuilder = PieChartStyle.Builder()
 
         fun chartViewStyle(block: ChartViewStyle.ChartViewStyleBuilder.() -> Unit) {
             chartViewStyleBuilder.apply(block)
         }
 
-        fun pieChartStyle(block: PieChartStyle.PieChartStyleBuilder.() -> Unit) {
+        fun pieChartStyle(block: PieChartStyle.Builder.() -> Unit) {
             pieChartStyleBuilder.apply(block)
         }
 
@@ -32,11 +32,11 @@ class PieChartViewStyle private constructor(
 
 @Immutable
 class PieChartStyle(
-    val chartColor: Color? = null,
-    val strokeColor: Color? = null,
-    val donutPercentage: Float? = null
+    val chartColor: Color?,
+    val strokeColor: Color?,
+    val donutPercentage: Float?
 ) {
-    class PieChartStyleBuilder {
+    class Builder {
         var chartColor: Color? = null
         var strokeColor: Color? = null
         var donutPercentage: Float? = null

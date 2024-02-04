@@ -10,15 +10,15 @@ class StackedBarChartViewStyle private constructor(
     val chartViewStyle: ChartViewStyle,
     val stackedBarChartStyle: StackedBarChartStyle
 ) {
-    class StackedBarChartStyleBuilder {
+    class Builder {
         private val chartViewStyleBuilder = ChartViewStyle.ChartViewStyleBuilder()
-        private val stackedBarChartStyleBuilder = StackedBarChartStyle.StackedBarChartStyleBuilder()
+        private val stackedBarChartStyleBuilder = StackedBarChartStyle.Builder()
 
         fun chartViewStyle(block: ChartViewStyle.ChartViewStyleBuilder.() -> Unit) {
             chartViewStyleBuilder.apply(block)
         }
 
-        fun stackedBarChartStyle(block: StackedBarChartStyle.StackedBarChartStyleBuilder.() -> Unit) {
+        fun stackedBarChartStyle(block: StackedBarChartStyle.Builder.() -> Unit) {
             stackedBarChartStyleBuilder.apply(block)
         }
 
@@ -33,11 +33,11 @@ class StackedBarChartViewStyle private constructor(
 
 @Immutable
 class StackedBarChartStyle(
-    val barColor: Color? = null,
-    val space: Dp? = null,
-    val colors: List<Color> = emptyList()
+    val barColor: Color?,
+    val space: Dp?,
+    val colors: List<Color>
 ) {
-    class StackedBarChartStyleBuilder {
+    class Builder {
         var barColor: Color? = null
         var space: Dp? = null
         var colors: List<Color> = emptyList()

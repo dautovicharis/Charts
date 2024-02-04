@@ -9,7 +9,7 @@ import com.hd.charts.LineChartView
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
 import com.hd.charts.common.model.ChartData
-import com.hd.charts.common.style.ChartStyle
+import com.hd.charts.ChartStyle
 import com.hd.charts.style.LineChartViewStyle
 
 /*
@@ -17,7 +17,7 @@ Default style for the LineChartView, that demonstrates available style options.
 The default values match those set in the library.
 */
 @Composable
-private fun defaultStyle(): LineChartViewStyle.LineChartStyleBuilder {
+private fun defaultStyle(): LineChartViewStyle.Builder {
     val pointColor = MaterialTheme.colorScheme.tertiary
     val lineColor = MaterialTheme.colorScheme.primary
     val backgroundColor = MaterialTheme.colorScheme.surface

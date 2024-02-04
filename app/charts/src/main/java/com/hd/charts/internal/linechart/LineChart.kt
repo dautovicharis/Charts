@@ -28,6 +28,8 @@ import com.hd.charts.internal.common.ANIMATION_TARGET
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
+import com.hd.charts.internal.style.LineChartDefaults
+import com.hd.charts.internal.style.LineChartStyleInternal
 import com.hd.charts.style.LineChartViewStyle
 
 
@@ -152,9 +154,13 @@ private fun DrawScope.drawChartPath(
             scaledValues = values,
             size = size
         )
+        val draggingCircleOffset = Offset(
+            nearestPoint.x.coerceIn(0f, canvasWidth),
+            nearestPoint.y.coerceIn(0f, canvasHeight)
+        )
 
         drawCircle(
-            center = nearestPoint,
+            center = draggingCircleOffset,
             radius = 15f,
             color = style.pointColor
         )
@@ -215,7 +221,7 @@ private fun DrawScope.drawPathPoints(
 @Preview(showBackground = true)
 @Composable
 private fun LineChartPreview() {
-    val style = LineChartViewStyle.LineChartStyleBuilder().apply {
+    val style = LineChartViewStyle.Builder().apply {
         chartViewStyle {
             width = 300.dp
         }
@@ -237,7 +243,7 @@ private fun LineChartPreview() {
 @Composable
 private fun LineChartBezierPreview() {
 
-    val style = LineChartViewStyle.LineChartStyleBuilder().apply {
+    val style = LineChartViewStyle.Builder().apply {
         chartViewStyle {
             width = 300.dp
         }

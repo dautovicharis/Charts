@@ -26,6 +26,8 @@ import com.hd.charts.internal.common.MAX_SCALE
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.common.model.ChartData
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
+import com.hd.charts.internal.style.PieChartDefaults
+import com.hd.charts.internal.style.PieChartStyleInternal
 import com.hd.charts.style.PieChartViewStyle
 
 
@@ -82,7 +84,7 @@ private fun PieChartPreview() {
     val chartColor = MaterialTheme.colorScheme.primary
     val strokeColor = MaterialTheme.colorScheme.surface
 
-    val style = PieChartViewStyle.PieChartStyleBuilder().apply {
+    val style = PieChartViewStyle.Builder().apply {
         pieChartStyle {
             this.chartColor = chartColor
             this.strokeColor = strokeColor

@@ -16,8 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.internal.barstackedchart.LegendItem
 import com.hd.charts.internal.barstackedchart.StackedBarChart
-import com.hd.charts.internal.barstackedchart.StackedBarChartDefaults
-import com.hd.charts.internal.barstackedchart.StackedBarChartStyleInternal
+import com.hd.charts.internal.style.StackedBarChartDefaults
+import com.hd.charts.internal.style.StackedBarChartStyleInternal
 import com.hd.charts.internal.barstackedchart.generateColorShades
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.composable.ChartView
@@ -48,7 +48,7 @@ fun StackedBarChartView(
     var currentTitle by remember { mutableStateOf(title) }
     var labels by remember { mutableStateOf(listOf<String>()) }
 
-    val colors = when (chartStyle.colors.isEmpty()) {
+    val colors = when (chartStyle.colors.isNullOrEmpty()) {
         true -> {
             generateColorShades(chartStyle.barColor, chartData.first().data.points.size)
         }
@@ -92,7 +92,7 @@ fun StackedBarChartView(
 private fun StackedBarChartViewPreview() {
     val barColor = MaterialTheme.colorScheme.primary
 
-    val style = StackedBarChartViewStyle.StackedBarChartStyleBuilder().apply {
+    val style = StackedBarChartViewStyle.Builder().apply {
         stackedBarChartStyle {
             this.barColor = barColor
             this.space = 8.dp

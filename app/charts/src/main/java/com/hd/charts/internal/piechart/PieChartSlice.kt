@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.dp
 import com.hd.charts.internal.common.ANIMATION_DURATION
 import com.hd.charts.internal.common.ANIMATION_DURATION_OFFSET
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
+import com.hd.charts.internal.style.PieChartDefaults
+import com.hd.charts.internal.style.PieChartStyleInternal
 import com.hd.charts.style.PieChartViewStyle
 
 internal data class PieSlice(
@@ -118,7 +120,7 @@ private fun PieSlicePreview() {
     val chartColor = MaterialTheme.colorScheme.primary
     val strokeColor = MaterialTheme.colorScheme.surface
 
-    val style = PieChartViewStyle.PieChartStyleBuilder().apply {
+    val style = PieChartViewStyle.Builder().apply {
         pieChartStyle {
             this.chartColor = chartColor
             this.strokeColor = strokeColor

@@ -31,6 +31,8 @@ import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.style.StackedBarChartViewStyle
 import com.hd.charts.StackedChartData
 import com.hd.charts.common.model.ChartData
+import com.hd.charts.internal.style.StackedBarChartDefaults
+import com.hd.charts.internal.style.StackedBarChartStyleInternal
 
 @Composable
 internal fun StackedBarChart(
@@ -108,7 +110,7 @@ internal fun StackedBarChart(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewStackedBarChart() {
-    val style = StackedBarChartViewStyle.StackedBarChartStyleBuilder().apply {
+    val style = StackedBarChartViewStyle.Builder().apply {
         chartViewStyle { }
         stackedBarChartStyle {
             barColor = Color.Blue
