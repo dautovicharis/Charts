@@ -1,5 +1,19 @@
 # Contributing to Charts
 
+Thank you for your time!
+
+# ⚠️ Important 
+Before making any contributions, please create a new issue, and then we will validate it. 
+The process includes the following steps before making any codebase contributions:
+ - New issue: https://github.com/dautovicharis/Charts/issues
+ - Validate
+ - Assign the issue to developer
+ - Development time
+
+Feel free to create an issue for any suggestions, improvement ideas, feature requests, or bug fixes. 
+If you have any questions, please DM me: https://www.linkedin.com/in/dautovicharis/
+
+
 ## Git setup
 #### Fork repo
  - Fork repository: https://github.com/dautovicharis/Charts
