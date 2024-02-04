@@ -2,9 +2,9 @@
 
 Thank you for your time!
 
-# ⚠️ Important 
-Before making any contributions, please create a new issue, and then we will validate it. 
-The process includes the following steps before making any codebase contributions:
+# Contributions 
+Thank you for considering contributing to Charts! 
+The process includes the following steps before making any codebase changes:
  - New issue: https://github.com/dautovicharis/Charts/issues
  - Validate
  - Assign the issue to developer
