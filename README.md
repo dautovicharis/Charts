@@ -73,8 +73,6 @@ Add it in your *settings.gradle.kts* at the end of repositories:
 
 
 # Contributions
+🌟 Thank you for your time! Before you start working on code, please create a [new issue](https://github.com/dautovicharis/Charts/issues).
+
 [Contributing guidelines](CONTRIBUTING.md)
-
-
-Feel free to create an issue for any suggestions, improvement ideas, feature requests, or bug fixes. 
-If you have any questions, please DM me: https://www.linkedin.com/in/dautovicharis/
