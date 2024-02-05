@@ -45,9 +45,9 @@ internal fun StackedBarChart(
         chartData.map { Animatable(0f) }
     }
 
-    LaunchedEffect(Unit) {
-        progress.forEachIndexed { index, segmentProgress ->
-            segmentProgress.animateTo(
+    progress.forEachIndexed { index, _ ->
+        LaunchedEffect(index) {
+            progress[index].animateTo(
                 targetValue = ANIMATION_TARGET,
                 animationSpec = tween(
                     durationMillis = ANIMATION_DURATION + ANIMATION_DURATION_OFFSET * index,
