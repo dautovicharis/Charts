@@ -64,6 +64,7 @@ fun AddStackedBarChartDemo() {
         defaultStyle().apply {
             chartViewStyle {
                 this.width = 200.dp
+                this.showLegend = false
             }
             stackedBarChartStyle {
                 this.colors = colors
