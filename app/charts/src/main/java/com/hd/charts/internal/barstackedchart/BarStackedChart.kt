@@ -1,8 +1,6 @@
 package com.hd.charts.internal.barstackedchart
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Column
@@ -21,18 +19,17 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import com.hd.charts.StackedChartData
+import com.hd.charts.common.model.ChartData
+import com.hd.charts.internal.AnimationSpec
 import com.hd.charts.internal.barchart.getSelectedIndex
-import com.hd.charts.internal.common.ANIMATION_DURATION
-import com.hd.charts.internal.common.ANIMATION_DURATION_OFFSET
 import com.hd.charts.internal.common.ANIMATION_TARGET
 import com.hd.charts.internal.common.DEFAULT_SCALE
 import com.hd.charts.internal.common.MAX_SCALE
 import com.hd.charts.internal.common.NO_SELECTION
-import com.hd.charts.style.StackedBarChartViewStyle
-import com.hd.charts.StackedChartData
-import com.hd.charts.common.model.ChartData
 import com.hd.charts.internal.style.StackedBarChartDefaults
 import com.hd.charts.internal.style.StackedBarChartStyleInternal
+import com.hd.charts.style.StackedBarChartViewStyle
 
 @Composable
 internal fun StackedBarChart(
@@ -49,11 +46,7 @@ internal fun StackedBarChart(
         LaunchedEffect(index) {
             progress[index].animateTo(
                 targetValue = ANIMATION_TARGET,
-                animationSpec = tween(
-                    durationMillis = ANIMATION_DURATION + ANIMATION_DURATION_OFFSET * index,
-                    delayMillis = 0,
-                    easing = LinearEasing
-                )
+                animationSpec = AnimationSpec.stackedBar(index)
             )
         }
     }

@@ -2,8 +2,6 @@ package com.hd.charts.internal.linechart
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.runtime.Composable
@@ -22,11 +20,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import com.hd.charts.internal.common.ANIMATION_DURATION
-import com.hd.charts.internal.common.ANIMATION_DURATION_OFFSET
+import com.hd.charts.common.model.ChartData
+import com.hd.charts.internal.AnimationSpec
 import com.hd.charts.internal.common.ANIMATION_TARGET
 import com.hd.charts.internal.common.NO_SELECTION
-import com.hd.charts.common.model.ChartData
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.style.LineChartDefaults
 import com.hd.charts.internal.style.LineChartStyleInternal
@@ -49,11 +46,7 @@ internal fun LineChart(
         progress.forEachIndexed { index, segmentProgress ->
             segmentProgress.animateTo(
                 targetValue = ANIMATION_TARGET,
-                animationSpec = tween(
-                    durationMillis = ANIMATION_DURATION + ANIMATION_DURATION_OFFSET * index,
-                    delayMillis = 0,
-                    easing = FastOutSlowInEasing
-                )
+                animationSpec = AnimationSpec.lineChart(index)
             )
         }
     }
