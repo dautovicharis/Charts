@@ -77,13 +77,14 @@ fun StackedBarChartView(
                     else -> chartData[it].data.labels
                 }
             }
-
-            LegendItem(
-                chartViewsStyle = chartViewStyle,
-                colors = colors,
-                legend = legend,
-                labels = labels
-            )
+            if (chartStyle.showLegend) {
+                LegendItem(
+                    chartViewsStyle = chartViewStyle,
+                    colors = colors,
+                    legend = legend,
+                    labels = labels
+                )
+            }
         }
     }
 }

@@ -6,12 +6,13 @@ import androidx.compose.ui.unit.Dp
 
 @Immutable
 class ChartViewStyle(
-    val backgroundColor: Color? = null,
-    val cornerRadius: Dp? = null,
-    val shadow: Dp? = null,
-    val innerPadding: Dp? = null,
-    val outerPadding: Dp? = null,
-    val width: Dp? = null
+    val backgroundColor: Color?,
+    val cornerRadius: Dp?,
+    val shadow: Dp?,
+    val innerPadding: Dp?,
+    val outerPadding: Dp?,
+    val width: Dp?,
+    val showLegend: Boolean?
 ) {
     class ChartViewStyleBuilder {
         var backgroundColor: Color? = null
@@ -20,6 +21,7 @@ class ChartViewStyle(
         var innerPadding: Dp? = null
         var outerPadding: Dp? = null
         var width: Dp? = null
+        var showLegend: Boolean? = null
 
         fun build(): ChartViewStyle {
             return ChartViewStyle(
@@ -28,7 +30,8 @@ class ChartViewStyle(
                 shadow = shadow,
                 innerPadding = innerPadding,
                 outerPadding = outerPadding,
-                width = width
+                width = width,
+                showLegend = showLegend
             )
         }
     }
