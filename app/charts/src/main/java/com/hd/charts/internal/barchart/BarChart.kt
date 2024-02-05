@@ -1,7 +1,7 @@
 package com.hd.charts.internal.barchart
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -43,22 +43,23 @@ internal fun BarChart(
         chartData.points.map { Animatable(0f) }
     }
 
-    LaunchedEffect(Unit) {
-        progress.forEachIndexed { index, segmentProgress ->
-            segmentProgress.animateTo(
+    chartData.points.forEachIndexed { index, _ ->
+        LaunchedEffect(index) {
+            progress[index].animateTo(
                 targetValue = ANIMATION_TARGET,
                 animationSpec = tween(
                     durationMillis = ANIMATION_DURATION + ANIMATION_DURATION_OFFSET * index,
                     delayMillis = 0,
-                    easing = FastOutSlowInEasing
+                    easing = LinearEasing
                 )
             )
         }
     }
+
     val maxValue = chartData.points.max()
     val minValue = chartData.points.min()
 
-    var selectedIndex by remember { mutableStateOf(-1) }
+    var selectedIndex by remember { mutableIntStateOf(-1) }
 
     Canvas(modifier = style.modifier.pointerInput(Unit) {
         detectDragGestures(
