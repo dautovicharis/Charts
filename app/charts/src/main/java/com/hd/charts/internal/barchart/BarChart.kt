@@ -18,12 +18,13 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
-import com.hd.charts.common.model.ChartData
 import com.hd.charts.internal.AnimationSpec
 import com.hd.charts.internal.common.ANIMATION_TARGET
 import com.hd.charts.internal.common.DEFAULT_SCALE
 import com.hd.charts.internal.common.MAX_SCALE
 import com.hd.charts.internal.common.NO_SELECTION
+import com.hd.charts.internal.common.model.ChartData
+import com.hd.charts.internal.common.model.toChartData
 import com.hd.charts.internal.style.BarChartDefaults
 import com.hd.charts.internal.style.BarChartStyleInternal
 import com.hd.charts.style.BarChartViewStyle
@@ -107,12 +108,24 @@ internal fun BarChartPreview() {
         }
     }.build()
 
-    val data = listOf(100f, -50f, -5f, -60f, -1f, -30f, -50f, -35f, -25f, -40f, 100f)
+
     Column(
         modifier = Modifier.wrapContentSize()
     ) {
         BarChart(
-            chartData = ChartData.fromFloatList(data),
+            chartData = listOf(
+                100f,
+                -50f,
+                -5f,
+                -60f,
+                -1f,
+                -30f,
+                -50f,
+                -35f,
+                -25f,
+                -40f,
+                100f
+            ).toChartData(),
             style = BarChartDefaults.barChartStyle(style)
         )
     }

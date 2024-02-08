@@ -4,7 +4,7 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.center
 import com.hd.charts.internal.common.NO_SELECTION
-import com.hd.charts.common.model.ChartData
+import com.hd.charts.internal.common.model.ChartData
 import kotlin.math.abs
 import kotlin.math.atan
 import kotlin.math.min

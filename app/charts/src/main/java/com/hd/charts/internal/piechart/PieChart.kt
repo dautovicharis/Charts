@@ -24,7 +24,8 @@ import com.hd.charts.internal.common.ANIMATION_DURATION
 import com.hd.charts.internal.common.DEFAULT_SCALE
 import com.hd.charts.internal.common.MAX_SCALE
 import com.hd.charts.internal.common.NO_SELECTION
-import com.hd.charts.common.model.ChartData
+import com.hd.charts.internal.common.model.ChartData
+import com.hd.charts.internal.common.model.toChartData
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.style.PieChartDefaults
 import com.hd.charts.internal.style.PieChartStyleInternal
@@ -92,15 +93,24 @@ private fun PieChartPreview() {
         }
     }.build()
 
+
     Row(
         modifier = Modifier
             .wrapContentWidth()
             .wrapContentHeight()
     ) {
         PieChart(
-            chartData = ChartData.fromDoubleList(
-                listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)
-            ),
+            chartData = listOf(
+                8.0f,
+                23.0f,
+                54.0f,
+                32.0f,
+                12.0f,
+                37.0f,
+                7.0f,
+                23.0f,
+                43.0f
+            ).toChartData(),
             style = PieChartDefaults.pieChartStyle(style)
         )
     }

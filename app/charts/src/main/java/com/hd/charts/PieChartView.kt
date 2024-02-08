@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.composable.ChartView
-import com.hd.charts.common.model.ChartData
 import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.common.style.ChartViewStyleInternal
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
@@ -27,8 +27,7 @@ import com.hd.charts.style.PieChartViewStyle
 
 @Composable
 fun PieChartView(
-    chartData: ChartData,
-    title: String,
+    chartData: ChartDataSet,
     style: PieChartViewStyle,
 ) {
     val chartViewStyle: ChartViewStyleInternal = ChartViewDefaults.chartViewStyle(
@@ -38,7 +37,7 @@ fun PieChartView(
         style = style
     )
 
-    var currentTitle by remember { mutableStateOf(title) }
+    var currentTitle by remember { mutableStateOf(chartData.data.label) }
     ChartsDefaultTheme {
         ChartView(chartViewsStyle = chartViewStyle) {
             Text(
@@ -47,12 +46,12 @@ fun PieChartView(
                 style = chartViewStyle.styleTitle
             )
             PieChart(
-                chartData = chartData,
+                chartData = chartData.data.item,
                 style = pieChartStyle
             ) {
                 currentTitle = when (it) {
-                    NO_SELECTION -> title
-                    else -> chartData.labels[it]
+                    NO_SELECTION -> chartData.data.label
+                    else -> chartData.data.item.labels[it]
                 }
             }
         }
@@ -79,6 +78,10 @@ private fun PieChartViewPreview() {
         }
     }.build()
 
+    val data = ChartDataSet(
+        items = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f),
+        title = stringResource(id = R.string.pie_chart)
+    )
 
     Row(
         modifier = Modifier
@@ -86,10 +89,7 @@ private fun PieChartViewPreview() {
             .wrapContentHeight(),
     ) {
         PieChartView(
-            chartData = ChartData.fromDoubleList(
-                listOf(8.0, 23.0, 54.0, 32.0, 12.0, 37.0, 7.0, 23.0, 43.0)
-            ),
-            title = stringResource(id = R.string.pie_chart),
+            chartData = data,
             style = style
         )
     }
