@@ -5,11 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.hd.charts.ChartStyle
 import com.hd.charts.PieChartView
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
-import com.hd.charts.common.model.ChartData
-import com.hd.charts.ChartStyle
+import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.style.PieChartViewStyle
 
 /*
@@ -68,13 +68,14 @@ fun AddPieChartDemo() {
 
 @Composable
 private fun AddPieChart(style: PieChartViewStyle) {
-    PieChartView(
-        chartData = ChartData.fromDoubleList(
-            listOf(
-                8.0, 23.0, 54.0, 32.0, 12.0, 37.0
-            ), postfix = " °C"
-        ),
+    val data = ChartDataSet(
+        items = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f),
         title = stringResource(id = R.string.pie_chart),
+        postfix = " °C"
+    )
+
+    PieChartView(
+        chartData = data,
         style = style
     )
 }

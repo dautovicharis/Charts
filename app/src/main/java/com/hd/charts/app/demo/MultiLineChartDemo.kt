@@ -9,7 +9,7 @@ import com.hd.charts.ChartStyle
 import com.hd.charts.LineChartView
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
-import com.hd.charts.common.model.ChartDataSet
+import com.hd.charts.common.model.MultiChartDataSet
 import com.hd.charts.style.LineChartViewStyle
 
 /*
@@ -52,61 +52,60 @@ private fun defaultStyle(): LineChartViewStyle.Builder {
 }
 
 @Composable
-fun AddLineChartDemo() {
-
+fun AddMultiLineChartDemo() {
     ScrollView {
-        // Default - Line Chart
+        // Default
         defaultStyle().apply {
             chartViewStyle {
-                this.width = 200.dp
+                this.width = 300.dp
             }
-            AddLineChart(style = build())
-        }
 
-        // Default Line Chart + Points
-        defaultStyle().apply {
-            chartViewStyle {
-                this.width = 200.dp
-            }
-            lineChartStyle { pointVisible = true }
-            AddLineChart(style = build())
-        }
-
-        // Bezier
-        defaultStyle().apply {
-            chartViewStyle {
-                this.width = 200.dp
-            }
-            lineChartStyle { bezier = true }
-            AddLineChart(style = build())
-        }
-
-        // Bezier + Points
-        defaultStyle().apply {
-            chartViewStyle {
-                this.width = 200.dp
-            }
             lineChartStyle {
-                bezier = true
-                pointVisible = true
+                this.pointVisible = true
             }
-            AddLineChart(style = build())
+
+            AddMultiLineChart(style = build())
+        }
+
+        // Multi Line Chart
+        defaultStyle().apply {
+            chartViewStyle {
+                this.width = 300.dp
+            }
+
+            lineChartStyle {
+                this.dragPointVisible = true
+                this.dragActivePointSize = 10f
+            }
+            AddMultiLineChart(style = build())
         }
     }
 }
 
 @Composable
-private fun AddLineChart(
+private fun AddMultiLineChart(
     style: LineChartViewStyle
 ) {
-    val chartData = ChartDataSet(
-        items = listOf(
-            8f, 23f, 54f, 32f, 12f, 37f, 7f, 23f, 43f
-        ), title = stringResource(id = R.string.line_chart)
+    val categories = listOf(
+        "Jan", "Feb", "Mar", "Apr"
+    )
+    val labelPrefix = "$"
+
+    val items = listOf(
+        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f, 50000.57f),
+        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 40000.57f, 100500f),
+        "Lime Av." to listOf(1500.87f, 2765.58f, 33245.81f, 200765.58f),
+        "Apple Rd." to listOf(5444.87f, 10033.58f, 67544.81f, 110444.87f)
+    )
+
+    val data = MultiChartDataSet(
+        items = items,
+        prefix = labelPrefix,
+        categories = categories,
+        title = stringResource(id = R.string.line_chart)
     )
 
     LineChartView(
-        data = chartData,
-        style = style
+        data = data, style = style
     )
 }

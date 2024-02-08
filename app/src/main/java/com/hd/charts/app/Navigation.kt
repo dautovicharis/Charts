@@ -6,4 +6,5 @@ sealed class ChartScreen(val route: String) {
     data object PieChartScreen : ChartScreen("pieChart")
     data object BarChartScreen : ChartScreen("barChart")
     data object StackedBarChartScreen : ChartScreen("stackedBarChart")
+    data object MultiLineChartScreen : ChartScreen("multiLineChart")
 }

@@ -9,7 +9,7 @@ import com.hd.charts.BarChartView
 import com.hd.charts.ChartStyle
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
-import com.hd.charts.common.model.ChartData
+import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.style.BarChartViewStyle
 
 /*
@@ -47,10 +47,10 @@ fun AddSimpleBarChartDemo() {
             }
 
             AddBarChart(
-                style = build(), data = ChartData.fromFloatList(
-                    listOf(
+                style = build(), data = ChartDataSet(
+                    items = listOf(
                         -8.0f, 23.0f, 54.0f, 12.0f, 37.0f, -100f
-                    )
+                    ), title = stringResource(id = R.string.bar_chart)
                 )
             )
         }
@@ -61,10 +61,10 @@ fun AddSimpleBarChartDemo() {
             }
 
             AddBarChart(
-                style = build(), data = ChartData.fromFloatList(
-                    listOf(
+                style = build(), data = ChartDataSet(
+                    items = listOf(
                         100f, -50f, -5f, -60f, -1f, -30f, -50f, -35f, 50f, 100f
-                    )
+                    ), title = stringResource(id = R.string.bar_chart)
                 )
             )
         }
@@ -72,10 +72,9 @@ fun AddSimpleBarChartDemo() {
 }
 
 @Composable
-private fun AddBarChart(style: BarChartViewStyle, data: ChartData) {
+private fun AddBarChart(style: BarChartViewStyle, data: ChartDataSet) {
     BarChartView(
         chartData = data,
-        title = stringResource(id = R.string.bar_chart),
         style = style
     )
 }
