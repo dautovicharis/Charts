@@ -5,5 +5,6 @@
     <string name="line_chart">Line Chart</string>
     <string name="bar_chart">Bar Chart</string>
     <string name="bar_stacked_chart">Stacked Bar Chart</string>
+    <string name="multi_line_chart">Multi Line Chart</string>
 
 </resources>
