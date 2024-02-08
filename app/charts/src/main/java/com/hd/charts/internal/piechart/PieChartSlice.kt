@@ -35,7 +35,6 @@ internal data class PieSlice(
     val normalizedValue: Double
 )
 
-
 // Constants
 private const val STROKE_WIDTH = 5f
 private const val MAX_SCALE = 1f

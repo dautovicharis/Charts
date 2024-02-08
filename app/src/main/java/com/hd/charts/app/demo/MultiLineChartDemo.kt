@@ -106,6 +106,6 @@ private fun AddMultiLineChart(
     )
 
     LineChartView(
-        data = data, style = style
+        dataSet = data, style = style
     )
 }

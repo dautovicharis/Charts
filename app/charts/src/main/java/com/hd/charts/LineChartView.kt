@@ -18,13 +18,13 @@ import com.hd.charts.style.LineChartViewStyle
 
 @Composable
 fun LineChartView(
-    data: ChartDataSet,
+    dataSet: ChartDataSet,
     style: LineChartViewStyle
 ) {
     LineChartViewImpl(
         data = MultiChartData(
-            items = listOf(data.data),
-            title = data.data.label
+            items = listOf(dataSet.data),
+            title = dataSet.data.label
         ),
         style = style
     )
@@ -32,11 +32,11 @@ fun LineChartView(
 
 @Composable
 fun LineChartView(
-    data: MultiChartDataSet,
+    dataSet: MultiChartDataSet,
     style: LineChartViewStyle
 ) {
     LineChartViewImpl(
-        data = data.data,
+        data = dataSet.data,
         style = style
     )
 }
@@ -89,7 +89,7 @@ private fun LineChartViewPreview() {
             .wrapContentHeight(),
     ) {
         LineChartView(
-            data = data,
+            dataSet = data,
             style = style.build()
         )
     }

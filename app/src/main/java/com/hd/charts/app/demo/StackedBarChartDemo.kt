@@ -94,7 +94,7 @@ private fun AddStackedBarChart(style: StackedBarChartViewStyle) {
     )
 
     StackedBarChartView(
-        data = data,
+        dataSet = data,
         style = style
     )
 }
