@@ -16,9 +16,17 @@ import com.hd.charts.style.LineChartViewStyle
 internal class LineChartStyleInternal internal constructor(
     val modifier: Modifier,
     val pointColor: Color,
+    val pointVisible: Boolean,
+    val pointColorSameAsLine: Boolean,
+    val pointSize: Float,
     val lineColor: Color,
     val bezier: Boolean,
-    val showPoints: Boolean
+    val colors: List<Color>,
+    val dragPointSize: Float,
+    val dragPointVisible: Boolean,
+    val dragActivePointSize: Float,
+    val dragPointColor: Color,
+    val dragPointColorSameAsLine: Boolean
 )
 
 internal object LineChartDefaults {
@@ -35,16 +43,41 @@ internal object LineChartDefaults {
             .aspectRatio(1f)
 
         val pointColor = style.lineChartStyle.pointColor ?: MaterialTheme.colorScheme.tertiary
+        val pointColorSameAsLine = when (style.lineChartStyle.pointColor) {
+            null -> true
+            else -> false
+        }
+        val pointSize = style.lineChartStyle.pointSize ?: 8f
+        val pointVisible = style.lineChartStyle.pointVisible ?: false
+
         val lineColor = style.lineChartStyle.lineColor ?: MaterialTheme.colorScheme.primary
         val bezier = style.lineChartStyle.bezier ?: true
-        val showPoints = style.lineChartStyle.showPoints ?: false
+        val colors = style.lineChartStyle.colors
+
+        val dragPointSize = style.lineChartStyle.dragPointSize ?: 15f
+        val dragPointVisible = style.lineChartStyle.dragPointVisible ?: true
+        val dragActivePointSize = style.lineChartStyle.dragActivePointSize ?: 12f
+        val dragPointColor =
+            style.lineChartStyle.dragPointColor ?: MaterialTheme.colorScheme.tertiary
+        val dragPointColorSameAsLine = when (style.lineChartStyle.dragPointColor) {
+            null -> true
+            else -> false
+        }
 
         return LineChartStyleInternal(
             modifier = modifier,
             pointColor = pointColor,
             lineColor = lineColor,
             bezier = bezier,
-            showPoints = showPoints
+            pointVisible = pointVisible,
+            colors = colors,
+            dragPointSize = dragPointSize,
+            dragPointVisible = dragPointVisible,
+            pointSize = pointSize,
+            dragActivePointSize = dragActivePointSize,
+            pointColorSameAsLine = pointColorSameAsLine,
+            dragPointColor = dragPointColor,
+            dragPointColorSameAsLine = dragPointColorSameAsLine
         )
     }
 }

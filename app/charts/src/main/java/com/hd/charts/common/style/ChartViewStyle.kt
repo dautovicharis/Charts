@@ -11,8 +11,7 @@ class ChartViewStyle(
     val shadow: Dp?,
     val innerPadding: Dp?,
     val outerPadding: Dp?,
-    val width: Dp?,
-    val showLegend: Boolean?
+    val width: Dp?
 ) {
     class ChartViewStyleBuilder {
         var backgroundColor: Color? = null
@@ -21,7 +20,6 @@ class ChartViewStyle(
         var innerPadding: Dp? = null
         var outerPadding: Dp? = null
         var width: Dp? = null
-        var showLegend: Boolean? = null
 
         fun build(): ChartViewStyle {
             return ChartViewStyle(
@@ -30,8 +28,7 @@ class ChartViewStyle(
                 shadow = shadow,
                 innerPadding = innerPadding,
                 outerPadding = outerPadding,
-                width = width,
-                showLegend = showLegend
+                width = width
             )
         }
     }
