@@ -106,7 +106,7 @@ private fun AddLineChart(
     )
 
     LineChartView(
-        data = chartData,
+        dataSet = chartData,
         style = style
     )
 }

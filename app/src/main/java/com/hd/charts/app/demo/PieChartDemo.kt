@@ -75,7 +75,7 @@ private fun AddPieChart(style: PieChartViewStyle) {
     )
 
     PieChartView(
-        chartData = data,
+        dataSet = data,
         style = style
     )
 }

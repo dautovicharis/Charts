@@ -27,57 +27,57 @@ import com.hd.charts.style.StackedBarChartViewStyle
 
 @Composable
 fun StackedBarChartView(
-    data: MultiChartDataSet,
+    dataSet: MultiChartDataSet,
     style: StackedBarChartViewStyle
 ) {
     val chartViewStyle = ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
-    val chartStyle = StackedBarChartDefaults.barChartStyle(style = style)
+    val barChartStyle = StackedBarChartDefaults.barChartStyle(style = style)
 
-    var currentTitle by remember { mutableStateOf(data.data.title) }
+    var title by remember { mutableStateOf(dataSet.data.title) }
     var labels by remember { mutableStateOf(listOf<String>()) }
 
     val colors by remember {
         mutableStateOf(
-            chartStyle.colors.ifEmpty {
-                generateColorShades(chartStyle.barColor, data.data.getFirstPointsSize())
+            barChartStyle.colors.ifEmpty {
+                generateColorShades(barChartStyle.barColor, dataSet.data.getFirstPointsSize())
             }
         )
     }
 
-    ChartsDefaultTheme {
-        ChartView(chartViewsStyle = chartViewStyle) {
-            Text(
-                modifier = chartViewStyle.modifierTopTitle,
-                text = currentTitle,
-                style = chartViewStyle.styleTitle
+    ChartView(chartViewsStyle = chartViewStyle) {
+        Text(
+            modifier = chartViewStyle.modifierTopTitle,
+            text = title,
+            style = chartViewStyle.styleTitle
+        )
+
+        StackedBarChart(
+            data = dataSet.data,
+            style = barChartStyle,
+            colors = colors
+        ) { selectedIndex ->
+            title = when (selectedIndex) {
+                NO_SELECTION -> title
+                else -> {
+                    dataSet.data.items[selectedIndex].label
+                }
+            }
+
+            if (dataSet.data.hasCategories()) {
+                labels = when (selectedIndex) {
+                    NO_SELECTION -> emptyList()
+                    else -> dataSet.data.items[selectedIndex].item.labels
+                }
+            }
+        }
+
+        if (dataSet.data.hasCategories()) {
+            LegendItem(
+                chartViewsStyle = chartViewStyle,
+                colors = colors,
+                legend = dataSet.data.categories,
+                labels = labels
             )
-
-            StackedBarChart(data = data.data, style = chartStyle, colors = colors) {selectedIndex ->
-                currentTitle = when (selectedIndex) {
-                    NO_SELECTION -> currentTitle
-                    else -> {
-                        data.data.items[selectedIndex].label
-                    }
-                }
-
-
-
-                if (data.data.hasCategories()) {
-                    labels = when (selectedIndex) {
-                        NO_SELECTION -> emptyList()
-                        else -> data.data.items[selectedIndex].item.labels
-                    }
-                }
-            }
-
-            if (data.data.hasCategories()) {
-                LegendItem(
-                    chartViewsStyle = chartViewStyle,
-                    colors = colors,
-                    legend = data.data.categories,
-                    labels = labels
-                )
-            }
         }
     }
 }
@@ -108,7 +108,8 @@ private fun StackedBarChartViewPreview() {
     val data = MultiChartDataSet(
         items = items,
         categories = categories,
-        title = stringResource(id = R.string.bar_stacked_chart))
+        title = stringResource(id = R.string.bar_stacked_chart)
+    )
 
     Row(
         modifier = Modifier
@@ -116,7 +117,7 @@ private fun StackedBarChartViewPreview() {
             .wrapContentHeight(),
     ) {
         StackedBarChartView(
-            data = data,
+            dataSet = data,
             style = style
         )
     }

@@ -19,36 +19,30 @@ import com.hd.charts.internal.barchart.BarChart
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.composable.ChartView
 import com.hd.charts.internal.common.style.ChartViewDefaults
-import com.hd.charts.internal.common.style.ChartViewStyleInternal
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.style.BarChartDefaults
-import com.hd.charts.internal.style.BarChartStyleInternal
 import com.hd.charts.style.BarChartViewStyle
 
 @Composable
 fun BarChartView(
-    chartData: ChartDataSet,
+    dataSet: ChartDataSet,
     style: BarChartViewStyle
 ) {
-    var currentTitle by remember { mutableStateOf(chartData.data.label) }
-    val chartViewsStyle: ChartViewStyleInternal =
-        ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
-    val chartStyle: BarChartStyleInternal =
-        BarChartDefaults.barChartStyle(style = style)
+    var title by remember { mutableStateOf(dataSet.data.label) }
+    val chartViewsStyle = ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
+    val barChartStyle = BarChartDefaults.barChartStyle(style = style)
 
-    ChartsDefaultTheme {
-        ChartView(chartViewsStyle = chartViewsStyle) {
-            Text(
-                modifier = chartViewsStyle.modifierTopTitle,
-                text = currentTitle,
-                style = chartViewsStyle.styleTitle
-            )
+    ChartView(chartViewsStyle = chartViewsStyle) {
+        Text(
+            modifier = chartViewsStyle.modifierTopTitle,
+            text = title,
+            style = chartViewsStyle.styleTitle
+        )
 
-            BarChart(chartData = chartData.data.item, style = chartStyle) {
-                currentTitle = when (it) {
-                    NO_SELECTION -> currentTitle
-                    else -> chartData.data.item.labels[it]
-                }
+        BarChart(chartData = dataSet.data.item, style = barChartStyle) {
+            title = when (it) {
+                NO_SELECTION -> title
+                else -> dataSet.data.item.labels[it]
             }
         }
     }
@@ -67,7 +61,8 @@ private fun BarChartViewPreview() {
 
     val chartData = ChartDataSet(
         items = listOf(-300f, 50f, 20f, 1f, 15f, -30f, 50f, 35f, 25f, 40f, 500f),
-        title = stringResource(id = R.string.bar_chart))
+        title = stringResource(id = R.string.bar_chart)
+    )
 
     Row(
         modifier = Modifier
@@ -75,7 +70,7 @@ private fun BarChartViewPreview() {
             .wrapContentHeight(),
     ) {
         BarChartView(
-            chartData = chartData,
+            dataSet = chartData,
             style = style
         )
     }

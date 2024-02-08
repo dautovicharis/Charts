@@ -50,9 +50,8 @@ internal fun BarChart(
         }
     }
 
-    val maxValue = chartData.points.max()
-    val minValue = chartData.points.min()
-
+    val maxValue = remember { chartData.points.max() }
+    val minValue = remember { chartData.points.min() }
     var selectedIndex by remember { mutableIntStateOf(-1) }
 
     Canvas(modifier = style.modifier.pointerInput(Unit) {
@@ -108,24 +107,12 @@ internal fun BarChartPreview() {
         }
     }.build()
 
-
     Column(
         modifier = Modifier.wrapContentSize()
     ) {
         BarChart(
-            chartData = listOf(
-                100f,
-                -50f,
-                -5f,
-                -60f,
-                -1f,
-                -30f,
-                -50f,
-                -35f,
-                -25f,
-                -40f,
-                100f
-            ).toChartData(),
+            chartData = listOf(100f, -50f, -5f, -60f, -1f, -30f, -50f, -35f, -25f, -40f, 100f)
+                .toChartData(),
             style = BarChartDefaults.barChartStyle(style)
         )
     }

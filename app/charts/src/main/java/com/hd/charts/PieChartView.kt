@@ -18,41 +18,33 @@ import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.composable.ChartView
 import com.hd.charts.internal.common.style.ChartViewDefaults
-import com.hd.charts.internal.common.style.ChartViewStyleInternal
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.piechart.PieChart
 import com.hd.charts.internal.style.PieChartDefaults
-import com.hd.charts.internal.style.PieChartStyleInternal
 import com.hd.charts.style.PieChartViewStyle
 
 @Composable
 fun PieChartView(
-    chartData: ChartDataSet,
+    dataSet: ChartDataSet,
     style: PieChartViewStyle,
 ) {
-    val chartViewStyle: ChartViewStyleInternal = ChartViewDefaults.chartViewStyle(
-        style = style.chartViewStyle
-    )
-    val pieChartStyle: PieChartStyleInternal = PieChartDefaults.pieChartStyle(
-        style = style
-    )
+    val chartViewStyle = ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
+    val pieChartStyle = PieChartDefaults.pieChartStyle(style = style)
 
-    var currentTitle by remember { mutableStateOf(chartData.data.label) }
-    ChartsDefaultTheme {
-        ChartView(chartViewsStyle = chartViewStyle) {
-            Text(
-                modifier = chartViewStyle.modifierTopTitle,
-                text = currentTitle,
-                style = chartViewStyle.styleTitle
-            )
-            PieChart(
-                chartData = chartData.data.item,
-                style = pieChartStyle
-            ) {
-                currentTitle = when (it) {
-                    NO_SELECTION -> chartData.data.label
-                    else -> chartData.data.item.labels[it]
-                }
+    var title by remember { mutableStateOf(dataSet.data.label) }
+    ChartView(chartViewsStyle = chartViewStyle) {
+        Text(
+            modifier = chartViewStyle.modifierTopTitle,
+            text = title,
+            style = chartViewStyle.styleTitle
+        )
+        PieChart(
+            chartData = dataSet.data.item,
+            style = pieChartStyle
+        ) {
+            title = when (it) {
+                NO_SELECTION -> dataSet.data.label
+                else -> dataSet.data.item.labels[it]
             }
         }
     }
@@ -89,7 +81,7 @@ private fun PieChartViewPreview() {
             .wrapContentHeight(),
     ) {
         PieChartView(
-            chartData = data,
+            dataSet = data,
             style = style
         )
     }

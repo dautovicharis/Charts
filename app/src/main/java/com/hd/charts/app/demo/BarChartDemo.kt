@@ -74,7 +74,7 @@ fun AddSimpleBarChartDemo() {
 @Composable
 private fun AddBarChart(style: BarChartViewStyle, data: ChartDataSet) {
     BarChartView(
-        chartData = data,
+        dataSet = data,
         style = style
     )
 }
