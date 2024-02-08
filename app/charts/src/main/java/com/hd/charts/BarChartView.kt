@@ -14,24 +14,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.hd.charts.common.model.ChartDataSet
+import com.hd.charts.internal.barchart.BarChart
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.composable.ChartView
-import com.hd.charts.common.model.ChartData
 import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.common.style.ChartViewStyleInternal
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
-import com.hd.charts.internal.barchart.BarChart
 import com.hd.charts.internal.style.BarChartDefaults
 import com.hd.charts.internal.style.BarChartStyleInternal
 import com.hd.charts.style.BarChartViewStyle
 
 @Composable
 fun BarChartView(
-    chartData: ChartData,
-    title: String,
+    chartData: ChartDataSet,
     style: BarChartViewStyle
 ) {
-    var currentTitle by remember { mutableStateOf(title) }
+    var currentTitle by remember { mutableStateOf(chartData.data.label) }
     val chartViewsStyle: ChartViewStyleInternal =
         ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
     val chartStyle: BarChartStyleInternal =
@@ -45,10 +44,10 @@ fun BarChartView(
                 style = chartViewsStyle.styleTitle
             )
 
-            BarChart(chartData = chartData, style = chartStyle) {
+            BarChart(chartData = chartData.data.item, style = chartStyle) {
                 currentTitle = when (it) {
-                    NO_SELECTION -> title
-                    else -> chartData.labels[it]
+                    NO_SELECTION -> currentTitle
+                    else -> chartData.data.item.labels[it]
                 }
             }
         }
@@ -66,16 +65,17 @@ private fun BarChartViewPreview() {
         }
     }.build()
 
+    val chartData = ChartDataSet(
+        items = listOf(-300f, 50f, 20f, 1f, 15f, -30f, 50f, 35f, 25f, 40f, 500f),
+        title = stringResource(id = R.string.bar_chart))
+
     Row(
         modifier = Modifier
             .size(400.dp)
             .wrapContentHeight(),
     ) {
         BarChartView(
-            chartData = ChartData.fromFloatList(
-                listOf(-300f, 50f, 20f, 1f, 15f, -30f, 50f, 35f, 25f, 40f, 500f)
-            ),
-            title = stringResource(id = R.string.bar_chart),
+            chartData = chartData,
             style = style
         )
     }

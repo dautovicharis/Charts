@@ -5,11 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.hd.charts.ChartStyle
 import com.hd.charts.LineChartView
 import com.hd.charts.R
 import com.hd.charts.app.ScrollView
-import com.hd.charts.common.model.ChartData
-import com.hd.charts.ChartStyle
+import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.style.LineChartViewStyle
 
 /*
@@ -18,16 +18,26 @@ The default values match those set in the library.
 */
 @Composable
 private fun defaultStyle(): LineChartViewStyle.Builder {
-    val pointColor = MaterialTheme.colorScheme.tertiary
     val lineColor = MaterialTheme.colorScheme.primary
     val backgroundColor = MaterialTheme.colorScheme.surface
 
     return ChartStyle.lineChart.apply {
         lineChartStyle {
-            this.pointColor = pointColor
+            // this.pointColor = MaterialTheme.colorScheme.tertiary
+            this.pointSize = 8f
+            this.pointVisible = false
+
             this.lineColor = lineColor
             this.bezier = true
-            this.showPoints = false
+
+            this.dragPointSize = 7f
+            this.dragPointVisible = true
+            this.dragActivePointSize = 12f
+            // this.dragPointColor = MaterialTheme.colorScheme.tertiary
+
+            // this.colors
+            // If not provided, default colors are internally generated based on the primary color.
+            // Check  `generateColorShades` function.
         }
 
         chartViewStyle {
@@ -58,7 +68,7 @@ fun AddLineChartDemo() {
             chartViewStyle {
                 this.width = 200.dp
             }
-            lineChartStyle { showPoints = true }
+            lineChartStyle { pointVisible = true }
             AddLineChart(style = build())
         }
 
@@ -78,7 +88,7 @@ fun AddLineChartDemo() {
             }
             lineChartStyle {
                 bezier = true
-                showPoints = true
+                pointVisible = true
             }
             AddLineChart(style = build())
         }
@@ -89,13 +99,14 @@ fun AddLineChartDemo() {
 private fun AddLineChart(
     style: LineChartViewStyle
 ) {
+    val chartData = ChartDataSet(
+        items = listOf(
+            8f, 23f, 54f, 32f, 12f, 37f, 7f, 23f, 43f
+        ), title = stringResource(id = R.string.line_chart)
+    )
+
     LineChartView(
-        data = ChartData.fromIntList(
-            listOf(
-                8, 23, 54, 32, 12, 37, 7, 23, 43
-            )
-        ),
-        title = stringResource(id = R.string.line_chart),
+        data = chartData,
         style = style
     )
 }

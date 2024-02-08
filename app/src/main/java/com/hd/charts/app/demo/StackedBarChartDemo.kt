@@ -5,12 +5,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.hd.charts.ChartStyle
 import com.hd.charts.R
 import com.hd.charts.StackedBarChartView
-import com.hd.charts.StackedChartData
 import com.hd.charts.app.ScrollView
-import com.hd.charts.common.model.ChartData
-import com.hd.charts.ChartStyle
+import com.hd.charts.common.model.MultiChartDataSet
 import com.hd.charts.style.StackedBarChartViewStyle
 
 /*
@@ -64,7 +63,6 @@ fun AddStackedBarChartDemo() {
         defaultStyle().apply {
             chartViewStyle {
                 this.width = 200.dp
-                this.showLegend = false
             }
             stackedBarChartStyle {
                 this.colors = colors
@@ -76,51 +74,27 @@ fun AddStackedBarChartDemo() {
 
 @Composable
 private fun AddStackedBarChart(style: StackedBarChartViewStyle) {
-    val legendLabels = listOf(
+    val categories = listOf(
         "Jan", "Feb", "Mar"
     )
-
     val labelPrefix = "$"
-    val chartData = listOf(
-        StackedChartData(
-            label = "Cherry St.",
-            data = ChartData.fromFloatList(
-                listOf(8261.68f, 4810.34f, 1536.57f),
-                prefix = labelPrefix
-            )
-        ),
-        StackedChartData(
-            label = "Strawberry Mall",
-            data = ChartData.fromFloatList(
-                listOf(7875.87f, 3126.58f, 2019.81f),
-                prefix = labelPrefix
-            )
-        ),
-        StackedChartData(
-            label = "Peach St.",
-            data = ChartData.fromFloatList(
-                listOf(4990.23f, 4923.48f, 1472.59f),
-                prefix = labelPrefix
-            )
-        ),
-        StackedChartData(
-            label = "Lime Av.",
-            data = ChartData.fromFloatList(
-                listOf(4658.42f, 2955.55f, 1390.55f),
-                prefix = labelPrefix
-            )
-        ),
-        StackedChartData(
-            label = "Apple Rd.",
-            data = ChartData.fromFloatList(listOf(3952f, 1858.46f, 917.9f), prefix = labelPrefix)
-        )
+
+    val items = listOf(
+        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
+        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
+        "Lime Av." to listOf(1500.87f, 2765.58f, 33245.81f),
+        "Apple Rd." to listOf(5444.87f, 233.58f, 67544.81f)
     )
 
+    val data = MultiChartDataSet(
+        items = items,
+        prefix = labelPrefix,
+        categories = categories,
+        title = stringResource(id = R.string.bar_stacked_chart)
+    )
 
     StackedBarChartView(
-        chartData = chartData,
-        title = stringResource(id = R.string.bar_stacked_chart),
-        legend = legendLabels,
+        data = data,
         style = style
     )
 }

@@ -22,18 +22,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.hd.charts.app.demo.AddLineChartDemo
+import com.hd.charts.app.demo.AddMultiLineChartDemo
 import com.hd.charts.app.demo.AddPieChartDemo
 import com.hd.charts.app.demo.AddSimpleBarChartDemo
 import com.hd.charts.app.demo.AddStackedBarChartDemo
 import com.hd.charts.app.ui.theme.AppTheme
+import com.hd.charts.R as ChartsR
 
 class MainActivity : ComponentActivity() {
 
     private val charts = listOf(
-        com.hd.charts.R.string.line_chart to ChartScreen.LineChartScreen.route,
-        com.hd.charts.R.string.pie_chart to ChartScreen.PieChartScreen.route,
-        com.hd.charts.R.string.bar_chart to ChartScreen.BarChartScreen.route,
-        com.hd.charts.R.string.bar_stacked_chart to ChartScreen.StackedBarChartScreen.route
+        ChartsR.string.line_chart to ChartScreen.LineChartScreen.route,
+        ChartsR.string.pie_chart to ChartScreen.PieChartScreen.route,
+        ChartsR.string.bar_chart to ChartScreen.BarChartScreen.route,
+        ChartsR.string.bar_stacked_chart to ChartScreen.StackedBarChartScreen.route,
+        ChartsR.string.multi_line_chart to ChartScreen.MultiLineChartScreen.route
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +58,7 @@ class MainActivity : ComponentActivity() {
                     composable(ChartScreen.PieChartScreen.route) { AddPieChartDemo() }
                     composable(ChartScreen.BarChartScreen.route) { AddSimpleBarChartDemo() }
                     composable(ChartScreen.StackedBarChartScreen.route) { AddStackedBarChartDemo() }
+                    composable(ChartScreen.MultiLineChartScreen.route) { AddMultiLineChartDemo() }
                 }
             }
         }
