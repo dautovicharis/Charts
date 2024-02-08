@@ -1,7 +1,8 @@
 package com.hd.charts.common.model
 
 import com.google.common.truth.Truth.assertThat
-import com.hd.charts.common.model.ChartData
+import com.hd.charts.internal.common.model.ChartData
+import com.hd.charts.internal.common.model.toChartData
 import org.junit.Test
 
 class ChartDataTest {
@@ -9,7 +10,7 @@ class ChartDataTest {
     // DoubleList
     @Test
     fun `test chart data with double list`() {
-        val chartDate = ChartData.fromDoubleList(listOf(1.0, 2.0, 3.0))
+        val chartDate = listOf(1.0, 2.0, 3.0).toChartData()
         assertThat(chartDate.points).containsExactly(1.0, 2.0, 3.0).inOrder()
         assertThat(chartDate.labels).containsExactly("1.0", "2.0", "3.0").inOrder()
     }
@@ -17,7 +18,7 @@ class ChartDataTest {
     // FloatList
     @Test
     fun `test chart data with float list`() {
-        val chartData = ChartData.fromFloatList(listOf(1.5f, 2.5f, 3.5f))
+        val chartData = listOf(1.5f, 2.5f, 3.5f).toChartData()
         assertThat(chartData.points).containsExactly(1.5, 2.5, 3.5).inOrder()
         assertThat(chartData.labels).containsExactly("1.5", "2.5", "3.5").inOrder()
     }
@@ -25,7 +26,7 @@ class ChartDataTest {
     // StringList - double
     @Test
     fun `test chart data with string double list`() {
-        val chartData = ChartData.fromStringList(listOf("25.5", "40.0", "70.5"), postfix = " °C")
+        val chartData = listOf("25.5", "40.0", "70.5").toChartData(postfix = " °C")
         assertThat(chartData.points).containsExactly(25.5, 40.0, 70.5).inOrder()
         assertThat(chartData.labels).containsExactly("25.5 °C", "40.0 °C", "70.5 °C").inOrder()
     }
@@ -33,7 +34,7 @@ class ChartDataTest {
     // StringList - int
     @Test
     fun `test chart data with string int list`() {
-        val chartData = ChartData.fromStringList(listOf("1", "2", "3"), prefix = "$")
+        val chartData = listOf("1", "2", "3").toChartData(prefix = "$")
         assertThat(chartData.points).containsExactly(1.0, 2.0, 3.0).inOrder()
         assertThat(chartData.labels).containsExactly("$1", "$2", "$3").inOrder()
     }
@@ -41,7 +42,7 @@ class ChartDataTest {
     // StringList - float
     @Test
     fun `test chart data with string float list`() {
-        val chartData = ChartData.fromStringList(listOf("-1.0f", "2.0f", "3.0f"))
+        val chartData = listOf("-1.0f", "2.0f", "3.0f").toChartData()
         assertThat(chartData.points).containsExactly(-1.0, 2.0, 3.0).inOrder()
         assertThat(chartData.labels).containsExactly("-1.0f", "2.0f", "3.0f").inOrder()
     }
@@ -57,7 +58,7 @@ class ChartDataTest {
     // IntList
     @Test
     fun `test chart data with int list`() {
-        val chartData = ChartData.fromIntList(listOf(-1,2,3))
+        val chartData = listOf(-1, 2, 3).toChartData()
         assertThat(chartData.points).containsExactly(-1.0, 2.0, 3.0).inOrder()
         assertThat(chartData.labels).containsExactly("-1", "2", "3").inOrder()
     }
