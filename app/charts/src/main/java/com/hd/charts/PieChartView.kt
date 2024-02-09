@@ -40,7 +40,8 @@ fun PieChartView(
         )
         PieChart(
             chartData = dataSet.data.item,
-            style = pieChartStyle
+            style = pieChartStyle,
+            chartStyle = chartViewStyle
         ) {
             title = when (it) {
                 NO_SELECTION -> dataSet.data.label
