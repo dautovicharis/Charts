@@ -17,7 +17,7 @@ import com.hd.charts.style.PieChartViewStyle
 internal class PieChartStyleInternal internal constructor(
     val modifier: Modifier,
     val donutHolePercentage: Float,
-    val backgroundColor: Color,
+    val chartColor: Color,
     val strokeColor: Color
 )
 
@@ -41,7 +41,7 @@ internal object PieChartDefaults {
                 DONUT_MIN_PERCENTAGE,
                 DONUT_MAX_PERCENTAGE
             ),
-            backgroundColor = chartColor,
+            chartColor = chartColor,
             strokeColor = strokeColor
         )
     }

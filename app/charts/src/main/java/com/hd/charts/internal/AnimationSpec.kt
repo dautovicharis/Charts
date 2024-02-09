@@ -46,7 +46,7 @@ internal object AnimationSpec {
 
     fun pieChart(index: Int) = TweenSpec<Float>(
         durationMillis = duration(index),
-        delay = duration(index = index),
+        delay = (index) * ANIMATION_OFFSET,
         easing = FastOutSlowInEasing
     )
 }

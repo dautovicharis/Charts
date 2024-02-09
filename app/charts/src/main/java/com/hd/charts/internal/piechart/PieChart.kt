@@ -1,83 +1,131 @@
 package com.hd.charts.internal.piechart
 
-import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.drawscope.Fill
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
+import com.hd.charts.ChartStyle
+import com.hd.charts.internal.AnimationSpec
 import com.hd.charts.internal.common.ANIMATION_DURATION
 import com.hd.charts.internal.common.DEFAULT_SCALE
 import com.hd.charts.internal.common.MAX_SCALE
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.model.ChartData
 import com.hd.charts.internal.common.model.toChartData
+import com.hd.charts.internal.common.style.ChartViewDefaults
+import com.hd.charts.internal.common.style.ChartViewStyleInternal
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.style.PieChartDefaults
 import com.hd.charts.internal.style.PieChartStyleInternal
 import com.hd.charts.style.PieChartViewStyle
 
+private const val STROKE_WIDTH = 5f
+
+internal data class PieSlice(
+    val startDeg: Float,
+    val endDeg: Float,
+    val sweepAngle: Float,
+    val value: Double,
+    val normalizedValue: Double
+)
 
 @Composable
 internal fun PieChart(
     chartData: ChartData,
     style: PieChartStyleInternal,
+    chartStyle: ChartViewStyleInternal,
     onSliceTouched: (Int) -> Unit = {},
 ) {
     val slices = remember(chartData) { createPieSlices(chartData) }
-    var currentSelectionIndex by remember { mutableIntStateOf(NO_SELECTION) }
+    var selectedIndex by remember { mutableIntStateOf(NO_SELECTION) }
+    val sliceSweepAngles = remember {
+        slices.map {
+            Animatable(0f)
+        }
+    }
 
-    val transition =
-        updateTransition(targetState = currentSelectionIndex, label = "sliceTransition")
-    val animation = transition.animateFloat(label = "sliceAnimation", transitionSpec = {
-        tween(durationMillis = ANIMATION_DURATION)
-    }) {
-        if (it == NO_SELECTION) DEFAULT_SCALE else MAX_SCALE
+    val sliceScaleAnimation = animateFloatAsState(
+        targetValue = if (selectedIndex == NO_SELECTION) DEFAULT_SCALE else MAX_SCALE,
+        animationSpec = tween(durationMillis = ANIMATION_DURATION),
+        label = "sliceAnimation"
+    )
+
+    slices.forEachIndexed { i, slice ->
+        LaunchedEffect(key1 = true) {
+            sliceSweepAngles[i].animateTo(
+                targetValue = slice.sweepAngle,
+                animationSpec = AnimationSpec.pieChart(i)
+            )
+        }
     }
 
     Box(modifier = style.modifier
         .pointerInput(Unit) {
             detectDragGestures(onDragEnd = {
-                currentSelectionIndex = NO_SELECTION
-                onSliceTouched(currentSelectionIndex)
+                selectedIndex = NO_SELECTION
+                onSliceTouched(selectedIndex)
             }) { change, _ ->
-                change.consume()
-                currentSelectionIndex =
+                selectedIndex =
                     getSelectedIndex(change = change, size = size, slices = slices)
-                onSliceTouched(currentSelectionIndex)
+                onSliceTouched(selectedIndex)
+                change.consume()
             }
-        }) {
-        slices.forEachIndexed { i, slice ->
-            Row(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .scale(if (currentSelectionIndex == i) animation.value else DEFAULT_SCALE),
-            ) {
-                key(i) {
-                    PieChartSlice(
-                        startDeg = slice.startDeg,
-                        endDeg = slice.endDeg,
-                        index = i,
-                        style = style
-                    )
+        }
+        .drawWithCache {
+            onDrawBehind {
+                slices.forEachIndexed { i, slice ->
+                    val scaleValue =
+                        if (selectedIndex == i) sliceScaleAnimation.value else DEFAULT_SCALE
+
+                    scale(scaleValue) {
+                        drawArc(
+                            color = style.chartColor,
+                            startAngle = slice.startDeg,
+                            sweepAngle = sliceSweepAngles[i].value,
+                            useCenter = true,
+                            style = Fill
+                        )
+                        drawArc(
+                            color = style.strokeColor,
+                            startAngle = slice.startDeg,
+                            sweepAngle = slice.sweepAngle,
+                            useCenter = true,
+                            style = Stroke(width = STROKE_WIDTH)
+                        )
+                    }
+
+                    if (style.donutHolePercentage > 0f) {
+                        val totalRadius = size.width / 2
+                        val innerRadius = totalRadius * (style.donutHolePercentage / 100f)
+                        drawCircle(
+                            color = chartStyle.backgroundColor,
+                            radius = innerRadius,
+                            center = Offset(totalRadius, totalRadius)
+                        )
+                    }
                 }
             }
         }
-    }
+    )
 }
 
 @Composable
@@ -100,18 +148,9 @@ private fun PieChartPreview() {
             .wrapContentHeight()
     ) {
         PieChart(
-            chartData = listOf(
-                8.0f,
-                23.0f,
-                54.0f,
-                32.0f,
-                12.0f,
-                37.0f,
-                7.0f,
-                23.0f,
-                43.0f
-            ).toChartData(),
-            style = PieChartDefaults.pieChartStyle(style)
+            chartData = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f).toChartData(),
+            style = PieChartDefaults.pieChartStyle(style),
+            chartStyle = ChartViewDefaults.chartViewStyle(ChartStyle.chartView.build())
         )
     }
 }

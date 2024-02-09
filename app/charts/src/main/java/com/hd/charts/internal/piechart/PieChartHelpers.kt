@@ -98,6 +98,7 @@ internal fun createPieSlices(data: ChartData): List<PieSlice> {
                     startDeg = startDeg.toFloat(),
                     endDeg = endDeg.toFloat(),
                     value = slice,
+                    sweepAngle = (endDeg - startDeg).toFloat(),
                     normalizedValue = normalized
                 )
             )

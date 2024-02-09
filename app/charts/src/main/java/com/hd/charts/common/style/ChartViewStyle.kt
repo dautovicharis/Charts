@@ -13,7 +13,7 @@ class ChartViewStyle(
     val outerPadding: Dp?,
     val width: Dp?
 ) {
-    class ChartViewStyleBuilder {
+    class Builder {
         var backgroundColor: Color? = null
         var cornerRadius: Dp? = null
         var shadow: Dp? = null

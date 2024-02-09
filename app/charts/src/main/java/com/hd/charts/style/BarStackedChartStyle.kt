@@ -11,10 +11,10 @@ class StackedBarChartViewStyle private constructor(
     val stackedBarChartStyle: StackedBarChartStyle
 ) {
     class Builder {
-        private val chartViewStyleBuilder = ChartViewStyle.ChartViewStyleBuilder()
+        private val chartViewStyleBuilder = ChartViewStyle.Builder()
         private val stackedBarChartStyleBuilder = StackedBarChartStyle.Builder()
 
-        fun chartViewStyle(block: ChartViewStyle.ChartViewStyleBuilder.() -> Unit) {
+        fun chartViewStyle(block: ChartViewStyle.Builder.() -> Unit) {
             chartViewStyleBuilder.apply(block)
         }
 

@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -27,7 +28,8 @@ internal class ChartViewStyleInternal internal constructor(
     val modifierTopTitle: Modifier,
     val modifierLegend: Modifier,
     val innerPadding: Dp,
-    val width: Dp
+    val width: Dp,
+    val backgroundColor: Color
 )
 
 internal object ChartViewDefaults {
@@ -76,7 +78,8 @@ internal object ChartViewDefaults {
             modifierTopTitle = modifierTitle,
             modifierLegend = modifierLegend,
             innerPadding = innerPadding,
-            width = width
+            width = width,
+            backgroundColor = backgroundColor
         )
     }
 }
