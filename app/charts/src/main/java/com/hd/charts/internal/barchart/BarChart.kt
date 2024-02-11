@@ -64,6 +64,7 @@ internal fun BarChart(
                         canvasSize = size
                     )
                 onValueChanged(selectedIndex)
+                change.consume()
             },
             onDragEnd = {
                 selectedIndex = NO_SELECTION
