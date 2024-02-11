@@ -41,7 +41,7 @@ fun BarChartView(
 
         BarChart(chartData = dataSet.data.item, style = barChartStyle) {
             title = when (it) {
-                NO_SELECTION -> title
+                NO_SELECTION -> dataSet.data.label
                 else -> dataSet.data.item.labels[it]
             }
         }
