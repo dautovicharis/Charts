@@ -52,7 +52,7 @@ internal fun BarChart(
 
     val maxValue = remember { chartData.points.max() }
     val minValue = remember { chartData.points.min() }
-    var selectedIndex by remember { mutableIntStateOf(-1) }
+    var selectedIndex by remember { mutableIntStateOf(NO_SELECTION) }
 
     Canvas(modifier = style.modifier.pointerInput(Unit) {
         detectDragGestures(
@@ -64,6 +64,7 @@ internal fun BarChart(
                         canvasSize = size
                     )
                 onValueChanged(selectedIndex)
+                change.consume()
             },
             onDragEnd = {
                 selectedIndex = NO_SELECTION

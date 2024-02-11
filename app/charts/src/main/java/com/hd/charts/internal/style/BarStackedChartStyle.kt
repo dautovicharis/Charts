@@ -17,7 +17,7 @@ internal class StackedBarChartStyleInternal internal constructor(
     val modifier: Modifier,
     val barColor: Color,
     val space: Dp,
-    val colors: List<Color>
+    val barColors: List<Color>
 )
 
 internal object StackedBarChartDefaults {
@@ -34,13 +34,13 @@ internal object StackedBarChartDefaults {
 
         val barColor = style.stackedBarChartStyle.barColor ?: MaterialTheme.colorScheme.primary
         val space = style.stackedBarChartStyle.space ?: 10.dp
-        val colors = style.stackedBarChartStyle.colors
+        val barColors = style.stackedBarChartStyle.barColors
 
         return StackedBarChartStyleInternal(
             modifier = modifier,
             barColor = barColor,
             space = space,
-            colors = colors
+            barColors = barColors
         )
     }
 }

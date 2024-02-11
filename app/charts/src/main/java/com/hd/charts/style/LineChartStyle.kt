@@ -1,7 +1,6 @@
 package com.hd.charts.style
 
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.hd.charts.common.style.ChartViewStyle
 
@@ -37,8 +36,8 @@ class LineChartStyle(
     val pointVisible: Boolean?,
     val pointSize: Float?,
     val lineColor: Color?,
+    val lineColors: List<Color>,
     val bezier: Boolean?,
-    val colors: List<Color>,
     val dragPointSize: Float?,
     val dragPointVisible: Boolean?,
     val dragActivePointSize: Float?,
@@ -49,8 +48,8 @@ class LineChartStyle(
         var pointVisible: Boolean? = null
         var pointSize: Float? = null
         var lineColor: Color? = null
+        var lineColors: List<Color> = emptyList()
         var bezier: Boolean? = null
-        var colors: List<Color> = emptyList()
         var dragPointSize: Float? = null
         var dragPointVisible: Boolean? = null
         var dragActivePointSize: Float? = null
@@ -62,7 +61,7 @@ class LineChartStyle(
                 lineColor = lineColor,
                 bezier = bezier,
                 pointVisible = pointVisible,
-                colors = colors,
+                lineColors = lineColors,
                 dragPointSize = dragPointSize,
                 dragPointVisible = dragPointVisible,
                 pointSize = pointSize,

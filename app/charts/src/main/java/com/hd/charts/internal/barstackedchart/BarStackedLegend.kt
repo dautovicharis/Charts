@@ -51,7 +51,7 @@ internal fun LegendItem(
 
                 Text(
                     text = label,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = colors[index],
                     modifier = Modifier.padding(
                         start = chartViewsStyle.innerPadding,
                         end = chartViewsStyle.innerPadding

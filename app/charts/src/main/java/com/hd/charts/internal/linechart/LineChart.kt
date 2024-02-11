@@ -224,7 +224,7 @@ private fun DrawScope.tryDrawPathPoints(
     dragging: Boolean,
     touchX: Float,
 ) {
-    if (!style.pointVisible) return
+    if (!style.pointVisible && !style.dragPointVisible) return
 
     val selectedIndex = (touchX / size.width * (values.size - 1))
         .toInt()
@@ -254,11 +254,21 @@ private fun DrawScope.tryDrawPathPoints(
 
         val color = if (selectedIndex == i && dragging) dragPointColor else pointColor
 
-        drawCircle(
-            color = color,
-            radius = radius,
-            center = Offset(x, y)
-        )
+        if (style.dragPointVisible && dragging) {
+            drawCircle(
+                color = color,
+                radius = radius,
+                center = Offset(x, y)
+            )
+        }
+
+        if (style.pointVisible) {
+            drawCircle(
+                color = color,
+                radius = radius,
+                center = Offset(x, y)
+            )
+        }
     }
 }
 
