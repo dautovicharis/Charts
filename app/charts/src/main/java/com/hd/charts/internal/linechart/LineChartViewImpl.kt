@@ -30,10 +30,10 @@ internal fun LineChartViewImpl(
         mutableStateOf(
             if (data.hasSingleItem()) {
                 listOf(lineChartStyle.lineColor)
-            } else if (lineChartStyle.colors.isEmpty()) {
+            } else if (lineChartStyle.lineColors.isEmpty()) {
                 generateColorShades(lineChartStyle.lineColor, data.items.size)
             } else {
-                lineChartStyle.colors
+                lineChartStyle.lineColors
             }
         )
     }

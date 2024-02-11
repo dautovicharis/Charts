@@ -38,7 +38,7 @@ fun StackedBarChartView(
 
     val colors by remember {
         mutableStateOf(
-            barChartStyle.colors.ifEmpty {
+            barChartStyle.barColors.ifEmpty {
                 generateColorShades(barChartStyle.barColor, dataSet.data.getFirstPointsSize())
             }
         )

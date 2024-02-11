@@ -20,8 +20,8 @@ internal class LineChartStyleInternal internal constructor(
     val pointColorSameAsLine: Boolean,
     val pointSize: Float,
     val lineColor: Color,
+    val lineColors: List<Color>,
     val bezier: Boolean,
-    val colors: List<Color>,
     val dragPointSize: Float,
     val dragPointVisible: Boolean,
     val dragActivePointSize: Float,
@@ -48,11 +48,11 @@ internal object LineChartDefaults {
             else -> false
         }
         val pointSize = style.lineChartStyle.pointSize ?: 8f
-        val pointVisible = style.lineChartStyle.pointVisible ?: false
+        val pointVisible = style.lineChartStyle.pointVisible ?: true
 
         val lineColor = style.lineChartStyle.lineColor ?: MaterialTheme.colorScheme.primary
         val bezier = style.lineChartStyle.bezier ?: true
-        val colors = style.lineChartStyle.colors
+        val lineColors = style.lineChartStyle.lineColors
 
         val dragPointSize = style.lineChartStyle.dragPointSize ?: 15f
         val dragPointVisible = style.lineChartStyle.dragPointVisible ?: true
@@ -70,7 +70,7 @@ internal object LineChartDefaults {
             lineColor = lineColor,
             bezier = bezier,
             pointVisible = pointVisible,
-            colors = colors,
+            lineColors = lineColors,
             dragPointSize = dragPointSize,
             dragPointVisible = dragPointVisible,
             pointSize = pointSize,

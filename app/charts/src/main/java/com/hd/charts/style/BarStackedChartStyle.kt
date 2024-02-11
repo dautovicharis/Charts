@@ -35,18 +35,18 @@ class StackedBarChartViewStyle private constructor(
 class StackedBarChartStyle(
     val barColor: Color?,
     val space: Dp?,
-    val colors: List<Color>
+    val barColors: List<Color>
 ) {
     class Builder {
         var barColor: Color? = null
         var space: Dp? = null
-        var colors: List<Color> = emptyList()
+        var barColors: List<Color> = emptyList()
 
         fun build(): StackedBarChartStyle {
             return StackedBarChartStyle(
                 barColor = barColor,
                 space = space,
-                colors = colors
+                barColors = barColors
             )
         }
     }
