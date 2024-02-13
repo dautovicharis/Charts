@@ -1,6 +1,5 @@
 package com.hd.charts.internal
 
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.TweenSpec
 import com.hd.charts.internal.common.ANIMATION_DURATION
@@ -48,5 +47,10 @@ internal object AnimationSpec {
         durationMillis = duration(index = index),
         delay = index * ANIMATION_OFFSET,
         easing = LinearEasing
+    )
+
+    fun pieChartDonut() = TweenSpec<Float>(
+        durationMillis = 900,
+        delay = 0
     )
 }

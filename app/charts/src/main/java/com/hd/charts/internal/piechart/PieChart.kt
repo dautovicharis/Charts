@@ -73,6 +73,12 @@ internal fun PieChart(
         )
     }
 
+    val donutHoleAnimation by animateFloatAsState(
+        targetValue = if (show) style.donutHolePercentage else 0f,
+        animationSpec = AnimationSpec.pieChartDonut(),
+        label = "donutHoleAnimation"
+    )
+
     Box(modifier = style.modifier
         .onGloballyPositioned { show = true }
         .pointerInput(Unit) {
@@ -113,13 +119,19 @@ internal fun PieChart(
                     }
                 }
 
-                if (style.donutHolePercentage > 0f) {
+                if (donutHoleAnimation > 0f) {
                     val totalRadius = size.width / 2
-                    val innerRadius = totalRadius * (style.donutHolePercentage / 100f)
+                    val innerRadius = totalRadius * (donutHoleAnimation / 100f)
                     drawCircle(
                         color = chartStyle.backgroundColor,
                         radius = innerRadius,
                         center = Offset(totalRadius, totalRadius)
+                    )
+                    drawCircle(
+                        color = style.strokeColor,
+                        radius = innerRadius,
+                        center = Offset(totalRadius, totalRadius),
+                        style = Stroke(width = STROKE_WIDTH)
                     )
                 }
             }
