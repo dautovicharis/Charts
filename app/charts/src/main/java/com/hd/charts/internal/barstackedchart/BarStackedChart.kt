@@ -107,7 +107,7 @@ internal fun StackedBarChart(
 private fun PreviewStackedBarChart() {
     val style = StackedBarChartViewStyle.Builder().apply {
         chartViewStyle { }
-        stackedBarChartStyle {
+        chartStyle {
             barColor = Color.Blue
             space = 8.dp
         }

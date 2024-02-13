@@ -17,7 +17,7 @@ class LineChartViewStyle private constructor(
             chartViewStyleBuilder.apply(block)
         }
 
-        fun lineChartStyle(block: LineChartStyle.Builder.() -> Unit) {
+        fun chartStyle(block: LineChartStyle.Builder.() -> Unit) {
             lineChartStyleBuilder.apply(block)
         }
 

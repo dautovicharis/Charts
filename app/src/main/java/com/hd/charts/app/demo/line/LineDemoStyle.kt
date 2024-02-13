@@ -21,7 +21,7 @@ object LineDemoStyle {
         val dragPointColor = MaterialTheme.colorScheme.tertiary
 
         return ChartStyle.lineChart.apply {
-            lineChartStyle {
+            chartStyle {
                 this.pointColor = pointColor
                 this.pointSize = 8f
                 this.pointVisible = true
@@ -54,7 +54,7 @@ object LineDemoStyle {
     @Composable
     fun custom(): LineChartViewStyle.Builder {
         return default().apply {
-            lineChartStyle {
+            chartStyle {
                 this.lineColor = ColorPalette.DataColor.deepPurple
                 this.pointColor = ColorPalette.DataColor.magenta
                 this.dragPointColor = ColorPalette.DataColor.deepPurple

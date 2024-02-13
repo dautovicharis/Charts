@@ -19,7 +19,7 @@ object StackedBarDemoStyle {
         val backgroundColor = MaterialTheme.colorScheme.surface
 
         return ChartStyle.stackedBar.apply {
-            stackedBarChartStyle {
+            chartStyle {
                 this.barColor = barColor
                 this.space = 10.dp
 
@@ -50,7 +50,7 @@ object StackedBarDemoStyle {
         )
 
         return default().apply {
-            stackedBarChartStyle {
+            chartStyle {
                 this.barColors = colors
             }
         }

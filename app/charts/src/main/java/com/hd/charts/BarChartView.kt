@@ -53,7 +53,7 @@ private fun BarChartViewPreview() {
     val barColor = MaterialTheme.colorScheme.primary
 
     val style = BarChartViewStyle.Builder().apply {
-        barChartStyle {
+        chartStyle {
             this.barColor = barColor
             this.space = 8.dp
         }

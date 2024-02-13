@@ -322,7 +322,7 @@ private fun LineChartPreview() {
         chartViewStyle {
             width = 300.dp
         }
-        lineChartStyle {
+        chartStyle {
             pointVisible = false
             bezier = false
         }
@@ -356,7 +356,7 @@ private fun LineChartBezierPreview() {
         chartViewStyle {
             width = 300.dp
         }
-        lineChartStyle {
+        chartStyle {
             bezier = true
             pointVisible = true
         }

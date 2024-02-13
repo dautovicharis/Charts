@@ -18,7 +18,7 @@ class StackedBarChartViewStyle private constructor(
             chartViewStyleBuilder.apply(block)
         }
 
-        fun stackedBarChartStyle(block: StackedBarChartStyle.Builder.() -> Unit) {
+        fun chartStyle(block: StackedBarChartStyle.Builder.() -> Unit) {
             stackedBarChartStyleBuilder.apply(block)
         }
 

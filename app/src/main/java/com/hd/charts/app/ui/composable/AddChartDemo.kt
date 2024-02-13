@@ -32,10 +32,10 @@ sealed class ChartStyleType {
 
 @Composable
 fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
+    val chartStyleCustom = "chartStyle {custom}"
     when (type) {
         is ChartStyleType.PieChartDefault -> {
             StyleAndChart(
-                name = "pieChartStyle {default}",
                 tableItems = PieChartStyleItems.default()
             ) {
                 chartItem()
@@ -44,7 +44,7 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.PieChartCustom -> {
             StyleAndChart(
-                name = "pieChartStyle {custom}",
+                name = chartStyleCustom,
                 tableItems = PieChartStyleItems.custom()
             ) {
                 chartItem()
@@ -53,7 +53,6 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.LineChartDefault -> {
             StyleAndChart(
-                name = "lineChartStyle {default}",
                 tableItems = LineChartStyleItems.default()
             ) {
                 chartItem()
@@ -62,7 +61,7 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.LineChartCustom -> {
             StyleAndChart(
-                name = "lineChartStyle {custom}",
+                name = chartStyleCustom,
                 tableItems = LineChartStyleItems.custom()
             ) {
                 chartItem()
@@ -71,7 +70,6 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.MultiLineChartDefault -> {
             StyleAndChart(
-                name = "lineChartStyle {default}",
                 tableItems = MultiLineStyleItems.default()
             ) {
                 chartItem()
@@ -80,7 +78,7 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.MultiLineChartCustom -> {
             StyleAndChart(
-                name = "lineChartStyle {custom}",
+                name = chartStyleCustom,
                 tableItems = MultiLineStyleItems.custom()
             ) {
                 chartItem()
@@ -89,7 +87,6 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.BarChartDefault -> {
             StyleAndChart(
-                name = "barChartStyle {default}",
                 tableItems = BarChartStyleItems.default()
             ) {
                 chartItem()
@@ -98,7 +95,7 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.BarChartCustom -> {
             StyleAndChart(
-                name = "barChartStyle {custom}",
+                name = chartStyleCustom,
                 tableItems = BarChartStyleItems.custom()
             ) {
                 chartItem()
@@ -107,7 +104,6 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.StackedBarChartDefault -> {
             StyleAndChart(
-                name = "stackedBarChartStyle {default}",
                 tableItems = StackedBarChartStyleItems.default()
             ) {
                 chartItem()
@@ -116,7 +112,7 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
 
         is ChartStyleType.StackedBarChartCustom -> {
             StyleAndChart(
-                name = "stackedBarChartStyle {custom}",
+                name = chartStyleCustom,
                 tableItems = StackedBarChartStyleItems.custom()
             ) {
                 chartItem()

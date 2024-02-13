@@ -133,7 +133,7 @@ private fun PieChartPreview() {
     val strokeColor = MaterialTheme.colorScheme.surface
 
     val style = PieChartViewStyle.Builder().apply {
-        pieChartStyle {
+        chartStyle {
             this.chartColor = chartColor
             this.strokeColor = strokeColor
             this.donutPercentage = 0f

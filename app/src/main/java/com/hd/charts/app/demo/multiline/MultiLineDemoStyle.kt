@@ -17,7 +17,7 @@ object MultiLineDemoStyle {
     @Composable
     fun custom(): LineChartViewStyle.Builder {
         return LineDemoStyle.default().apply {
-            lineChartStyle {
+            chartStyle {
                 this.lineColors = listOf(
                     ColorPalette.DataColor.navyBlue,
                     ColorPalette.DataColor.darkBlue,
