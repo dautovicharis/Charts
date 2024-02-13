@@ -5,4 +5,8 @@
     <string name="show_style">Show style</string>
     <string name="repeat">Repeat</string>
 
+    <!-- Content descriptions -->
+    <string name="github_url_content_description">GitHub repository</string>
+    <string name="themes_content_description">Selected app theme</string>
+
 </resources>
