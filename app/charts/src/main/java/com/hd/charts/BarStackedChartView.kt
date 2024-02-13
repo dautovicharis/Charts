@@ -87,7 +87,7 @@ private fun StackedBarChartViewPreview() {
     val barColor = MaterialTheme.colorScheme.primary
 
     val style = StackedBarChartViewStyle.Builder().apply {
-        stackedBarChartStyle {
+        chartStyle {
             this.barColor = barColor
             this.space = 8.dp
         }

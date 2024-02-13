@@ -18,7 +18,7 @@ object BarDemoStyle {
         val backgroundColor = MaterialTheme.colorScheme.surface
 
         return ChartStyle.barChart.apply {
-            barChartStyle {
+            chartStyle {
                 this.barColor = barColor
                 this.space = 10.dp
             }
@@ -38,7 +38,7 @@ object BarDemoStyle {
     @Composable
     fun custom(): BarChartViewStyle.Builder {
         return default().apply {
-            barChartStyle {
+            chartStyle {
                 this.barColor = ColorPalette.DataColor.deepPurple
                 this.space = 12.dp
             }

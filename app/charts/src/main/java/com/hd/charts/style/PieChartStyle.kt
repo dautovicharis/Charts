@@ -17,7 +17,7 @@ class PieChartViewStyle private constructor(
             chartViewStyleBuilder.apply(block)
         }
 
-        fun pieChartStyle(block: PieChartStyle.Builder.() -> Unit) {
+        fun chartStyle(block: PieChartStyle.Builder.() -> Unit) {
             pieChartStyleBuilder.apply(block)
         }
 

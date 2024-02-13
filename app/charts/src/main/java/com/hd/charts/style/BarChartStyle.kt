@@ -18,7 +18,7 @@ class BarChartViewStyle private constructor(
             chartViewStyleBuilder.apply(block)
         }
 
-        fun barChartStyle(block: BarChartStyle.Builder.() -> Unit) {
+        fun chartStyle(block: BarChartStyle.Builder.() -> Unit) {
             barChartStyleBuilder.apply(block)
         }
 

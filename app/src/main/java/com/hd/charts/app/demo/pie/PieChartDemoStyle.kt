@@ -20,7 +20,7 @@ object PieChartDemoStyle {
         val backgroundColor = MaterialTheme.colorScheme.surface
 
         return ChartStyle.pieChart.apply {
-            pieChartStyle {
+            chartStyle {
                 this.strokeColor = strokeColor
                 this.donutPercentage = 0f
                 this.chartColor = chartColor
@@ -41,7 +41,7 @@ object PieChartDemoStyle {
     @Composable
     fun custom(): PieChartViewStyle.Builder {
         return default().apply {
-            pieChartStyle {
+            chartStyle {
                 this.chartColor = ColorPalette.DataColor.deepPurple
                 this.strokeColor = Color.White
                 this.donutPercentage = 50f

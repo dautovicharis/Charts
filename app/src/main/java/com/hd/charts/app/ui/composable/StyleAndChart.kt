@@ -43,7 +43,7 @@ import com.hd.charts.app.R as AppR
 
 @Composable
 fun StyleAndChart(
-    name: String,
+    name: String = "chartStyle {default}",
     tableItems: List<TableItem>,
     columns: List<String> = listOf("Parameter", "Value"),
     chartItem: @Composable () -> Unit

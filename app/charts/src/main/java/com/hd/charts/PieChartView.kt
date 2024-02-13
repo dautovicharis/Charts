@@ -64,7 +64,7 @@ private fun PieChartViewPreview() {
             this.shadow = 15.dp
             this.innerPadding = 15.dp
         }
-        pieChartStyle {
+        chartStyle {
             this.chartColor = chartColor
             this.strokeColor = strokeColor
             this.donutPercentage = 0f

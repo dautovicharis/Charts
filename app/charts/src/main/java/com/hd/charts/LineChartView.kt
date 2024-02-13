@@ -55,7 +55,7 @@ private fun LineChartViewPreview() {
         chartViewStyle {
             this.width = 300.dp
         }
-        lineChartStyle {
+        chartStyle {
             this.bezier = true
             this.lineColors = colors
             this.dragPointSize = 5f

@@ -103,7 +103,7 @@ internal fun BarChart(
 @Preview
 internal fun BarChartPreview() {
     val style = BarChartViewStyle.Builder().apply {
-        barChartStyle {
+        chartStyle {
             space = 8.dp
         }
     }.build()
