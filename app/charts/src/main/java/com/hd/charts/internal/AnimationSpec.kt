@@ -6,7 +6,6 @@ import com.hd.charts.internal.common.ANIMATION_DURATION
 import com.hd.charts.internal.common.ANIMATION_DURATION_BAR
 import com.hd.charts.internal.common.ANIMATION_DURATION_LINE
 import com.hd.charts.internal.common.ANIMATION_OFFSET
-import com.hd.charts.internal.common.ANIMATION_OFFSET_LINE
 
 internal object AnimationSpec {
 
@@ -18,12 +17,8 @@ internal object AnimationSpec {
         return duration + offset * index
     }
 
-    fun lineChart(index: Int) = TweenSpec<Float>(
-        durationMillis = duration(
-            index = index,
-            duration = ANIMATION_DURATION_LINE,
-            offset = ANIMATION_OFFSET_LINE
-        ),
+    fun lineChart() = TweenSpec<Float>(
+        durationMillis = ANIMATION_DURATION_LINE,
         delay = 0,
         easing = LinearEasing
     )
