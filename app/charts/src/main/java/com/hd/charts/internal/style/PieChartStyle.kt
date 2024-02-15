@@ -18,7 +18,8 @@ internal class PieChartStyleInternal internal constructor(
     val modifier: Modifier,
     val donutHolePercentage: Float,
     val chartColor: Color,
-    val strokeColor: Color
+    val strokeColor: Color,
+    val strokeWidth: Float
 )
 
 internal object PieChartDefaults {
@@ -31,6 +32,7 @@ internal object PieChartDefaults {
         val strokeColor = style.pieChartStyle.strokeColor ?: MaterialTheme.colorScheme.surface
         val innerPadding = style.chartViewStyle.innerPadding ?: 15.dp
         val donutPercentage = style.pieChartStyle.donutPercentage ?: 0f
+        val strokeWidth = style.pieChartStyle.strokeWidth ?: 5f
 
         return PieChartStyleInternal(
             modifier = Modifier
@@ -42,7 +44,8 @@ internal object PieChartDefaults {
                 DONUT_MAX_PERCENTAGE
             ),
             chartColor = chartColor,
-            strokeColor = strokeColor
+            strokeColor = strokeColor,
+            strokeWidth = strokeWidth
         )
     }
 }

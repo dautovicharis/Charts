@@ -38,8 +38,6 @@ import com.hd.charts.internal.style.PieChartDefaults
 import com.hd.charts.internal.style.PieChartStyleInternal
 import com.hd.charts.style.PieChartViewStyle
 
-private const val STROKE_WIDTH = 5f
-
 internal data class PieSlice(
     val startDeg: Float,
     val endDeg: Float,
@@ -114,7 +112,7 @@ internal fun PieChart(
                             startAngle = slice.startDeg,
                             sweepAngle = slice.sweepAngle,
                             useCenter = true,
-                            style = Stroke(width = STROKE_WIDTH)
+                            style = Stroke(width = style.strokeWidth)
                         )
                     }
                 }
@@ -131,7 +129,7 @@ internal fun PieChart(
                         color = style.strokeColor,
                         radius = innerRadius,
                         center = Offset(totalRadius, totalRadius),
-                        style = Stroke(width = STROKE_WIDTH)
+                        style = Stroke(width = style.strokeWidth)
                     )
                 }
             }

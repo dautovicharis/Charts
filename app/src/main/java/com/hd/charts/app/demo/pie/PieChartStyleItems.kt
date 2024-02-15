@@ -27,12 +27,18 @@ private fun pieChartTableItems(style: PieChartViewStyle): List<TableItem> {
     val isStrokeChanged = currentStyle.strokeColor != defaultStyle.strokeColor
     val isChartColorChanged = currentStyle.chartColor != defaultStyle.chartColor
     val isDonutChanged = currentStyle.donutPercentage != defaultStyle.donutPercentage
+    val isStrokeWidthChanged = currentStyle.strokeWidth != defaultStyle.strokeWidth
 
     val strokeColorLabel: String = when (isStrokeChanged) {
         true -> "Custom color"
         false -> "MaterialTheme\n" +
                 ".colorScheme\n" +
                 ".surface"
+    }
+
+    val strokeWidthLabel: String = when (isStrokeWidthChanged) {
+        true -> "Custom: ${currentStyle.strokeWidth}"
+        false -> currentStyle.strokeWidth.toString()
     }
 
     val chartColorLabel: String = when (isChartColorChanged) {
@@ -53,6 +59,7 @@ private fun pieChartTableItems(style: PieChartViewStyle): List<TableItem> {
             value = strokeColorLabel,
             color = currentStyle.strokeColor
         ),
+        TableItem(name = PieChartStyle::strokeWidth.name, value = strokeWidthLabel),
         TableItem(
             name = PieChartStyle::chartColor.name,
             value = chartColorLabel,

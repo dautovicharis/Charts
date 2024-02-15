@@ -24,6 +24,7 @@ object PieChartDemoStyle {
                 this.strokeColor = strokeColor
                 this.donutPercentage = 0f
                 this.chartColor = chartColor
+                this.strokeWidth = 5f
             }
 
             chartViewStyle {
@@ -45,6 +46,7 @@ object PieChartDemoStyle {
                 this.chartColor = ColorPalette.DataColor.deepPurple
                 this.strokeColor = Color.White
                 this.donutPercentage = 50f
+                this.strokeWidth = 6f
             }
         }
     }
