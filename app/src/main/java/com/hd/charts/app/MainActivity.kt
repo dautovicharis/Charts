@@ -131,7 +131,8 @@ class MainActivity : ComponentActivity() {
                     .padding(10.dp)
                     .align(Alignment.CenterHorizontally),
                 text = "Version: ${BuildConfig.VERSION_NAME}\n"
-                        + "Build: ${BuildConfig.VERSION_CODE}",
+                        + "Build: ${BuildConfig.VERSION_CODE}\n"
+                        + "Charts: develop",
                 color = MaterialTheme.colorScheme.onBackground
             )
         }
