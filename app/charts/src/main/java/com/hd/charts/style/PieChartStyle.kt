@@ -34,17 +34,20 @@ class PieChartViewStyle private constructor(
 class PieChartStyle(
     val chartColor: Color?,
     val strokeColor: Color?,
-    val donutPercentage: Float?
+    val donutPercentage: Float?,
+    val strokeWidth: Float?
 ) {
     class Builder {
         var chartColor: Color? = null
         var strokeColor: Color? = null
         var donutPercentage: Float? = null
+        var strokeWidth: Float? = null
         fun build(): PieChartStyle {
             return PieChartStyle(
                 chartColor = chartColor,
                 strokeColor = strokeColor,
-                donutPercentage = donutPercentage
+                donutPercentage = donutPercentage,
+                strokeWidth = strokeWidth
             )
         }
     }
