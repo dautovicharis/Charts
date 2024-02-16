@@ -24,28 +24,22 @@ private fun pieChartTableItems(style: PieChartViewStyle): List<TableItem> {
     val defaultStyle = PieChartDemoStyle.default().build().pieChartStyle
     val currentStyle = style.pieChartStyle
 
-    val isStrokeChanged = currentStyle.strokeColor != defaultStyle.strokeColor
-    val isChartColorChanged = currentStyle.chartColor != defaultStyle.chartColor
+    val isBorderColorChanged = currentStyle.borderColor != defaultStyle.borderColor
+    val isBorderWidthChanged = currentStyle.borderWidth != defaultStyle.borderWidth
+    val isPieColorChanged = currentStyle.pieColor != defaultStyle.pieColor
+    val arePieColorsChanged = currentStyle.pieColors != defaultStyle.pieColors
     val isDonutChanged = currentStyle.donutPercentage != defaultStyle.donutPercentage
-    val isStrokeWidthChanged = currentStyle.strokeWidth != defaultStyle.strokeWidth
 
-    val strokeColorLabel: String = when (isStrokeChanged) {
+    val strokeColorLabel: String = when (isBorderColorChanged) {
         true -> "Custom color"
         false -> "MaterialTheme\n" +
                 ".colorScheme\n" +
                 ".surface"
     }
 
-    val strokeWidthLabel: String = when (isStrokeWidthChanged) {
-        true -> "Custom: ${currentStyle.strokeWidth}"
-        false -> currentStyle.strokeWidth.toString()
-    }
-
-    val chartColorLabel: String = when (isChartColorChanged) {
-        true -> "Custom color"
-        false -> "MaterialTheme\n" +
-                ".colorScheme\n" +
-                ".primary"
+    val borderWidthLabel: String = when (isBorderWidthChanged) {
+        true -> "Custom: ${currentStyle.borderWidth}"
+        false -> currentStyle.borderWidth.toString()
     }
 
     val donutPercentageLabel: String = when (isDonutChanged) {
@@ -53,17 +47,36 @@ private fun pieChartTableItems(style: PieChartViewStyle): List<TableItem> {
         false -> currentStyle.donutPercentage.toString()
     }
 
+    val pieColorLabel = if (arePieColorsChanged) {
+        "Not in use"
+    } else if (isPieColorChanged) {
+        "Custom color"
+    } else {
+        "MaterialTheme\n" +
+                ".colorScheme\n" +
+                ".primary"
+    }
+
+    val pieColorsLabel: String = when (arePieColorsChanged) {
+        true -> "Custom colors"
+        else -> "Auto generated"
+    }
+
     return listOf(
         TableItem(
-            name = PieChartStyle::strokeColor.name,
+            name = PieChartStyle::borderColor.name,
             value = strokeColorLabel,
-            color = currentStyle.strokeColor
+            color = currentStyle.borderColor
         ),
-        TableItem(name = PieChartStyle::strokeWidth.name, value = strokeWidthLabel),
+        TableItem(name = PieChartStyle::borderWidth.name, value = borderWidthLabel),
         TableItem(
-            name = PieChartStyle::chartColor.name,
-            value = chartColorLabel,
-            color = currentStyle.chartColor
+            name = PieChartStyle::pieColor.name,
+            value = pieColorLabel,
+            color = currentStyle.pieColor
+        ),
+        TableItem(
+            name = PieChartStyle::pieColors.name,
+            value = pieColorsLabel
         ),
         TableItem(name = PieChartStyle::donutPercentage.name, value = donutPercentageLabel)
     )

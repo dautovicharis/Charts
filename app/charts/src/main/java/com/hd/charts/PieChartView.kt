@@ -55,7 +55,7 @@ fun PieChartView(
 private fun PieChartViewPreview() {
     val chartColor = MaterialTheme.colorScheme.primary
     val backgroundColor = MaterialTheme.colorScheme.surface
-    val strokeColor = MaterialTheme.colorScheme.surface
+    val borderColor = MaterialTheme.colorScheme.surface
 
     val style = PieChartViewStyle.Builder().apply {
         chartViewStyle {
@@ -65,8 +65,8 @@ private fun PieChartViewPreview() {
             this.innerPadding = 15.dp
         }
         chartStyle {
-            this.chartColor = chartColor
-            this.strokeColor = strokeColor
+            this.pieColor = chartColor
+            this.borderColor = borderColor
             this.donutPercentage = 0f
         }
     }.build()

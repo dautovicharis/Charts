@@ -15,16 +15,16 @@ object PieChartDemoStyle {
     */
     @Composable
     fun default(): PieChartViewStyle.Builder {
-        val strokeColor = MaterialTheme.colorScheme.surface
-        val chartColor = MaterialTheme.colorScheme.primary
+        val borderColor = MaterialTheme.colorScheme.surface
+        val pieColor = MaterialTheme.colorScheme.primary
         val backgroundColor = MaterialTheme.colorScheme.surface
 
         return ChartStyle.pieChart.apply {
             chartStyle {
-                this.strokeColor = strokeColor
+                this.borderColor = borderColor
                 this.donutPercentage = 0f
-                this.chartColor = chartColor
-                this.strokeWidth = 5f
+                this.pieColor = pieColor
+                this.borderWidth = 5f
             }
 
             chartViewStyle {
@@ -44,9 +44,9 @@ object PieChartDemoStyle {
         return default().apply {
             chartStyle {
                 this.chartColor = ColorPalette.DataColor.deepPurple
-                this.strokeColor = Color.White
+                this.borderColor = Color.White
                 this.donutPercentage = 50f
-                this.strokeWidth = 6f
+                this.borderWidth = 6f
             }
         }
     }

@@ -72,7 +72,7 @@ internal fun PieChart(
     }
 
     val donutHoleAnimation by animateFloatAsState(
-        targetValue = if (show) style.donutHolePercentage else 0f,
+        targetValue = if (show) style.donutPercentage else 0f,
         animationSpec = AnimationSpec.pieChartDonut(),
         label = "donutHoleAnimation"
     )
@@ -108,11 +108,11 @@ internal fun PieChart(
                             style = Fill
                         )
                         drawArc(
-                            color = style.strokeColor,
+                            color = style.borderColor,
                             startAngle = slice.startDeg,
                             sweepAngle = slice.sweepAngle,
                             useCenter = true,
-                            style = Stroke(width = style.strokeWidth)
+                            style = Stroke(width = style.borderWidth)
                         )
                     }
                 }
@@ -126,10 +126,10 @@ internal fun PieChart(
                         center = Offset(totalRadius, totalRadius)
                     )
                     drawCircle(
-                        color = style.strokeColor,
+                        color = style.borderColor,
                         radius = innerRadius,
                         center = Offset(totalRadius, totalRadius),
-                        style = Stroke(width = style.strokeWidth)
+                        style = Stroke(width = style.borderWidth)
                     )
                 }
             }
@@ -139,13 +139,13 @@ internal fun PieChart(
 
 @Composable
 private fun PieChartPreview() {
-    val chartColor = MaterialTheme.colorScheme.primary
-    val strokeColor = MaterialTheme.colorScheme.surface
+    val pieColor = MaterialTheme.colorScheme.primary
+    val borderColor = MaterialTheme.colorScheme.surface
 
     val style = PieChartViewStyle.Builder().apply {
         chartStyle {
-            this.chartColor = chartColor
-            this.strokeColor = strokeColor
+            this.pieColor = pieColor
+            this.borderColor = borderColor
             this.donutPercentage = 0f
         }
     }.build()
