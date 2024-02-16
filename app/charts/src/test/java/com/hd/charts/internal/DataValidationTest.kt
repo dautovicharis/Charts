@@ -377,7 +377,11 @@ class DataValidationTest {
 
         // Act
         val validationErrors =
-            validatePieData(data = chartDataSet, style = pieChartStyle, resources = resource)
+            validatePieData(
+                dataSet = chartDataSet,
+                style = pieChartStyle,
+                resources = resource
+            )
 
         // Assert
         Truth.assertThat(validationErrors).isEmpty()
@@ -399,7 +403,11 @@ class DataValidationTest {
 
         // Act
         val validationErrors =
-            validatePieData(data = chartDataSet, style = pieChartStyle, resources = resource)
+            validatePieData(
+                dataSet = chartDataSet,
+                style = pieChartStyle,
+                resources = resource
+            )
 
         // Assert
         val expectedError =
@@ -426,7 +434,7 @@ class DataValidationTest {
 
         // Act
         val validationErrors =
-            validatePieData(data = chartDataSet, style = pieChartStyle, resources = resource)
+            validatePieData(dataSet = chartDataSet, style = pieChartStyle, resources = resource)
 
         // Assert
         val expectedError = resource.getString(

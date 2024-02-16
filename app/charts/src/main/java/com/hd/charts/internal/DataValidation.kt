@@ -49,12 +49,12 @@ internal fun validateBarData(
 }
 
 internal fun validatePieData(
-    datSet: ChartDataSet,
+    dataSet: ChartDataSet,
     style: PieChartStyleInternal,
     resources: Resources
 ): List<String> {
     val validationErrors = mutableListOf<String>()
-    val pointsSize = datSet.data.item.points.size
+    val pointsSize = dataSet.data.item.points.size
     val colorsSize = style.pieColors.size
     val minRequiredPointsSize = 2
 

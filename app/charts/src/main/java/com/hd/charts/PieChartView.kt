@@ -35,7 +35,7 @@ fun PieChartView(
     val pieChartStyle = PieChartDefaults.pieChartStyle(style = style, chartData = dataSet.data.item)
     val resources = LocalContext.current.resources
     val errors by remember {
-        mutableStateOf(validatePieData(datSet = dataSet, style = pieChartStyle, resources = resources))
+        mutableStateOf(validatePieData(dataSet = dataSet, style = pieChartStyle, resources = resources))
     }
 
     if (errors.isNotEmpty()) {
