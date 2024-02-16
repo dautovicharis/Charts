@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 
 internal fun generateColorShades(baseColor: Color, numberOfShades: Int): List<Color> {
-    val step = 0.6f / (numberOfShades - 1)
+    val step = 0.6f / (numberOfShades)
 
     return (0 until numberOfShades).map { i ->
         val luminance = step * i

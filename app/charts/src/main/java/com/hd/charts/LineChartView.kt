@@ -1,11 +1,7 @@
 package com.hd.charts
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,8 +43,7 @@ private fun LineChartViewPreview() {
         MaterialTheme.colorScheme.primary,
         MaterialTheme.colorScheme.secondary,
         MaterialTheme.colorScheme.tertiary,
-        MaterialTheme.colorScheme.error,
-        MaterialTheme.colorScheme.outline
+        MaterialTheme.colorScheme.error
     )
 
     val style = LineChartViewStyle.Builder().apply {
@@ -63,12 +58,6 @@ private fun LineChartViewPreview() {
         }
     }
 
-    val categories = listOf(
-        "Jan", "Feb", "Mar"
-    )
-
-    val labelPrefix = "$"
-
     val items = listOf(
         "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
         "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
@@ -78,21 +67,15 @@ private fun LineChartViewPreview() {
 
     val data = MultiChartDataSet(
         items = items,
-        categories = categories,
+        categories = listOf("Jan", "Feb", "Mar"),
         title = stringResource(id = R.string.line_chart),
-        prefix = labelPrefix
+        prefix = "$"
     )
 
-    Row(
-        modifier = Modifier
-            .width(900.dp)
-            .wrapContentHeight(),
-    ) {
-        LineChartView(
-            dataSet = data,
-            style = style.build()
-        )
-    }
+    LineChartView(
+        dataSet = data,
+        style = style.build()
+    )
 }
 
 @Preview
@@ -117,4 +100,45 @@ private fun LineChartViewDynamic() {
     ChartsDefaultTheme(darkTheme = false, dynamicColor = true) {
         LineChartViewPreview()
     }
+}
+
+@Preview
+@Composable
+private fun LineChartViewInvalidData() {
+    val colors = listOf(
+        MaterialTheme.colorScheme.primary,
+        MaterialTheme.colorScheme.secondary,
+        MaterialTheme.colorScheme.tertiary
+    )
+
+    val style = LineChartViewStyle.Builder().apply {
+        chartViewStyle {
+            this.width = 300.dp
+        }
+        chartStyle {
+            this.bezier = true
+            this.lineColors = colors
+            this.dragPointSize = 5f
+            this.pointVisible = true
+        }
+    }
+
+    val items = listOf(
+        "Cherry St." to listOf(8261.68f, 8810.34f),
+        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
+        "Peach St." to listOf(1500.87f, 2765.58f),
+        "Lime Av." to listOf(5444.87f, 233.58f, 67544.81f)
+    )
+
+    val data = MultiChartDataSet(
+        items = items,
+        categories = listOf("Jan", "Feb"),
+        title = stringResource(id = R.string.line_chart),
+        prefix = "$"
+    )
+
+    LineChartView(
+        dataSet = data,
+        style = style.build()
+    )
 }

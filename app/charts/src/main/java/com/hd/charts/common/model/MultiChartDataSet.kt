@@ -6,7 +6,7 @@ import com.hd.charts.internal.common.model.toChartData
 
 class MultiChartDataSet(
     items: List<Pair<String, List<Float>>>,
-    categories: List<String>,
+    categories: List<String> = emptyList(),
     title: String,
     prefix: String = "",
     postfix: String = ""
