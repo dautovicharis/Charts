@@ -30,7 +30,7 @@ private fun pieChartTableItems(style: PieChartViewStyle): List<TableItem> {
     val arePieColorsChanged = currentStyle.pieColors != defaultStyle.pieColors
     val isDonutChanged = currentStyle.donutPercentage != defaultStyle.donutPercentage
 
-    val strokeColorLabel: String = when (isBorderColorChanged) {
+    val borderColorLabel: String = when (isBorderColorChanged) {
         true -> "Custom color"
         false -> "MaterialTheme\n" +
                 ".colorScheme\n" +
@@ -65,7 +65,7 @@ private fun pieChartTableItems(style: PieChartViewStyle): List<TableItem> {
     return listOf(
         TableItem(
             name = PieChartStyle::borderColor.name,
-            value = strokeColorLabel,
+            value = borderColorLabel,
             color = currentStyle.borderColor
         ),
         TableItem(name = PieChartStyle::borderWidth.name, value = borderWidthLabel),
