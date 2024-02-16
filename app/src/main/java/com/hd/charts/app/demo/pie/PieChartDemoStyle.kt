@@ -25,6 +25,10 @@ object PieChartDemoStyle {
                 this.donutPercentage = 0f
                 this.pieColor = pieColor
                 this.borderWidth = 5f
+
+                // this.pieColors
+                // If not provided, default colors are internally generated based on the pieColor.
+                // Check  `generateColorShades` function.
             }
 
             chartViewStyle {
@@ -43,7 +47,16 @@ object PieChartDemoStyle {
     fun custom(): PieChartViewStyle.Builder {
         return default().apply {
             chartStyle {
-                this.chartColor = ColorPalette.DataColor.deepPurple
+                this.pieColors = listOf(
+                    ColorPalette.DataColor.navyBlue,
+                    ColorPalette.DataColor.darkBlue,
+                    ColorPalette.DataColor.deepPurple,
+                    ColorPalette.DataColor.magenta,
+                    ColorPalette.DataColor.darkPink,
+                    ColorPalette.DataColor.coral,
+                    ColorPalette.DataColor.orange,
+                    ColorPalette.DataColor.yellow
+                )
                 this.borderColor = Color.White
                 this.donutPercentage = 50f
                 this.borderWidth = 6f

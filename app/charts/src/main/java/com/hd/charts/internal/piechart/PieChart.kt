@@ -101,7 +101,7 @@ internal fun PieChart(
 
                     scale(scale) {
                         drawArc(
-                            color = style.chartColor,
+                            color = style.pieColors[i],
                             startAngle = slice.startDeg,
                             sweepAngle = slice.sweepAngle,
                             useCenter = true,
@@ -150,6 +150,7 @@ private fun PieChartPreview() {
         }
     }.build()
 
+    val chartData = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f).toChartData()
 
     Row(
         modifier = Modifier
@@ -158,8 +159,8 @@ private fun PieChartPreview() {
     ) {
         PieChart(
             chartData = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f).toChartData(),
-            style = PieChartDefaults.pieChartStyle(style),
-            chartStyle = ChartViewDefaults.chartViewStyle(ChartStyle.chartView.build())
+            style = PieChartDefaults.pieChartStyle(style = style, chartData = chartData),
+            chartStyle = ChartViewDefaults.chartViewStyle(ChartStyle.chartView.build()),
         )
     }
 }

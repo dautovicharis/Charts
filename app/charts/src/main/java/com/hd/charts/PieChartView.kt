@@ -29,7 +29,7 @@ fun PieChartView(
     style: PieChartViewStyle,
 ) {
     val chartViewStyle = ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
-    val pieChartStyle = PieChartDefaults.pieChartStyle(style = style)
+    val pieChartStyle = PieChartDefaults.pieChartStyle(style = style, chartData = dataSet.data.item)
 
     var title by remember { mutableStateOf(dataSet.data.label) }
     ChartView(chartViewsStyle = chartViewStyle) {

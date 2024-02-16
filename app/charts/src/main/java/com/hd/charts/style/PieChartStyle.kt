@@ -33,18 +33,21 @@ class PieChartViewStyle private constructor(
 @Immutable
 class PieChartStyle(
     val pieColor: Color?,
+    val pieColors: List<Color>,
     val borderColor: Color?,
     val donutPercentage: Float?,
     val borderWidth: Float?
 ) {
     class Builder {
         var pieColor: Color? = null
+        var pieColors: List<Color> = emptyList()
         var borderColor: Color? = null
         var donutPercentage: Float? = null
         var borderWidth: Float? = null
         fun build(): PieChartStyle {
             return PieChartStyle(
                 pieColor = pieColor,
+                pieColors = pieColors,
                 borderColor = borderColor,
                 borderWidth = borderWidth,
                 donutPercentage = donutPercentage,

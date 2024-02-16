@@ -31,18 +31,24 @@ fun AddPieChartDemo() {
 
 @Composable
 private fun AddDefaultPieChart() {
-    AddPieChart(style = PieChartDemoStyle.default().build())
+    AddPieChart(
+        style = PieChartDemoStyle.default().build(),
+        items = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f)
+    )
 }
 
 @Composable
 private fun AddCustomPieChart() {
-    AddPieChart(style = PieChartDemoStyle.custom().build())
+    AddPieChart(
+        style = PieChartDemoStyle.custom().build(),
+        items = listOf(60.0f, 25f, 15f, 14f, 30f, 30f, 20f, 30f)
+    )
 }
 
 @Composable
-private fun AddPieChart(style: PieChartViewStyle) {
+private fun AddPieChart(style: PieChartViewStyle, items: List<Float>) {
     val data = ChartDataSet(
-        items = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f),
+        items = items,
         title = stringResource(id = R.string.pie_chart),
         postfix = " °C"
     )
