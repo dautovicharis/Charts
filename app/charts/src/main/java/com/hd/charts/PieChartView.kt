@@ -11,16 +11,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.internal.common.NO_SELECTION
+import com.hd.charts.internal.common.composable.ChartErrors
 import com.hd.charts.internal.common.composable.ChartView
 import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.piechart.PieChart
 import com.hd.charts.internal.style.PieChartDefaults
+import com.hd.charts.internal.validatePieData
 import com.hd.charts.style.PieChartViewStyle
 
 @Composable
@@ -29,23 +32,32 @@ fun PieChartView(
     style: PieChartViewStyle,
 ) {
     val chartViewStyle = ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
-    val pieChartStyle = PieChartDefaults.pieChartStyle(style = style)
+    val pieChartStyle = PieChartDefaults.pieChartStyle(style = style, chartData = dataSet.data.item)
+    val resources = LocalContext.current.resources
+    val errors by remember {
+        mutableStateOf(validatePieData(dataSet = dataSet, style = pieChartStyle, resources = resources))
+    }
 
-    var title by remember { mutableStateOf(dataSet.data.label) }
-    ChartView(chartViewsStyle = chartViewStyle) {
-        Text(
-            modifier = chartViewStyle.modifierTopTitle,
-            text = title,
-            style = chartViewStyle.styleTitle
-        )
-        PieChart(
-            chartData = dataSet.data.item,
-            style = pieChartStyle,
-            chartStyle = chartViewStyle
-        ) {
-            title = when (it) {
-                NO_SELECTION -> dataSet.data.label
-                else -> dataSet.data.item.labels[it]
+    if (errors.isNotEmpty()) {
+        ChartErrors(chartViewStyle = chartViewStyle, errors = errors)
+    } else {
+        var title by remember { mutableStateOf(dataSet.data.label) }
+
+        ChartView(chartViewsStyle = chartViewStyle) {
+            Text(
+                modifier = chartViewStyle.modifierTopTitle,
+                text = title,
+                style = chartViewStyle.styleTitle
+            )
+            PieChart(
+                chartData = dataSet.data.item,
+                style = pieChartStyle,
+                chartStyle = chartViewStyle
+            ) {
+                title = when (it) {
+                    NO_SELECTION -> dataSet.data.label
+                    else -> dataSet.data.item.labels[it]
+                }
             }
         }
     }
@@ -55,7 +67,7 @@ fun PieChartView(
 private fun PieChartViewPreview() {
     val chartColor = MaterialTheme.colorScheme.primary
     val backgroundColor = MaterialTheme.colorScheme.surface
-    val strokeColor = MaterialTheme.colorScheme.surface
+    val borderColor = MaterialTheme.colorScheme.surface
 
     val style = PieChartViewStyle.Builder().apply {
         chartViewStyle {
@@ -65,8 +77,8 @@ private fun PieChartViewPreview() {
             this.innerPadding = 15.dp
         }
         chartStyle {
-            this.chartColor = chartColor
-            this.strokeColor = strokeColor
+            this.pieColor = chartColor
+            this.borderColor = borderColor
             this.donutPercentage = 0f
         }
     }.build()

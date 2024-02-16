@@ -10,8 +10,8 @@ import androidx.compose.ui.platform.LocalContext
 import com.hd.charts.internal.barstackedchart.LegendItem
 import com.hd.charts.internal.barstackedchart.generateColorShades
 import com.hd.charts.internal.common.NO_SELECTION
-import com.hd.charts.internal.common.composable.ChartView
 import com.hd.charts.internal.common.composable.ChartErrors
+import com.hd.charts.internal.common.composable.ChartView
 import com.hd.charts.internal.common.model.MultiChartData
 import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.style.LineChartDefaults
@@ -25,13 +25,13 @@ internal fun LineChartViewImpl(
 ) {
     val chartViewStyle = ChartViewDefaults.chartViewStyle(style.chartViewStyle)
     val lineChartStyle = LineChartDefaults.lineChartStyle(style)
-    val context = LocalContext.current
+    val resources = LocalContext.current.resources
     val errors by remember {
         mutableStateOf(
             validateLineData(
                 data = data,
                 style = lineChartStyle,
-                context = context
+                resources = resources
             )
         )
     }

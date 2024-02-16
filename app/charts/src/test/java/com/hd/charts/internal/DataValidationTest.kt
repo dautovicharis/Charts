@@ -1,11 +1,13 @@
 package com.hd.charts.internal
 
-import android.content.Context
+import android.content.res.Resources
 import androidx.compose.ui.graphics.Color
 import com.google.common.truth.Truth
 import com.hd.charts.R
+import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.common.model.MultiChartDataSet
 import com.hd.charts.internal.style.LineChartStyleInternal
+import com.hd.charts.internal.style.PieChartStyleInternal
 import com.hd.charts.internal.style.StackedBarChartStyleInternal
 import io.mockk.every
 import io.mockk.mockk
@@ -13,7 +15,7 @@ import org.junit.Test
 
 class DataValidationTest {
 
-    private val context = mockk<Context>(relaxed = true)
+    private val resource = mockk<Resources>()
 
     // Mock data
     private val defaultDataItems = listOf(
@@ -26,6 +28,49 @@ class DataValidationTest {
     private val defaultCategories = listOf("Jan", "Feb", "Mar", "Apr")
     private val defaultColors = listOf(Color.Red, Color.Green, Color.Cyan, Color.Black)
     private val defaultTitle = "Title"
+
+    private fun mockCategoriesString(size: Int, expectedSize: Int) {
+        every {
+            resource.getString(
+                R.string.rule_categories_size_mismatch,
+                ofType<Int>(),
+                ofType<Int>()
+            )
+        } answers {
+            "Categories size ${size} does not match expected ${expectedSize}."
+        }
+    }
+
+    private fun mockColorsString(size: Int, expectedSize: Int) {
+        every {
+            resource.getString(
+                R.string.rule_colors_size_mismatch,
+                ofType<Int>(),
+                ofType<Int>()
+            )
+        } answers {
+            "Colors size ${size} does not match expected ${expectedSize}."
+        }
+    }
+
+    private fun mockItemPointsString(index: Int, pointsSize: Int, expectedSize: Int) {
+        every {
+            resource.getString(
+                R.string.rule_item_points_size,
+                index,
+                pointsSize,
+                expectedSize
+            )
+        } answers {
+            "Item at index ${index} has ${pointsSize} points, expected ${expectedSize}."
+        }
+    }
+
+    private fun mockDataPointsString(minSize: Int) {
+        every { resource.getString(R.string.rule_data_points_less_than_min, minSize) } answers {
+            "Data points size should be greater than ${minSize}."
+        }
+    }
 
     // Line data
     @Test
@@ -45,8 +90,8 @@ class DataValidationTest {
         }
 
         // Act
-        val lineErrors = validateLineData(dataSet.data, lineChartStyle, context)
-        val barErrors = validateBarData(dataSet.data, barChartStyle, context)
+        val lineErrors = validateLineData(dataSet.data, lineChartStyle, resource)
+        val barErrors = validateBarData(dataSet.data, barChartStyle, resource)
 
         // Assert
         Truth.assertThat(lineErrors).isEmpty()
@@ -67,13 +112,14 @@ class DataValidationTest {
         val lineChartStyle = mockk<LineChartStyleInternal> {
             every { lineColors } returns defaultColors
         }
+        val expectedCategoriesSize = dataSet.data.items.first().item.points.size
+        mockCategoriesString(categories.size, expectedCategoriesSize)
 
         // Act
-        val validationErrors = validateLineData(dataSet.data, lineChartStyle, context)
+        val validationErrors = validateLineData(dataSet.data, lineChartStyle, resource)
 
         // Assert
-        val expectedCategoriesSize = dataSet.data.items.first().item.points.size
-        val expectedError = context.getString(
+        val expectedError = resource.getString(
             R.string.rule_categories_size_mismatch,
             categories.size,
             expectedCategoriesSize
@@ -97,12 +143,14 @@ class DataValidationTest {
             every { lineColors } returns colors
         }
 
+        val expectedColorSize = dataSet.data.items.size
+        mockColorsString(size = colors.size, expectedSize = expectedColorSize)
+
         // Act
-        val validationErrors = validateLineData(dataSet.data, lineChartStyle, context)
+        val validationErrors = validateLineData(dataSet.data, lineChartStyle, resource)
 
         // Assert
-        val expectedColorSize = dataSet.data.items.size
-        val expectedError = context.getString(
+        val expectedError = resource.getString(
             R.string.rule_colors_size_mismatch,
             colors.size,
             expectedColorSize
@@ -114,9 +162,10 @@ class DataValidationTest {
     @Test
     fun `validateLineData with invalid data items`() {
         // Arrange
-        val modifiedList = defaultDataItems[1].second.drop(2)
+        val index = 1
+        val modifiedList = defaultDataItems[index].second.drop(2)
         val dataItems = defaultDataItems.toMutableList().apply {
-            this[1] = this[1].copy(second = modifiedList)
+            this[index] = this[index].copy(second = modifiedList)
         }
 
         val dataSet = MultiChartDataSet(
@@ -128,16 +177,22 @@ class DataValidationTest {
         val lineChartStyle = mockk<LineChartStyleInternal> {
             every { lineColors } returns defaultColors
         }
+        val expectedPoints = dataSet.data.items.first().item.points.size
+        val pointsSize = dataSet.data.items[index].item.points.size
+        mockItemPointsString(
+            index = index,
+            pointsSize = pointsSize,
+            expectedSize = expectedPoints
+        )
 
         // Act
-        val validationErrors = validateLineData(dataSet.data, lineChartStyle, context)
+        val validationErrors = validateLineData(dataSet.data, lineChartStyle, resource)
 
         // Assert
-        val expectedPoints = dataSet.data.items.first().item.points.size
-        val expectedError = context.getString(
+        val expectedError = resource.getString(
             R.string.rule_item_points_size,
-            1,
-            dataSet.data.items[1].item.points.size,
+            index,
+            pointsSize,
             expectedPoints
         )
         Truth.assertThat(validationErrors).isNotEmpty()
@@ -147,8 +202,9 @@ class DataValidationTest {
     @Test
     fun `validateLineData with empty item points`() {
         // Arrange
+        val index = 0
         val dataItems = defaultDataItems.toMutableList().apply {
-            this[0] = this[0].copy(second = emptyList())
+            this[index] = this[index].copy(second = emptyList())
         }
 
         val dataSet = MultiChartDataSet(
@@ -161,12 +217,15 @@ class DataValidationTest {
             every { lineColors } returns defaultColors
         }
 
+        val minRequiredPointsSize = 2
+        mockDataPointsString(minSize = minRequiredPointsSize)
+
         // Act
-        val validationErrors = validateLineData(dataSet.data, lineChartStyle, context)
+        val validationErrors = validateLineData(dataSet.data, lineChartStyle, resource)
 
         // Assert
         val expectedError =
-            context.getString(R.string.rule_data_points_less_than_min, 1)
+            resource.getString(R.string.rule_data_points_less_than_min, minRequiredPointsSize)
         Truth.assertThat(validationErrors).isNotEmpty()
         Truth.assertThat(validationErrors.first()).isEqualTo(expectedError)
     }
@@ -187,12 +246,14 @@ class DataValidationTest {
             every { barColors } returns defaultColors
         }
 
+        val expectedCategoriesSize = dataSet.data.items.first().item.points.size
+        mockCategoriesString(size = categories.size, expectedSize = expectedCategoriesSize)
+
         // Act
-        val validationErrors = validateBarData(dataSet.data, barChartStyle, context)
+        val validationErrors = validateBarData(dataSet.data, barChartStyle, resource)
 
         // Assert
-        val expectedCategoriesSize = dataSet.data.items.first().item.points.size
-        val expectedError = context.getString(
+        val expectedError = resource.getString(
             R.string.rule_categories_size_mismatch,
             categories.size,
             expectedCategoriesSize
@@ -215,13 +276,14 @@ class DataValidationTest {
         val barChartStyle = mockk<StackedBarChartStyleInternal> {
             every { barColors } returns colors
         }
+        val expectedColorSize = dataSet.data.items.size
+        mockColorsString(size = colors.size, expectedSize = expectedColorSize)
 
         // Act
-        val validationErrors = validateBarData(dataSet.data, barChartStyle, context)
+        val validationErrors = validateBarData(dataSet.data, barChartStyle, resource)
 
         // Assert
-        val expectedColorSize = dataSet.data.items.size
-        val expectedError = context.getString(
+        val expectedError = resource.getString(
             R.string.rule_colors_size_mismatch,
             colors.size,
             expectedColorSize
@@ -233,9 +295,10 @@ class DataValidationTest {
     @Test
     fun `validateBarData with invalid data items`() {
         // Arrange
-        val modifiedList = defaultDataItems[1].second.drop(1)
+        val index = 1
+        val modifiedList = defaultDataItems[index].second.drop(1)
         val items = defaultDataItems.toMutableList().apply {
-            this[1] = this[1].copy(second = modifiedList)
+            this[index] = this[index].copy(second = modifiedList)
         }
 
         val dataSet = MultiChartDataSet(
@@ -247,16 +310,22 @@ class DataValidationTest {
         val barChartStyle = mockk<StackedBarChartStyleInternal> {
             every { barColors } returns defaultColors
         }
+        val expectedPoints = dataSet.data.items.first().item.points.size
+        val pointsSize = dataSet.data.items[index].item.points.size
+        mockItemPointsString(
+            index = index,
+            pointsSize = pointsSize,
+            expectedSize = expectedPoints
+        )
 
         // Act
-        val validationErrors = validateBarData(dataSet.data, barChartStyle, context)
+        val validationErrors = validateBarData(dataSet.data, barChartStyle, resource)
 
         // Assert
-        val expectedPoints = dataSet.data.items.first().item.points.size
-        val expectedError = context.getString(
+        val expectedError = resource.getString(
             R.string.rule_item_points_size,
-            1,
-            dataSet.data.items[1].item.points.size,
+            index,
+            pointsSize,
             expectedPoints
         )
         Truth.assertThat(validationErrors).isNotEmpty()
@@ -266,8 +335,9 @@ class DataValidationTest {
     @Test
     fun `validateBarData with empty item points`() {
         // Arrange
+        val index = 0
         val items = defaultDataItems.toMutableList().apply {
-            this[1] = this[1].copy(second = emptyList())
+            this[index] = this[index].copy(second = emptyList())
         }
 
         val dataSet = MultiChartDataSet(
@@ -279,13 +349,99 @@ class DataValidationTest {
         val barChartStyle = mockk<StackedBarChartStyleInternal> {
             every { barColors } returns defaultColors
         }
+        val minRequiredPointsSize = 1
+        mockDataPointsString(minSize = minRequiredPointsSize)
 
         // Act
-        val validationErrors = validateBarData(dataSet.data, barChartStyle, context)
+        val validationErrors = validateBarData(dataSet.data, barChartStyle, resource)
 
         // Assert
         val expectedError =
-            context.getString(R.string.rule_data_points_less_than_min, 0)
+            resource.getString(R.string.rule_data_points_less_than_min, minRequiredPointsSize)
+        Truth.assertThat(validationErrors).isNotEmpty()
+        Truth.assertThat(validationErrors.first()).isEqualTo(expectedError)
+    }
+
+    // Pie data
+    @Test
+    fun `validatePieData with valid dataSet`() {
+        // Arrange
+        val chartDataSet = ChartDataSet(
+            items = listOf(10f, 20f, 30f, 40f),
+            title = defaultTitle,
+        )
+
+        val pieChartStyle = mockk<PieChartStyleInternal> {
+            every { pieColors } returns defaultColors
+        }
+
+        // Act
+        val validationErrors =
+            validatePieData(
+                dataSet = chartDataSet,
+                style = pieChartStyle,
+                resources = resource
+            )
+
+        // Assert
+        Truth.assertThat(validationErrors).isEmpty()
+    }
+
+    @Test
+    fun `validatePieData with invalid data items`() {
+        // Arrange
+        val chartDataSet = ChartDataSet(
+            items = listOf(10f),
+            title = defaultTitle,
+        )
+
+        val pieChartStyle = mockk<PieChartStyleInternal> {
+            every { pieColors } returns defaultColors
+        }
+        val minRequiredPointsSize = 2
+        mockDataPointsString(minSize = minRequiredPointsSize)
+
+        // Act
+        val validationErrors =
+            validatePieData(
+                dataSet = chartDataSet,
+                style = pieChartStyle,
+                resources = resource
+            )
+
+        // Assert
+        val expectedError =
+            resource.getString(R.string.rule_data_points_less_than_min, minRequiredPointsSize)
+        Truth.assertThat(validationErrors).isNotEmpty()
+        Truth.assertThat(validationErrors.first()).isEqualTo(expectedError)
+    }
+
+    @Test
+    fun `validatePieData with invalid colors`() {
+        // Arrange
+        val colors = defaultColors.drop(2)
+
+        val chartDataSet = ChartDataSet(
+            items = listOf(10f, 20f, 30f, 40f),
+            title = defaultTitle,
+        )
+
+        val pieChartStyle = mockk<PieChartStyleInternal> {
+            every { pieColors } returns colors
+        }
+        val expectedColorSize = chartDataSet.data.item.points.size
+        mockColorsString(size = colors.size, expectedSize = expectedColorSize)
+
+        // Act
+        val validationErrors =
+            validatePieData(dataSet = chartDataSet, style = pieChartStyle, resources = resource)
+
+        // Assert
+        val expectedError = resource.getString(
+            R.string.rule_colors_size_mismatch,
+            colors.size,
+            expectedColorSize
+        )
         Truth.assertThat(validationErrors).isNotEmpty()
         Truth.assertThat(validationErrors.first()).isEqualTo(expectedError)
     }

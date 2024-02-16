@@ -16,8 +16,8 @@ import com.hd.charts.internal.barstackedchart.LegendItem
 import com.hd.charts.internal.barstackedchart.StackedBarChart
 import com.hd.charts.internal.barstackedchart.generateColorShades
 import com.hd.charts.internal.common.NO_SELECTION
-import com.hd.charts.internal.common.composable.ChartView
 import com.hd.charts.internal.common.composable.ChartErrors
+import com.hd.charts.internal.common.composable.ChartView
 import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.style.StackedBarChartDefaults
@@ -31,14 +31,14 @@ fun StackedBarChartView(
 ) {
     val chartViewStyle = ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
     val barChartStyle = StackedBarChartDefaults.barChartStyle(style = style)
-    val context = LocalContext.current
+    val resources = LocalContext.current.resources
 
     val errors by remember {
         mutableStateOf(
             validateBarData(
                 data = dataSet.data,
                 style = barChartStyle,
-                context = context
+                resources = resources
             )
         )
     }
