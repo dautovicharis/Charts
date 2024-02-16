@@ -45,8 +45,7 @@ object StackedBarDemoStyle {
         val colors = listOf(
             ColorPalette.DataColor.navyBlue,
             ColorPalette.DataColor.darkBlue,
-            ColorPalette.DataColor.deepPurple,
-            ColorPalette.DataColor.magenta
+            ColorPalette.DataColor.deepPurple
         )
 
         return default().apply {
