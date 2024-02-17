@@ -50,7 +50,7 @@ object PieChartDemoStyle {
                     ColorPalette.DataColor.yellow
                 )
                 this.borderColor = Color.White
-                this.donutPercentage = 50f
+                this.donutPercentage = 40f
                 this.borderWidth = 6f
             }
         }

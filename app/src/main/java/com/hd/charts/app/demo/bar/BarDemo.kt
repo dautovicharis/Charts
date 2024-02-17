@@ -33,7 +33,7 @@ fun AddBarChartDemo() {
 private fun AddDefaultBarChart() {
     AddBarChart(
         style = BarDemoStyle.default().build(),
-        items = listOf(100f, -50f, -5f, -60f, -1f, -30f, -50f, -35f, 50f, 100f)
+        items = listOf(100f, 50f, 5f, 60f, -50f, 50f, 60f)
     )
 }
 
