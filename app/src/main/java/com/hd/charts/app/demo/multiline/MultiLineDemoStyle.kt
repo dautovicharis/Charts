@@ -1,7 +1,7 @@
 package com.hd.charts.app.demo.multiline
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.Dp
+import com.hd.charts.app.demo.ChartViewDemoStyle
 import com.hd.charts.app.demo.line.LineDemoStyle
 import com.hd.charts.app.ui.theme.ColorPalette
 import com.hd.charts.style.LineChartViewStyle
@@ -10,7 +10,7 @@ object MultiLineDemoStyle {
     @Composable
     fun default(): LineChartViewStyle.Builder {
         return LineDemoStyle.default().apply {
-            chartViewStyle { this.width = Dp.Infinity }
+            chartViewStyle(ChartViewDemoStyle.custom())
         }
     }
 
@@ -31,9 +31,7 @@ object MultiLineDemoStyle {
                 this.dragPointColor = ColorPalette.DataColor.deepPurple
             }
 
-            chartViewStyle {
-                this.width = Dp.Infinity
-            }
+            chartViewStyle(ChartViewDemoStyle.custom())
         }
     }
 }
