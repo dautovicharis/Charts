@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.key
@@ -53,7 +54,7 @@ fun StyleAndChart(
     val outerPadding = 15.dp
     val cornerRadius = 20.dp
     val shadow = 15.dp
-    val backgroundColor = MaterialTheme.colorScheme.surface
+    val backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(0.1.dp)
 
     val (tableItemsVisible, setTableItemsVisible) = remember { mutableStateOf(false) }
     val chartItemKey = remember { mutableIntStateOf(0) }
