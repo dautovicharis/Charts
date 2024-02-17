@@ -10,11 +10,15 @@ class LineChartViewStyle private constructor(
     val lineChartStyle: LineChartStyle
 ) {
     class Builder {
-        private val chartViewStyleBuilder = ChartViewStyle.Builder()
+        private var chartViewStyleBuilder = ChartViewStyle.Builder()
         private val lineChartStyleBuilder = LineChartStyle.Builder()
 
         fun chartViewStyle(block: ChartViewStyle.Builder.() -> Unit) {
             chartViewStyleBuilder.apply(block)
+        }
+
+        fun chartViewStyle(builder: ChartViewStyle.Builder) {
+            chartViewStyleBuilder = builder
         }
 
         fun chartStyle(block: LineChartStyle.Builder.() -> Unit) {

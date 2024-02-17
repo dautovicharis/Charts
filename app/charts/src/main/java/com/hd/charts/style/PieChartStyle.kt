@@ -10,11 +10,15 @@ class PieChartViewStyle private constructor(
     val pieChartStyle: PieChartStyle
 ) {
     class Builder {
-        private val chartViewStyleBuilder = ChartViewStyle.Builder()
+        private var chartViewStyleBuilder = ChartViewStyle.Builder()
         private val pieChartStyleBuilder = PieChartStyle.Builder()
 
         fun chartViewStyle(block: ChartViewStyle.Builder.() -> Unit) {
             chartViewStyleBuilder.apply(block)
+        }
+
+        fun chartViewStyle(builder: ChartViewStyle.Builder) {
+            chartViewStyleBuilder = builder
         }
 
         fun chartStyle(block: PieChartStyle.Builder.() -> Unit) {

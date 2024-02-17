@@ -4,6 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.hd.charts.ChartStyle
+import com.hd.charts.app.demo.ChartViewDemoStyle
 import com.hd.charts.app.ui.theme.ColorPalette
 import com.hd.charts.style.StackedBarChartViewStyle
 
@@ -16,8 +17,6 @@ object StackedBarDemoStyle {
     @Composable
     fun default(): StackedBarChartViewStyle.Builder {
         val barColor = MaterialTheme.colorScheme.primary
-        val backgroundColor = MaterialTheme.colorScheme.surface
-
         return ChartStyle.stackedBar.apply {
             chartStyle {
                 this.barColor = barColor
@@ -28,15 +27,7 @@ object StackedBarDemoStyle {
                 //  Check  `generateColorShades` function.
             }
 
-            chartViewStyle {
-                // Width is set to Dp.Infinity by default, we are changing it to 200.dp just for demo purposes
-                this.width = 200.dp
-                this.outerPadding = 20.dp
-                this.innerPadding = 15.dp
-                this.cornerRadius = 20.dp
-                this.shadow = 15.dp
-                this.backgroundColor = backgroundColor
-            }
+            chartViewStyle(ChartViewDemoStyle.custom(size = 240.dp))
         }
     }
 

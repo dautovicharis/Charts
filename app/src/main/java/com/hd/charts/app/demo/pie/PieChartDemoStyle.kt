@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.hd.charts.ChartStyle
+import com.hd.charts.app.demo.ChartViewDemoStyle
 import com.hd.charts.app.ui.theme.ColorPalette
 import com.hd.charts.style.PieChartViewStyle
 
@@ -17,7 +18,6 @@ object PieChartDemoStyle {
     fun default(): PieChartViewStyle.Builder {
         val borderColor = MaterialTheme.colorScheme.surface
         val pieColor = MaterialTheme.colorScheme.primary
-        val backgroundColor = MaterialTheme.colorScheme.surface
 
         return ChartStyle.pieChart.apply {
             chartStyle {
@@ -31,15 +31,7 @@ object PieChartDemoStyle {
                 // Check  `generateColorShades` function.
             }
 
-            chartViewStyle {
-                // Width is set to Dp.Infinity by default, we are changing it to 200.dp just for demo purposes
-                this.width = 200.dp
-                this.outerPadding = 20.dp
-                this.innerPadding = 15.dp
-                this.cornerRadius = 20.dp
-                this.shadow = 15.dp
-                this.backgroundColor = backgroundColor
-            }
+            chartViewStyle(ChartViewDemoStyle.custom(size = 200.dp))
         }
     }
 
@@ -58,7 +50,7 @@ object PieChartDemoStyle {
                     ColorPalette.DataColor.yellow
                 )
                 this.borderColor = Color.White
-                this.donutPercentage = 50f
+                this.donutPercentage = 40f
                 this.borderWidth = 6f
             }
         }
