@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.hd.charts.R
 import com.hd.charts.common.model.MultiChartDataSet
@@ -29,15 +28,14 @@ import com.hd.charts.internal.common.DEFAULT_SCALE
 import com.hd.charts.internal.common.MAX_SCALE
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.model.MultiChartData
-import com.hd.charts.internal.style.StackedBarChartDefaults
-import com.hd.charts.internal.style.StackedBarChartStyleInternal
-import com.hd.charts.style.StackedBarChartViewStyle
+import com.hd.charts.style.StackedBarChartDefaults
+import com.hd.charts.style.StackedBarChartStyle
 
 @Composable
 internal fun StackedBarChart(
     data: MultiChartData,
-    style: StackedBarChartStyleInternal,
-    colors: List<Color> = generateColorShades(style.barColor, data.items.first().item.points.size),
+    style: StackedBarChartStyle,
+    colors: List<Color>,
     onValueChanged: (Int) -> Unit = {}
 ) {
     val progress = remember {
@@ -105,14 +103,6 @@ internal fun StackedBarChart(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewStackedBarChart() {
-    val style = StackedBarChartViewStyle.Builder().apply {
-        chartViewStyle { }
-        chartStyle {
-            barColor = Color.Blue
-            space = 8.dp
-        }
-    }.build()
-
     val items = listOf(
         "Cherry St." to listOf(8261.68f, 4810.34f, 1536.57f, 1000.0f),
         "Strawberry Mall" to listOf(7875.87f, 3126.58f, 2019.81f, 1500.0f),
@@ -132,7 +122,11 @@ private fun PreviewStackedBarChart() {
     ) {
         StackedBarChart(
             data = chartData.data,
-            style = StackedBarChartDefaults.barChartStyle(style = style)
+            style = StackedBarChartDefaults.style(),
+            colors = generateColorShades(
+                StackedBarChartDefaults.style().barColor,
+                items.first().second.size
+            )
         )
     }
 }

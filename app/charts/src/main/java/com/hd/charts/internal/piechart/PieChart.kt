@@ -23,20 +23,19 @@ import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
-import com.hd.charts.ChartStyle
 import com.hd.charts.internal.AnimationSpec
+import com.hd.charts.internal.barstackedchart.generateColorShades
 import com.hd.charts.internal.common.ANIMATION_DURATION
 import com.hd.charts.internal.common.DEFAULT_SCALE
 import com.hd.charts.internal.common.MAX_SCALE
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.model.ChartData
 import com.hd.charts.internal.common.model.toChartData
-import com.hd.charts.internal.common.style.ChartViewDefaults
-import com.hd.charts.internal.common.style.ChartViewStyleInternal
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
-import com.hd.charts.internal.style.PieChartDefaults
-import com.hd.charts.internal.style.PieChartStyleInternal
-import com.hd.charts.style.PieChartViewStyle
+import com.hd.charts.style.ChartViewDefaults
+import com.hd.charts.style.ChartViewStyle
+import com.hd.charts.style.PieChartDefaults
+import com.hd.charts.style.PieChartStyle
 
 internal data class PieSlice(
     val startDeg: Float,
@@ -49,8 +48,8 @@ internal data class PieSlice(
 @Composable
 internal fun PieChart(
     chartData: ChartData,
-    style: PieChartStyleInternal,
-    chartStyle: ChartViewStyleInternal,
+    style: PieChartStyle,
+    chartStyle: ChartViewStyle,
     onSliceTouched: (Int) -> Unit = {},
 ) {
     var show by remember { mutableStateOf(false) }
@@ -142,15 +141,15 @@ private fun PieChartPreview() {
     val pieColor = MaterialTheme.colorScheme.primary
     val borderColor = MaterialTheme.colorScheme.surface
 
-    val style = PieChartViewStyle.Builder().apply {
-        chartStyle {
-            this.pieColor = pieColor
-            this.borderColor = borderColor
-            this.donutPercentage = 0f
-        }
-    }.build()
+    val chartData =
+        listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f).toChartData()
 
-    val chartData = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f).toChartData()
+    val style: PieChartStyle = PieChartDefaults.style(
+        pieColor = pieColor,
+        pieColors = generateColorShades(pieColor, chartData.points.size),
+        borderColor = borderColor,
+        donutPercentage = 0f
+    )
 
     Row(
         modifier = Modifier
@@ -158,9 +157,9 @@ private fun PieChartPreview() {
             .wrapContentHeight()
     ) {
         PieChart(
-            chartData = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f).toChartData(),
-            style = PieChartDefaults.pieChartStyle(style = style, chartData = chartData),
-            chartStyle = ChartViewDefaults.chartViewStyle(ChartStyle.chartView.build()),
+            chartData = chartData,
+            style = style,
+            chartStyle = ChartViewDefaults.style()
         )
     }
 }
@@ -181,7 +180,7 @@ private fun PieChartDark() {
     }
 }
 
-@Preview
+@Preview(apiLevel = 33)
 @Composable
 private fun PieChartDynamic() {
     ChartsDefaultTheme(darkTheme = true, dynamicColor = true) {

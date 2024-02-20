@@ -4,13 +4,13 @@ import android.content.res.Resources
 import com.hd.charts.R
 import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.internal.common.model.MultiChartData
-import com.hd.charts.internal.style.LineChartStyleInternal
-import com.hd.charts.internal.style.PieChartStyleInternal
-import com.hd.charts.internal.style.StackedBarChartStyleInternal
+import com.hd.charts.style.LineChartStyle
+import com.hd.charts.style.PieChartStyle
+import com.hd.charts.style.StackedBarChartStyle
 
 internal fun validateLineData(
     data: MultiChartData,
-    style: LineChartStyleInternal,
+    style: LineChartStyle,
     resources: Resources
 ): List<String> {
     val firstPointsSize = data.items.first().item.points.size
@@ -31,7 +31,7 @@ internal fun validateLineData(
 
 internal fun validateBarData(
     data: MultiChartData,
-    style: StackedBarChartStyleInternal,
+    style: StackedBarChartStyle,
     resources: Resources
 ): List<String> {
     val firstPointsSize = data.items.first().item.points.size
@@ -50,7 +50,7 @@ internal fun validateBarData(
 
 internal fun validatePieData(
     dataSet: ChartDataSet,
-    style: PieChartStyleInternal,
+    style: PieChartStyle,
     resources: Resources
 ): List<String> {
     val validationErrors = mutableListOf<String>()

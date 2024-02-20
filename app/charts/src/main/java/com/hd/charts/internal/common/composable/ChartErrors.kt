@@ -12,11 +12,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hd.charts.internal.common.style.ChartViewStyleInternal
+import com.hd.charts.style.ChartViewStyle
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 
 @Composable
-internal fun ChartErrors(chartViewStyle: ChartViewStyleInternal, errors: List<String>) {
+internal fun ChartErrors(chartViewStyle: ChartViewStyle, errors: List<String>) {
     ChartsDefaultTheme {
         Column(
             modifier = chartViewStyle.modifierMain.padding(15.dp)

@@ -16,43 +16,46 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hd.charts.common.model.ChartDataSet
+import com.hd.charts.internal.barstackedchart.generateColorShades
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.composable.ChartErrors
 import com.hd.charts.internal.common.composable.ChartView
-import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.piechart.PieChart
-import com.hd.charts.internal.style.PieChartDefaults
 import com.hd.charts.internal.validatePieData
-import com.hd.charts.style.PieChartViewStyle
+import com.hd.charts.style.ChartViewDefaults
+import com.hd.charts.style.PieChartDefaults
+import com.hd.charts.style.PieChartStyle
 
 @Composable
 fun PieChartView(
     dataSet: ChartDataSet,
-    style: PieChartViewStyle,
+    style: PieChartStyle = PieChartDefaults.style(),
 ) {
-    val chartViewStyle = ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
-    val pieChartStyle = PieChartDefaults.pieChartStyle(style = style, chartData = dataSet.data.item)
+    style.pieColors = style.pieColors.ifEmpty {
+        generateColorShades(style.pieColor, dataSet.data.item.points.size)
+    }
+
     val resources = LocalContext.current.resources
     val errors by remember {
-        mutableStateOf(validatePieData(dataSet = dataSet, style = pieChartStyle, resources = resources))
+        mutableStateOf(validatePieData(dataSet = dataSet, style = style, resources = resources))
     }
 
     if (errors.isNotEmpty()) {
-        ChartErrors(chartViewStyle = chartViewStyle, errors = errors)
+        ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
     } else {
         var title by remember { mutableStateOf(dataSet.data.label) }
 
-        ChartView(chartViewsStyle = chartViewStyle) {
+        ChartView(chartViewsStyle = style.chartViewStyle) {
             Text(
-                modifier = chartViewStyle.modifierTopTitle,
+                modifier = style.chartViewStyle.modifierTopTitle,
                 text = title,
-                style = chartViewStyle.styleTitle
+                style = style.chartViewStyle.styleTitle
             )
             PieChart(
                 chartData = dataSet.data.item,
-                style = pieChartStyle,
-                chartStyle = chartViewStyle
+                style = style,
+                chartStyle = style.chartViewStyle
             ) {
                 title = when (it) {
                     NO_SELECTION -> dataSet.data.label
@@ -65,23 +68,21 @@ fun PieChartView(
 
 @Composable
 private fun PieChartViewPreview() {
-    val chartColor = MaterialTheme.colorScheme.primary
+    val pieColor = MaterialTheme.colorScheme.primary
     val backgroundColor = MaterialTheme.colorScheme.surface
     val borderColor = MaterialTheme.colorScheme.surface
 
-    val style = PieChartViewStyle.Builder().apply {
-        chartViewStyle {
-            this.backgroundColor = backgroundColor
-            this.cornerRadius = 20.dp
-            this.shadow = 15.dp
-            this.innerPadding = 15.dp
-        }
-        chartStyle {
-            this.pieColor = chartColor
-            this.borderColor = borderColor
-            this.donutPercentage = 0f
-        }
-    }.build()
+    val style: PieChartStyle = PieChartDefaults.style(
+        pieColor = pieColor,
+        borderColor = borderColor,
+        donutPercentage = 0f,
+        chartViewStyle = ChartViewDefaults.style(
+            backgroundColor = backgroundColor,
+            cornerRadius = 20.dp,
+            shadow = 15.dp,
+            innerPadding = 15.dp
+        )
+    )
 
     val data = ChartDataSet(
         items = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f),
@@ -116,7 +117,7 @@ private fun PieChartViewDark() {
     }
 }
 
-@Preview
+@Preview(apiLevel = 33)
 @Composable
 private fun PieChartViewDynamic() {
     ChartsDefaultTheme(darkTheme = false, dynamicColor = true) {

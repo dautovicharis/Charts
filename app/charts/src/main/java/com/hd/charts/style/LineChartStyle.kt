@@ -1,77 +1,76 @@
 package com.hd.charts.style
 
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.hd.charts.common.style.ChartViewStyle
 
 @Immutable
-class LineChartViewStyle private constructor(
-    val chartViewStyle: ChartViewStyle,
-    val lineChartStyle: LineChartStyle
-) {
-    class Builder {
-        private var chartViewStyleBuilder = ChartViewStyle.Builder()
-        private val lineChartStyleBuilder = LineChartStyle.Builder()
-
-        fun chartViewStyle(block: ChartViewStyle.Builder.() -> Unit) {
-            chartViewStyleBuilder.apply(block)
-        }
-
-        fun chartViewStyle(builder: ChartViewStyle.Builder) {
-            chartViewStyleBuilder = builder
-        }
-
-        fun chartStyle(block: LineChartStyle.Builder.() -> Unit) {
-            lineChartStyleBuilder.apply(block)
-        }
-
-        fun build(): LineChartViewStyle {
-            return LineChartViewStyle(
-                chartViewStyle = chartViewStyleBuilder.build(),
-                lineChartStyle = lineChartStyleBuilder.build()
-            )
-        }
-    }
-}
-
-@Immutable
-class LineChartStyle(
-    val pointColor: Color?,
-    val pointVisible: Boolean?,
-    val pointSize: Float?,
-    val lineColor: Color?,
+class LineChartStyle internal constructor(
+    internal val modifier: Modifier,
+    internal val chartViewStyle: ChartViewStyle,
+    internal val dragPointColorSameAsLine: Boolean,
+    internal val pointColorSameAsLine: Boolean,
+    val pointColor: Color,
+    val pointVisible: Boolean,
+    val pointSize: Float,
+    val lineColor: Color,
     val lineColors: List<Color>,
-    val bezier: Boolean?,
-    val dragPointSize: Float?,
-    val dragPointVisible: Boolean?,
-    val dragActivePointSize: Float?,
-    val dragPointColor: Color?
-) {
-    class Builder {
-        var pointColor: Color? = null
-        var pointVisible: Boolean? = null
-        var pointSize: Float? = null
-        var lineColor: Color? = null
-        var lineColors: List<Color> = emptyList()
-        var bezier: Boolean? = null
-        var dragPointSize: Float? = null
-        var dragPointVisible: Boolean? = null
-        var dragActivePointSize: Float? = null
-        var dragPointColor: Color? = null
+    val bezier: Boolean,
+    val dragPointSize: Float,
+    val dragPointVisible: Boolean,
+    val dragActivePointSize: Float,
+    val dragPointColor: Color
+)
 
-        fun build(): LineChartStyle {
-            return LineChartStyle(
-                pointColor = pointColor,
-                lineColor = lineColor,
-                bezier = bezier,
-                pointVisible = pointVisible,
-                lineColors = lineColors,
-                dragPointSize = dragPointSize,
-                dragPointVisible = dragPointVisible,
-                pointSize = pointSize,
-                dragActivePointSize = dragActivePointSize,
-                dragPointColor = dragPointColor
-            )
-        }
+object LineChartDefaults {
+    @Composable
+    private fun defaultPointColor() = MaterialTheme.colorScheme.tertiary
+    @Composable
+    private fun defaultDragPointColor() = MaterialTheme.colorScheme.tertiary
+
+    @Composable
+    fun style(
+        pointColor: Color = defaultPointColor(),
+        pointSize: Float = 10f,
+        pointVisible: Boolean = true,
+        lineColor: Color = MaterialTheme.colorScheme.primary,
+        lineColors: List<Color> = emptyList(),
+        bezier: Boolean = true,
+        dragPointSize: Float = 7f,
+        dragPointVisible: Boolean = true,
+        dragActivePointSize: Float = 12f,
+        dragPointColor: Color = defaultDragPointColor(),
+        chartViewStyle: ChartViewStyle = ChartViewDefaults.style()
+    ): LineChartStyle {
+        val padding = chartViewStyle.innerPadding
+        val modifier: Modifier = Modifier
+            .wrapContentSize()
+            .padding(padding)
+            .aspectRatio(1f)
+
+        val pointColorSameAsLine = pointColor == defaultPointColor()
+        val dragPointColorSameAsLine = pointColor == defaultDragPointColor()
+
+        return LineChartStyle(
+            modifier = modifier,
+            pointColor = pointColor,
+            lineColor = lineColor,
+            bezier = bezier,
+            pointVisible = pointVisible,
+            lineColors = lineColors,
+            dragPointSize = dragPointSize,
+            dragPointVisible = dragPointVisible,
+            pointSize = pointSize,
+            dragActivePointSize = dragActivePointSize,
+            pointColorSameAsLine = pointColorSameAsLine,
+            dragPointColor = dragPointColor,
+            dragPointColorSameAsLine = dragPointColorSameAsLine,
+            chartViewStyle = chartViewStyle
+        )
     }
 }

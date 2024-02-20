@@ -6,9 +6,9 @@ import com.google.common.truth.Truth
 import com.hd.charts.R
 import com.hd.charts.common.model.ChartDataSet
 import com.hd.charts.common.model.MultiChartDataSet
-import com.hd.charts.internal.style.LineChartStyleInternal
-import com.hd.charts.internal.style.PieChartStyleInternal
-import com.hd.charts.internal.style.StackedBarChartStyleInternal
+import com.hd.charts.style.LineChartStyle
+import com.hd.charts.style.PieChartStyle
+import com.hd.charts.style.StackedBarChartStyle
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.Test
@@ -82,10 +82,10 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val lineChartStyle = mockk<LineChartStyleInternal> {
+        val lineChartStyle = mockk<LineChartStyle> {
             every { lineColors } returns defaultColors
         }
-        val barChartStyle = mockk<StackedBarChartStyleInternal> {
+        val barChartStyle = mockk<StackedBarChartStyle> {
             every { barColors } returns defaultColors
         }
 
@@ -109,7 +109,7 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val lineChartStyle = mockk<LineChartStyleInternal> {
+        val lineChartStyle = mockk<LineChartStyle> {
             every { lineColors } returns defaultColors
         }
         val expectedCategoriesSize = dataSet.data.items.first().item.points.size
@@ -139,7 +139,7 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val lineChartStyle = mockk<LineChartStyleInternal> {
+        val lineChartStyle = mockk<LineChartStyle> {
             every { lineColors } returns colors
         }
 
@@ -174,7 +174,7 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val lineChartStyle = mockk<LineChartStyleInternal> {
+        val lineChartStyle = mockk<LineChartStyle> {
             every { lineColors } returns defaultColors
         }
         val expectedPoints = dataSet.data.items.first().item.points.size
@@ -213,7 +213,7 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val lineChartStyle = mockk<LineChartStyleInternal> {
+        val lineChartStyle = mockk<LineChartStyle> {
             every { lineColors } returns defaultColors
         }
 
@@ -242,7 +242,7 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val barChartStyle = mockk<StackedBarChartStyleInternal> {
+        val barChartStyle = mockk<StackedBarChartStyle> {
             every { barColors } returns defaultColors
         }
 
@@ -273,7 +273,7 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val barChartStyle = mockk<StackedBarChartStyleInternal> {
+        val barChartStyle = mockk<StackedBarChartStyle> {
             every { barColors } returns colors
         }
         val expectedColorSize = dataSet.data.items.size
@@ -307,7 +307,7 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val barChartStyle = mockk<StackedBarChartStyleInternal> {
+        val barChartStyle = mockk<StackedBarChartStyle> {
             every { barColors } returns defaultColors
         }
         val expectedPoints = dataSet.data.items.first().item.points.size
@@ -346,7 +346,7 @@ class DataValidationTest {
             title = defaultTitle
         )
 
-        val barChartStyle = mockk<StackedBarChartStyleInternal> {
+        val barChartStyle = mockk<StackedBarChartStyle> {
             every { barColors } returns defaultColors
         }
         val minRequiredPointsSize = 1
@@ -371,7 +371,7 @@ class DataValidationTest {
             title = defaultTitle,
         )
 
-        val pieChartStyle = mockk<PieChartStyleInternal> {
+        val pieChartStyle = mockk<PieChartStyle> {
             every { pieColors } returns defaultColors
         }
 
@@ -395,7 +395,7 @@ class DataValidationTest {
             title = defaultTitle,
         )
 
-        val pieChartStyle = mockk<PieChartStyleInternal> {
+        val pieChartStyle = mockk<PieChartStyle> {
             every { pieColors } returns defaultColors
         }
         val minRequiredPointsSize = 2
@@ -426,7 +426,7 @@ class DataValidationTest {
             title = defaultTitle,
         )
 
-        val pieChartStyle = mockk<PieChartStyleInternal> {
+        val pieChartStyle = mockk<PieChartStyle> {
             every { pieColors } returns colors
         }
         val expectedColorSize = chartDataSet.data.item.points.size

@@ -10,12 +10,14 @@ import com.hd.charts.common.model.MultiChartDataSet
 import com.hd.charts.internal.common.model.MultiChartData
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
 import com.hd.charts.internal.linechart.LineChartViewImpl
-import com.hd.charts.style.LineChartViewStyle
+import com.hd.charts.style.ChartViewDefaults
+import com.hd.charts.style.LineChartDefaults
+import com.hd.charts.style.LineChartStyle
 
 @Composable
 fun LineChartView(
     dataSet: ChartDataSet,
-    style: LineChartViewStyle
+    style: LineChartStyle = LineChartDefaults.style()
 ) {
     LineChartViewImpl(
         data = MultiChartData(
@@ -29,7 +31,7 @@ fun LineChartView(
 @Composable
 fun LineChartView(
     dataSet: MultiChartDataSet,
-    style: LineChartViewStyle
+    style: LineChartStyle = LineChartDefaults.style()
 ) {
     LineChartViewImpl(
         data = dataSet.data,
@@ -46,17 +48,13 @@ private fun LineChartViewPreview() {
         MaterialTheme.colorScheme.error
     )
 
-    val style = LineChartViewStyle.Builder().apply {
-        chartViewStyle {
-            this.width = 300.dp
-        }
-        chartStyle {
-            this.bezier = true
-            this.lineColors = colors
-            this.dragPointSize = 5f
-            this.pointVisible = true
-        }
-    }
+    val style = LineChartDefaults.style(
+        bezier = true,
+        lineColors = colors,
+        dragPointSize = 5f,
+        pointVisible = true,
+        chartViewStyle = ChartViewDefaults.style(width = 300.dp)
+    )
 
     val items = listOf(
         "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
@@ -74,7 +72,7 @@ private fun LineChartViewPreview() {
 
     LineChartView(
         dataSet = data,
-        style = style.build()
+        style = style
     )
 }
 
@@ -94,7 +92,7 @@ private fun LineChartViewDark() {
     }
 }
 
-@Preview
+@Preview (apiLevel = 33)
 @Composable
 private fun LineChartViewDynamic() {
     ChartsDefaultTheme(darkTheme = false, dynamicColor = true) {
@@ -111,17 +109,13 @@ private fun LineChartViewInvalidData() {
         MaterialTheme.colorScheme.tertiary
     )
 
-    val style = LineChartViewStyle.Builder().apply {
-        chartViewStyle {
-            this.width = 300.dp
-        }
-        chartStyle {
-            this.bezier = true
-            this.lineColors = colors
-            this.dragPointSize = 5f
-            this.pointVisible = true
-        }
-    }
+    val style = LineChartDefaults.style(
+        bezier = true,
+        lineColors = colors,
+        dragPointSize = 5f,
+        pointVisible = true,
+        chartViewStyle = ChartViewDefaults.style(width = 300.dp)
+    )
 
     val items = listOf(
         "Cherry St." to listOf(8261.68f, 8810.34f),
@@ -139,6 +133,6 @@ private fun LineChartViewInvalidData() {
 
     LineChartView(
         dataSet = data,
-        style = style.build()
+        style = style
     )
 }

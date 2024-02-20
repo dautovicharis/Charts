@@ -1,54 +1,42 @@
 package com.hd.charts.style
 
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import com.hd.charts.common.style.ChartViewStyle
+import androidx.compose.ui.unit.dp
 
 @Immutable
-class BarChartViewStyle private constructor(
-    val chartViewStyle: ChartViewStyle,
-    val barChartStyle: BarChartStyle
-) {
-    class Builder {
-        private var chartViewStyleBuilder = ChartViewStyle.Builder()
-        private val barChartStyleBuilder = BarChartStyle.Builder()
+class BarChartStyle internal constructor(
+    internal val modifier: Modifier,
+    internal val chartViewStyle: ChartViewStyle,
+    val barColor: Color,
+    val space: Dp
+)
 
-        fun chartViewStyle(block: ChartViewStyle.Builder.() -> Unit) {
-            chartViewStyleBuilder.apply(block)
-        }
+object BarChartDefaults {
+    @Composable
+    fun style(
+        barColor: Color = MaterialTheme.colorScheme.primary,
+        space: Dp = 10.dp,
+        chartViewStyle: ChartViewStyle = ChartViewDefaults.style(),
+    ): BarChartStyle {
+        val padding = chartViewStyle.innerPadding
+        val modifier: Modifier = Modifier
+            .padding(padding)
+            .aspectRatio(1f)
+            .fillMaxSize()
 
-        fun chartViewStyle(builder: ChartViewStyle.Builder) {
-            chartViewStyleBuilder = builder
-        }
-
-        fun chartStyle(block: BarChartStyle.Builder.() -> Unit) {
-            barChartStyleBuilder.apply(block)
-        }
-
-        fun build(): BarChartViewStyle {
-            return BarChartViewStyle(
-                chartViewStyle = chartViewStyleBuilder.build(),
-                barChartStyle = barChartStyleBuilder.build()
-            )
-        }
-    }
-}
-
-@Immutable
-class BarChartStyle(
-    val barColor: Color?,
-    val space: Dp?
-) {
-    class Builder {
-        var barColor: Color? = null
-        var space: Dp? = null
-
-        fun build(): BarChartStyle {
-            return BarChartStyle(
-                barColor = barColor,
-                space = space
-            )
-        }
+        return BarChartStyle(
+            modifier = modifier,
+            barColor = barColor,
+            space = space,
+            chartViewStyle = chartViewStyle
+        )
     }
 }

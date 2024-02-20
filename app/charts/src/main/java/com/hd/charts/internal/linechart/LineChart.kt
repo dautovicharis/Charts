@@ -3,6 +3,8 @@ package com.hd.charts.internal.linechart
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableFloatState
@@ -12,6 +14,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
@@ -32,14 +35,14 @@ import com.hd.charts.internal.common.model.MultiChartData
 import com.hd.charts.internal.common.model.minMax
 import com.hd.charts.internal.common.model.toChartData
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
-import com.hd.charts.internal.style.LineChartDefaults
-import com.hd.charts.internal.style.LineChartStyleInternal
-import com.hd.charts.style.LineChartViewStyle
+import com.hd.charts.style.ChartViewDefaults
+import com.hd.charts.style.LineChartDefaults
+import com.hd.charts.style.LineChartStyle
 
 @Composable
 internal fun LineChart(
     data: MultiChartData,
-    style: LineChartStyleInternal,
+    style: LineChartStyle,
     colors: List<Color>,
     onValueChanged: (Int) -> Unit = {}
 ) {
@@ -98,7 +101,7 @@ internal fun LineChart(
 
 private fun DrawScope.drawChartPath(
     values: List<Float>,
-    style: LineChartStyleInternal,
+    style: LineChartStyle,
     lineAnimationProgress: Float,
     dragging: MutableState<Boolean>,
     touchX: MutableFloatState,
@@ -188,7 +191,7 @@ private fun Path.drawBezier(
 private fun DrawScope.tryDrawPoints(
     touchX: Float,
     values: List<Float>,
-    style: LineChartStyleInternal,
+    style: LineChartStyle,
     dragging: Boolean,
     lineColor: Color,
     lineAnimationProgress: Float,
@@ -216,7 +219,7 @@ private fun DrawScope.tryDrawPoints(
 
 private fun DrawScope.tryDrawPathPoints(
     values: List<Float>,
-    style: LineChartStyleInternal,
+    style: LineChartStyle,
     lineColor: Color,
     dragging: Boolean,
     touchX: Float,
@@ -272,7 +275,7 @@ private fun DrawScope.tryDrawPathPoints(
 private fun DrawScope.tryDrawDragPoints(
     touchX: Float,
     values: List<Float>,
-    style: LineChartStyleInternal,
+    style: LineChartStyle,
     dragging: Boolean,
     lineColor: Color,
     onValueChanged: (Int) -> Unit
@@ -315,17 +318,11 @@ private fun DrawScope.tryDrawDragPoints(
 @Preview(showBackground = true)
 @Composable
 private fun LineChartPreview() {
-    val style = LineChartViewStyle.Builder().apply {
-        chartViewStyle {
-            width = 300.dp
-        }
-        chartStyle {
-            pointVisible = false
-            bezier = false
-        }
-    }.build()
-
-    val lineColor = MaterialTheme.colorScheme.primary
+    val style = LineChartDefaults.style(
+        pointVisible = false,
+        bezier = false,
+        chartViewStyle = ChartViewDefaults.style(width = 300.dp)
+    )
 
     val data = MultiChartData(
         items = listOf(
@@ -336,10 +333,12 @@ private fun LineChartPreview() {
         title = stringResource(id = R.string.line_chart)
     )
 
+    val lineColor = MaterialTheme.colorScheme.primary
+
     ChartsDefaultTheme {
         LineChart(
             data = data,
-            style = LineChartDefaults.lineChartStyle(style = style),
+            style = style,
             colors = listOf(lineColor)
         )
     }
@@ -348,16 +347,11 @@ private fun LineChartPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun LineChartBezierPreview() {
-
-    val style = LineChartViewStyle.Builder().apply {
-        chartViewStyle {
-            width = 300.dp
-        }
-        chartStyle {
-            bezier = true
-            pointVisible = true
-        }
-    }.build()
+    val style = LineChartDefaults.style(
+        pointVisible = true,
+        bezier = true,
+        chartViewStyle = ChartViewDefaults.style(width = 300.dp)
+    )
 
     val lineColor = MaterialTheme.colorScheme.primary
 
@@ -370,10 +364,12 @@ private fun LineChartBezierPreview() {
         title = stringResource(id = R.string.line_chart)
     )
 
-    ChartsDefaultTheme {
+    Column(
+        modifier = Modifier.wrapContentSize()
+    ) {
         LineChart(
             data = data,
-            style = LineChartDefaults.lineChartStyle(style = style),
+            style = style,
             colors = listOf(lineColor)
         )
     }

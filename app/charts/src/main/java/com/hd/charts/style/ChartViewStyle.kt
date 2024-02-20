@@ -1,4 +1,4 @@
-package com.hd.charts.internal.common.style
+package com.hd.charts.style
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,10 +19,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hd.charts.common.style.ChartViewStyle
 
 @Immutable
-internal class ChartViewStyleInternal internal constructor(
+class ChartViewStyle internal constructor(
     val modifierMain: Modifier,
     val styleTitle: TextStyle,
     val modifierTopTitle: Modifier,
@@ -32,21 +31,19 @@ internal class ChartViewStyleInternal internal constructor(
     val backgroundColor: Color
 )
 
-internal object ChartViewDefaults {
-    @Composable
-    fun chartViewStyle(
-        style: ChartViewStyle,
-    ): ChartViewStyleInternal {
+ object ChartViewDefaults {
 
-        val width = style.width ?: Dp.Infinity
-        val outerPadding = style.outerPadding ?: 20.dp
-        val innerPadding = style.innerPadding ?: 15.dp
-        val cornerRadius = style.cornerRadius ?: 20.dp
-        val shadow = style.shadow ?: 15.dp
-        val backgroundColor = style.backgroundColor ?: MaterialTheme.colorScheme.surface
+    @Composable
+    fun style(
+        width: Dp = Dp.Infinity,
+        outerPadding: Dp = 20.dp,
+        innerPadding: Dp = 15.dp,
+        cornerRadius: Dp = 20.dp,
+        shadow: Dp = 15.dp,
+        backgroundColor: Color = MaterialTheme.colorScheme.surface,
+    ): ChartViewStyle {
 
         val modifierTitle: Modifier = Modifier.padding(top = innerPadding, start = innerPadding)
-
         val modifierLegend: Modifier = Modifier
             .wrapContentSize()
             .padding(start = innerPadding, end = innerPadding, bottom = innerPadding)
@@ -72,7 +69,7 @@ internal object ChartViewDefaults {
             fontWeight = FontWeight.ExtraBold
         )
 
-        return ChartViewStyleInternal(
+        return ChartViewStyle(
             modifierMain = updatedModifierMain,
             styleTitle = titleStyle,
             modifierTopTitle = modifierTitle,
