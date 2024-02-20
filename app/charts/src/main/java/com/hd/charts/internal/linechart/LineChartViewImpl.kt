@@ -13,24 +13,21 @@ import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.composable.ChartErrors
 import com.hd.charts.internal.common.composable.ChartView
 import com.hd.charts.internal.common.model.MultiChartData
-import com.hd.charts.internal.common.style.ChartViewDefaults
-import com.hd.charts.internal.style.LineChartDefaults
 import com.hd.charts.internal.validateLineData
-import com.hd.charts.style.LineChartViewStyle
+import com.hd.charts.style.LineChartDefaults
+import com.hd.charts.style.LineChartStyle
 
 @Composable
 internal fun LineChartViewImpl(
     data: MultiChartData,
-    style: LineChartViewStyle
+    style: LineChartStyle = LineChartDefaults.style(),
 ) {
-    val chartViewStyle = ChartViewDefaults.chartViewStyle(style.chartViewStyle)
-    val lineChartStyle = LineChartDefaults.lineChartStyle(style)
     val resources = LocalContext.current.resources
     val errors by remember {
         mutableStateOf(
             validateLineData(
                 data = data,
-                style = lineChartStyle,
+                style = style,
                 resources = resources
             )
         )
@@ -43,24 +40,24 @@ internal fun LineChartViewImpl(
         val lineColors by remember {
             mutableStateOf(
                 if (data.hasSingleItem()) {
-                    listOf(lineChartStyle.lineColor)
-                } else if (lineChartStyle.lineColors.isEmpty()) {
-                    generateColorShades(lineChartStyle.lineColor, data.items.size)
+                    listOf(style.lineColor)
+                } else if (style.lineColors.isEmpty()) {
+                    generateColorShades(style.lineColor, data.items.size)
                 } else {
-                    lineChartStyle.lineColors
+                    style.lineColors
                 }
             )
         }
-        ChartView(chartViewsStyle = chartViewStyle) {
+        ChartView(chartViewsStyle = style.chartViewStyle) {
             Text(
-                modifier = chartViewStyle.modifierTopTitle,
+                modifier = style.chartViewStyle.modifierTopTitle,
                 text = title,
-                style = chartViewStyle.styleTitle
+                style = style.chartViewStyle.styleTitle
             )
 
             LineChart(
                 data = data,
-                style = lineChartStyle,
+                style = style,
                 colors = lineColors
             ) { selectedIndex ->
                 title = data.getLabel(selectedIndex)
@@ -75,7 +72,7 @@ internal fun LineChartViewImpl(
 
             if (data.hasCategories()) {
                 LegendItem(
-                    chartViewsStyle = chartViewStyle,
+                    chartViewsStyle = style.chartViewStyle,
                     legend = data.items.map { it.label },
                     colors = lineColors,
                     labels = labels
@@ -83,6 +80,6 @@ internal fun LineChartViewImpl(
             }
         }
     } else {
-        ChartErrors(chartViewStyle, errors)
+        ChartErrors(style.chartViewStyle, errors)
     }
 }

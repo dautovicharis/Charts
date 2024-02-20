@@ -18,26 +18,22 @@ import com.hd.charts.internal.barstackedchart.generateColorShades
 import com.hd.charts.internal.common.NO_SELECTION
 import com.hd.charts.internal.common.composable.ChartErrors
 import com.hd.charts.internal.common.composable.ChartView
-import com.hd.charts.internal.common.style.ChartViewDefaults
 import com.hd.charts.internal.common.theme.ChartsDefaultTheme
-import com.hd.charts.internal.style.StackedBarChartDefaults
 import com.hd.charts.internal.validateBarData
-import com.hd.charts.style.StackedBarChartViewStyle
+import com.hd.charts.style.StackedBarChartDefaults
+import com.hd.charts.style.StackedBarChartStyle
 
 @Composable
 fun StackedBarChartView(
     dataSet: MultiChartDataSet,
-    style: StackedBarChartViewStyle
+    style: StackedBarChartStyle = StackedBarChartDefaults.style()
 ) {
-    val chartViewStyle = ChartViewDefaults.chartViewStyle(style = style.chartViewStyle)
-    val barChartStyle = StackedBarChartDefaults.barChartStyle(style = style)
     val resources = LocalContext.current.resources
-
     val errors by remember {
         mutableStateOf(
             validateBarData(
                 data = dataSet.data,
-                style = barChartStyle,
+                style = style,
                 resources = resources
             )
         )
@@ -49,22 +45,22 @@ fun StackedBarChartView(
 
         val colors by remember {
             mutableStateOf(
-                barChartStyle.barColors.ifEmpty {
-                    generateColorShades(barChartStyle.barColor, dataSet.data.getFirstPointsSize())
+                style.barColors.ifEmpty {
+                    generateColorShades(style.barColor, dataSet.data.getFirstPointsSize())
                 }
             )
         }
 
-        ChartView(chartViewsStyle = chartViewStyle) {
+        ChartView(chartViewsStyle = style.chartViewStyle) {
             Text(
-                modifier = chartViewStyle.modifierTopTitle,
+                modifier = style.chartViewStyle.modifierTopTitle,
                 text = title,
-                style = chartViewStyle.styleTitle
+                style = style.chartViewStyle.styleTitle
             )
 
             StackedBarChart(
                 data = dataSet.data,
-                style = barChartStyle,
+                style = style,
                 colors = colors
             ) { selectedIndex ->
                 title = when (selectedIndex) {
@@ -84,7 +80,7 @@ fun StackedBarChartView(
 
             if (dataSet.data.hasCategories()) {
                 LegendItem(
-                    chartViewsStyle = chartViewStyle,
+                    chartViewsStyle = style.chartViewStyle,
                     colors = colors,
                     legend = dataSet.data.categories,
                     labels = labels
@@ -92,21 +88,12 @@ fun StackedBarChartView(
             }
         }
     } else {
-        ChartErrors(chartViewStyle = chartViewStyle, errors = errors)
+        ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
     }
 }
 
 @Composable
 private fun StackedBarChartViewPreview() {
-    val barColor = MaterialTheme.colorScheme.primary
-
-    val style = StackedBarChartViewStyle.Builder().apply {
-        chartStyle {
-            this.barColor = barColor
-            this.space = 8.dp
-        }
-    }.build()
-
     val items = listOf(
         "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
         "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
@@ -122,7 +109,7 @@ private fun StackedBarChartViewPreview() {
 
     StackedBarChartView(
         dataSet = data,
-        style = style
+        style = StackedBarChartDefaults.style()
     )
 }
 
@@ -142,7 +129,7 @@ private fun StackedBarChartViewDark() {
     }
 }
 
-@Preview
+@Preview(apiLevel = 33)
 @Composable
 private fun StackedBarChartViewDynamic() {
     ChartsDefaultTheme(darkTheme = false, dynamicColor = true) {
@@ -154,13 +141,10 @@ private fun StackedBarChartViewDynamic() {
 @Composable
 private fun StackedBarChartViewInvalidData() {
     val barColor = MaterialTheme.colorScheme.primary
-
-    val style = StackedBarChartViewStyle.Builder().apply {
-        chartStyle {
-            this.barColors = listOf(barColor)
-            this.space = 8.dp
-        }
-    }.build()
+    val style = StackedBarChartDefaults.style(
+        barColors = listOf(barColor),
+        space = 8.dp
+    )
 
     val items = listOf(
         "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),

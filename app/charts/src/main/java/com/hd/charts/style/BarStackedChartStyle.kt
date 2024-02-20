@@ -1,57 +1,45 @@
 package com.hd.charts.style
 
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import com.hd.charts.common.style.ChartViewStyle
+import androidx.compose.ui.unit.dp
 
 @Immutable
-class StackedBarChartViewStyle private constructor(
-    val chartViewStyle: ChartViewStyle,
-    val stackedBarChartStyle: StackedBarChartStyle
-) {
-    class Builder {
-        private var chartViewStyleBuilder = ChartViewStyle.Builder()
-        private val stackedBarChartStyleBuilder = StackedBarChartStyle.Builder()
+class StackedBarChartStyle internal constructor(
+    internal val modifier: Modifier,
+    internal val chartViewStyle: ChartViewStyle,
+    val barColor: Color,
+    val space: Dp,
+    val barColors: List<Color>,
+)
 
-        fun chartViewStyle(block: ChartViewStyle.Builder.() -> Unit) {
-            chartViewStyleBuilder.apply(block)
-        }
+object StackedBarChartDefaults {
+    @Composable
+    fun style(
+        barColor: Color = MaterialTheme.colorScheme.primary,
+        space: Dp = 10.dp,
+        barColors: List<Color> = emptyList(),
+        chartViewStyle: ChartViewStyle = ChartViewDefaults.style()
+    ): StackedBarChartStyle {
+        val padding = chartViewStyle.innerPadding
+        val modifier: Modifier = Modifier
+            .padding(padding)
+            .aspectRatio(1f)
+            .fillMaxSize()
 
-        fun chartViewStyle(builder: ChartViewStyle.Builder) {
-            chartViewStyleBuilder = builder
-        }
-
-        fun chartStyle(block: StackedBarChartStyle.Builder.() -> Unit) {
-            stackedBarChartStyleBuilder.apply(block)
-        }
-
-        fun build(): StackedBarChartViewStyle {
-            return StackedBarChartViewStyle(
-                chartViewStyle = chartViewStyleBuilder.build(),
-                stackedBarChartStyle = stackedBarChartStyleBuilder.build()
-            )
-        }
-    }
-}
-
-@Immutable
-class StackedBarChartStyle(
-    val barColor: Color?,
-    val space: Dp?,
-    val barColors: List<Color>
-) {
-    class Builder {
-        var barColor: Color? = null
-        var space: Dp? = null
-        var barColors: List<Color> = emptyList()
-
-        fun build(): StackedBarChartStyle {
-            return StackedBarChartStyle(
-                barColor = barColor,
-                space = space,
-                barColors = barColors
-            )
-        }
+        return StackedBarChartStyle(
+            modifier = modifier,
+            barColor = barColor,
+            space = space,
+            barColors = barColors,
+            chartViewStyle = chartViewStyle
+        )
     }
 }

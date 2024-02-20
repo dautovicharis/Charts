@@ -10,20 +10,19 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.hd.charts.internal.common.style.ChartViewStyleInternal
+import com.hd.charts.style.ChartViewStyle
 
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun LegendItem(
-    chartViewsStyle: ChartViewStyleInternal,
+    chartViewsStyle: ChartViewStyle,
     legend: List<String>,
     colors: List<Color>,
     labels: List<String> = emptyList()

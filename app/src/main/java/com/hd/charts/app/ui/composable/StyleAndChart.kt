@@ -34,7 +34,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.hd.charts.ChartStyle
 import com.hd.charts.PieChartView
 import com.hd.charts.R
 import com.hd.charts.app.demo.pie.PieChartStyleItems
@@ -47,6 +46,7 @@ fun StyleAndChart(
     name: String = "chartStyle {default}",
     tableItems: List<TableItem>,
     columns: List<String> = listOf("Parameter", "Value"),
+    buttonsVisibility: Boolean = true,
     chartItem: @Composable () -> Unit
 ) {
     val extraBold = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold)
@@ -56,7 +56,7 @@ fun StyleAndChart(
     val shadow = 15.dp
     val backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(0.1.dp)
 
-    val (tableItemsVisible, setTableItemsVisible) = remember { mutableStateOf(false) }
+    val (tableItemsVisible, setTableItemsVisible) = remember { mutableStateOf(!buttonsVisibility) }
     val chartItemKey = remember { mutableIntStateOf(0) }
 
     Column(
@@ -91,12 +91,15 @@ fun StyleAndChart(
         }
 
         ChartItem(chartItem, chartItemKey)
-        Buttons(
-            tableItemsVisible = tableItemsVisible,
-            setTableItemsVisible = setTableItemsVisible,
-            chartItemKey = chartItemKey,
-            outerPadding = outerPadding
-        )
+
+        if (buttonsVisibility) {
+            Buttons(
+                tableItemsVisible = tableItemsVisible,
+                setTableItemsVisible = setTableItemsVisible,
+                chartItemKey = chartItemKey,
+                outerPadding = outerPadding
+            )
+        }
     }
 }
 
@@ -141,7 +144,12 @@ private fun TableItems(
             ) {
                 TableCell(text = it.name, weight = columnWeight)
                 Spacer(modifier = Modifier.width(1.dp))
-                TableCell(text = it.value, weight = columnWeight, color = it.color)
+                TableCell(
+                    text = it.value,
+                    weight = columnWeight,
+                    color = it.color,
+                    isChanged = it.isChanged
+                )
             }
         }
     }
@@ -213,8 +221,7 @@ fun StyleAndChartPreview() {
 
     StyleAndChart(name = "chartViewStyle {default}", tableItems = items) {
         PieChartView(
-            dataSet = dataSet,
-            style = ChartStyle.pieChart.build()
+            dataSet = dataSet
         )
     }
 }

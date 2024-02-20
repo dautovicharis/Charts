@@ -1,61 +1,54 @@
 package com.hd.charts.style
 
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.hd.charts.common.style.ChartViewStyle
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.hd.charts.internal.common.DONUT_MAX_PERCENTAGE
+import com.hd.charts.internal.common.DONUT_MIN_PERCENTAGE
 
 @Immutable
-class PieChartViewStyle private constructor(
-    val chartViewStyle: ChartViewStyle,
-    val pieChartStyle: PieChartStyle
-) {
-    class Builder {
-        private var chartViewStyleBuilder = ChartViewStyle.Builder()
-        private val pieChartStyleBuilder = PieChartStyle.Builder()
+class PieChartStyle internal constructor(
+    internal val modifier: Modifier,
+    internal val chartViewStyle: ChartViewStyle,
+    val donutPercentage: Float,
+    var pieColors: List<Color>,
+    val pieColor: Color,
+    val borderColor: Color,
+    val borderWidth: Float
+)
 
-        fun chartViewStyle(block: ChartViewStyle.Builder.() -> Unit) {
-            chartViewStyleBuilder.apply(block)
-        }
-
-        fun chartViewStyle(builder: ChartViewStyle.Builder) {
-            chartViewStyleBuilder = builder
-        }
-
-        fun chartStyle(block: PieChartStyle.Builder.() -> Unit) {
-            pieChartStyleBuilder.apply(block)
-        }
-
-        fun build(): PieChartViewStyle {
-            return PieChartViewStyle(
-                chartViewStyle = chartViewStyleBuilder.build(),
-                pieChartStyle = pieChartStyleBuilder.build()
-            )
-        }
-    }
-}
-
-@Immutable
-class PieChartStyle(
-    val pieColor: Color?,
-    val pieColors: List<Color>,
-    val borderColor: Color?,
-    val donutPercentage: Float?,
-    val borderWidth: Float?
-) {
-    class Builder {
-        var pieColor: Color? = null
-        var pieColors: List<Color> = emptyList()
-        var borderColor: Color? = null
-        var donutPercentage: Float? = null
-        var borderWidth: Float? = null
-        fun build(): PieChartStyle {
-            return PieChartStyle(
-                pieColor = pieColor,
-                pieColors = pieColors,
-                borderColor = borderColor,
-                borderWidth = borderWidth,
-                donutPercentage = donutPercentage,
-            )
-        }
+ object PieChartDefaults {
+    @Composable
+    fun style(
+        pieColor: Color = MaterialTheme.colorScheme.primary,
+        pieColors: List<Color> = emptyList(),
+        borderColor: Color = MaterialTheme.colorScheme.surface,
+        innerPadding: Dp = 15.dp,
+        donutPercentage: Float = 0f,
+        borderWidth: Float = 5f,
+        chartViewStyle: ChartViewStyle = ChartViewDefaults.style()
+    ): PieChartStyle {
+        return PieChartStyle(
+            modifier = Modifier
+                .wrapContentSize()
+                .padding(innerPadding)
+                .aspectRatio(1f),
+            donutPercentage = donutPercentage.coerceIn(
+                DONUT_MIN_PERCENTAGE,
+                DONUT_MAX_PERCENTAGE
+            ),
+            pieColors = pieColors,
+            pieColor = pieColor,
+            borderColor = borderColor,
+            borderWidth = borderWidth,
+            chartViewStyle = chartViewStyle
+        )
     }
 }
