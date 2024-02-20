@@ -3,14 +3,40 @@ package com.hd.charts.app.demo.stackedbar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.hd.charts.R
 import com.hd.charts.StackedBarChartView
+import com.hd.charts.app.demo.ChartViewDemoStyle
 import com.hd.charts.app.ui.composable.AddChartDemo
 import com.hd.charts.app.ui.composable.ChartStyleType
 import com.hd.charts.app.ui.composable.TableView
+import com.hd.charts.app.ui.theme.ColorPalette
 import com.hd.charts.common.model.MultiChartDataSet
-import com.hd.charts.style.StackedBarChartViewStyle
+import com.hd.charts.style.StackedBarChartDefaults
+import com.hd.charts.style.StackedBarChartStyle
 
+object StackedBarDemoStyle {
+
+    @Composable
+    fun default(): StackedBarChartStyle {
+        return StackedBarChartDefaults.style(
+            chartViewStyle = ChartViewDemoStyle.custom(width = 240.dp)
+        )
+    }
+
+    @Composable
+    fun custom(): StackedBarChartStyle {
+        val colors = listOf(
+            ColorPalette.DataColor.navyBlue,
+            ColorPalette.DataColor.darkBlue,
+            ColorPalette.DataColor.deepPurple
+        )
+        return StackedBarChartDefaults.style(
+            barColors = colors,
+            chartViewStyle = ChartViewDemoStyle.custom(width = 240.dp)
+        )
+    }
+}
 
 @Composable
 fun AddStackedBarChartDemo() {
@@ -32,18 +58,18 @@ fun AddStackedBarChartDemo() {
 
 @Composable
 private fun AddDefaultStackedBarChart() {
-    val style = StackedBarDemoStyle.default().build()
+    val style = StackedBarDemoStyle.default()
     AddStackedBarChart(style)
 }
 
 @Composable
 private fun AddCustomStackedBarChart() {
-    val style = StackedBarDemoStyle.custom().build()
+    val style = StackedBarDemoStyle.custom()
     AddStackedBarChart(style)
 }
 
 @Composable
-private fun AddStackedBarChart(style: StackedBarChartViewStyle) {
+private fun AddStackedBarChart(style: StackedBarChartStyle) {
     val categories = listOf(
         "Jan", "Feb", "Mar"
     )

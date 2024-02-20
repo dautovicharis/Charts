@@ -121,7 +121,6 @@ fun AddChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
     }
 }
 
-
 @Preview
 @Composable
 fun AddPieChartDemoPreview() {
@@ -136,8 +135,7 @@ fun AddPieChartDemoPreview() {
             {
                 AddChartDemo(type = ChartStyleType.PieChartDefault) {
                     PieChartView(
-                        dataSet = data,
-                        style = PieChartDemoStyle.default().build()
+                        dataSet = data
                     )
                 }
             },
@@ -145,7 +143,7 @@ fun AddPieChartDemoPreview() {
                 AddChartDemo(type = ChartStyleType.PieChartCustom) {
                     PieChartView(
                         dataSet = data,
-                        style = PieChartDemoStyle.custom().build()
+                        style = PieChartDemoStyle.custom()
                     )
                 }
             }
