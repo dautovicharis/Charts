@@ -338,11 +338,11 @@ private fun AddCustomStackedBarChart() {
 ```
 
 # Examples
-- [Pie Chart](https://github.com/dautovicharis/Charts/blob/update/readme/app/src/main/java/com/hd/charts/app/demo/pie/PieChartDemo.kt)
-- [Line Chart](https://github.com/dautovicharis/Charts/blob/update/readme/app/src/main/java/com/hd/charts/app/demo/line/LineDemo.kt)
-- [Multiline Chart](https://github.com/dautovicharis/Charts/blob/update/readme/app/src/main/java/com/hd/charts/app/demo/multiline/MultiLineDemo.kt)
-- [Bar Chart](https://github.com/dautovicharis/Charts/blob/update/readme/app/src/main/java/com/hd/charts/app/demo/bar/BarDemo.kt)
-- [Stacked Bar Chart](https://github.com/dautovicharis/Charts/blob/update/readme/app/src/main/java/com/hd/charts/app/demo/stackedbar/StackedBarDemo.kt)
+- [Pie Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/pie/PieChartDemo.kt)
+- [Line Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/line/LineDemo.kt)
+- [Multiline Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/multiline/MultiLineDemo.kt)
+- [Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/bar/BarDemo.kt)
+- [Stacked Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/stackedbar/StackedBarDemo.kt)
 
 # Demo app
 [![Demo app](https://github.com/dautovicharis/Charts/assets/7049715/b48464c9-5886-4f89-b740-e4d24b6be3c7)](https://play.google.com/store/apps/details?id=com.hd.charts.app)
