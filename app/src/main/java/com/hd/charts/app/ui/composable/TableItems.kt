@@ -11,8 +11,8 @@ import kotlin.reflect.full.memberProperties
 fun <T : Any> getTableItems(
     currentStyle: T,
     defaultStyle: T
-): List<TableItem> {
-    return currentStyle::class.memberProperties
+): TableItems {
+    val items =  currentStyle::class.memberProperties
         .filterIsInstance<KProperty1<T, Any>>()
         .filterNot { property ->
             property.visibility == KVisibility.INTERNAL ||
@@ -49,6 +49,13 @@ fun <T : Any> getTableItems(
                 isChanged = currentValue != defaultValue
             )
         }
+
+    val postfix = if (items.any { it.isChanged }) "(custom)" else "(default)"
+    val name = "${currentStyle.javaClass.simpleName} $postfix"
+    return TableItems(
+        name = name,
+        items = items
+    )
 }
 
 @Composable

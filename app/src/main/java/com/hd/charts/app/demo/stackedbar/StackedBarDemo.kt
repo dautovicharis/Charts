@@ -70,11 +70,6 @@ private fun AddCustomStackedBarChart() {
 
 @Composable
 private fun AddStackedBarChart(style: StackedBarChartStyle) {
-    val categories = listOf(
-        "Jan", "Feb", "Mar"
-    )
-    val labelPrefix = "$"
-
     val items = listOf(
         "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
         "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
@@ -82,15 +77,15 @@ private fun AddStackedBarChart(style: StackedBarChartStyle) {
         "Apple Rd." to listOf(5444.87f, 233.58f, 67544.81f)
     )
 
-    val data = MultiChartDataSet(
+    val dataSet = MultiChartDataSet(
         items = items,
-        prefix = labelPrefix,
-        categories = categories,
+        prefix = "$",
+        categories = listOf("Jan", "Feb", "Mar"),
         title = stringResource(id = R.string.bar_stacked_chart)
     )
 
     StackedBarChartView(
-        dataSet = data,
+        dataSet = dataSet,
         style = style
     )
 }

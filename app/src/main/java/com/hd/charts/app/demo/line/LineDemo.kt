@@ -58,7 +58,7 @@ fun AddLineChartDemo() {
 
 @Composable
 private fun AddDefaultLineChart() {
-    val chartData = ChartDataSet(
+    val dataSet = ChartDataSet(
         items = listOf(
             8f, 23f, 54f, 32f, 12f, 37f, 7f, 23f, 43f
         ),
@@ -66,14 +66,14 @@ private fun AddDefaultLineChart() {
     )
 
     LineChartView(
-        dataSet = chartData,
+        dataSet = dataSet,
         style = LineDemoStyle.default()
     )
 }
 
 @Composable
 private fun AddCustomLineChart() {
-    val chartData = ChartDataSet(
+    val dataSet = ChartDataSet(
         items = listOf(
             10f, 100f, 20f, 50f, 150f, 70f, 10f, 20f, 40f
         ),
@@ -81,7 +81,7 @@ private fun AddCustomLineChart() {
     )
 
     LineChartView(
-        dataSet = chartData,
+        dataSet = dataSet,
         style = LineDemoStyle.custom()
     )
 }

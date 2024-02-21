@@ -78,7 +78,7 @@ private fun AddMultiLineChart(
         "Apple Rd." to listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f)
     )
 
-    val data = MultiChartDataSet(
+    val dataSet = MultiChartDataSet(
         items = items,
         prefix = "$",
         categories = listOf("Jan", "Feb", "Mar", "Apr"),
@@ -86,7 +86,7 @@ private fun AddMultiLineChart(
     )
 
     LineChartView(
-        dataSet = data, style = style
+        dataSet = dataSet, style = style
     )
 }
 

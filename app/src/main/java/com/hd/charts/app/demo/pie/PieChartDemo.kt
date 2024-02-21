@@ -66,26 +66,26 @@ fun AddPieChartDemo() {
 
 @Composable
 private fun AddDefaultPieChart() {
-    val data = ChartDataSet(
+    val dataSet = ChartDataSet(
         items = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f),
         title = stringResource(id = R.string.pie_chart),
         postfix = " °C"
     )
 
-    PieChartView(dataSet = data,
+    PieChartView(dataSet = dataSet,
         style = PieChartDemoStyle.default())
 }
 
 @Composable
 private fun AddCustomPieChart() {
-    val data = ChartDataSet(
+    val dataSet = ChartDataSet(
         items = listOf(60.0f, 25f, 15f, 14f, 30f, 30f, 20f, 30f),
         title = stringResource(id = R.string.pie_chart),
         postfix = " °C"
     )
 
     PieChartView(
-        dataSet = data,
+        dataSet = dataSet,
         style = PieChartDemoStyle.custom()
     )
 }
