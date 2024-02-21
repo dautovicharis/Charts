@@ -30,6 +30,11 @@ import com.hd.charts.R
 import com.hd.charts.app.demo.pie.PieChartStyleItems
 import com.hd.charts.common.model.ChartDataSet
 
+class TableItems(
+    val name: String,
+    val items: List<TableItem>
+)
+
 class TableItem(
     val name: String,
     val value: String,
@@ -95,12 +100,12 @@ fun TwoColumnTablePreview() {
     TableView(
         listOf(
             {
-                StyleAndChart(name = "Default", tableItems = PieChartStyleItems.default()) {
+                StyleAndChart(tableItems = PieChartStyleItems.default()) {
                     AddPieChart()
                 }
             },
             {
-                StyleAndChart(name = "Custom", tableItems = PieChartStyleItems.custom()) {
+                StyleAndChart(tableItems = PieChartStyleItems.custom()) {
                     AddPieChart()
                 }
             }

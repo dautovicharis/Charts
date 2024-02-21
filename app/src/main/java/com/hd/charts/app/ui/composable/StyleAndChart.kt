@@ -43,8 +43,7 @@ import com.hd.charts.app.R as AppR
 
 @Composable
 fun StyleAndChart(
-    name: String = "chartStyle {default}",
-    tableItems: List<TableItem>,
+    tableItems: TableItems,
     columns: List<String> = listOf("Parameter", "Value"),
     buttonsVisibility: Boolean = true,
     chartItem: @Composable () -> Unit
@@ -72,7 +71,7 @@ fun StyleAndChart(
     ) {
         Text(
             modifier = Modifier.padding(14.dp),
-            text = name,
+            text = tableItems.name,
             style = extraBold,
             color = MaterialTheme.colorScheme.onSurface
         )
@@ -84,7 +83,7 @@ fun StyleAndChart(
         ) {
             TableItems(
                 columns = columns,
-                tableItems = tableItems,
+                tableItems = tableItems.items,
                 columnWeight = columnWeight,
                 outerPadding = outerPadding
             )
@@ -219,7 +218,7 @@ fun StyleAndChartPreview() {
         title = stringResource(id = R.string.pie_chart)
     )
 
-    StyleAndChart(name = "chartViewStyle {default}", tableItems = items) {
+    StyleAndChart(tableItems = items) {
         PieChartView(
             dataSet = dataSet
         )
