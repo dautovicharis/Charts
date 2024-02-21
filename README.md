@@ -45,7 +45,7 @@ Add it in your *settings.gradle.kts* at the end of repositories:
 
 # Pie chart
 <details close>
-<summary>Pie chart style options</summary>
+<summary>🎨 Pie chart style options</summary>
 <p align="center">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/db02285b-7664-4a33-ab84-8691f7cd9fcf" width="300">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/0b586941-088f-452b-a64b-113056b17929" width="300">
@@ -105,7 +105,7 @@ private fun AddCustomPieChart() {
 
 # Line chart
 <details close>
-<summary>Line chart style options</summary>
+<summary>🎨 Line chart style options</summary>
 <p align="center">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/381f8be6-4949-4f28-8e9c-3ce6bd6b0141" width="300">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/2640b5d2-4a15-45d3-bbe3-1c5a1cd9a927" width="300">
@@ -157,7 +157,7 @@ private fun AddCustomLineChart() {
 
 # Multiline chart
 <details close>
-<summary>Multiline chart style options</summary>
+<summary>🎨 Multiline chart style options</summary>
 <p align="center">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/3d443179-af98-4d6a-b99c-13b90bcb04d7)" width="300">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/1884a5f7-0820-4737-a498-4d95747caf24" width="300">
@@ -227,7 +227,7 @@ private fun AddCustomMultiLineChart() {
 
 ### Bar
 <details close>
-<summary>Bar chart style options</summary>
+<summary>🎨 Bar chart style options</summary>
 <p align="center">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/4495302c-02f9-4617-a492-cdd9a178a771" width="300">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/a61e7942-6b61-4a44-bd36-eddf4ef6abbe" width="300">
@@ -274,7 +274,7 @@ private fun AddCustomBarChart() {
 
 ### Stacked Bar
 <details close>
-<summary>Stacked bar chart style options</summary>
+<summary>🎨 Stacked bar chart style options</summary>
 <p align="center">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/ae9fa2d3-28e3-491d-be7d-b04b6454fd2a" width="300">
 <img src="https://github.com/dautovicharis/Charts/assets/7049715/ec19630d-23f5-4f90-8e43-237c0dd9af4c" width="300">
