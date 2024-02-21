@@ -83,7 +83,7 @@ publishing {
                 from(components["release"])
                 groupId = "com.github.dautovicharis"
                 artifactId = "charts"
-                version = "1.0.0"
+                version = "1.2.0"
             }
         }
     }

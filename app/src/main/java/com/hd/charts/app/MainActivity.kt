@@ -132,7 +132,7 @@ class MainActivity : ComponentActivity() {
                     .align(Alignment.CenterHorizontally),
                 text = "Version: ${BuildConfig.VERSION_NAME}\n"
                         + "Build: ${BuildConfig.VERSION_CODE}\n"
-                        + "Charts: develop",
+                        + "Charts: 1.2.0",
                 color = MaterialTheme.colorScheme.onBackground
             )
         }
