@@ -347,12 +347,12 @@ private fun AddCustomStackedBarChart() {
 # Demo app
 [![Demo app](https://github.com/dautovicharis/Charts/assets/7049715/b48464c9-5886-4f89-b740-e4d24b6be3c7)](https://play.google.com/store/apps/details?id=com.hd.charts.app)
 
-# Contributions
-🌟 Thank you for your time! Before you start working on code, please create a [new issue](https://github.com/dautovicharis/Charts/issues).
-
 # What's next
 - KMP
 - Charts scroll
 - Improve documentation
+
+# Contributions
+🌟 Thank you for your time! Before you start working on code, please create a [new issue](https://github.com/dautovicharis/Charts/issues).
 
 [Contributing guidelines](CONTRIBUTING.md)
