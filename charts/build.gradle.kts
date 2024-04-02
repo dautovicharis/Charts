@@ -88,3 +88,15 @@ publishing {
         }
     }
 }
+
+tasks.register("listComponents") {
+    doLast {
+        println("Available components:")
+        if (project.components.isEmpty()) {
+            println("No components available.")
+        }
+        project.components.all {
+            println("Component name: $name")
+        }
+    }
+}
