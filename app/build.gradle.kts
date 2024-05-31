@@ -75,5 +75,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // Modules
-    implementation(project(":app:charts"))
+    implementation(project(":charts"))
 }
