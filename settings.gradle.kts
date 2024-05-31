@@ -1,4 +1,4 @@
-rootProject.name = "Charts"
+rootProject.name = "ChartsProject"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

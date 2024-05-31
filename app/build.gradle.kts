@@ -20,7 +20,6 @@ kotlin {
         }
     }
     js(IR) {
-        moduleName = "Charts"
         browser {
             commonWebpackConfig {
                 outputFileName = "Charts.js"

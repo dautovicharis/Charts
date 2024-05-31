@@ -32,10 +32,10 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import charts.app.generated.resources.Res
-import charts.app.generated.resources.hide_style
-import charts.app.generated.resources.repeat
-import charts.app.generated.resources.show_style
+import chartsproject.app.generated.resources.Res
+import chartsproject.app.generated.resources.hide_style
+import chartsproject.app.generated.resources.repeat
+import chartsproject.app.generated.resources.show_style
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import kotlin.random.Random
