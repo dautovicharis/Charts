@@ -1,16 +1,16 @@
 package com.hd.charts.app
 
-import charts.app.generated.resources.Res
-import charts.app.generated.resources.bar_chart
-import charts.app.generated.resources.bar_stacked_chart
-import charts.app.generated.resources.ic_bar_chart
-import charts.app.generated.resources.ic_line_chart
-import charts.app.generated.resources.ic_multi_line_chart
-import charts.app.generated.resources.ic_pie_chart
-import charts.app.generated.resources.ic_stacked_bar_chart
-import charts.app.generated.resources.line_chart
-import charts.app.generated.resources.multi_line_chart
-import charts.app.generated.resources.pie_chart
+import chartsproject.app.generated.resources.Res
+import chartsproject.app.generated.resources.bar_chart
+import chartsproject.app.generated.resources.bar_stacked_chart
+import chartsproject.app.generated.resources.ic_bar_chart
+import chartsproject.app.generated.resources.ic_line_chart
+import chartsproject.app.generated.resources.ic_multi_line_chart
+import chartsproject.app.generated.resources.ic_pie_chart
+import chartsproject.app.generated.resources.ic_stacked_bar_chart
+import chartsproject.app.generated.resources.line_chart
+import chartsproject.app.generated.resources.multi_line_chart
+import chartsproject.app.generated.resources.pie_chart
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.StringResource
