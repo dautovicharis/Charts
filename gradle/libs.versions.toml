@@ -30,6 +30,8 @@ kotlinCompilerExtensionVersion = "1.5.9"
 
 # Documentation: https://kotlin.github.io/dokka/
 dokka = "1.9.20"
+# https://github.com/vanniktech/gradle-maven-publish-plugin
+mavenPublish = "0.28.0"
 
 [libraries]
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
@@ -45,3 +47,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-multiplatform" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }

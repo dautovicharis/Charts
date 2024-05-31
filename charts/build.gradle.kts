@@ -3,12 +3,17 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    `maven-publish`
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.dokka)
+    `maven-publish`
+    signing
+    alias(libs.plugins.mavenPublish)
 }
 
 kotlin {
+    androidTarget {
+        publishLibraryVariants("release")
+    }
 
     iosX64()
     iosArm64()
@@ -88,28 +93,42 @@ tasks.dokkaHtml.configure {
     }
 }
 
+mavenPublishing {
+    coordinates(
+        groupId = "io.github.dautovicharis",
+        artifactId = "charts",
+        version = libs.versions.chartsVersion.get()
+    )
 
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-                groupId = "com.github.dautovicharis"
-                artifactId = "charts"
-                version = "1.2.0"
+    pom {
+        name.set("Charts")
+        description.set("Charts made in JetpackCompose")
+        inceptionYear.set("2024")
+        url.set("https://github.com/dautovicharis/Charts")
+
+        licenses {
+            license {
+                name.set("MIT")
+                url.set("https://github.com/dautovicharis/Charts/blob/main/LICENSE")
             }
         }
+        developers {
+            developer {
+                id.set("dautovicharis")
+                name.set("Haris Dautović")
+                email.set("haris.dautovic.dev@gmail.com")
+            }
+        }
+        issueManagement {
+            system.set("GitHub")
+            url.set("https://github.com/dautovicharis/Charts/issues")
+        }
+        scm {
+            connection.set("https://github.com/dautovicharis/Charts.git")
+            url.set("https://github.com/dautovicharis/Charts")
+        }
     }
-}
 
-tasks.register("listComponents") {
-    doLast {
-        println("Available components:")
-        if (project.components.isEmpty()) {
-            println("No components available.")
-        }
-        project.components.all {
-            println("Component name: $name")
-        }
-    }
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
 }
