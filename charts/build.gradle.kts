@@ -1,66 +1,79 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
     `maven-publish`
+    alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.dokka)
 }
 
-android {
-    namespace = "com.hd.charts"
-    compileSdk = 34
+kotlin {
 
-    defaultConfig {
-        minSdk = 24
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    js(IR) {
+        browser()
+        binaries.executable()
     }
+    jvm()
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+    sourceSets {
+        commonMain.dependencies {
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.material3)
+            api(compose.ui)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(kotlin("test-common"))
+            implementation(kotlin("test-annotations-common"))
+        }
+
+        androidMain.dependencies {
+            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.compose.ui.tooling)
+            implementation(libs.dokka.doc)
+        }
+
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
         }
     }
+}
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
+android {
+    defaultConfig {
+        namespace = "com.hd.charts"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
     }
 
     buildFeatures {
         compose = true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.9"
+    compose {
+        kotlinCompilerPlugin.set(libs.versions.kotlinCompilerPlugin.get())
     }
-}
 
-dependencies {
+    kotlin {
+        jvmToolchain(libs.versions.java.get().toInt())
+    }
 
-    // Core library
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.material3)
+    compileOptions {
+        sourceCompatibility = JavaVersion.toVersion(libs.versions.java.get())
+        targetCompatibility = JavaVersion.toVersion(libs.versions.java.get())
+    }
 
-    // Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui.tooling)
-    implementation(libs.androidx.ui.util)
-
-    // Testing
-    testImplementation(libs.junit4)
-    testImplementation(libs.google.tuth)
-    testImplementation(libs.mockk)
-
-    // Documentation
-    dokkaPlugin(libs.dokkaAndroid)
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
+    }
 }
 
 // https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/
