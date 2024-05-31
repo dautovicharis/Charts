@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Charts</string>
+
+    <string name="hide_style">Hide style</string>
+    <string name="show_style">Show style</string>
+    <string name="repeat">Repeat</string>
+
+    <!-- Content descriptions -->
+    <string name="github_url_content_description">GitHub repository</string>
+    <string name="themes_content_description">Selected app theme</string>
+
+    <!-- Charts title -->
+    <string name="pie_chart">Pie Chart</string>
+    <string name="line_chart">Line Chart</string>
+    <string name="bar_chart">Bar Chart</string>
+    <string name="bar_stacked_chart">Stacked Bar Chart</string>
+    <string name="multi_line_chart">Multi Line Chart</string>
+
+    <string translatable="false" name="github_url">https://github.com/dautovicharis/Charts</string>
+
+</resources>
