@@ -1,10 +1,10 @@
 package io.github.dautovicharis.charts.app.demo.bar
 
 import androidx.compose.runtime.Composable
-import com.hd.charts.style.BarChartDefaults
-import com.hd.charts.style.BarChartStyle
 import io.github.dautovicharis.charts.app.ui.composable.TableItems
 import io.github.dautovicharis.charts.app.ui.composable.getTableItems
+import io.github.dautovicharis.charts.style.BarChartDefaults
+import io.github.dautovicharis.charts.style.BarChartStyle
 
 object BarChartStyleItems {
     @Composable

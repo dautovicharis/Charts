@@ -1,10 +1,10 @@
 package io.github.dautovicharis.charts.app.demo.stackedbar
 
 import androidx.compose.runtime.Composable
-import com.hd.charts.style.StackedBarChartDefaults
-import com.hd.charts.style.StackedBarChartStyle
 import io.github.dautovicharis.charts.app.ui.composable.TableItems
 import io.github.dautovicharis.charts.app.ui.composable.getTableItems
+import io.github.dautovicharis.charts.style.StackedBarChartDefaults
+import io.github.dautovicharis.charts.style.StackedBarChartStyle
 
 object StackedBarChartStyleItems {
     @Composable

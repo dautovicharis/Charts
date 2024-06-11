@@ -1,10 +1,10 @@
 package io.github.dautovicharis.charts.app.demo.pie
 
 import androidx.compose.runtime.Composable
-import com.hd.charts.style.PieChartDefaults
-import com.hd.charts.style.PieChartStyle
 import io.github.dautovicharis.charts.app.ui.composable.TableItems
 import io.github.dautovicharis.charts.app.ui.composable.getTableItems
+import io.github.dautovicharis.charts.style.PieChartDefaults
+import io.github.dautovicharis.charts.style.PieChartStyle
 
 object PieChartStyleItems {
     @Composable

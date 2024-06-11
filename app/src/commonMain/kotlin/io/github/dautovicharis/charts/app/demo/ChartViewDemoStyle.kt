@@ -5,8 +5,8 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.hd.charts.style.ChartViewDefaults
-import com.hd.charts.style.ChartViewStyle
+import io.github.dautovicharis.charts.style.ChartViewDefaults
+import io.github.dautovicharis.charts.style.ChartViewStyle
 
 object ChartViewDemoStyle {
 

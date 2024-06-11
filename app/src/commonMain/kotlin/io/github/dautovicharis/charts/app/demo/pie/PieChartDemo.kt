@@ -3,15 +3,15 @@ package io.github.dautovicharis.charts.app.demo.pie
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.hd.charts.PieChartView
-import com.hd.charts.common.model.ChartDataSet
-import com.hd.charts.style.PieChartDefaults
-import com.hd.charts.style.PieChartStyle
+import io.github.dautovicharis.charts.PieChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.composable.TableView
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
+import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.style.PieChartDefaults
+import io.github.dautovicharis.charts.style.PieChartStyle
 
 object PieChartDemoStyle {
 

@@ -1,10 +1,10 @@
 package io.github.dautovicharis.charts.app.demo.line
 
 import androidx.compose.runtime.Composable
-import com.hd.charts.style.LineChartDefaults
-import com.hd.charts.style.LineChartStyle
 import io.github.dautovicharis.charts.app.ui.composable.TableItems
 import io.github.dautovicharis.charts.app.ui.composable.getTableItems
+import io.github.dautovicharis.charts.style.LineChartDefaults
+import io.github.dautovicharis.charts.style.LineChartStyle
 
 object LineChartStyleItems {
     @Composable

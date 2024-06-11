@@ -2,15 +2,15 @@ package io.github.dautovicharis.charts.app.demo.bar
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.hd.charts.BarChartView
-import com.hd.charts.common.model.ChartDataSet
-import com.hd.charts.style.BarChartDefaults
-import com.hd.charts.style.BarChartStyle
+import io.github.dautovicharis.charts.BarChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.composable.TableView
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
+import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.style.BarChartDefaults
+import io.github.dautovicharis.charts.style.BarChartStyle
 
 object BarDemoStyle {
 

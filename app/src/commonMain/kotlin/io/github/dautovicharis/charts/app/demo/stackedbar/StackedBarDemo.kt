@@ -2,15 +2,15 @@ package io.github.dautovicharis.charts.app.demo.stackedbar
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.hd.charts.StackedBarChartView
-import com.hd.charts.common.model.MultiChartDataSet
-import com.hd.charts.style.StackedBarChartDefaults
-import com.hd.charts.style.StackedBarChartStyle
+import io.github.dautovicharis.charts.StackedBarChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.composable.TableView
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
+import io.github.dautovicharis.charts.common.model.MultiChartDataSet
+import io.github.dautovicharis.charts.style.StackedBarChartDefaults
+import io.github.dautovicharis.charts.style.StackedBarChartStyle
 
 object StackedBarDemoStyle {
 

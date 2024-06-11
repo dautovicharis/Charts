@@ -1,15 +1,15 @@
 package io.github.dautovicharis.charts.app.demo.multiline
 
 import androidx.compose.runtime.Composable
-import com.hd.charts.LineChartView
-import com.hd.charts.common.model.MultiChartDataSet
-import com.hd.charts.style.LineChartDefaults
-import com.hd.charts.style.LineChartStyle
+import io.github.dautovicharis.charts.LineChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.composable.TableView
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
+import io.github.dautovicharis.charts.common.model.MultiChartDataSet
+import io.github.dautovicharis.charts.style.LineChartDefaults
+import io.github.dautovicharis.charts.style.LineChartStyle
 
 object MultiLineDemoStyle {
     @Composable

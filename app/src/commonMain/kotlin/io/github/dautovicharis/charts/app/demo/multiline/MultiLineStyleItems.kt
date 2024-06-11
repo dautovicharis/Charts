@@ -2,8 +2,8 @@ package io.github.dautovicharis.charts.app.demo.multiline
 
 import androidx.compose.runtime.Composable
 import io.github.dautovicharis.charts.app.demo.line.lineChartTableItems
-import com.hd.charts.style.LineChartDefaults
 import io.github.dautovicharis.charts.app.ui.composable.TableItems
+import io.github.dautovicharis.charts.style.LineChartDefaults
 
 object MultiLineStyleItems {
     @Composable

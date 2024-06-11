@@ -3,7 +3,7 @@ package io.github.dautovicharis.charts.app.ui.composable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.hd.charts.style.Style
+import io.github.dautovicharis.charts.style.Style
 
 @Composable
 fun getTableItems(
