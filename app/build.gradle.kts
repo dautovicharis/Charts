@@ -44,6 +44,8 @@ kotlin {
             implementation(compose.components.resources)
 
             implementation(project(":charts"))
+            // Snapshot test
+            // implementation("io.github.dautovicharis:charts:2.0.0-SNAPSHOT")
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
