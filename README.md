@@ -27,7 +27,29 @@ Public API: https://dautovicharis.github.io/Charts/
     commonMain.dependencies {
         implementation("io.github.dautovicharis:charts:<version>")
     }
+
+    dependencyResolutionManagement {
+        repositories {
+            mavenCentral()
+        }
+    }
 ```
+
+# Snapshots
+Latest snapshot version: https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/dautovicharis/charts/
+```kotlin
+    commonMain.dependencies {
+        // Example: 
+        implementation("io.github.dautovicharis:charts:2.0.0-SNAPSHOT")
+    }
+
+    dependencyResolutionManagement {
+        repositories {
+            maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
+        }
+    }
+```
+
 
 # Pie chart
 <details close>
