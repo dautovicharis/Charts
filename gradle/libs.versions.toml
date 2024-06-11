@@ -3,10 +3,10 @@
 java = "17"
 
 # Android gradle plugin version
-agp = "8.2.2"
+agp = "8.4.1"
 
 androidx-navigation = "2.7.0-alpha06"
-androidx-lifecycle = "2.8.0-rc03"
+androidx-lifecycle = "2.8.0"
 
 # Kotlin compatibility
 # https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#kotlin-compatibility
