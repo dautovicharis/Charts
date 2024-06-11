@@ -10,7 +10,7 @@
         android:theme="@android:style/Theme.Material.Light.NoActionBar">
         <activity
             android:exported="true"
-            android:name=".MainActivity">
+            android:name="io.github.dautovicharis.charts.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

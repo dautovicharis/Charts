@@ -44,6 +44,8 @@ kotlin {
             implementation(compose.components.resources)
 
             implementation(project(":charts"))
+            // Snapshot test
+            // implementation("io.github.dautovicharis:charts:2.0.0-SNAPSHOT")
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
@@ -61,13 +63,13 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "com.hd.charts.app"
-        namespace = "com.hd.charts.app"
-        compileSdk = libs.versions.android.compileSdk.get().toInt()
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = libs.versions.demoVersionCode.get().toInt()
-        versionName = libs.versions.demoVersionName.get()
+        applicationId = Config.demoNamespace
+        namespace = Config.demoNamespace
+        compileSdk = Config.compileSdk
+        minSdk = Config.minSdk
+        targetSdk = Config.targetSdk
+        versionCode = Config.demoVersionCode
+        versionName = Config.demoVersionName
     }
 
     packaging {
@@ -121,8 +123,8 @@ compose.desktop {
         mainClass = "MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.hd.charts.app"
-            packageVersion = libs.versions.demoVersionName.get()
+            packageName = Config.demoNamespace
+            packageVersion = Config.demoVersionName
         }
     }
 }

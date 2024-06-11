@@ -54,9 +54,9 @@ kotlin {
 
 android {
     defaultConfig {
-        namespace = "com.hd.charts"
-        compileSdk = libs.versions.android.compileSdk.get().toInt()
-        minSdk = libs.versions.android.minSdk.get().toInt()
+        namespace = Config.chartsNamespace
+        compileSdk = Config.compileSdk
+        minSdk = Config.minSdk
     }
 
     buildFeatures {
@@ -95,9 +95,9 @@ tasks.dokkaHtml.configure {
 
 mavenPublishing {
     coordinates(
-        groupId = "io.github.dautovicharis",
-        artifactId = "charts",
-        version = libs.versions.chartsVersion.get()
+        groupId = Config.groupId,
+        artifactId = Config.artifactId,
+        version = Config.chartsVersion
     )
 
     pom {
@@ -129,6 +129,6 @@ mavenPublishing {
         }
     }
 
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral(SonatypeHost.S01)
     signAllPublications()
 }
