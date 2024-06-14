@@ -1,4 +1,6 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.dokka.versioning.VersioningConfiguration
+import org.jetbrains.dokka.versioning.VersioningPlugin
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,6 +10,12 @@ plugins {
     `maven-publish`
     signing
     alias(libs.plugins.mavenPublish)
+}
+
+buildscript {
+    dependencies {
+        classpath(libs.dokka.versions)
+    }
 }
 
 kotlin {
@@ -43,7 +51,6 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.compose.ui.tooling)
-            implementation(libs.dokka.doc)
         }
 
         jvmMain.dependencies {
@@ -83,13 +90,22 @@ android {
 
 // https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/
 tasks.dokkaHtml.configure {
-    outputDirectory.set(project.rootDir.resolve("docs"))
     dokkaSourceSets {
         configureEach {
             includeNonPublic.set(false)
             skipEmptyPackages.set(true)
             skipDeprecated.set(false)
         }
+    }
+
+    val docVersionsDir = project.rootDir.resolve("docs")
+    val currentVersion = Config.chartsVersion
+    val currentDocsDir = docVersionsDir.resolve(currentVersion)
+    outputDirectory.set(currentDocsDir)
+
+    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
+        olderVersionsDir = docVersionsDir
+        version = currentVersion
     }
 }
 
@@ -131,4 +147,9 @@ mavenPublishing {
 
     publishToMavenCentral(SonatypeHost.S01)
     signAllPublications()
+}
+
+dependencies {
+    dokkaHtmlPlugin(libs.dokka.versions)
+    implementation(libs.dokka.doc)
 }
