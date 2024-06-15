@@ -2,7 +2,8 @@
 
 # Charts
 [![Release](https://img.shields.io/maven-central/v/io.github.dautovicharis/charts.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.dautovicharis/charts/overview)
-[![Build Status](https://app.bitrise.io/app/23ce18a5-812b-463b-a463-ee85e65c726b/status.svg?token=X08KrAmKwbHjF0NvT05WdA&branch=master)](https://app.bitrise.io/app/23ce18a5-812b-463b-a463-ee85e65c726b)
+[![Snapshot](https://img.shields.io/nexus/s/io.github.dautovicharis/charts?server=https%3A%2F%2Fs01.oss.sonatype.org)](https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/dautovicharis/charts/)
+[![Build Status](https://app.bitrise.io/app/23ce18a5-812b-463b-a463-ee85e65c726b/status.svg?token=X08KrAmKwbHjF0NvT05WdA&branch=main)](https://app.bitrise.io/app/23ce18a5-812b-463b-a463-ee85e65c726b)
 
 This is a simple chart library built with Jetpack Compose.
 
@@ -46,7 +47,7 @@ https://central.sonatype.com/search?q=io.github.dautovicharis.charts
 ```
 
 # Snapshots
-https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/dautovicharis/charts/
+[![Snapshot](https://img.shields.io/nexus/s/io.github.dautovicharis/charts?server=https%3A%2F%2Fs01.oss.sonatype.org)](https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/dautovicharis/charts/)
 ```kotlin
     commonMain.dependencies {
         implementation("io.github.dautovicharis:charts:<snapshot-version>")
