@@ -42,14 +42,13 @@ import chartsproject.app.generated.resources.github_url_content_description
 import chartsproject.app.generated.resources.ic_check
 import chartsproject.app.generated.resources.ic_github
 import chartsproject.app.generated.resources.themes_content_description
+import io.github.dautovicharis.charts.app.BuildConfig
 import io.github.dautovicharis.charts.app.ChartScreen
 import io.github.dautovicharis.charts.app.demo.bar.AddBarChartDemo
 import io.github.dautovicharis.charts.app.demo.line.AddLineChartDemo
 import io.github.dautovicharis.charts.app.demo.multiline.AddMultiLineChartDemo
 import io.github.dautovicharis.charts.app.demo.pie.AddPieChartDemo
 import io.github.dautovicharis.charts.app.demo.stackedbar.AddStackedBarChartDemo
-import io.github.dautovicharis.charts.app.helpers.getVersionCode
-import io.github.dautovicharis.charts.app.helpers.getVersionName
 import io.github.dautovicharis.charts.app.ui.theme.AppTheme
 import io.github.dautovicharis.charts.app.ui.theme.Theme
 import io.github.dautovicharis.charts.app.ui.theme.ThemeManager
@@ -153,15 +152,13 @@ private fun AddMenuItems(selectedItem: (selected: ChartScreen) -> Unit) {
         View(items = charts) { chartItem ->
             selectedItem(chartItem)
         }
-        val versionName = getVersionName()
-        val versionCode = getVersionCode()
         Text(
             modifier = Modifier
                 .padding(10.dp)
                 .align(Alignment.CenterHorizontally),
-            text = "Version: ${versionName}\n"
-                    + "Build: ${versionCode}\n"
-                    + "Charts: 1.2.0",
+            text = "Version: ${BuildConfig.DEMO_VERSION_NAME}\n"
+                    + "Build: ${BuildConfig.DEMO_VERSION_CODE}\n"
+                    + "Charts: ${BuildConfig.CHARTS_VERSION}",
             color = MaterialTheme.colorScheme.onBackground
         )
     }
