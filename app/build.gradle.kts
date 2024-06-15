@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.build.config)
 }
 
 kotlin {
@@ -108,7 +109,6 @@ android {
 
     buildFeatures {
         compose = true
-        buildConfig = true
     }
 }
 
@@ -127,4 +127,13 @@ compose.desktop {
             packageVersion = Config.demoVersionName
         }
     }
+}
+
+// Shared BuildConfig
+buildConfig {
+    packageName(Config.demoNamespace)
+    buildConfigField("CHARTS_VERSION", Config.chartsVersion )
+    buildConfigField("DEMO_VERSION_NAME", Config.demoVersionName)
+    buildConfigField("DEMO_VERSION_CODE", Config.demoVersionCode)
+    useKotlinOutput()
 }
