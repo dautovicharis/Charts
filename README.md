@@ -22,7 +22,7 @@ Public API: https://dautovicharis.github.io/Charts/
 - Various data set support
 - Multiplatform: Android, iOS, Desktop, Web.
 
-# Usage
+# Dependency
 ```kotlin
     commonMain.dependencies {
         implementation("io.github.dautovicharis:charts:<version>")
@@ -35,12 +35,21 @@ Public API: https://dautovicharis.github.io/Charts/
     }
 ```
 
+# Dependencies by platform
+https://central.sonatype.com/search?q=io.github.dautovicharis.charts
+```kotlin
+    implementation("io.github.dautovicharis:charts-iosx64:<version>")
+    implementation("io.github.dautovicharis:charts-iosarm64:<version>")
+    implementation("io.github.dautovicharis:charts-jvm:<version>")
+    implementation("io.github.dautovicharis:charts-js:<version>")
+    implementation("io.github.dautovicharis:charts-android:<version>")
+```
+
 # Snapshots
-Latest snapshot version: https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/dautovicharis/charts/
+https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/dautovicharis/charts/
 ```kotlin
     commonMain.dependencies {
-        // Example: 
-        implementation("io.github.dautovicharis:charts:2.0.0-SNAPSHOT")
+        implementation("io.github.dautovicharis:charts:<snapshot-version>")
     }
 
     dependencyResolutionManagement {
@@ -346,19 +355,14 @@ private fun AddCustomStackedBarChart() {
 ```
 
 # Examples
-- [Pie Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/pie/PieChartDemo.kt)
-- [Line Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/line/LineDemo.kt)
-- [Multiline Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/multiline/MultiLineDemo.kt)
-- [Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/bar/BarDemo.kt)
-- [Stacked Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/main/java/com/hd/charts/app/demo/stackedbar/StackedBarDemo.kt)
+- [Pie Chart](https://github.com/dautovicharis/Charts/blob/develop/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/pie/PieChartDemo.kt)
+- [Line Chart](https://github.com/dautovicharis/Charts/blob/develop/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/line/LineDemo.kt)
+- [Multiline Chart](https://github.com/dautovicharis/Charts/blob/develop/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/multiline/MultiLineDemo.kt)
+- [Bar Chart](https://github.com/dautovicharis/Charts/blob/develop/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/bar/BarDemo.kt)
+- [Stacked Bar Chart](https://github.com/dautovicharis/Charts/blob/develop/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/stackedbar/StackedBarDemo.kt)
 
 # Demo app
 [![Demo app](https://github.com/dautovicharis/Charts/assets/7049715/b48464c9-5886-4f89-b740-e4d24b6be3c7)](https://play.google.com/store/apps/details?id=com.hd.charts.app)
-
-# What's next
-- KMP
-- Charts scroll
-- Improve documentation
 
 # Contributions
 🌟 Thank you for your time! Before you start working on code, please create a [new issue](https://github.com/dautovicharis/Charts/issues).
