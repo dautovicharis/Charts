@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
+import io.github.dautovicharis.charts.mock.Mock
 import io.github.dautovicharis.charts.style.ChartViewDefaults
 import io.github.dautovicharis.charts.style.PieChartDefaults
 import io.github.dautovicharis.charts.style.PieChartStyle
@@ -31,18 +31,13 @@ private fun PieChartViewPreview() {
         )
     )
 
-    val data = ChartDataSet(
-        items = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f),
-        title = "Pie Chart"
-    )
-
     Row(
         modifier = Modifier
             .width(300.dp)
             .wrapContentHeight(),
     ) {
         PieChartView(
-            dataSet = data,
+            dataSet = Mock.pieChart(),
             style = style
         )
     }
