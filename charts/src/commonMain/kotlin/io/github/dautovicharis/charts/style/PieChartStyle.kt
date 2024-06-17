@@ -42,7 +42,7 @@ object PieChartDefaults {
         borderColor: Color = MaterialTheme.colorScheme.surface,
         innerPadding: Dp = 15.dp,
         donutPercentage: Float = 0f,
-        borderWidth: Float = 5f,
+        borderWidth: Float = 3f,
         chartViewStyle: ChartViewStyle = ChartViewDefaults.style()
     ): PieChartStyle {
         return PieChartStyle(

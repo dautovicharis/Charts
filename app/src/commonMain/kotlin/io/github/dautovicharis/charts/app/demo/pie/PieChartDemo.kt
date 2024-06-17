@@ -36,7 +36,7 @@ object PieChartDemoStyle {
         return PieChartDefaults.style(
             borderColor = Color.White,
             donutPercentage = 40f,
-            borderWidth = 6f,
+            borderWidth = 5f,
             pieColors = pieColors,
             chartViewStyle = ChartViewDemoStyle.custom(width = 200.dp)
         )
