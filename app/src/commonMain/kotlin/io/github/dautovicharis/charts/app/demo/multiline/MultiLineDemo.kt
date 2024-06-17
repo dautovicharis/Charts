@@ -1,6 +1,7 @@
 package io.github.dautovicharis.charts.app.demo.multiline
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.LineChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
@@ -14,7 +15,7 @@ import io.github.dautovicharis.charts.style.LineChartStyle
 object MultiLineDemoStyle {
     @Composable
     fun default(): LineChartStyle {
-        return LineChartDefaults.style(chartViewStyle = ChartViewDemoStyle.custom())
+        return LineChartDefaults.style(chartViewStyle = ChartViewDemoStyle.custom(width = 300.dp))
     }
 
     @Composable
@@ -31,7 +32,7 @@ object MultiLineDemoStyle {
             pointVisible = true,
             pointColor = ColorPalette.DataColor.magenta,
             dragPointColor = ColorPalette.DataColor.deepPurple,
-            chartViewStyle = ChartViewDemoStyle.custom()
+            chartViewStyle = ChartViewDemoStyle.custom(width = 300.dp)
         )
     }
 }
