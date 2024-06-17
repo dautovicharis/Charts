@@ -1,6 +1,7 @@
 package io.github.dautovicharis.charts.internal.barstackedchart
 
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.runtime.Composable
@@ -12,6 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.util.lerp
 import io.github.dautovicharis.charts.internal.AnimationSpec
@@ -33,6 +35,7 @@ internal fun StackedBarChart(
     val progress = remember {
         data.items.map { Animatable(0f) }
     }
+    var selectedIndex by remember { mutableIntStateOf(-1) }
 
     progress.forEachIndexed { index, _ ->
         LaunchedEffect(index) {
@@ -42,8 +45,6 @@ internal fun StackedBarChart(
             )
         }
     }
-
-    var selectedIndex by remember { mutableIntStateOf(-1) }
 
     Canvas(
         modifier = style.modifier.pointerInput(Unit) {
@@ -62,32 +63,50 @@ internal fun StackedBarChart(
                     onValueChanged(NO_SELECTION)
                 }
             )
+        }, onDraw = {
+            drawBars(
+                style = style,
+                size = size,
+                data = data,
+                progress = progress,
+                selectedIndex = selectedIndex,
+                colors = colors
+            )
         }
-    ) {
-        val totalMaxValue = data.items.maxOf { it.item.points.sum() }
-        val spacing = style.space.toPx()
-        val barWidth = (size.width - spacing * (data.items.size - 1)) / data.items.size
+    )
+}
 
-        data.items.forEachIndexed { index, item ->
-            var topOffset = size.height
-            val selectedBarScale = if (index == selectedIndex) MAX_SCALE else DEFAULT_SCALE
-            item.item.points.forEachIndexed { dataIndex, value ->
-                val height = lerp(
-                    0f,
-                    (value.toFloat() / totalMaxValue.toFloat()) * size.height,
-                    progress[index].value
-                )
-                topOffset -= height
+private fun DrawScope.drawBars(
+    style: StackedBarChartStyle,
+    size: Size,
+    data: MultiChartData,
+    progress: List<Animatable<Float, AnimationVector1D>>,
+    selectedIndex: Int,
+    colors: List<Color>
+) {
+    val totalMaxValue = data.items.maxOf { it.item.points.sum() }
+    val spacing = style.space.toPx()
+    val barWidth = (size.width - spacing * (data.items.size - 1)) / data.items.size
 
-                drawRect(
-                    color = colors[dataIndex],
-                    topLeft = Offset(x = index * (barWidth + spacing), y = topOffset),
-                    size = Size(
-                        width = barWidth * selectedBarScale,
-                        height = height * selectedBarScale
-                    )
+    data.items.forEachIndexed { index, item ->
+        var topOffset = size.height
+        val selectedBarScale = if (index == selectedIndex) MAX_SCALE else DEFAULT_SCALE
+        item.item.points.forEachIndexed { dataIndex, value ->
+            val height = lerp(
+                0f,
+                (value.toFloat() / totalMaxValue.toFloat()) * size.height,
+                progress[index].value
+            )
+            topOffset -= height
+
+            drawRect(
+                color = colors[dataIndex],
+                topLeft = Offset(x = index * (barWidth + spacing), y = topOffset),
+                size = Size(
+                    width = barWidth * selectedBarScale,
+                    height = height * selectedBarScale
                 )
-            }
+            )
         }
     }
 }
