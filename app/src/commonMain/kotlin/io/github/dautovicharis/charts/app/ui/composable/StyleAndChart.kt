@@ -7,10 +7,13 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -22,13 +25,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -42,7 +50,7 @@ import kotlin.random.Random
 
 @Composable
 fun StyleAndChart(
-    tableItems: TableItems,
+    tableItems: StyleItems,
     columns: List<String> = listOf("Parameter", "Value"),
     buttonsVisibility: Boolean = true,
     chartItem: @Composable () -> Unit
@@ -80,9 +88,9 @@ fun StyleAndChart(
             enter = expandVertically(),
             exit = shrinkVertically()
         ) {
-            TableItems(
+            DemoStyleItems(
                 columns = columns,
-                tableItems = tableItems.items,
+                items = tableItems.items,
                 columnWeight = columnWeight,
                 outerPadding = outerPadding
             )
@@ -102,9 +110,9 @@ fun StyleAndChart(
 }
 
 @Composable
-private fun TableItems(
+private fun DemoStyleItems(
     columns: List<String>,
-    tableItems: List<TableItem>,
+    items: List<StyleItem>,
     columnWeight: Float,
     outerPadding: Dp
 ) {
@@ -112,14 +120,14 @@ private fun TableItems(
         modifier = Modifier
             .wrapContentSize()
     ) {
-        // Table header
+        // Header
         Row(
             modifier = Modifier
                 .wrapContentSize()
                 .padding(horizontal = outerPadding)
         ) {
             columns.forEach { column ->
-                TableCell(
+                StyleItemRow(
                     text = column,
                     weight = columnWeight,
                     fontWeight = FontWeight.Medium
@@ -128,8 +136,8 @@ private fun TableItems(
             }
         }
 
-        // Table items
-        tableItems.forEach {
+        // Items
+        items.forEach {
             Row(
                 Modifier
                     .wrapContentSize()
@@ -140,15 +148,52 @@ private fun TableItems(
                     )
                     .clip(MaterialTheme.shapes.small)
             ) {
-                TableCell(text = it.name, weight = columnWeight)
+                StyleItemRow(text = it.name, weight = columnWeight)
                 Spacer(modifier = Modifier.width(1.dp))
-                TableCell(
+                StyleItemRow(
                     text = it.value,
                     weight = columnWeight,
                     color = it.color,
                     isChanged = it.isChanged
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun RowScope.StyleItemRow(
+    text: String,
+    weight: Float,
+    fontWeight: FontWeight = FontWeight.Normal,
+    color: Color? = null,
+    isChanged: Boolean = false
+) {
+    val localDensity = LocalDensity.current
+    var textHeight by remember { mutableStateOf(0.dp) }
+    val textFontWeight = if (isChanged) FontWeight.SemiBold else fontWeight
+
+    Row(modifier = Modifier.weight(weight)) {
+        Text(
+            modifier = Modifier
+                .weight(0.9f)
+                .onGloballyPositioned {
+                    textHeight = it.size.height.dp
+                    textHeight = with(localDensity) { it.size.height.toDp() }
+                }
+                .padding(5.dp),
+            text = text,
+            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = textFontWeight
+        )
+        color?.let {
+            Box(
+                modifier = Modifier
+                    .weight(0.1f)
+                    .height(textHeight)
+                    .background(color)
+                    .border(0.5.dp, MaterialTheme.colorScheme.onSurface)
+            )
         }
     }
 }

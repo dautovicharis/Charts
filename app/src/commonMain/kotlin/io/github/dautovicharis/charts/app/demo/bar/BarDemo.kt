@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.BarChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
-import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
-import io.github.dautovicharis.charts.app.ui.composable.TableView
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.style.BarChartDefaults
@@ -33,15 +33,15 @@ object BarDemoStyle {
 
 @Composable
 fun AddBarChartDemo() {
-    TableView(
+    ChartDemoItems(
         listOf(
             {
-                AddChartDemo(type = ChartStyleType.BarChartDefault) {
+                ChartDemo(type = ChartStyleType.BarChartDefault) {
                     AddDefaultBarChart()
                 }
             },
             {
-                AddChartDemo(type = ChartStyleType.BarChartCustom) {
+                ChartDemo(type = ChartStyleType.BarChartCustom) {
                     AddCustomBarChart()
                 }
             }

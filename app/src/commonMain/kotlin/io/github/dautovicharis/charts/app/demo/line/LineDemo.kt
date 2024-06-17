@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.LineChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
-import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
-import io.github.dautovicharis.charts.app.ui.composable.TableView
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.style.LineChartDefaults
@@ -37,15 +37,15 @@ object LineDemoStyle {
 
 @Composable
 fun AddLineChartDemo() {
-    TableView(
+    ChartDemoItems(
         listOf(
             {
-                AddChartDemo(type = ChartStyleType.LineChartDefault) {
+                ChartDemo(type = ChartStyleType.LineChartDefault) {
                     AddDefaultLineChart()
                 }
             },
             {
-                AddChartDemo(type = ChartStyleType.LineChartCustom) {
+                ChartDemo(type = ChartStyleType.LineChartCustom) {
                     AddCustomLineChart()
                 }
             }

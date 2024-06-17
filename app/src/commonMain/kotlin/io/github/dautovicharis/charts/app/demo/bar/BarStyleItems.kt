@@ -1,19 +1,19 @@
 package io.github.dautovicharis.charts.app.demo.bar
 
 import androidx.compose.runtime.Composable
-import io.github.dautovicharis.charts.app.ui.composable.TableItems
-import io.github.dautovicharis.charts.app.ui.composable.getTableItems
+import io.github.dautovicharis.charts.app.ui.composable.StyleItems
+import io.github.dautovicharis.charts.app.ui.composable.ChartStyleItems
 import io.github.dautovicharis.charts.style.BarChartDefaults
 import io.github.dautovicharis.charts.style.BarChartStyle
 
 object BarChartStyleItems {
     @Composable
-    fun default(): TableItems {
+    fun default(): StyleItems {
         return barChartTableItems(BarChartDefaults.style())
     }
 
     @Composable
-    fun custom(): TableItems {
+    fun custom(): StyleItems {
         return barChartTableItems(BarDemoStyle.custom())
     }
 }
@@ -21,8 +21,8 @@ object BarChartStyleItems {
 @Composable
 fun barChartTableItems(
     currentStyle: BarChartStyle,
-): TableItems {
-    return getTableItems(
+): StyleItems {
+    return ChartStyleItems(
         currentStyle = currentStyle,
         defaultStyle = BarChartDefaults.style(),
     )

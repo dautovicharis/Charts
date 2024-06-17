@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.LineChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
-import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
-import io.github.dautovicharis.charts.app.ui.composable.TableView
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.style.LineChartDefaults
@@ -39,15 +39,15 @@ object MultiLineDemoStyle {
 
 @Composable
 fun AddMultiLineChartDemo() {
-    TableView(
+    ChartDemoItems(
         listOf(
             {
-                AddChartDemo(type = ChartStyleType.MultiLineChartDefault) {
+                ChartDemo(type = ChartStyleType.MultiLineChartDefault) {
                     AddDefaultMultiLineChart()
                 }
             },
             {
-                AddChartDemo(type = ChartStyleType.MultiLineChartCustom) {
+                ChartDemo(type = ChartStyleType.MultiLineChartCustom) {
                     AddCustomMultiLineChart()
                 }
             }
