@@ -1,6 +1,7 @@
 package io.github.dautovicharis.charts.internal.barchart
 
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.runtime.Composable
@@ -11,6 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.util.lerp
 import io.github.dautovicharis.charts.internal.AnimationSpec
@@ -63,30 +66,52 @@ internal fun BarChart(
                 onValueChanged(NO_SELECTION)
             }
         )
-    }) {
-        val baselineY = size.height * (maxValue / (maxValue - minValue))
-        val dataSize = chartData.points.size
+    }, onDraw = {
+        drawBars(
+            style = style,
+            size = size,
+            chartData = chartData,
+            progress = progress,
+            selectedIndex = selectedIndex,
+            barColor = barColor,
+            maxValue = maxValue,
+            minValue = minValue
+        )
+    })
+}
 
-        chartData.points.forEachIndexed { index, value ->
-            val spacing = style.space.toPx()
-            val barWidth = (size.width - spacing * (dataSize - 1)) / dataSize
+private fun DrawScope.drawBars(
+    style: BarChartStyle,
+    size: Size,
+    chartData: ChartData,
+    progress: List<Animatable<Float, AnimationVector1D>>,
+    selectedIndex: Int,
+    barColor: Color,
+    maxValue: Double,
+    minValue: Double
+) {
+    val baselineY = size.height * (maxValue / (maxValue - minValue))
+    val dataSize = chartData.points.size
 
-            val finalBarHeight = size.height * (abs(value) / (maxValue - minValue))
-            val barHeight = lerp(0f, finalBarHeight.toFloat(), progress[index].value)
+    chartData.points.forEachIndexed { index, value ->
+        val spacing = style.space.toPx()
+        val barWidth = (size.width - spacing * (dataSize - 1)) / dataSize
 
-            val top = if (value >= 0) baselineY - barHeight else baselineY
-            val left = (barWidth + spacing) * index
+        val finalBarHeight = size.height * (abs(value) / (maxValue - minValue))
+        val barHeight = lerp(0f, finalBarHeight.toFloat(), progress[index].value)
 
-            val selectedBarScale = if (index == selectedIndex) MAX_SCALE else DEFAULT_SCALE
+        val top = if (value >= 0) baselineY - barHeight else baselineY
+        val left = (barWidth + spacing) * index
 
-            drawRect(
-                color = barColor,
-                topLeft = Offset(x = left, y = top.toFloat()),
-                size = Size(
-                    width = barWidth * selectedBarScale,
-                    height = barHeight * selectedBarScale
-                )
+        val selectedBarScale = if (index == selectedIndex) MAX_SCALE else DEFAULT_SCALE
+
+        drawRect(
+            color = barColor,
+            topLeft = Offset(x = left, y = top.toFloat()),
+            size = Size(
+                width = barWidth * selectedBarScale,
+                height = barHeight * selectedBarScale
             )
-        }
+        )
     }
 }
