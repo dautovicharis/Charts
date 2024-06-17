@@ -3,27 +3,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
+import io.github.dautovicharis.charts.mock.Mock
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
 
 @Composable
 private fun StackedBarChartViewPreview() {
-    val items = listOf(
-        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Test1" to listOf(1500.87f, 2765.58f, 33245.81f),
-        "Test2" to listOf(5444.87f, 233.58f, 67544.81f)
-    )
-
-    val data = MultiChartDataSet(
-        items = items,
-        categories = listOf("Jan", "Feb", "Mar"),
-        title = "Stacked Bar Chart"
-    )
-
     StackedBarChartView(
-        dataSet = data,
+        dataSet = Mock.stackedBarChart(),
         style = StackedBarChartDefaults.style()
     )
 }
@@ -61,21 +48,8 @@ private fun StackedBarChartViewInvalidData() {
         space = 8.dp
     )
 
-    val items = listOf(
-        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Cherry St." to listOf(8261.68f, 8810.34f),
-        "Test1" to listOf(1500.87f, 2765.58f, 33245.81f),
-        "Test2" to listOf(5444.87f, 233.58f)
-    )
-
-    val data = MultiChartDataSet(
-        items = items,
-        categories = listOf("Jan", "Feb"),
-        title = "Stacked Bar Chart"
-    )
-
     StackedBarChartView(
-        dataSet = data,
+        dataSet = Mock.stackedBarChartInvalid(),
         style = style
     )
 }

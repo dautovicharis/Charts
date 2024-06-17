@@ -4,8 +4,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
+import io.github.dautovicharis.charts.mock.Mock
 import io.github.dautovicharis.charts.style.ChartViewDefaults
 import io.github.dautovicharis.charts.style.LineChartDefaults
 
@@ -27,22 +27,8 @@ private fun LineChartViewPreview() {
         chartViewStyle = ChartViewDefaults.style(width = 300.dp)
     )
 
-    val items = listOf(
-        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Peach St." to listOf(1500.87f, 2765.58f, 33245.81f),
-        "Lime Av." to listOf(5444.87f, 233.58f, 67544.81f)
-    )
-
-    val data = MultiChartDataSet(
-        items = items,
-        categories = listOf("Jan", "Feb", "Mar"),
-        title = "Line Chart",
-        prefix = "$"
-    )
-
     LineChartView(
-        dataSet = data,
+        dataSet = Mock.lineChart(),
         style = style
     )
 }
@@ -88,22 +74,8 @@ private fun LineChartViewInvalidData() {
         chartViewStyle = ChartViewDefaults.style(width = 300.dp)
     )
 
-    val items = listOf(
-        "Cherry St." to listOf(8261.68f, 8810.34f),
-        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Peach St." to listOf(1500.87f, 2765.58f),
-        "Lime Av." to listOf(5444.87f, 233.58f, 67544.81f)
-    )
-
-    val data = MultiChartDataSet(
-        items = items,
-        categories = listOf("Jan", "Feb"),
-        title = "Line Chart",
-        prefix = "$"
-    )
-
     LineChartView(
-        dataSet = data,
+        dataSet = Mock.lineChartInvalid(),
         style = style
     )
 }
