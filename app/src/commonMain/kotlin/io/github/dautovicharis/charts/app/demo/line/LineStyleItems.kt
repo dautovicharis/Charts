@@ -1,20 +1,20 @@
 package io.github.dautovicharis.charts.app.demo.line
 
 import androidx.compose.runtime.Composable
-import io.github.dautovicharis.charts.app.ui.composable.TableItems
-import io.github.dautovicharis.charts.app.ui.composable.getTableItems
+import io.github.dautovicharis.charts.app.ui.composable.StyleItems
+import io.github.dautovicharis.charts.app.ui.composable.ChartStyleItems
 import io.github.dautovicharis.charts.style.LineChartDefaults
 import io.github.dautovicharis.charts.style.LineChartStyle
 
 object LineChartStyleItems {
     @Composable
-    fun default(): TableItems {
+    fun default(): StyleItems {
         val style = LineChartDefaults.style()
         return lineChartTableItems(style)
     }
 
     @Composable
-    fun custom(): TableItems {
+    fun custom(): StyleItems {
         val style = LineDemoStyle.custom()
         return lineChartTableItems(style)
     }
@@ -23,8 +23,8 @@ object LineChartStyleItems {
 @Composable
 fun lineChartTableItems(
     currentStyle: LineChartStyle
-): TableItems {
-    return getTableItems(
+): StyleItems {
+    return ChartStyleItems(
         currentStyle = currentStyle,
         defaultStyle = LineChartDefaults.style(),
     )

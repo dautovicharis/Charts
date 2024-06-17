@@ -5,9 +5,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.PieChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
-import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
-import io.github.dautovicharis.charts.app.ui.composable.TableView
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.style.PieChartDefaults
@@ -36,7 +36,7 @@ object PieChartDemoStyle {
         return PieChartDefaults.style(
             borderColor = Color.White,
             donutPercentage = 40f,
-            borderWidth = 6f,
+            borderWidth = 5f,
             pieColors = pieColors,
             chartViewStyle = ChartViewDemoStyle.custom(width = 200.dp)
         )
@@ -45,15 +45,15 @@ object PieChartDemoStyle {
 
 @Composable
 fun AddPieChartDemo() {
-    TableView(
+    ChartDemoItems(
         listOf(
             {
-                AddChartDemo(type = ChartStyleType.PieChartDefault) {
+                ChartDemo(type = ChartStyleType.PieChartDefault) {
                     AddDefaultPieChart()
                 }
             },
             {
-                AddChartDemo(type = ChartStyleType.PieChartCustom) {
+                ChartDemo(type = ChartStyleType.PieChartCustom) {
                     AddCustomPieChart()
                 }
             }
@@ -69,7 +69,8 @@ private fun AddDefaultPieChart() {
         postfix = " °C"
     )
 
-    PieChartView(dataSet = dataSet,
+    PieChartView(
+        dataSet = dataSet,
         style = PieChartDemoStyle.default()
     )
 }

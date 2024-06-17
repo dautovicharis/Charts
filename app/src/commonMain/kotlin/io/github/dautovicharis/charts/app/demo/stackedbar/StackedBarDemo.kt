@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.StackedBarChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
-import io.github.dautovicharis.charts.app.ui.composable.AddChartDemo
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
-import io.github.dautovicharis.charts.app.ui.composable.TableView
+import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
@@ -37,15 +37,15 @@ object StackedBarDemoStyle {
 
 @Composable
 fun AddStackedBarChartDemo() {
-    TableView(
+    ChartDemoItems(
         listOf(
             {
-                AddChartDemo(type = ChartStyleType.StackedBarChartDefault) {
+                ChartDemo(type = ChartStyleType.StackedBarChartDefault) {
                     AddDefaultStackedBarChart()
                 }
             },
             {
-                AddChartDemo(type = ChartStyleType.StackedBarChartCustom) {
+                ChartDemo(type = ChartStyleType.StackedBarChartCustom) {
                     AddCustomStackedBarChart()
                 }
             }

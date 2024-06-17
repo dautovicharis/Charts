@@ -1,20 +1,20 @@
 package io.github.dautovicharis.charts.app.demo.stackedbar
 
 import androidx.compose.runtime.Composable
-import io.github.dautovicharis.charts.app.ui.composable.TableItems
-import io.github.dautovicharis.charts.app.ui.composable.getTableItems
+import io.github.dautovicharis.charts.app.ui.composable.StyleItems
+import io.github.dautovicharis.charts.app.ui.composable.ChartStyleItems
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
 import io.github.dautovicharis.charts.style.StackedBarChartStyle
 
 object StackedBarChartStyleItems {
     @Composable
-    fun default(): TableItems {
+    fun default(): StyleItems {
         val style = StackedBarChartDefaults.style()
         return multiBarChartTableItems(style)
     }
 
     @Composable
-    fun custom(): TableItems {
+    fun custom(): StyleItems {
         val style = StackedBarDemoStyle.custom()
         return multiBarChartTableItems(style)
     }
@@ -23,8 +23,8 @@ object StackedBarChartStyleItems {
 @Composable
 fun multiBarChartTableItems(
     currentStyle: StackedBarChartStyle,
-): TableItems {
-    return getTableItems(
+): StyleItems {
+    return ChartStyleItems(
         currentStyle = currentStyle,
         defaultStyle = StackedBarChartDefaults.style(),
     )

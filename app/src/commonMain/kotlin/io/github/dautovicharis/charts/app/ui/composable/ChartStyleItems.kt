@@ -5,11 +5,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import io.github.dautovicharis.charts.style.Style
 
+class StyleItems(
+    val name: String,
+    val items: List<StyleItem>
+)
+
+class StyleItem(
+    val name: String,
+    val value: String,
+    val color: Color? = null,
+    val isChanged: Boolean
+)
+
 @Composable
-fun getTableItems(
+fun ChartStyleItems(
     currentStyle: Style,
     defaultStyle: Style
-): TableItems {
+): StyleItems {
 
     val currentProperties = currentStyle.getProperties()
     val defaultProperties = defaultStyle.getProperties().toMap()
@@ -23,20 +35,20 @@ fun getTableItems(
 
         if (isListOfColors) {
             val value = if (isChanged) "Custom" else "Default"
-            TableItem(
+            StyleItem(
                 name = name,
                 value = value,
                 isChanged = isChanged
             )
         } else if (isColor) {
-            TableItem(
+            StyleItem(
                 name = name,
                 value = (currentValue as Color).getName(),
                 color = currentValue,
                 isChanged = isChanged
             )
         } else {
-            TableItem(
+            StyleItem(
                 name = name,
                 value = currentValue.toString(),
                 isChanged = isChanged
@@ -46,7 +58,7 @@ fun getTableItems(
 
     val isChanged = items.any { it.isChanged }
     val styleName = currentStyle::class.simpleName + if (isChanged) " (Custom)" else " (Default)"
-    return TableItems(
+    return StyleItems(
         name = styleName,
         items = items
     )
