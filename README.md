@@ -15,7 +15,7 @@ Inspired by: https://github.com/AppPear/ChartView
 </p>
 
 # Documentation
-Public API: https://dautovicharis.github.io/Charts/
+Public API: https://dautovicharis.github.io/Charts/2.0.0-SNAPSHOT/
 
 # Features
 - Animations
