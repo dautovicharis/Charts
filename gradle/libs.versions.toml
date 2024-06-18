@@ -22,6 +22,8 @@ dokka = "1.9.20"
 mavenPublish = "0.28.0"
 # https://github.com/gmazzo/gradle-buildconfig-plugin
 buildConfig = "5.3.5"
+# https://sonarcloud.io
+sonarqube = "5.0.0.4638"
 
 [libraries]
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
@@ -40,3 +42,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
 build-config = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
+sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
