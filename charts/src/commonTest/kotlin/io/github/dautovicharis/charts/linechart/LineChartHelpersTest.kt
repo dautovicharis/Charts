@@ -11,7 +11,7 @@ import kotlin.test.assertTrue
 class LineChartHelpersTest {
 
     @Test
-    fun testFindNearestPoint() {
+    fun findNearestPoint_validInput_correctOffsetReturned() {
         // Arrange
         val testCases = hashMapOf(
             Triple(500f, listOf(100f, 200f, 300f, 400f, 500f), Size(1000f, 2500f))
@@ -34,7 +34,7 @@ class LineChartHelpersTest {
     }
 
     @Test
-    fun testScaleValues() {
+    fun scaleValues_validInput_correctlyScaledValuesReturned() {
         // Arrange
         val testCases = hashMapOf(
             Pair(listOf(10.0, 20.0, 30.0, 40.0, 50.0), Size(40f, 40f))

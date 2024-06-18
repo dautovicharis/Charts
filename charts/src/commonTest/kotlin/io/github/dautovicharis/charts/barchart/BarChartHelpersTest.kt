@@ -16,7 +16,7 @@ class BarChartHelpersTest {
     )
 
     @Test
-    fun `getSelectedIndex should return correct index`() {
+    fun getSelectedIndex_shouldReturnCorrectIndex() {
         // Arrange
         val testCases = listOf(
             GetSelectedIndexTestCase(

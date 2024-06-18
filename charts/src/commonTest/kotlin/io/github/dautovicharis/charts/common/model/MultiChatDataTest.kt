@@ -12,7 +12,7 @@ import kotlin.test.assertTrue
 class MultiChatDataTest {
 
     @Test
-    fun `test minMax`() {
+    fun minMax_returnsCorrectMinMaxValues() {
         // Arrange
         val multiChartData = MultiChartData(
             items = listOf(
@@ -32,7 +32,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test getFirstPointsSize`() {
+    fun getFirstPointsSize_returnsFirstPointsSize() {
         // Arrange
         val multiChartData = MultiChartData(
             items = listOf(
@@ -52,7 +52,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test hasSingleItem when single item`() {
+    fun hasSingleItem_whenSingleItem_returnsTrue() {
         // Arrange
         val multiChartData = MultiChartData(
             items = listOf(
@@ -69,7 +69,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test hasSingleItem when multiple items`() {
+    fun hasSingleItem_whenMultipleItems_returnsFalse() {
         // Arrange
         val multiChartData = MultiChartData(
             items = listOf(
@@ -87,7 +87,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test getLabel when single item`() {
+    fun getLabel_whenSingleItem_returnsExpectedLabel() {
         // Arrange
         val dataItem = listOf(1.0f, 2.0f, 3.0f).toChartData()
         val multiChartData = MultiChartData(
@@ -105,7 +105,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test getLabel with multiple item and no categories`() {
+    fun getLabel_withMultipleItemsAndNoCategories_returnsTitle() {
         // Arrange
         val title = "Title"
         val multiChartData = MultiChartData(
@@ -126,7 +126,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test getLabel with multiple item when has categories`() {
+    fun getLabel_withMultipleItemsAndCategories_returnsCategoryLabel() {
         // Arrange
         val multiChartData = MultiChartData(
             items = listOf(
@@ -147,7 +147,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test getLabel with multiple item and incomplete categories`() {
+    fun getLabel_withMultipleItemsAndIncompleteCategories_returnsMissingLabel() {
         // Arrange
         val multiChartData = MultiChartData(
             items = listOf(
@@ -166,7 +166,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test hasCategories when false`() {
+    fun hasCategories_whenNoCategories_returnsFalse() {
         // Arrange
         val multiChartData = MultiChartData(
             items = listOf(
@@ -184,7 +184,7 @@ class MultiChatDataTest {
     }
 
     @Test
-    fun `test hasCategories when true`() {
+    fun hasCategories_whenCategoriesPresent_returnsTrue() {
         // Arrange
         val multiChartData = MultiChartData(
             items = listOf(
