@@ -95,7 +95,7 @@ class DataValidationTest {
 
     // Line data
     @Test
-    fun `test line and stacked bar chart data with valid dataSet`() {
+    fun lineAndStackedBarChartData_validDataSet_noValidationErrors() {
         // Arrange
         val dataSet = MultiChartDataSet(
             items = defaultDataItems,
@@ -117,7 +117,7 @@ class DataValidationTest {
 
 
     @Test
-    fun `validateLineData with invalid categories`() {
+    fun validateLineData_invalidCategories_validationErrorsPresent() {
         // Arrange
         val categories = defaultCategories.drop(1)
 
@@ -145,7 +145,7 @@ class DataValidationTest {
     }
 
     @Test
-    fun `validateLineData with invalid colors`() {
+    fun validateLineData_invalidColors_validationErrorsPresent() {
         // Arrange
         val colors = defaultColors.drop(2)
         val dataSet = MultiChartDataSet(
@@ -168,7 +168,7 @@ class DataValidationTest {
     }
 
     @Test
-    fun `validateLineData with invalid data items`() {
+    fun validateLineData_invalidDataItems_validationErrorsPresent() {
         // Arrange
         val index = 1
         val modifiedList = defaultDataItems[index].second.drop(2)
@@ -198,7 +198,7 @@ class DataValidationTest {
     }
 
     @Test
-    fun `validateLineData with empty item points`() {
+    fun validateLineData_emptyItemPoints_validationErrorsPresent() {
         // Arrange
         val index = 0
         val dataItems = defaultDataItems.toMutableList().apply {
@@ -226,7 +226,7 @@ class DataValidationTest {
 
     // Bar data
     @Test
-    fun `validateBarData with invalid categories`() {
+    fun validateBarData_invalidCategories_validationErrorsPresent() {
         // Arrange
         val categories = defaultCategories.drop(1)
 
@@ -253,7 +253,7 @@ class DataValidationTest {
     }
 
     @Test
-    fun `validateBarData with invalid colors`() {
+    fun validateBarData_invalidColors_validationErrorsPresent() {
         // Arrange
         val colors = defaultColors.drop(2)
         val dataSet = MultiChartDataSet(
@@ -276,7 +276,7 @@ class DataValidationTest {
     }
 
     @Test
-    fun `validateBarData with invalid data items`() {
+    fun validateBarData_invalidDataItems_validationErrorsPresent() {
         // Arrange
         val index = 1
         val modifiedList = defaultDataItems[index].second.drop(1)
@@ -306,7 +306,7 @@ class DataValidationTest {
     }
 
     @Test
-    fun `validateBarData with empty item points`() {
+    fun validateBarData_emptyItemPoints_validationErrorsPresent() {
         // Arrange
         val index = 0
         val items = defaultDataItems.toMutableList().apply {
@@ -334,7 +334,7 @@ class DataValidationTest {
 
     // Pie data
     @Test
-    fun `validatePieData with valid dataSet`() {
+    fun validatePieData_validDataSet_noValidationErrors() {
         // Arrange
         val chartDataSet = ChartDataSet(
             items = listOf(10f, 20f, 30f, 40f),
@@ -350,7 +350,7 @@ class DataValidationTest {
     }
 
     @Test
-    fun `validatePieData with invalid data items`() {
+    fun validatePieData_invalidDataItems_validationErrorsPresent() {
         // Arrange
         val chartDataSet = ChartDataSet(
             items = listOf(10f),
@@ -375,7 +375,7 @@ class DataValidationTest {
     }
 
     @Test
-    fun `validatePieData with invalid colors`() {
+    fun validatePieData_invalidColors_validationErrorsPresent() {
         // Arrange
         val colors = defaultColors.drop(2)
 

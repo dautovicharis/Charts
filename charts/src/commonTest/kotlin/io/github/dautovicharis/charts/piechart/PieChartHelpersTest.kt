@@ -22,7 +22,7 @@ class PieChartHelpersTest {
      * - Absolute coordinates are used for the screen points.
      */
     @Test
-    fun testPointsInsideAndOutsideCircle() {
+    fun isPointInCircle_pointsInsideAndOutsideCircle_correctlyIdentifiesPoints() {
         val testPoints = hashMapOf(
             Pair(50f, 50f) to false,   // Outside the circle
             Pair(250f, 0f) to true,    // On the top edge of the circle
@@ -63,7 +63,7 @@ class PieChartHelpersTest {
      * - Absolute coordinates are used for the screen points.
      */
     @Test
-    fun testDegrees() {
+    fun degree_calculatingDegrees_correctDegreesReturned() {
         val testPoints = hashMapOf(
             Pair(300f, 300f) to Pair(0.0, 90.0),     // First Quadrant
             Pair(200f, 300f) to Pair(90.0, 180.0),   // Second Quadrant
