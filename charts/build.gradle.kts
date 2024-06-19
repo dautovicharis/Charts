@@ -89,7 +89,18 @@ android {
 }
 
 // https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/
+tasks.register<Delete>("cleanOldDocs") {
+    group = "documentation"
+    description = "Deletes the old documentation directory for the current version."
+
+    val docVersionsDir = project.rootDir.resolve("docs")
+    val currentVersion = Config.chartsVersion
+    val currentDocsDir = docVersionsDir.resolve(currentVersion)
+    delete(currentDocsDir)
+}
+
 tasks.dokkaHtml.configure {
+    dependsOn("cleanOldDocs")
     dokkaSourceSets {
         configureEach {
             includeNonPublic.set(false)
