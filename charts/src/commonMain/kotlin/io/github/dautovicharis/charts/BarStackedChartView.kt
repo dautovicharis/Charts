@@ -17,6 +17,12 @@ import io.github.dautovicharis.charts.internal.validateBarData
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
 import io.github.dautovicharis.charts.style.StackedBarChartStyle
 
+/**
+ * A composable function that displays a Stacked Bar Chart.
+ *
+ * @param dataSet The data set to be displayed in the chart.
+ * @param style The style to be applied to the chart. If not provided, the default style will be used.
+ */
 @Composable
 fun StackedBarChartView(
     dataSet: MultiChartDataSet,
@@ -32,54 +38,59 @@ fun StackedBarChartView(
     }
 
     if (errors.isEmpty()) {
-        var title by remember { mutableStateOf(dataSet.data.title) }
-        var labels by remember { mutableStateOf(listOf<String>()) }
+        ChartContent(dataSet = dataSet, style = style)
+    } else {
+        ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
+    }
+}
 
-        val colors by remember {
-            mutableStateOf(
-                style.barColors.ifEmpty {
-                    generateColorShades(style.barColor, dataSet.data.getFirstPointsSize())
-                }
-            )
-        }
+@Composable
+private fun ChartContent(dataSet: MultiChartDataSet, style: StackedBarChartStyle) {
+    var title by remember { mutableStateOf(dataSet.data.title) }
+    var labels by remember { mutableStateOf(listOf<String>()) }
 
-        ChartView(chartViewsStyle = style.chartViewStyle) {
-            Text(
-                modifier = style.chartViewStyle.modifierTopTitle,
-                text = title,
-                style = style.chartViewStyle.styleTitle
-            )
+    val colors by remember {
+        mutableStateOf(
+            style.barColors.ifEmpty {
+                generateColorShades(style.barColor, dataSet.data.getFirstPointsSize())
+            }
+        )
+    }
 
-            StackedBarChart(
-                data = dataSet.data,
-                style = style,
-                colors = colors
-            ) { selectedIndex ->
-                title = when (selectedIndex) {
-                    NO_SELECTION -> title
-                    else -> {
-                        dataSet.data.items[selectedIndex].label
-                    }
-                }
+    ChartView(chartViewsStyle = style.chartViewStyle) {
+        Text(
+            modifier = style.chartViewStyle.modifierTopTitle,
+            text = title,
+            style = style.chartViewStyle.styleTitle
+        )
 
-                if (dataSet.data.hasCategories()) {
-                    labels = when (selectedIndex) {
-                        NO_SELECTION -> emptyList()
-                        else -> dataSet.data.items[selectedIndex].item.labels
-                    }
+        StackedBarChart(
+            data = dataSet.data,
+            style = style,
+            colors = colors
+        ) { selectedIndex ->
+            title = when (selectedIndex) {
+                NO_SELECTION -> title
+                else -> {
+                    dataSet.data.items[selectedIndex].label
                 }
             }
 
             if (dataSet.data.hasCategories()) {
-                LegendItem(
-                    chartViewsStyle = style.chartViewStyle,
-                    colors = colors,
-                    legend = dataSet.data.categories,
-                    labels = labels
-                )
+                labels = when (selectedIndex) {
+                    NO_SELECTION -> emptyList()
+                    else -> dataSet.data.items[selectedIndex].item.labels
+                }
             }
         }
-    } else {
-        ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
+
+        if (dataSet.data.hasCategories()) {
+            LegendItem(
+                chartViewsStyle = style.chartViewStyle,
+                colors = colors,
+                legend = dataSet.data.categories,
+                labels = labels
+            )
+        }
     }
 }

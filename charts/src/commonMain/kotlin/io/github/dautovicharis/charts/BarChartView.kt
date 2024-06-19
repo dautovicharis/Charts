@@ -13,6 +13,12 @@ import io.github.dautovicharis.charts.internal.common.composable.ChartView
 import io.github.dautovicharis.charts.style.BarChartDefaults
 import io.github.dautovicharis.charts.style.BarChartStyle
 
+/**
+ * A composable function that displays a Bar Chart.
+ *
+ * @param dataSet The data set to be displayed in the chart.
+ * @param style The style to be applied to the chart. If not provided, the default style will be used.
+ */
 @Composable
 fun BarChartView(
     dataSet: ChartDataSet,

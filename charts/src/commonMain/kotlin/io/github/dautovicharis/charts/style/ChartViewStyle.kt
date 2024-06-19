@@ -20,6 +20,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+/**
+ * A class that defines the style for a Chart View.
+ *
+ * @property modifierMain The main modifier to be applied to the chart view.
+ * @property styleTitle The style to be applied to the title of the chart view.
+ * @property modifierTopTitle The modifier to be applied to the top title of the chart view.
+ * @property modifierLegend The modifier to be applied to the legend of the chart view.
+ * @property innerPadding The inner padding of the chart view.
+ * @property width The width of the chart view.
+ * @property backgroundColor The background color of the chart view.
+ */
 @Immutable
 class ChartViewStyle internal constructor(
     val modifierMain: Modifier,
@@ -31,8 +42,20 @@ class ChartViewStyle internal constructor(
     val backgroundColor: Color
 )
 
+/**
+ * An object that provides default styles for a Chart View.
+ */
  object ChartViewDefaults {
-
+    /**
+     * Returns a ChartViewStyle with the provided parameters or their default values.
+     *
+     * @param width The width of the chart view. Defaults to Dp.Infinity.
+     * @param outerPadding The outer padding of the chart view. Defaults to 20.dp.
+     * @param innerPadding The inner padding of the chart view. Defaults to 15.dp.
+     * @param cornerRadius The corner radius of the chart view. Defaults to 20.dp.
+     * @param shadow The shadow of the chart view. Defaults to 15.dp.
+     * @param backgroundColor The background color of the chart view. Defaults to the surface color of the MaterialTheme.
+     */
     @Composable
     fun style(
         width: Dp = Dp.Infinity,

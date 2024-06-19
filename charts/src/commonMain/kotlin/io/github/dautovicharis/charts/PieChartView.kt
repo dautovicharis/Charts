@@ -16,6 +16,12 @@ import io.github.dautovicharis.charts.internal.validatePieData
 import io.github.dautovicharis.charts.style.PieChartDefaults
 import io.github.dautovicharis.charts.style.PieChartStyle
 
+/**
+ * A composable function that displays a Pie Chart.
+ *
+ * @param dataSet The data set to be displayed in the chart.
+ * @param style The style to be applied to the chart. If not provided, the default style will be used.
+ */
 @Composable
 fun PieChartView(
     dataSet: ChartDataSet,
@@ -32,23 +38,31 @@ fun PieChartView(
     if (errors.isNotEmpty()) {
         ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
     } else {
-        var title by remember { mutableStateOf(dataSet.data.label) }
+        ChartContent(dataSet = dataSet, style = style)
+    }
+}
 
-        ChartView(chartViewsStyle = style.chartViewStyle) {
-            Text(
-                modifier = style.chartViewStyle.modifierTopTitle,
-                text = title,
-                style = style.chartViewStyle.styleTitle
-            )
-            PieChart(
-                chartData = dataSet.data.item,
-                style = style,
-                chartStyle = style.chartViewStyle
-            ) {
-                title = when (it) {
-                    NO_SELECTION -> dataSet.data.label
-                    else -> dataSet.data.item.labels[it]
-                }
+@Composable
+private fun ChartContent(
+    dataSet: ChartDataSet,
+    style: PieChartStyle
+) {
+    var title by remember { mutableStateOf(dataSet.data.label) }
+
+    ChartView(chartViewsStyle = style.chartViewStyle) {
+        Text(
+            modifier = style.chartViewStyle.modifierTopTitle,
+            text = title,
+            style = style.chartViewStyle.styleTitle
+        )
+        PieChart(
+            chartData = dataSet.data.item,
+            style = style,
+            chartStyle = style.chartViewStyle
+        ) {
+            title = when (it) {
+                NO_SELECTION -> dataSet.data.label
+                else -> dataSet.data.item.labels[it]
             }
         }
     }
