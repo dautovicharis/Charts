@@ -20,3 +20,15 @@ sonar {
         )
     }
 }
+
+tasks.register("chartsTest") {
+    group = "Charts"
+    description = "Relevant tests for the charts project"
+    dependsOn("charts:iosX64Test", "charts:connectedAndroidTest", "charts:jsTest", "charts:jvmTest")
+}
+
+tasks.register("chartsCheck") {
+    group = "Charts"
+    description = "Build, tests, coverage report and sonar analysis for the charts project"
+    dependsOn("build", "chartsTest", "charts:koverXmlReport", "app:koverXmlReport", "sonar")
+}
