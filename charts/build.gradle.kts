@@ -46,6 +46,8 @@ kotlin {
             implementation(kotlin("test"))
             implementation(kotlin("test-common"))
             implementation(kotlin("test-annotations-common"))
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
         }
 
         androidMain.dependencies {
@@ -64,6 +66,7 @@ android {
         namespace = Config.chartsNamespace
         compileSdk = Config.compileSdk
         minSdk = Config.minSdk
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
