@@ -1,6 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
+import org.jetbrains.kotlin.gradle.targets.js.internal.filterClassName
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -10,6 +11,7 @@ plugins {
     `maven-publish`
     signing
     alias(libs.plugins.mavenPublish)
+    alias(libs.plugins.kover)
 }
 
 buildscript {
@@ -166,4 +168,8 @@ mavenPublishing {
 dependencies {
     dokkaHtmlPlugin(libs.dokka.versions)
     implementation(libs.dokka.doc)
+}
+
+kover {
+    filterClassName("androidx.compose.ui.tooling.preview.Preview")
 }
