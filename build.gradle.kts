@@ -28,6 +28,10 @@ tasks.register("chartsTest") {
     dependsOn("charts:connectedAndroidTest")
     dependsOn("charts:jsTest")
     dependsOn("charts:jvmTest")
+
+    tasks.findByName("charts:connectedAndroidTest")?.mustRunAfter("charts:iosX64Test")
+    tasks.findByName("charts:jsTest")?.mustRunAfter("charts:connectedAndroidTest")
+    tasks.findByName("charts:jvmTest")?.mustRunAfter("charts:jsTest")
 }
 
 tasks.register("chartsCheck") {
@@ -37,4 +41,8 @@ tasks.register("chartsCheck") {
     dependsOn("chartsTest")
     dependsOn("charts:koverXmlReport")
     dependsOn("sonar")
+
+    tasks.findByName("chartsTest")?.mustRunAfter("build")
+    tasks.findByName("charts:koverXmlReport")?.mustRunAfter("chartsTest")
+    tasks.findByName("sonar")?.mustRunAfter("charts:koverXmlReport")
 }
