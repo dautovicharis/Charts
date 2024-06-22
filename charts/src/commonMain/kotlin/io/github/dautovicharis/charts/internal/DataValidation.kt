@@ -1,6 +1,9 @@
 package io.github.dautovicharis.charts.internal
 
 import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_BAR
+import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_LINE
+import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_PIE
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.style.LineChartStyle
 import io.github.dautovicharis.charts.style.PieChartStyle
@@ -12,6 +15,10 @@ internal object ValidationErrors {
         "Categories size %d does not match expected %d."
     const val RULE_COLORS_SIZE_MISMATCH: String = "Colors size %d does not match expected %d."
     const val RULE_DATA_POINTS_LESS_THAN_MIN: String = "Data points size should be greater than %d."
+
+    const val MIN_REQUIRED_PIE: Int = 2
+    const val MIN_REQUIRED_LINE: Int = 2
+    const val MIN_REQUIRED_BAR: Int = 1
 }
 
 internal fun String.format(vararg args: Any?): String {
@@ -29,12 +36,11 @@ internal fun validateLineData(
 
     val colorsSize = style.lineColors.size
     val expectedColorsSize = data.items.size
-    val minRequiredPointsSize = 2
 
     return validateChartData(
         data = data,
         pointsSize = firstPointsSize,
-        minRequiredPointsSize = minRequiredPointsSize,
+        minRequiredPointsSize = MIN_REQUIRED_LINE,
         colorsSize = colorsSize,
         expectedColorsSize = expectedColorsSize
     )
@@ -46,17 +52,15 @@ internal fun validateBarData(
 ): List<String> {
     val firstPointsSize = data.items.first().item.points.size
     val colorsSize = style.barColors.size
-    val minRequiredPointsSize = 1
 
     return validateChartData(
         data = data,
         pointsSize = firstPointsSize,
-        minRequiredPointsSize = minRequiredPointsSize,
+        minRequiredPointsSize = MIN_REQUIRED_BAR,
         colorsSize = colorsSize,
         expectedColorsSize = firstPointsSize
     )
 }
-
 
 internal fun validatePieData(
     dataSet: ChartDataSet,
@@ -65,12 +69,11 @@ internal fun validatePieData(
     val validationErrors = mutableListOf<String>()
     val pointsSize = dataSet.data.item.points.size
     val colorsSize = style.pieColors.size
-    val minRequiredPointsSize = 2
 
     // Rule 1: pointsSize should be greater than minRequiredPointsSize
-    if (pointsSize < minRequiredPointsSize) {
+    if (pointsSize < MIN_REQUIRED_PIE) {
         val validationError =
-            ValidationErrors.RULE_DATA_POINTS_LESS_THAN_MIN.format(minRequiredPointsSize)
+            ValidationErrors.RULE_DATA_POINTS_LESS_THAN_MIN.format(MIN_REQUIRED_PIE)
         validationErrors.add(validationError)
         return validationErrors
     }
