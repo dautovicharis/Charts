@@ -1,6 +1,6 @@
 package io.github.dautovicharis.charts.internal.common.model
 
-import io.github.dautovicharis.charts.internal.common.NO_SELECTION
+import io.github.dautovicharis.charts.internal.NO_SELECTION
 
 internal data class MultiChartData(
     val items: List<ChartDataItem>,

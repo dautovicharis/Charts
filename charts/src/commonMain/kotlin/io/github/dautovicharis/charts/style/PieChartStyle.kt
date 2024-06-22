@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import io.github.dautovicharis.charts.internal.common.DONUT_MAX_PERCENTAGE
-import io.github.dautovicharis.charts.internal.common.DONUT_MIN_PERCENTAGE
+import io.github.dautovicharis.charts.internal.DONUT_MAX_PERCENTAGE
+import io.github.dautovicharis.charts.internal.DONUT_MIN_PERCENTAGE
 
 /**
  * A class that defines the style for a Pie Chart.

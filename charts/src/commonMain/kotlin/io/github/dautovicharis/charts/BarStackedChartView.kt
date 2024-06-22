@@ -6,11 +6,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.testTag
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
+import io.github.dautovicharis.charts.internal.NO_SELECTION
+import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.barstackedchart.LegendItem
 import io.github.dautovicharis.charts.internal.barstackedchart.StackedBarChart
 import io.github.dautovicharis.charts.internal.barstackedchart.generateColorShades
-import io.github.dautovicharis.charts.internal.common.NO_SELECTION
 import io.github.dautovicharis.charts.internal.common.composable.ChartErrors
 import io.github.dautovicharis.charts.internal.common.composable.ChartView
 import io.github.dautovicharis.charts.internal.validateBarData
@@ -59,7 +61,8 @@ private fun ChartContent(dataSet: MultiChartDataSet, style: StackedBarChartStyle
 
     ChartView(chartViewsStyle = style.chartViewStyle) {
         Text(
-            modifier = style.chartViewStyle.modifierTopTitle,
+            modifier = style.chartViewStyle.modifierTopTitle
+                .testTag(TestTags.CHART_TITLE),
             text = title,
             style = style.chartViewStyle.styleTitle
         )

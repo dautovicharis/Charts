@@ -19,9 +19,11 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.testTag
+import io.github.dautovicharis.charts.internal.ANIMATION_TARGET
 import io.github.dautovicharis.charts.internal.AnimationSpec
-import io.github.dautovicharis.charts.internal.common.ANIMATION_TARGET
-import io.github.dautovicharis.charts.internal.common.NO_SELECTION
+import io.github.dautovicharis.charts.internal.NO_SELECTION
+import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.internal.common.model.minMax
 import io.github.dautovicharis.charts.style.LineChartStyle
@@ -45,6 +47,7 @@ internal fun LineChart(
 
     val minMax = remember { data.minMax() }
     Canvas(modifier = style.modifier
+        .testTag(TestTags.LINE_CHART)
         .onGloballyPositioned {
             show = true
         }

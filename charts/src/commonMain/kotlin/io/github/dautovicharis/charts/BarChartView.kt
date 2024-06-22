@@ -6,9 +6,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.testTag
 import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.internal.NO_SELECTION
+import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.barchart.BarChart
-import io.github.dautovicharis.charts.internal.common.NO_SELECTION
 import io.github.dautovicharis.charts.internal.common.composable.ChartView
 import io.github.dautovicharis.charts.style.BarChartDefaults
 import io.github.dautovicharis.charts.style.BarChartStyle
@@ -27,7 +29,8 @@ fun BarChartView(
     var title by remember { mutableStateOf(dataSet.data.label) }
     ChartView(chartViewsStyle = style.chartViewStyle) {
         Text(
-            modifier = style.chartViewStyle.modifierTopTitle,
+            modifier = style.chartViewStyle.modifierTopTitle
+                .testTag(TestTags.CHART_TITLE),
             text = title,
             style = style.chartViewStyle.styleTitle
         )
