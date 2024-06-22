@@ -24,11 +24,17 @@ sonar {
 tasks.register("chartsTest") {
     group = "Charts"
     description = "Relevant tests for the charts project"
-    dependsOn("charts:iosX64Test", "charts:connectedAndroidTest", "charts:jsTest", "charts:jvmTest")
+    dependsOn("charts:iosX64Test")
+    dependsOn("charts:connectedAndroidTest")
+    dependsOn("charts:jsTest")
+    dependsOn("charts:jvmTest")
 }
 
 tasks.register("chartsCheck") {
     group = "Charts"
     description = "Build, tests, coverage report and sonar analysis for the charts project"
-    dependsOn("build", "chartsTest", "charts:koverXmlReport", "app:koverXmlReport", "sonar")
+    dependsOn("build")
+    dependsOn("chartsTest")
+    dependsOn("charts:koverXmlReport")
+    dependsOn("sonar")
 }
