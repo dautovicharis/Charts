@@ -1,4 +1,4 @@
-package io.github.dautovicharis.charts.common.model
+package io.github.dautovicharis.charts.unit.model
 
 import io.github.dautovicharis.charts.internal.common.model.ChartDataItem
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData

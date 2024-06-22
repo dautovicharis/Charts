@@ -1,4 +1,4 @@
-package io.github.dautovicharis.charts.barchart
+package io.github.dautovicharis.charts.unit.helpers
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
