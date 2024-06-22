@@ -1,13 +1,16 @@
 package io.github.dautovicharis.charts.internal.piechart
 
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.center
-import io.github.dautovicharis.charts.internal.common.NO_SELECTION
+import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.common.model.ChartData
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan
+import kotlin.math.cos
 import kotlin.math.min
+import kotlin.math.sin
 import kotlin.math.sqrt
 
 /**
@@ -105,3 +108,38 @@ internal fun createPieSlices(data: ChartData): List<PieSlice> {
         }
     }
 }
+
+/**
+ * Calculates the coordinates for the middle of a slice in a pie chart.
+ *
+ * @param index The index of the slice in the list of slices.
+ * @param size The size of the pie chart as [IntSize].
+ * @param slices The list of slices in the pie chart.
+ * @return The [Offset] representing the coordinates of the middle of the slice.
+ */
+internal fun getCoordinatesForSlice(
+    index: Int,
+    size: IntSize,
+    slices: List<PieSlice>
+): Offset {
+    val slice = slices[index]
+    val startAngle = slice.startDeg
+    val sweepAngle = slice.sweepAngle
+    val radius = size.width / 2
+
+    // Calculate midpoint angle of the slice
+    val midAngle = startAngle + (sweepAngle / 2f)
+
+    // Convert midpoint angle from degrees to radians
+    val radian = midAngle * (PI / 180)
+
+    // Calculate the distance from the center to the middle of the slice
+    val middleRadius = radius / 2f
+
+    // Calculate x and y coordinates of the middle of the slice
+    val x = radius + middleRadius * cos(radian).toFloat()
+    val y = radius + middleRadius * sin(radian).toFloat()
+
+    return Offset(x, y)
+}
+
