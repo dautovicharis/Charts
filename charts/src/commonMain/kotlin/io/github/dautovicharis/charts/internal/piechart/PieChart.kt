@@ -17,11 +17,13 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.testTag
+import io.github.dautovicharis.charts.internal.ANIMATION_DURATION
 import io.github.dautovicharis.charts.internal.AnimationSpec
-import io.github.dautovicharis.charts.internal.common.ANIMATION_DURATION
-import io.github.dautovicharis.charts.internal.common.DEFAULT_SCALE
-import io.github.dautovicharis.charts.internal.common.MAX_SCALE
-import io.github.dautovicharis.charts.internal.common.NO_SELECTION
+import io.github.dautovicharis.charts.internal.DEFAULT_SCALE
+import io.github.dautovicharis.charts.internal.MAX_SCALE
+import io.github.dautovicharis.charts.internal.NO_SELECTION
+import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.common.model.ChartData
 import io.github.dautovicharis.charts.style.ChartViewStyle
 import io.github.dautovicharis.charts.style.PieChartStyle
@@ -66,6 +68,7 @@ internal fun PieChart(
     )
 
     Box(modifier = style.modifier
+        .testTag(TestTags.PIE_CHART)
         .onGloballyPositioned { show = true }
         .pointerInput(Unit) {
             detectDragGestures(onDragEnd = {

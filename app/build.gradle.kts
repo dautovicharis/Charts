@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.internal.filterClassName
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -6,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.build.config)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
@@ -132,8 +134,12 @@ compose.desktop {
 // Shared BuildConfig
 buildConfig {
     packageName(Config.demoNamespace)
-    buildConfigField("CHARTS_VERSION", Config.chartsVersion )
+    buildConfigField("CHARTS_VERSION", Config.chartsVersion)
     buildConfigField("DEMO_VERSION_NAME", Config.demoVersionName)
     buildConfigField("DEMO_VERSION_CODE", Config.demoVersionCode)
     useKotlinOutput()
+}
+
+kover {
+    filterClassName("androidx.compose.ui.tooling.preview.Preview")
 }

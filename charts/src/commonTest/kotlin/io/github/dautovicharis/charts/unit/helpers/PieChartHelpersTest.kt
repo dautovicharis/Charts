@@ -1,25 +1,27 @@
-package io.github.dautovicharis.charts.piechart
+package io.github.dautovicharis.charts.unit.helpers
 
 import androidx.compose.ui.unit.IntSize
+import io.github.dautovicharis.charts.internal.piechart.createPieSlices
 import io.github.dautovicharis.charts.internal.piechart.degree
+import io.github.dautovicharis.charts.internal.piechart.getCoordinatesForSlice
 import io.github.dautovicharis.charts.internal.piechart.isPointInCircle
+import io.github.dautovicharis.charts.mock.MockTest.dataSet
+import io.github.dautovicharis.charts.unit.helpers.PieChartHelpersTest.Companion.WIDTH
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class PieChartHelpersTest {
 
-    companion object {
+    private companion object {
         private const val WIDTH = 500
         private const val HEIGHT = 500
     }
 
     /**
-     * Tests for checking whether points are inside or outside a circle on a chart.
-     *
-     * Assumptions:
-     * - The chart size is defined by [WIDTH] and [HEIGHT].
-     * - The center of the chart is at half of its [WIDTH] [HEIGHT].
-     * - Absolute coordinates are used for the screen points.
+     * This test checks whether the function `isPointInCircle` correctly identifies points inside and outside a circle.
+     * The circle is defined by the [WIDTH] and [HEIGHT] of the chart, and its center is at half of its [WIDTH] and [HEIGHT].
+     * Absolute coordinates are used for the screen points.
      */
     @Test
     fun isPointInCircle_pointsInsideAndOutsideCircle_correctlyIdentifiesPoints() {
@@ -55,12 +57,9 @@ class PieChartHelpersTest {
 
 
     /**
-     * Tests for calculating degrees on a chart.
-     *
-     * Assumptions:
-     * - The chart size is defined by [WIDTH] and [HEIGHT].
-     * - The center of the chart is at half of its [WIDTH] [HEIGHT].
-     * - Absolute coordinates are used for the screen points.
+     * This test checks whether the function `degree` correctly calculates degrees on a chart.
+     * The chart size is defined by [WIDTH] and [HEIGHT], and its center is at half of its [WIDTH] and [HEIGHT].
+     * Absolute coordinates are used for the screen points.
      */
     @Test
     fun degree_calculatingDegrees_correctDegreesReturned() {
@@ -81,6 +80,33 @@ class PieChartHelpersTest {
             // Assert
             assertTrue { result > entry.value.first }
             assertTrue { result <= entry.value.second }
+        }
+    }
+
+    /**
+     * This test checks whether the function `getCoordinatesForSlice`
+     * returns the correct coordinates for a given index.
+     * The chart size is defined by [WIDTH] and [HEIGHT].
+     */
+    @Test
+    fun getCoordinates_returnsCorrectCoordinates() {
+        // Arrange
+        val testData = hashMapOf(
+            0 to Pair(368.88208f, 288.62714f),
+            1 to Pair(288.62714f, 368.88208f),
+            2 to Pair(131.11794f, 288.62714f),
+            3 to Pair(288.62714f, 131.11794f)
+        )
+        val slices = createPieSlices(dataSet.data.item)
+        val size = IntSize(WIDTH, HEIGHT)
+
+        // Act
+        testData.forEach {
+            val coordinates = getCoordinatesForSlice(it.key, size, slices)
+
+            // Assert
+            assertEquals(it.value.first, coordinates.x)
+            assertEquals(it.value.second, coordinates.y)
         }
     }
 }

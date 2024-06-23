@@ -15,13 +15,15 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.util.lerp
+import io.github.dautovicharis.charts.internal.ANIMATION_TARGET
 import io.github.dautovicharis.charts.internal.AnimationSpec
+import io.github.dautovicharis.charts.internal.DEFAULT_SCALE
+import io.github.dautovicharis.charts.internal.MAX_SCALE
+import io.github.dautovicharis.charts.internal.NO_SELECTION
+import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.barchart.getSelectedIndex
-import io.github.dautovicharis.charts.internal.common.ANIMATION_TARGET
-import io.github.dautovicharis.charts.internal.common.DEFAULT_SCALE
-import io.github.dautovicharis.charts.internal.common.MAX_SCALE
-import io.github.dautovicharis.charts.internal.common.NO_SELECTION
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.style.StackedBarChartStyle
 
@@ -47,7 +49,9 @@ internal fun StackedBarChart(
     }
 
     Canvas(
-        modifier = style.modifier.pointerInput(Unit) {
+        modifier = style.modifier
+            .testTag(TestTags.STACKED_BAR_CHART)
+            .pointerInput(Unit) {
             detectDragGestures(
                 onDrag = { change, _ ->
                     selectedIndex =

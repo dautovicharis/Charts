@@ -2,10 +2,6 @@ package io.github.dautovicharis.charts.internal
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.TweenSpec
-import io.github.dautovicharis.charts.internal.common.ANIMATION_DURATION
-import io.github.dautovicharis.charts.internal.common.ANIMATION_DURATION_BAR
-import io.github.dautovicharis.charts.internal.common.ANIMATION_DURATION_LINE
-import io.github.dautovicharis.charts.internal.common.ANIMATION_OFFSET
 
 internal object AnimationSpec {
 

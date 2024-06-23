@@ -24,6 +24,8 @@ mavenPublish = "0.28.0"
 buildConfig = "5.3.5"
 # https://sonarcloud.io
 sonarqube = "5.0.0.4638"
+# https://github.com/Kotlin/kotlinx-kover
+kover = "0.8.1"
 
 [libraries]
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
@@ -43,3 +45,4 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
 build-config = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }

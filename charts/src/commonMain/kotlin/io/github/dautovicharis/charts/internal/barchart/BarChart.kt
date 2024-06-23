@@ -15,12 +15,14 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.util.lerp
+import io.github.dautovicharis.charts.internal.ANIMATION_TARGET
 import io.github.dautovicharis.charts.internal.AnimationSpec
-import io.github.dautovicharis.charts.internal.common.ANIMATION_TARGET
-import io.github.dautovicharis.charts.internal.common.DEFAULT_SCALE
-import io.github.dautovicharis.charts.internal.common.MAX_SCALE
-import io.github.dautovicharis.charts.internal.common.NO_SELECTION
+import io.github.dautovicharis.charts.internal.DEFAULT_SCALE
+import io.github.dautovicharis.charts.internal.MAX_SCALE
+import io.github.dautovicharis.charts.internal.NO_SELECTION
+import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.common.model.ChartData
 import io.github.dautovicharis.charts.style.BarChartStyle
 import kotlin.math.abs
@@ -49,7 +51,9 @@ internal fun BarChart(
     val minValue = remember { chartData.points.min() }
     var selectedIndex by remember { mutableIntStateOf(NO_SELECTION) }
 
-    Canvas(modifier = style.modifier.pointerInput(Unit) {
+    Canvas(modifier = style.modifier
+        .testTag(TestTags.BAR_CHART)
+        .pointerInput(Unit) {
         detectDragGestures(
             onDrag = { change, _ ->
                 selectedIndex =

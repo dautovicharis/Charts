@@ -10,9 +10,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import io.github.dautovicharis.charts.internal.common.DONUT_MAX_PERCENTAGE
-import io.github.dautovicharis.charts.internal.common.DONUT_MIN_PERCENTAGE
+import io.github.dautovicharis.charts.internal.DONUT_MAX_PERCENTAGE
+import io.github.dautovicharis.charts.internal.DONUT_MIN_PERCENTAGE
 
+/**
+ * A class that defines the style for a Pie Chart.
+ *
+ * @property modifier The modifier to be applied to the chart.
+ * @property chartViewStyle The style to be applied to the chart view.
+ * @property donutPercentage The percentage of the chart that should be a donut hole. Must be between DONUT_MIN_PERCENTAGE and DONUT_MAX_PERCENTAGE.
+ * @property pieColors The colors to be used for the slices in the pie chart.
+ * @property pieColor The color to be used for the pie chart if pieColors is empty.
+ * @property borderColor The color of the border around the pie chart.
+ * @property borderWidth The width of the border around the pie chart.
+ */
 @Immutable
 class PieChartStyle internal constructor(
     internal val modifier: Modifier,
@@ -23,6 +34,9 @@ class PieChartStyle internal constructor(
     val borderColor: Color,
     val borderWidth: Float
 ) : Style {
+    /**
+     * Returns a list of the properties of the PieChartStyle.
+     */
     override fun getProperties(): List<Pair<String, Any>> {
         return listOf(
             PieChartStyle::donutPercentage.name to donutPercentage,
@@ -34,7 +48,21 @@ class PieChartStyle internal constructor(
     }
 }
 
+/**
+ * An object that provides default styles for a Pie Chart.
+ */
 object PieChartDefaults {
+    /**
+     * Returns a PieChartStyle with the provided parameters or their default values.
+     *
+     * @param pieColor The color to be used for the pie chart if pieColors is empty. Defaults to the primary color of the MaterialTheme.
+     * @param pieColors The colors to be used for the slices in the pie chart. Defaults to an empty list.
+     * @param borderColor The color of the border around the pie chart. Defaults to the surface color of the MaterialTheme.
+     * @param innerPadding The inner padding of the pie chart. Defaults to 15.dp.
+     * @param donutPercentage The percentage of the chart that should be a donut hole. Defaults to 0f.
+     * @param borderWidth The width of the border around the pie chart. Defaults to 3f.
+     * @param chartViewStyle The style to be applied to the chart view. Defaults to the default style of ChartViewDefaults.
+     */
     @Composable
     fun style(
         pieColor: Color = MaterialTheme.colorScheme.primary,

@@ -11,7 +11,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
 import io.github.dautovicharis.charts.style.ChartViewStyle
 
@@ -19,9 +21,11 @@ import io.github.dautovicharis.charts.style.ChartViewStyle
 internal fun ChartErrors(chartViewStyle: ChartViewStyle, errors: List<String>) {
     ChartsDefaultTheme(content = {
         Column(
-            modifier = chartViewStyle.modifierMain.padding(15.dp)
+            modifier = chartViewStyle.modifierMain
+                .padding(15.dp)
+                .testTag(TestTags.CHART_ERROR)
         ) {
-            errors.forEach {
+            errors.forEach { error ->
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -30,7 +34,7 @@ internal fun ChartErrors(chartViewStyle: ChartViewStyle, errors: List<String>) {
                             shape = RoundedCornerShape(5.dp)
                         )
                         .padding(5.dp),
-                    text = "$it\n",
+                    text = "$error\n",
                     color = MaterialTheme.colorScheme.onErrorContainer
                 )
                 Spacer(modifier = Modifier.height(5.dp))

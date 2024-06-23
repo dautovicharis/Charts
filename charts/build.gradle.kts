@@ -1,6 +1,7 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
+import org.jetbrains.kotlin.gradle.targets.js.internal.filterClassName
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -10,6 +11,7 @@ plugins {
     `maven-publish`
     signing
     alias(libs.plugins.mavenPublish)
+    alias(libs.plugins.kover)
 }
 
 buildscript {
@@ -46,6 +48,8 @@ kotlin {
             implementation(kotlin("test"))
             implementation(kotlin("test-common"))
             implementation(kotlin("test-annotations-common"))
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
         }
 
         androidMain.dependencies {
@@ -64,6 +68,7 @@ android {
         namespace = Config.chartsNamespace
         compileSdk = Config.compileSdk
         minSdk = Config.minSdk
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
@@ -89,7 +94,18 @@ android {
 }
 
 // https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/
+tasks.register<Delete>("cleanOldDocs") {
+    group = "documentation"
+    description = "Deletes the old documentation directory for the current version."
+
+    val docVersionsDir = project.rootDir.resolve("docs")
+    val currentVersion = Config.chartsVersion
+    val currentDocsDir = docVersionsDir.resolve(currentVersion)
+    delete(currentDocsDir)
+}
+
 tasks.dokkaHtml.configure {
+    dependsOn("cleanOldDocs")
     dokkaSourceSets {
         configureEach {
             includeNonPublic.set(false)
@@ -152,4 +168,8 @@ mavenPublishing {
 dependencies {
     dokkaHtmlPlugin(libs.dokka.versions)
     implementation(libs.dokka.doc)
+}
+
+kover {
+    filterClassName("androidx.compose.ui.tooling.preview.Preview")
 }
