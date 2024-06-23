@@ -1,10 +1,10 @@
 ![logo-no-background](https://github.com/dautovicharis/Charts/assets/7049715/4150f102-1b05-4fd7-ab01-63480d2e6d50)
 
-# Charts
 [![Release](https://img.shields.io/maven-central/v/io.github.dautovicharis/charts.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.dautovicharis/charts/overview)
 [![Snapshot](https://img.shields.io/nexus/s/io.github.dautovicharis/charts?server=https%3A%2F%2Fs01.oss.sonatype.org)](https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/dautovicharis/charts/)
 [![Build Status](https://app.bitrise.io/app/23ce18a5-812b-463b-a463-ee85e65c726b/status.svg?token=X08KrAmKwbHjF0NvT05WdA&branch=main)](https://app.bitrise.io/app/23ce18a5-812b-463b-a463-ee85e65c726b)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dautovicharis_Charts&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dautovicharis_Charts)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dautovicharis_Charts&metric=coverage)](https://sonarcloud.io/summary/new_code?id=dautovicharis_Charts)
 
 This is a simple chart library built with Jetpack Compose.
 
