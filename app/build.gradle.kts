@@ -1,5 +1,5 @@
+
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.targets.js.internal.filterClassName
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -138,8 +138,4 @@ buildConfig {
     buildConfigField("DEMO_VERSION_NAME", Config.demoVersionName)
     buildConfigField("DEMO_VERSION_CODE", Config.demoVersionCode)
     useKotlinOutput()
-}
-
-kover {
-    filterClassName("androidx.compose.ui.tooling.preview.Preview")
 }

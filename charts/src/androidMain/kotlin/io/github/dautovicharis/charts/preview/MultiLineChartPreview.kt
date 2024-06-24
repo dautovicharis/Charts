@@ -1,17 +1,18 @@
-package io.github.dautovicharis.charts
+package io.github.dautovicharis.charts.preview
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.github.dautovicharis.charts.LineChartView
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
-import io.github.dautovicharis.charts.mock.Mock
+import io.github.dautovicharis.charts.preview.mock.Mock
 import io.github.dautovicharis.charts.style.ChartViewDefaults
 import io.github.dautovicharis.charts.style.LineChartDefaults
 
 
 @Composable
-private fun LineChartViewPreview() {
+private fun MultiLineChartPreview() {
     val colors = listOf(
         MaterialTheme.colorScheme.primary,
         MaterialTheme.colorScheme.secondary,
@@ -35,31 +36,31 @@ private fun LineChartViewPreview() {
 
 @Preview
 @Composable
-private fun LineChartViewDefault() {
+private fun MultiLineChartDefault() {
     ChartsDefaultTheme(darkTheme = false, dynamicColor = false) {
-        LineChartViewPreview()
+        MultiLineChartPreview()
     }
 }
 
 @Preview
 @Composable
-private fun LineChartViewDark() {
+private fun MultiLineChartDark() {
     ChartsDefaultTheme(darkTheme = true, dynamicColor = false) {
-        LineChartViewPreview()
+        MultiLineChartPreview()
     }
 }
 
 @Preview(apiLevel = 33)
 @Composable
-private fun LineChartViewDynamic() {
+private fun MultiLineChartDynamic() {
     ChartsDefaultTheme(darkTheme = false, dynamicColor = true) {
-        LineChartViewPreview()
+        MultiLineChartPreview()
     }
 }
 
 @Preview
 @Composable
-private fun LineChartViewInvalidData() {
+private fun MultiLineChartError() {
     val colors = listOf(
         MaterialTheme.colorScheme.primary,
         MaterialTheme.colorScheme.secondary,
@@ -74,8 +75,10 @@ private fun LineChartViewInvalidData() {
         chartViewStyle = ChartViewDefaults.style(width = 300.dp)
     )
 
-    LineChartView(
-        dataSet = Mock.lineChartInvalid(),
-        style = style
-    )
+    ChartsDefaultTheme {
+        LineChartView(
+            dataSet = Mock.lineChartInvalid(),
+            style = style
+        )
+    }
 }

@@ -18,6 +18,7 @@ sonar {
             "${project.rootDir}/charts/build/reports/kover/report.xml," +
                     "${project.rootDir}/app/build/reports/kover/report.xml"
         )
+        property("sonar.coverage.exclusions", "**/preview/**")
     }
 }
 
