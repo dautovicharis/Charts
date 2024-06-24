@@ -1,20 +1,18 @@
-package io.github.dautovicharis.charts
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
+package io.github.dautovicharis.charts.preview
+
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.github.dautovicharis.charts.PieChartView
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
-import io.github.dautovicharis.charts.mock.Mock
+import io.github.dautovicharis.charts.preview.mock.Mock
 import io.github.dautovicharis.charts.style.ChartViewDefaults
 import io.github.dautovicharis.charts.style.PieChartDefaults
 import io.github.dautovicharis.charts.style.PieChartStyle
 
 @Composable
-private fun PieChartViewPreview() {
+private fun PieChartPreview() {
     val pieColor = MaterialTheme.colorScheme.primary
     val backgroundColor = MaterialTheme.colorScheme.surface
     val borderColor = MaterialTheme.colorScheme.surface
@@ -31,38 +29,43 @@ private fun PieChartViewPreview() {
         )
     )
 
-    Row(
-        modifier = Modifier
-            .width(300.dp)
-            .wrapContentHeight(),
-    ) {
-        PieChartView(
-            dataSet = Mock.pieChart(),
-            style = style
-        )
-    }
+    PieChartView(
+        dataSet = Mock.pieChart(),
+        style = style
+    )
 }
 
 @Preview
 @Composable
-private fun PieChartViewDefault() {
+private fun PieChartDefault() {
     ChartsDefaultTheme(darkTheme = false, dynamicColor = false) {
-        PieChartViewPreview()
+        PieChartPreview()
     }
 }
 
 @Preview
 @Composable
-private fun PieChartViewDark() {
+private fun PieChartDark() {
     ChartsDefaultTheme(darkTheme = true, dynamicColor = false) {
-        PieChartViewPreview()
+        PieChartPreview()
     }
 }
 
 @Preview(apiLevel = 33)
 @Composable
-private fun PieChartViewDynamic() {
+private fun PieChartDynamic() {
     ChartsDefaultTheme(darkTheme = false, dynamicColor = true) {
-        PieChartViewPreview()
+        PieChartPreview()
+    }
+}
+
+@Preview
+@Composable
+private fun PieChartError() {
+    ChartsDefaultTheme {
+        PieChartView(
+            dataSet = Mock.pieChart(1),
+            style = PieChartDefaults.style()
+        )
     }
 }

@@ -11,7 +11,9 @@ import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.barchart.BarChart
+import io.github.dautovicharis.charts.internal.common.composable.ChartErrors
 import io.github.dautovicharis.charts.internal.common.composable.ChartView
+import io.github.dautovicharis.charts.internal.validateBarData
 import io.github.dautovicharis.charts.style.BarChartDefaults
 import io.github.dautovicharis.charts.style.BarChartStyle
 
@@ -25,6 +27,27 @@ import io.github.dautovicharis.charts.style.BarChartStyle
 fun BarChartView(
     dataSet: ChartDataSet,
     style: BarChartStyle = BarChartDefaults.style()
+) {
+
+    val errors by remember {
+        mutableStateOf(
+            validateBarData(
+                data = dataSet.data.item
+            )
+        )
+    }
+
+    if (errors.isEmpty()) {
+        ChartContent(dataSet = dataSet, style = style)
+    } else {
+        ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
+    }
+}
+
+@Composable
+private fun ChartContent(
+    dataSet: ChartDataSet,
+    style: BarChartStyle
 ) {
     var title by remember { mutableStateOf(dataSet.data.label) }
     ChartView(chartViewsStyle = style.chartViewStyle) {

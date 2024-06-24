@@ -1,7 +1,6 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
-import org.jetbrains.kotlin.gradle.targets.js.internal.filterClassName
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -171,5 +170,15 @@ dependencies {
 }
 
 kover {
-    filterClassName("androidx.compose.ui.tooling.preview.Preview")
+    reports {
+        filters {
+            excludes {
+                packages("io.github.dautovicharis.charts.preview")
+                annotatedBy(
+                    "androidx.compose.ui.tooling.preview.Preview"
+                )
+                androidGeneratedClasses()
+            }
+        }
+    }
 }

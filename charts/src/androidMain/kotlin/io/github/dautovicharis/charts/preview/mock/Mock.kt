@@ -1,4 +1,4 @@
-package io.github.dautovicharis.charts.mock
+package io.github.dautovicharis.charts.preview.mock
 
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
@@ -43,9 +43,9 @@ internal object Mock {
         return mockList
     }
 
-    fun barChart(): ChartDataSet {
+    fun barChart(size: Int = 10): ChartDataSet {
         return ChartDataSet(
-            items = mockList(size = 10),
+            items = mockList(size = size),
             title = BAR_CHART_TITLE
         )
     }
@@ -82,6 +82,13 @@ internal object Mock {
         )
     }
 
+    fun lineChartSimple(size: Int = 10): ChartDataSet {
+        return ChartDataSet(
+            items = mockList(size = size),
+            title = LINE_CHART_TITLE
+        )
+    }
+
     fun lineChartInvalid(): MultiChartDataSet {
         val items = listOf(
             FIRST_ITEM_NAME to FIRST_ITEM.dropLast(1),
@@ -98,9 +105,9 @@ internal object Mock {
         )
     }
 
-    fun pieChart(): ChartDataSet {
+    fun pieChart(size: Int = 9): ChartDataSet {
         return ChartDataSet(
-            items = mockList(size = 9, minFloat = 7f, maxFloat = 54f),
+            items = mockList(size = size, minFloat = 7f, maxFloat = 54f),
             title = PIE_CHART_TITLE
         )
     }
