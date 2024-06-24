@@ -79,12 +79,10 @@ internal fun validatePieData(
     }
 
     // Rule 2: If colors are not empty, it should match pointsSize
-    if (colorsSize > 0) {
-        if (colorsSize != pointsSize) {
-            val validationError =
-                ValidationErrors.RULE_COLORS_SIZE_MISMATCH.format(colorsSize, pointsSize)
-            validationErrors.add(validationError)
-        }
+    if (colorsSize > 0 && colorsSize != pointsSize) {
+        val validationError =
+            ValidationErrors.RULE_COLORS_SIZE_MISMATCH.format(colorsSize, pointsSize)
+        validationErrors.add(validationError)
     }
     return validationErrors
 }
@@ -119,23 +117,19 @@ private fun validateChartData(
     }
 
     // Rule 3: If categories are not empty, it should match pointsSize
-    if (data.hasCategories()) {
-        if (data.categories.size != pointsSize) {
-            val validationError = ValidationErrors.RULE_CATEGORIES_SIZE_MISMATCH.format(
-                data.categories.size,
-                pointsSize
-            )
-            validationErrors.add(validationError)
-        }
+    if (data.hasCategories() && data.categories.size != pointsSize) {
+        val validationError = ValidationErrors.RULE_CATEGORIES_SIZE_MISMATCH.format(
+            data.categories.size,
+            pointsSize
+        )
+        validationErrors.add(validationError)
     }
 
     // Rule 4: If colors are not empty, it should match expectedColorsSize
-    if (colorsSize > 0) {
-        if (colorsSize != expectedColorsSize) {
-            val validationError =
-                ValidationErrors.RULE_COLORS_SIZE_MISMATCH.format(colorsSize, expectedColorsSize)
-            validationErrors.add(validationError)
-        }
+    if (colorsSize > 0 && colorsSize != expectedColorsSize) {
+        val validationError =
+            ValidationErrors.RULE_COLORS_SIZE_MISMATCH.format(colorsSize, expectedColorsSize)
+        validationErrors.add(validationError)
     }
     return validationErrors
 }
