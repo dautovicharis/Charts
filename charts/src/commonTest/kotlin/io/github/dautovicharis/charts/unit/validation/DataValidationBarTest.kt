@@ -1,7 +1,7 @@
 package io.github.dautovicharis.charts.unit.validation
 
 import io.github.dautovicharis.charts.internal.ValidationErrors
-import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_BAR
+import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_STACKED_BAR
 import io.github.dautovicharis.charts.internal.format
 import io.github.dautovicharis.charts.internal.validateBarData
 import io.github.dautovicharis.charts.mock.MockTest.colors
@@ -88,7 +88,7 @@ class DataValidationBarTest {
 
         // Assert
         val expectedError =
-            ValidationErrors.RULE_DATA_POINTS_LESS_THAN_MIN.format(MIN_REQUIRED_BAR)
+            ValidationErrors.RULE_DATA_POINTS_LESS_THAN_MIN.format(MIN_REQUIRED_STACKED_BAR)
         assertTrue(validationErrors.isNotEmpty())
         assertEquals(validationErrors.first(), expectedError)
     }

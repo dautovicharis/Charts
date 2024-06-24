@@ -96,7 +96,7 @@ class PieChartTest {
 
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun pieChart_withInvalidDataColors_displaysError() = runComposeUiTest {
+    fun pieChart_withInvalidColors_displaysError() = runComposeUiTest {
         // Arrange
         val colors = colors.drop(2)
         val pieChartStyle = mockPieChartStyle(colors)
