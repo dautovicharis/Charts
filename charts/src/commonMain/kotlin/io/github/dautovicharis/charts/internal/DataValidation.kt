@@ -4,6 +4,8 @@ import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_BAR
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_LINE
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_PIE
+import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_STACKED_BAR
+import io.github.dautovicharis.charts.internal.common.model.ChartData
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.style.LineChartStyle
 import io.github.dautovicharis.charts.style.PieChartStyle
@@ -14,11 +16,13 @@ internal object ValidationErrors {
     const val RULE_CATEGORIES_SIZE_MISMATCH: String =
         "Categories size %d does not match expected %d."
     const val RULE_COLORS_SIZE_MISMATCH: String = "Colors size %d does not match expected %d."
-    const val RULE_DATA_POINTS_LESS_THAN_MIN: String = "Data points size should be greater than %d."
+    const val RULE_DATA_POINTS_LESS_THAN_MIN: String =
+        "Data points size should be greater than or equal to %d."
 
     const val MIN_REQUIRED_PIE: Int = 2
     const val MIN_REQUIRED_LINE: Int = 2
-    const val MIN_REQUIRED_BAR: Int = 1
+    const val MIN_REQUIRED_STACKED_BAR: Int = 1
+    const val MIN_REQUIRED_BAR: Int = 2
 }
 
 internal fun String.format(vararg args: Any?): String {
@@ -56,10 +60,23 @@ internal fun validateBarData(
     return validateChartData(
         data = data,
         pointsSize = firstPointsSize,
-        minRequiredPointsSize = MIN_REQUIRED_BAR,
+        minRequiredPointsSize = MIN_REQUIRED_STACKED_BAR,
         colorsSize = colorsSize,
         expectedColorsSize = firstPointsSize
     )
+}
+
+internal fun validateBarData(data: ChartData): List<String> {
+    val validationErrors = mutableListOf<String>()
+    val pointsSize = data.points.size
+
+    if (pointsSize < MIN_REQUIRED_BAR) {
+        val validationError =
+            ValidationErrors.RULE_DATA_POINTS_LESS_THAN_MIN.format(MIN_REQUIRED_PIE)
+        validationErrors.add(validationError)
+        return validationErrors
+    }
+    return validationErrors
 }
 
 internal fun validatePieData(
