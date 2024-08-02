@@ -73,7 +73,7 @@ private fun ChartContent(dataSet: MultiChartDataSet, style: StackedBarChartStyle
             colors = colors
         ) { selectedIndex ->
             title = when (selectedIndex) {
-                NO_SELECTION -> title
+                NO_SELECTION -> dataSet.data.title
                 else -> {
                     dataSet.data.items[selectedIndex].label
                 }
