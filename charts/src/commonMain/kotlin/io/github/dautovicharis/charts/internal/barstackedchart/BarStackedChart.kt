@@ -98,7 +98,7 @@ private fun DrawScope.drawBars(
         item.item.points.forEachIndexed { dataIndex, value ->
             val height = lerp(
                 0f,
-                (value.toFloat() / totalMaxValue.toFloat()) * size.height,
+                (value.toFloat() * selectedBarScale / totalMaxValue.toFloat()) * size.height,
                 progress[index].value
             )
             topOffset -= height
@@ -108,7 +108,7 @@ private fun DrawScope.drawBars(
                 topLeft = Offset(x = index * (barWidth + spacing), y = topOffset),
                 size = Size(
                     width = barWidth * selectedBarScale,
-                    height = height * selectedBarScale
+                    height = height
                 )
             )
         }
