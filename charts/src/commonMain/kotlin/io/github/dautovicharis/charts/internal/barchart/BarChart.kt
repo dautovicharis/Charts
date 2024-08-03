@@ -101,20 +101,19 @@ private fun DrawScope.drawBars(
         val spacing = style.space.toPx()
         val barWidth = (size.width - spacing * (dataSize - 1)) / dataSize
 
-        val finalBarHeight = size.height * (abs(value) / (maxValue - minValue))
+        val selectedBarScale = if (index == selectedIndex) MAX_SCALE else DEFAULT_SCALE
+        val finalBarHeight = size.height * selectedBarScale * (abs(value) / (maxValue - minValue))
         val barHeight = lerp(0f, finalBarHeight.toFloat(), progress[index].value)
 
         val top = if (value >= 0) baselineY - barHeight else baselineY
         val left = (barWidth + spacing) * index
-
-        val selectedBarScale = if (index == selectedIndex) MAX_SCALE else DEFAULT_SCALE
 
         drawRect(
             color = barColor,
             topLeft = Offset(x = left, y = top.toFloat()),
             size = Size(
                 width = barWidth * selectedBarScale,
-                height = barHeight * selectedBarScale
+                height = barHeight
             )
         )
     }
