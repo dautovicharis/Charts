@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.drawWithCache
@@ -24,6 +23,7 @@ import io.github.dautovicharis.charts.internal.DEFAULT_SCALE
 import io.github.dautovicharis.charts.internal.MAX_SCALE
 import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
+import io.github.dautovicharis.charts.internal.common.composable.rememberShowState
 import io.github.dautovicharis.charts.internal.common.model.ChartData
 import io.github.dautovicharis.charts.style.ChartViewStyle
 import io.github.dautovicharis.charts.style.PieChartStyle
@@ -43,7 +43,7 @@ internal fun PieChart(
     chartStyle: ChartViewStyle,
     onSliceTouched: (Int) -> Unit = {},
 ) {
-    var show by remember { mutableStateOf(false) }
+    var show by rememberShowState()
     val slices = remember(chartData) { createPieSlices(chartData) }
     var selectedIndex by remember { mutableIntStateOf(NO_SELECTION) }
 

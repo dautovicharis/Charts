@@ -24,6 +24,7 @@ import io.github.dautovicharis.charts.internal.MAX_SCALE
 import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.barchart.getSelectedIndex
+import io.github.dautovicharis.charts.internal.common.composable.rememberAnimationState
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.style.StackedBarChartStyle
 
@@ -34,8 +35,9 @@ internal fun StackedBarChart(
     colors: List<Color>,
     onValueChanged: (Int) -> Unit = {}
 ) {
+    val animationState = rememberAnimationState()
     val progress = remember {
-        data.items.map { Animatable(0f) }
+        data.items.map { animationState }
     }
     var selectedIndex by remember { mutableIntStateOf(-1) }
 
