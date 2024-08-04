@@ -24,6 +24,7 @@ import io.github.dautovicharis.charts.internal.ANIMATION_TARGET
 import io.github.dautovicharis.charts.internal.AnimationSpec
 import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
+import io.github.dautovicharis.charts.internal.common.composable.rememberShowState
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.internal.common.model.minMax
 import io.github.dautovicharis.charts.style.LineChartStyle
@@ -35,7 +36,7 @@ internal fun LineChart(
     colors: List<Color>,
     onValueChanged: (Int) -> Unit = {}
 ) {
-    var show by remember { mutableStateOf(false) }
+    var show by rememberShowState()
     val touchX = remember { mutableFloatStateOf(0f) }
     val dragging = remember { mutableStateOf(false) }
 

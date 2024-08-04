@@ -23,6 +23,7 @@ import io.github.dautovicharis.charts.internal.DEFAULT_SCALE
 import io.github.dautovicharis.charts.internal.MAX_SCALE
 import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
+import io.github.dautovicharis.charts.internal.common.composable.rememberAnimationState
 import io.github.dautovicharis.charts.internal.common.model.ChartData
 import io.github.dautovicharis.charts.style.BarChartStyle
 import kotlin.math.abs
@@ -34,8 +35,9 @@ internal fun BarChart(
     onValueChanged: (Int) -> Unit = {}
 ) {
     val barColor = style.barColor
+    val animationState = rememberAnimationState()
     val progress = remember {
-        chartData.points.map { Animatable(0f) }
+        chartData.points.map { animationState }
     }
 
     chartData.points.forEachIndexed { index, _ ->
