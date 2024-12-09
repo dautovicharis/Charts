@@ -78,9 +78,9 @@ private fun AddDefaultPieChart() {
 @Composable
 private fun AddCustomPieChart() {
     val dataSet = ChartDataSet(
-        items = listOf(60.0f, 25f, 15f, 14f, 30f, 30f, 20f, 30f),
+        items = listOf(8.0f, 230.0f, 540.0f, 370.0f, 70.0f, 230.0f, 430.0f, 150.3f),
         title = "Pie Chart",
-        postfix = " °C"
+        labels = listOf("Public Transport", "Fuel", "Groceries", "Eating out", "Taxes", "Rent", "Entertainment", "Other")
     )
 
     PieChartView(

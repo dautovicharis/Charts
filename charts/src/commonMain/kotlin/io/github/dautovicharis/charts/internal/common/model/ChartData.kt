@@ -10,23 +10,27 @@ internal class ChartData(val data: List<Pair<String, Double>>) {
 @JvmName("toDoubleChartData")
 internal fun List<Double>.toChartData(
     prefix: String = "",
-    postfix: String = ""
-): ChartData = ChartData(this.map { "${prefix}${it}${postfix}" to it })
+    postfix: String = "",
+    labels: List<String>? = null
+): ChartData = ChartData(this.mapIndexed {index,it -> (if (labels != null) labels[index] else "${prefix}${it}${postfix}") to it })
 
 @JvmName("toFloatChartData")
 internal fun List<Float>.toChartData(
     prefix: String = "",
-    postfix: String = ""
-): ChartData = ChartData(this.map { "${prefix}${it}${postfix}" to it.toDouble() })
+    postfix: String = "",
+    labels: List<String>? = null
+): ChartData = ChartData(this.mapIndexed {index,it -> (if (labels != null) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })
 
 @JvmName("toStringChartData")
 internal fun List<String>.toChartData(
     prefix: String = "",
-    postfix: String = ""
-): ChartData = ChartData(this.map { "${prefix}${it}${postfix}" to it.toDouble() })
+    postfix: String = "",
+    labels: List<String>? = null
+): ChartData = ChartData(this.mapIndexed {index,it -> (if (labels != null) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })
 
 @JvmName("toIntChartData")
 internal fun List<Int>.toChartData(
     prefix: String = "",
-    postfix: String = ""
-): ChartData = ChartData(this.map { "${prefix}${it}${postfix}" to it.toDouble() })
+    postfix: String = "",
+    labels: List<String>? = null
+): ChartData = ChartData(this.mapIndexed {index,it -> (if (labels != null) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })
