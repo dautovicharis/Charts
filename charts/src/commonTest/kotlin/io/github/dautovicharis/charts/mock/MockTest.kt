@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.common.model.ChartDataType.FloatData
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.style.ChartViewStyle
 import io.github.dautovicharis.charts.style.LineChartStyle
@@ -28,14 +29,14 @@ internal object MockTest {
     val colors = listOf(Color.Red, Color.Green, Color.Cyan, Color.Black)
 
     private val dataItems = listOf(
-        FIRST_ITEM_NAME to FIRST_ITEM,
-        SECOND_ITEM_NAME to SECOND_ITEM,
-        THIRD_ITEM_NAME to THIRD_ITEM,
-        FOURTH_ITEM_NAME to FOURTH_ITEM
+        FIRST_ITEM_NAME to FloatData(FIRST_ITEM),
+        SECOND_ITEM_NAME to FloatData(SECOND_ITEM),
+        THIRD_ITEM_NAME to FloatData(THIRD_ITEM),
+        FOURTH_ITEM_NAME to FloatData(FOURTH_ITEM)
     )
 
     val dataSet = ChartDataSet(
-        items = listOf(10f, 20f, 30f, 40f),
+        items = FloatData(listOf(10f, 20f, 30f, 40f)),
         title = TITLE
     )
 
@@ -47,10 +48,10 @@ internal object MockTest {
 
     fun invalidMultiDataSet(): MultiChartDataSet {
         val items = listOf(
-            FIRST_ITEM_NAME to FIRST_ITEM.dropLast(1),
-            SECOND_ITEM_NAME to SECOND_ITEM,
-            THIRD_ITEM_NAME to THIRD_ITEM.dropLast(1),
-            FOURTH_ITEM_NAME to FOURTH_ITEM
+            FIRST_ITEM_NAME to FloatData(FIRST_ITEM.dropLast(1)),
+            SECOND_ITEM_NAME to FloatData(SECOND_ITEM),
+            THIRD_ITEM_NAME to FloatData(THIRD_ITEM.dropLast(1)),
+            FOURTH_ITEM_NAME to FloatData(FOURTH_ITEM)
         )
 
         return MultiChartDataSet(
@@ -64,9 +65,9 @@ internal object MockTest {
     fun invalidMultiDataSet(index: Int, empty: Boolean = false): MultiChartDataSet {
         val updatedDataItems = dataItems.toMutableList()
         updatedDataItems[index] = if (empty) {
-            updatedDataItems[index].copy(second = emptyList())
+            updatedDataItems[index].copy(second = FloatData(emptyList()))
         } else {
-            updatedDataItems[index].copy(second = updatedDataItems[index].second.drop(2))
+            updatedDataItems[index].copy(second = FloatData(updatedDataItems[index].second.values.drop(2)))
         }
 
         return MultiChartDataSet(

@@ -8,6 +8,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
 import io.github.dautovicharis.charts.BarChartView
 import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_LINE
 import io.github.dautovicharis.charts.internal.ValidationErrors.RULE_DATA_POINTS_LESS_THAN_MIN
@@ -39,7 +40,7 @@ class BarChartTest {
     @Test
     fun barChart_withInvalidData_displaysError () = runComposeUiTest {
         val dataSet = ChartDataSet(
-            items = listOf(1f),
+            items = ChartDataType.FloatData(listOf(1f)),
             title = TITLE
         )
         val expectedError = RULE_DATA_POINTS_LESS_THAN_MIN.format(MIN_REQUIRED_LINE)

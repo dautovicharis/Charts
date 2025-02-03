@@ -5,9 +5,10 @@ import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.StackedBarChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
-import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
+import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
+import io.github.dautovicharis.charts.common.model.ChartDataType.FloatData
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
 import io.github.dautovicharis.charts.style.StackedBarChartStyle
@@ -68,10 +69,10 @@ private fun AddCustomStackedBarChart() {
 @Composable
 private fun AddStackedBarChart(style: StackedBarChartStyle) {
     val items = listOf(
-        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Lime Av." to listOf(1500.87f, 2765.58f, 33245.81f),
-        "Apple Rd." to listOf(5444.87f, 233.58f, 67544.81f)
+        "Cherry St." to FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
+        "Strawberry Mall" to FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
+        "Lime Av." to FloatData(listOf(1500.87f, 2765.58f, 33245.81f)),
+        "Apple Rd." to FloatData(listOf(5444.87f, 233.58f, 67544.81f))
     )
 
     val dataSet = MultiChartDataSet(

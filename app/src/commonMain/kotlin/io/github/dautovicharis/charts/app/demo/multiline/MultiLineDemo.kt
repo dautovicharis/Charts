@@ -5,9 +5,10 @@ import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.LineChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
-import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
+import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
+import io.github.dautovicharis.charts.common.model.ChartDataType.FloatData
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.style.LineChartDefaults
 import io.github.dautovicharis.charts.style.LineChartStyle
@@ -70,10 +71,10 @@ private fun AddMultiLineChart(
     style: LineChartStyle
 ) {
     val items = listOf(
-        "Cherry St." to listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f),
-        "Strawberry Mall" to listOf(15261.68f, 17810.34f, 40000.57f, 85000f),
-        "Lime Av." to listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f),
-        "Apple Rd." to listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f)
+        "Cherry St." to FloatData(listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f)),
+        "Strawberry Mall" to FloatData(listOf(15261.68f, 17810.34f, 40000.57f, 85000f)),
+        "Lime Av." to FloatData(listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f)),
+        "Apple Rd." to FloatData(listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f))
     )
 
     val dataSet = MultiChartDataSet(

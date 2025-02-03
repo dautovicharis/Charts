@@ -9,7 +9,7 @@ import io.github.dautovicharis.charts.internal.common.model.toChartData
  * @property data The data item that represents the data set.
  */
 class ChartDataSet private constructor(
-    items: List<Float>,
+    items: ChartDataType,
     title: String,
     prefix: String = "",
     postfix: String = "",
@@ -17,7 +17,31 @@ class ChartDataSet private constructor(
 ) {
     internal val data: ChartDataItem = ChartDataItem(
         label = title,
-        item = items.toChartData(prefix = prefix, postfix = postfix, labels = labels)
+        item = when (items) {
+            is ChartDataType.FloatData -> items.values.toChartData(
+                prefix = prefix,
+                postfix = postfix,
+                labels = labels
+            )
+
+            is ChartDataType.DoubleData -> items.values.toChartData(
+                prefix = prefix,
+                postfix = postfix,
+                labels = labels
+            )
+
+            is ChartDataType.IntData -> items.values.toChartData(
+                prefix = prefix,
+                postfix = postfix,
+                labels = labels
+            )
+
+            is ChartDataType.StringData -> items.values.toChartData(
+                prefix = prefix,
+                postfix = postfix,
+                labels = labels
+            )
+        }
     )
 
     /**
@@ -28,7 +52,7 @@ class ChartDataSet private constructor(
      * @param prefix The prefix to be added to each data item. Defaults to an empty string.
      * @param postfix The postfix to be added to each data item. Defaults to an empty string.
      */
-    constructor(items: List<Float>, title: String, prefix: String = "", postfix: String = "")
+    constructor(items: ChartDataType, title: String, prefix: String = "", postfix: String = "")
             : this(items, title, prefix, postfix, null)
 
     /**
@@ -38,6 +62,6 @@ class ChartDataSet private constructor(
      * @param title The title of the data set.
      * @param labels The labels to be used for each data item..
      */
-    constructor(items: List<Float>, title: String, labels: List<String>)
+    constructor(items: ChartDataType, title: String, labels: List<String>)
             : this(items, title, prefix = "", postfix = "", labels = labels)
 }

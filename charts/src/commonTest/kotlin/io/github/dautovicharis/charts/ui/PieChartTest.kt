@@ -10,6 +10,7 @@ import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.runComposeUiTest
 import io.github.dautovicharis.charts.PieChartView
 import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_PIE
 import io.github.dautovicharis.charts.internal.ValidationErrors.RULE_COLORS_SIZE_MISMATCH
@@ -78,7 +79,7 @@ class PieChartTest {
     fun pieChart_withInvalidData_displaysError() = runComposeUiTest {
         // Arrange
         val dataSet = ChartDataSet(
-            items = listOf(1f),
+            items = ChartDataType.FloatData(listOf(1f)),
             title = TITLE
         )
         val expectedError = RULE_DATA_POINTS_LESS_THAN_MIN.format(MIN_REQUIRED_PIE)
