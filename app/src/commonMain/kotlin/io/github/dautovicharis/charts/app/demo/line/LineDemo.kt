@@ -5,10 +5,12 @@ import androidx.compose.ui.unit.dp
 import io.github.dautovicharis.charts.LineChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
-import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
+import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
 import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.common.model.ChartDataType.FloatData
+import io.github.dautovicharis.charts.common.model.ChartDataType.IntData
 import io.github.dautovicharis.charts.style.LineChartDefaults
 import io.github.dautovicharis.charts.style.LineChartStyle
 
@@ -56,9 +58,7 @@ fun AddLineChartDemo() {
 @Composable
 private fun AddDefaultLineChart() {
     val dataSet = ChartDataSet(
-        items = listOf(
-            8f, 23f, 54f, 32f, 12f, 37f, 7f, 23f, 43f
-        ),
+        items = IntData(listOf(8, 23, 54, 32, 12, 37, 7, 23, 43)),
         title = "Line Chart"
     )
 
@@ -71,9 +71,7 @@ private fun AddDefaultLineChart() {
 @Composable
 private fun AddCustomLineChart() {
     val dataSet = ChartDataSet(
-        items = listOf(
-            10f, 100f, 20f, 50f, 150f, 70f, 10f, 20f, 40f
-        ),
+        items = FloatData(listOf(10f, 100f, 20f, 50f, 150f, 70f, 10f, 20f, 40f)),
         title = "Line Chart"
     )
 

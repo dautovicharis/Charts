@@ -16,7 +16,7 @@ import io.github.dautovicharis.charts.internal.common.model.toChartData
  * @param postfix The postfix to be added to each data item. Defaults to an empty string.
  */
 class MultiChartDataSet(
-    items: List<Pair<String, List<Float>>>,
+    items: List<Pair<String, ChartDataType>>,
     categories: List<String> = emptyList(),
     title: String,
     prefix: String = "",
@@ -28,7 +28,27 @@ class MultiChartDataSet(
         val dataItems = items.map {
             ChartDataItem(
                 label = it.first,
-                item = it.second.toChartData(prefix = prefix, postfix = postfix)
+                item = when (val item = it.second) {
+                    is ChartDataType.FloatData -> item.values.toChartData(
+                        prefix = prefix,
+                        postfix = postfix
+                    )
+
+                    is ChartDataType.DoubleData -> item.values.toChartData(
+                        prefix = prefix,
+                        postfix = postfix
+                    )
+
+                    is ChartDataType.IntData -> item.values.toChartData(
+                        prefix = prefix,
+                        postfix = postfix
+                    )
+
+                    is ChartDataType.StringData -> item.values.toChartData(
+                        prefix = prefix,
+                        postfix = postfix
+                    )
+                }
             )
         }
 

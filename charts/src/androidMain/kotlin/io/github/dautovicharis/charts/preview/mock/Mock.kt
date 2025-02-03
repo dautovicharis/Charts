@@ -1,6 +1,7 @@
 package io.github.dautovicharis.charts.preview.mock
 
 import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.common.model.ChartDataType.FloatData
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import kotlin.random.Random
 
@@ -25,10 +26,10 @@ internal object Mock {
     private const val PREFIX = "$"
 
     private val ITEMS = listOf(
-        FIRST_ITEM_NAME to FIRST_ITEM,
-        SECOND_ITEM_NAME to SECOND_ITEM,
-        THIRD_ITEM_NAME to THIRD_ITEM,
-        FOURTH_ITEM_NAME to FOURTH_ITEM
+        FIRST_ITEM_NAME to FloatData(FIRST_ITEM),
+        SECOND_ITEM_NAME to FloatData(SECOND_ITEM),
+        THIRD_ITEM_NAME to FloatData(THIRD_ITEM),
+        FOURTH_ITEM_NAME to FloatData(FOURTH_ITEM)
     )
 
     private fun mockList(
@@ -45,7 +46,7 @@ internal object Mock {
 
     fun barChart(size: Int = 10): ChartDataSet {
         return ChartDataSet(
-            items = mockList(size = size),
+            items = FloatData(mockList(size = size)),
             title = BAR_CHART_TITLE
         )
     }
@@ -60,10 +61,10 @@ internal object Mock {
 
     fun stackedBarChartInvalid(): MultiChartDataSet {
         val items = listOf(
-            FIRST_ITEM_NAME to FIRST_ITEM,
-            SECOND_ITEM_NAME to SECOND_ITEM.dropLast(1),
-            THIRD_ITEM_NAME to THIRD_ITEM,
-            FOURTH_ITEM_NAME to FOURTH_ITEM.dropLast(1)
+            FIRST_ITEM_NAME to FloatData(FIRST_ITEM),
+            SECOND_ITEM_NAME to FloatData(SECOND_ITEM.dropLast(1)),
+            THIRD_ITEM_NAME to FloatData(THIRD_ITEM),
+            FOURTH_ITEM_NAME to FloatData(FOURTH_ITEM.dropLast(1))
         )
 
         return MultiChartDataSet(
@@ -84,17 +85,17 @@ internal object Mock {
 
     fun lineChartSimple(size: Int = 10): ChartDataSet {
         return ChartDataSet(
-            items = mockList(size = size),
+            items = FloatData(mockList(size = size)),
             title = LINE_CHART_TITLE
         )
     }
 
     fun lineChartInvalid(): MultiChartDataSet {
         val items = listOf(
-            FIRST_ITEM_NAME to FIRST_ITEM.dropLast(1),
-            SECOND_ITEM_NAME to SECOND_ITEM,
-            THIRD_ITEM_NAME to THIRD_ITEM.dropLast(1),
-            FOURTH_ITEM_NAME to FOURTH_ITEM
+            FIRST_ITEM_NAME to FloatData(FIRST_ITEM.dropLast(1)),
+            SECOND_ITEM_NAME to FloatData(SECOND_ITEM),
+            THIRD_ITEM_NAME to FloatData(THIRD_ITEM.dropLast(1)),
+            FOURTH_ITEM_NAME to FloatData(FOURTH_ITEM)
         )
 
         return MultiChartDataSet(
@@ -107,7 +108,7 @@ internal object Mock {
 
     fun pieChart(size: Int = 9): ChartDataSet {
         return ChartDataSet(
-            items = mockList(size = size, minFloat = 7f, maxFloat = 54f),
+            items = FloatData(mockList(size = size, minFloat = 7f, maxFloat = 54f)),
             title = PIE_CHART_TITLE
         )
     }

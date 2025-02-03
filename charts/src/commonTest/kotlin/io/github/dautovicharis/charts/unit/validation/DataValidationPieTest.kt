@@ -1,6 +1,7 @@
 package io.github.dautovicharis.charts.unit.validation
 
 import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.ValidationErrors
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_PIE
 import io.github.dautovicharis.charts.internal.format
@@ -31,7 +32,7 @@ class DataValidationPieTest {
     fun validatePieData_invalidDataItems_validationErrorsPresent() {
         // Arrange
         val chartDataSet = ChartDataSet(
-            items = listOf(10f),
+            items = ChartDataType.FloatData(listOf(10f)),
             title = TITLE,
         )
 
