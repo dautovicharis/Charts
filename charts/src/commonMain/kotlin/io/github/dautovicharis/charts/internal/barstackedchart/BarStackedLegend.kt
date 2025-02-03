@@ -34,7 +34,8 @@ internal fun LegendItem(
             )
         )
     ) {
-        legend.forEachIndexed { index, legend ->
+
+        repeat(legend.size) { index ->
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
@@ -43,8 +44,8 @@ internal fun LegendItem(
                 )
 
                 val label = when (labels.isEmpty()) {
-                    true -> legend
-                    else -> "$legend - ${labels[index]}"
+                    true -> legend[index]
+                    else -> "$legend[it] - ${labels[index]}"
                 }
 
                 Text(

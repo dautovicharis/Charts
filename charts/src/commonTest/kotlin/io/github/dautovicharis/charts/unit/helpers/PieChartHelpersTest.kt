@@ -1,6 +1,7 @@
 package io.github.dautovicharis.charts.unit.helpers
 
 import androidx.compose.ui.unit.IntSize
+import io.github.dautovicharis.charts.internal.piechart.calculatePercentages
 import io.github.dautovicharis.charts.internal.piechart.createPieSlices
 import io.github.dautovicharis.charts.internal.piechart.degree
 import io.github.dautovicharis.charts.internal.piechart.getCoordinatesForSlice
@@ -107,6 +108,24 @@ class PieChartHelpersTest {
             // Assert
             assertEquals(it.value.first, coordinates.x)
             assertEquals(it.value.second, coordinates.y)
+        }
+    }
+
+
+    @Test
+    fun calculatePercentages_returnsCorrectPercentages() {
+        // Arrange
+        val testData = hashMapOf(
+            listOf(10.0, 20.0, 30.0) to listOf("16.67", "33.33", "50.0"),
+            listOf(1.0, 1.0, 1.0) to listOf("33.33", "33.33", "33.33"),
+            listOf(0.0, 0.0, 0.0) to listOf("NaN", "NaN", "NaN"),
+            listOf(100.0, 0.0, 0.0) to listOf("100.0", "0.0", "0.0")
+        )
+
+        // Act & Assert
+        testData.forEach { entry ->
+            val result = calculatePercentages(entry.key)
+            assertEquals(entry.value, result)
         }
     }
 }
