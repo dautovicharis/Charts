@@ -1,50 +1,93 @@
 package io.github.dautovicharis.charts.unit.model
 
+import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.common.model.ChartData
-import io.github.dautovicharis.charts.internal.common.model.toChartData
+import io.github.dautovicharis.charts.mock.MockTest
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
 
 class ChartDataTest {
 
     // DoubleList
     @Test
-    fun toChartData_doubleList_correctDataReturned() {
-        val chartData = listOf(1.0, 2.0, 3.0).toChartData()
-        assertContentEquals(actual = chartData.points, expected = listOf(1.0, 2.0, 3.0))
-        assertContentEquals(actual = chartData.labels, expected = listOf("1.0", "2.0", "3.0"))
+    fun chartDataSet_doubleList_correctDataReturned() {
+        // Arrange
+        val items = listOf(1.0, 2.0, 3.0)
+        val itemsType = ChartDataType.DoubleData(items)
+
+        // Act
+        val inputDataSet = ChartDataSet(items = itemsType , title = MockTest.TITLE )
+
+        // Assert
+        assertContentEquals(actual = inputDataSet.data.item.points, expected = items)
+        assertContentEquals(actual = inputDataSet.data.item.labels, expected = listOf("1.0", "2.0", "3.0"))
+        assertEquals(actual = inputDataSet.data.label, expected = MockTest.TITLE)
     }
 
     // FloatList
     @Test
-    fun toChartData_floatList_correctDataReturned() {
-        val chartData = listOf(1.5f, 2.5f, 3.5f).toChartData()
-        assertContentEquals(actual = chartData.points, expected = listOf(1.5, 2.5, 3.5))
-        assertContentEquals(actual = chartData.labels, expected = listOf("1.5", "2.5", "3.5"))
+    fun chartDataSet_floatList_correctDataReturned() {
+        // Arrange
+        val items = listOf(1.5f, 2.5f, 3.5f)
+        val itemsType = ChartDataType.FloatData(items)
+
+        // Act
+        val inputDataSet = ChartDataSet(items = itemsType , title = MockTest.TITLE )
+
+        // Assert
+        assertContentEquals(actual = inputDataSet.data.item.points, expected = listOf(1.5, 2.5, 3.5))
+        assertContentEquals(actual = inputDataSet.data.item.labels, expected = listOf("1.5", "2.5", "3.5"))
+        assertEquals(actual = inputDataSet.data.label, expected = MockTest.TITLE)
     }
 
     // StringList - double
     @Test
-    fun toChartData_stringDoubleList_correctDataWithPostfixReturned() {
-        val chartData = listOf("25.5", "40.0", "70.5").toChartData(postfix = " °C")
-        assertContentEquals(actual = chartData.points, expected = listOf(25.5, 40.0, 70.5))
-        assertContentEquals(actual = chartData.labels, expected = listOf("25.5 °C", "40.0 °C", "70.5 °C"))
+    fun chartDataSet_stringDoubleList_correctDataWithPostfixReturned() {
+        // Arrange
+        val items = listOf("25.5", "40.0", "70.5")
+        val itemsType = ChartDataType.StringData(items)
+
+        // Act
+        val inputDataSet = ChartDataSet(items = itemsType , title = MockTest.TITLE, postfix = " °C")
+
+        // Assert
+        assertContentEquals(actual = inputDataSet.data.item.points, expected = listOf(25.5, 40.0, 70.5))
+        assertContentEquals(actual = inputDataSet.data.item.labels, expected = listOf("25.5 °C", "40.0 °C", "70.5 °C"))
+        assertEquals(actual = inputDataSet.data.label, expected = MockTest.TITLE)
     }
 
     // StringList - int
     @Test
-    fun toChartData_stringIntList_correctDataWithPrefixReturned() {
-        val chartData = listOf("1", "2", "3").toChartData(prefix = "$")
-        assertContentEquals(actual = chartData.points, expected = listOf(1.0, 2.0, 3.0))
-        assertContentEquals(actual = chartData.labels, expected = listOf("$1", "$2", "$3"))
+    fun chartDataSet_stringIntList_correctDataWithPrefixReturned() {
+        // Arrange
+        val items = listOf("1", "2", "3")
+        val itemsType = ChartDataType.StringData(items)
+
+        // Act
+        val inputDataSet = ChartDataSet(items = itemsType , title = MockTest.TITLE, prefix = "$")
+
+        // Assert
+        assertContentEquals(actual = inputDataSet.data.item.points, expected = listOf(1.0, 2.0, 3.0))
+        assertContentEquals(actual = inputDataSet.data.item.labels, expected = listOf("$1", "$2", "$3"))
+        assertEquals(actual = inputDataSet.data.label, expected = MockTest.TITLE)
     }
 
     // StringList - float
     @Test
-    fun toChartData_stringFloatList_correctDataReturned() {
-        val chartData = listOf("-1.0f", "2.0f", "3.0f").toChartData()
-        assertContentEquals(actual = chartData.points, expected = listOf(-1.0, 2.0, 3.0))
-        assertContentEquals(actual = chartData.labels, expected = listOf("-1.0f", "2.0f", "3.0f"))
+    fun chartDataSet_stringFloatList_correctDataReturned() {
+        // Arrange
+        val items = listOf("-1.0f", "2.0f", "3.0f")
+        val itemsType = ChartDataType.StringData(items)
+
+        // Act
+        val inputDataSet = ChartDataSet(items = itemsType , title = MockTest.TITLE)
+
+        // Assert
+        assertContentEquals(actual = inputDataSet.data.item.points, expected = listOf(-1.0, 2.0, 3.0))
+        assertContentEquals(actual = inputDataSet.data.item.labels, expected = items)
+        assertEquals(actual = inputDataSet.data.label, expected = MockTest.TITLE)
     }
 
     // Primary constructor - List<Pair<String, Double>>
@@ -57,9 +100,17 @@ class ChartDataTest {
 
     // IntList
     @Test
-    fun toChartData_intList_correctDataReturned() {
-        val chartData = listOf(-1, 2, 3).toChartData()
-        assertContentEquals(actual = chartData.points, expected = listOf(-1.0, 2.0, 3.0))
-        assertContentEquals(actual = chartData.labels, expected = listOf("-1", "2", "3"))
+    fun chartDataSet_intList_correctDataReturned() {
+        // Arrange
+        val items = listOf(-1, 2, 3)
+        val itemsType = ChartDataType.IntData(items)
+
+        // Act
+        val inputDataSet = ChartDataSet(items = itemsType , title = MockTest.TITLE)
+
+        // Assert
+        assertContentEquals(actual = inputDataSet.data.item.points, expected = listOf(-1.0, 2.0, 3.0))
+        assertContentEquals(actual = inputDataSet.data.item.labels, expected = listOf("-1", "2", "3"))
+        assertEquals(actual = inputDataSet.data.label, expected = MockTest.TITLE)
     }
 }
