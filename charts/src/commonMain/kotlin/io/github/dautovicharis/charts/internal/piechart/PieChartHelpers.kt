@@ -10,6 +10,7 @@ import kotlin.math.abs
 import kotlin.math.atan
 import kotlin.math.cos
 import kotlin.math.min
+import kotlin.math.round
 import kotlin.math.sin
 import kotlin.math.sqrt
 
@@ -143,3 +144,12 @@ internal fun getCoordinatesForSlice(
     return Offset(x, y)
 }
 
+
+internal fun calculatePercentages(values: List<Double>): List<String> {
+    val total = values.sum()
+    return values.map { value ->
+        val percentage = (value / total) * 100
+        val rounded = round(percentage * 100) / 100
+        "$rounded"
+    }
+}
