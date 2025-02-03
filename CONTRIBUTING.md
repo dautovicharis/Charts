@@ -31,21 +31,6 @@ If you have any questions, please DM me: https://www.linkedin.com/in/dautovichar
  git push origin main
 ```
 
-#### Prepare **develop** working copy
-```bash
-git checkout -b "develop" upstream/develop
-git checkout develop
-git push origin develop
-```
-
-#### Sync **origin/develop** with **upstream/develop**
-```bash
-git fetch upstream
-git checkout develop
-git merge upstream/develop
-git push origin develop
-```
-
 ## Branch naming convention
 ```bash
 bugfix/<bug-name>
@@ -75,9 +60,7 @@ improvement/app-demo
  - Capitalize the subject line
 
 ## New branches
-Create new branch from **develop**
+Create new branch from **main**
 
 ## PR
-Create new PR to **upstream/develop**
-
-
+Create new PR to **upstream/main**
