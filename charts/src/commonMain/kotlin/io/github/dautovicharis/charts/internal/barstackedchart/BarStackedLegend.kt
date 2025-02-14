@@ -45,7 +45,7 @@ internal fun LegendItem(
 
                 val label = when (labels.isEmpty()) {
                     true -> legend[index]
-                    else -> "$legend[it] - ${labels[index]}"
+                    else -> "${legend[index]} - ${labels[index]}"
                 }
 
                 Text(
