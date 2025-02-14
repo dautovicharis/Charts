@@ -1,6 +1,7 @@
 package io.github.dautovicharis.charts.app.demo.pie
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleItems
 import io.github.dautovicharis.charts.app.ui.composable.StyleItems
 import io.github.dautovicharis.charts.style.PieChartDefaults
@@ -14,8 +15,8 @@ object PieChartStyleItems {
     }
 
     @Composable
-    fun custom(): StyleItems {
-        val style = PieChartDemoStyle.custom()
+    fun custom(pieColors: List<Color>): StyleItems {
+        val style = PieChartDemoStyle.custom(pieColors)
         return pieChartTableItems(style)
     }
 }
