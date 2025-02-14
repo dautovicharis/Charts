@@ -1,89 +1,66 @@
 package io.github.dautovicharis.charts.app.demo.stackedbar
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.dautovicharis.charts.StackedBarChartView
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
-import io.github.dautovicharis.charts.app.ui.composable.ChartDemoItems
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
-import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
-import io.github.dautovicharis.charts.common.model.ChartDataType.FloatData
-import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
 import io.github.dautovicharis.charts.style.StackedBarChartStyle
+import org.koin.compose.viewmodel.koinViewModel
 
 object StackedBarDemoStyle {
 
     @Composable
     fun default(): StackedBarChartStyle {
         return StackedBarChartDefaults.style(
-            chartViewStyle = ChartViewDemoStyle.custom(width = 240.dp)
+            chartViewStyle = ChartViewDemoStyle.custom()
         )
     }
 
     @Composable
-    fun custom(): StackedBarChartStyle {
-        val colors = listOf(
-            ColorPalette.DataColor.navyBlue,
-            ColorPalette.DataColor.darkBlue,
-            ColorPalette.DataColor.deepPurple
-        )
+    fun custom(barColors: List<Color>): StackedBarChartStyle {
         return StackedBarChartDefaults.style(
-            barColors = colors,
-            chartViewStyle = ChartViewDemoStyle.custom(width = 240.dp)
+            barColors = barColors,
+            chartViewStyle = ChartViewDemoStyle.custom()
         )
     }
 }
 
 @Composable
-fun AddStackedBarChartDemo() {
-    ChartDemoItems(
-        listOf(
-            {
-                ChartDemo(type = ChartStyleType.StackedBarChartDefault) {
-                    AddDefaultStackedBarChart()
-                }
-            },
-            {
-                ChartDemo(type = ChartStyleType.StackedBarChartCustom) {
-                    AddCustomStackedBarChart()
-                }
-            }
+fun StackedBarBasicDemo(viewModel: StackedBarChartViewModel = koinViewModel()) {
+    val dataSet by viewModel.dataSet.collectAsStateWithLifecycle()
+
+    ChartDemo(
+        type = ChartStyleType.StackedBarChartDefault,
+        onRefresh = { viewModel.regenerateDataSet() }) {
+        StackedBarChartView(
+            dataSet = dataSet.dataSet,
+            style = StackedBarDemoStyle.default()
         )
-    )
+    }
 }
 
 @Composable
-private fun AddDefaultStackedBarChart() {
-    val style = StackedBarDemoStyle.default()
-    AddStackedBarChart(style)
-}
+fun StackedBarCustomDemo(viewModel: StackedBarChartViewModel = koinViewModel()) {
+    val dataSet by viewModel.dataSet.collectAsStateWithLifecycle()
 
-@Composable
-private fun AddCustomStackedBarChart() {
-    val style = StackedBarDemoStyle.custom()
-    AddStackedBarChart(style)
-}
+    LaunchedEffect(Unit) {
+        viewModel.regenerateDataSet()
+    }
 
-@Composable
-private fun AddStackedBarChart(style: StackedBarChartStyle) {
-    val items = listOf(
-        "Cherry St." to FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
-        "Strawberry Mall" to FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
-        "Lime Av." to FloatData(listOf(1500.87f, 2765.58f, 33245.81f)),
-        "Apple Rd." to FloatData(listOf(5444.87f, 233.58f, 67544.81f))
-    )
+    ChartDemo(
+        type = ChartStyleType.StackedBarChartCustom,
+        colors = dataSet.barColors,
+        onRefresh = { viewModel.regenerateDataSet() }) {
 
-    val dataSet = MultiChartDataSet(
-        items = items,
-        prefix = "$",
-        categories = listOf("Jan", "Feb", "Mar"),
-        title = "Stacked Bar Chart"
-    )
-
-    StackedBarChartView(
-        dataSet = dataSet,
-        style = style
-    )
+        StackedBarChartView(
+            dataSet = dataSet.dataSet,
+            style = StackedBarDemoStyle.custom(dataSet.barColors)
+        )
+    }
 }

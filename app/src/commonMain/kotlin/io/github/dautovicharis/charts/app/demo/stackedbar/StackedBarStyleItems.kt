@@ -1,8 +1,9 @@
 package io.github.dautovicharis.charts.app.demo.stackedbar
 
 import androidx.compose.runtime.Composable
-import io.github.dautovicharis.charts.app.ui.composable.StyleItems
+import androidx.compose.ui.graphics.Color
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleItems
+import io.github.dautovicharis.charts.app.ui.composable.StyleItems
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
 import io.github.dautovicharis.charts.style.StackedBarChartStyle
 
@@ -14,8 +15,8 @@ object StackedBarChartStyleItems {
     }
 
     @Composable
-    fun custom(): StyleItems {
-        val style = StackedBarDemoStyle.custom()
+    fun custom(barColors: List<Color>): StyleItems {
+        val style = StackedBarDemoStyle.custom(barColors)
         return multiBarChartTableItems(style)
     }
 }
