@@ -3,6 +3,7 @@ package io.github.dautovicharis.charts
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,19 +29,20 @@ fun BarChartView(
     dataSet: ChartDataSet,
     style: BarChartStyle = BarChartDefaults.style()
 ) {
-
-    val errors by remember {
-        mutableStateOf(
-            validateBarData(
-                data = dataSet.data.item
+    key(dataSet) {
+        val errors by remember {
+            mutableStateOf(
+                validateBarData(
+                    data = dataSet.data.item
+                )
             )
-        )
-    }
+        }
 
-    if (errors.isEmpty()) {
-        ChartContent(dataSet = dataSet, style = style)
-    } else {
-        ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
+        if (errors.isEmpty()) {
+            ChartContent(dataSet = dataSet, style = style)
+        } else {
+            ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
+        }
     }
 }
 
