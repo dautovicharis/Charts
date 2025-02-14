@@ -26,6 +26,8 @@ buildConfig = "5.3.5"
 sonarqube = "5.0.0.4638"
 # https://github.com/Kotlin/kotlinx-kover
 kover = "0.8.1"
+# https://insert-koin.io
+koin = "4.0.2"
 
 [libraries]
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
@@ -35,6 +37,8 @@ androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecy
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 dokka-doc = { group = "org.jetbrains.dokka", name="android-documentation-plugin", version.ref = "dokka" }
 dokka-versions = {group = "org.jetbrains.dokka", name = "versioning-plugin", version.ref = "dokka"}
+koin-android = {module = "io.insert-koin:koin-android", version.ref = "koin"}
+koin-compose-viewmodel = {module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
