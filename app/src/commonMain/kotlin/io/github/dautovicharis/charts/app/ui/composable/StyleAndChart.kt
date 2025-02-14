@@ -18,11 +18,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -33,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -41,26 +41,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import chartsproject.app.generated.resources.Res
-import chartsproject.app.generated.resources.hide_style
-import chartsproject.app.generated.resources.repeat
-import chartsproject.app.generated.resources.show_style
+import chartsproject.app.generated.resources.ic_replay
+import chartsproject.app.generated.resources.ic_visibility_off
+import chartsproject.app.generated.resources.ic_visibility_on
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.painterResource
 import kotlin.random.Random
 
 @Composable
-fun StyleAndChart(
+fun StyleAndChartComponent(
     tableItems: StyleItems,
     columns: List<String> = listOf("Parameter", "Value"),
     buttonsVisibility: Boolean = true,
-    chartItem: @Composable () -> Unit
+    chartItem: @Composable () -> Unit,
+    onRefresh: () -> Unit
 ) {
     val extraBold = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold)
     val columnWeight = 1f / columns.size
     val outerPadding = 15.dp
-    val cornerRadius = 20.dp
-    val shadow = 15.dp
-    val backgroundColor = MaterialTheme.colorScheme.surfaceColorAtElevation(0.1.dp)
 
     val (tableItemsVisible, setTableItemsVisible) = remember { mutableStateOf(!buttonsVisibility) }
     val chartItemKey = remember { mutableIntStateOf(0) }
@@ -70,11 +68,6 @@ fun StyleAndChart(
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(outerPadding)
-            .shadow(elevation = shadow, shape = RoundedCornerShape(cornerRadius))
-            .background(
-                color = backgroundColor,
-                shape = RoundedCornerShape(cornerRadius)
-            )
     ) {
         Text(
             modifier = Modifier.padding(14.dp),
@@ -88,7 +81,7 @@ fun StyleAndChart(
             enter = expandVertically(),
             exit = shrinkVertically()
         ) {
-            DemoStyleItems(
+            StyleAndChartContent(
                 columns = columns,
                 items = tableItems.items,
                 columnWeight = columnWeight,
@@ -96,21 +89,21 @@ fun StyleAndChart(
             )
         }
 
-        ChartItem(chartItem, chartItemKey)
+        StyleAndChartChartItem(chartItem, chartItemKey)
 
         if (buttonsVisibility) {
-            Buttons(
+            StyleAndChartButtons(
                 tableItemsVisible = tableItemsVisible,
                 setTableItemsVisible = setTableItemsVisible,
                 chartItemKey = chartItemKey,
-                outerPadding = outerPadding
+                onRefresh = onRefresh
             )
         }
     }
 }
 
 @Composable
-private fun DemoStyleItems(
+private fun StyleAndChartContent(
     columns: List<String>,
     items: List<StyleItem>,
     columnWeight: Float,
@@ -127,7 +120,7 @@ private fun DemoStyleItems(
                 .padding(horizontal = outerPadding)
         ) {
             columns.forEach { column ->
-                StyleItemRow(
+                StyleAndChartItemRow(
                     text = column,
                     weight = columnWeight,
                     fontWeight = FontWeight.Medium
@@ -148,9 +141,9 @@ private fun DemoStyleItems(
                     )
                     .clip(MaterialTheme.shapes.small)
             ) {
-                StyleItemRow(text = it.name, weight = columnWeight)
+                StyleAndChartItemRow(text = it.name, weight = columnWeight)
                 Spacer(modifier = Modifier.width(1.dp))
-                StyleItemRow(
+                StyleAndChartItemRow(
                     text = it.value,
                     weight = columnWeight,
                     color = it.color,
@@ -162,7 +155,7 @@ private fun DemoStyleItems(
 }
 
 @Composable
-private fun RowScope.StyleItemRow(
+private fun RowScope.StyleAndChartItemRow(
     text: String,
     weight: Float,
     fontWeight: FontWeight = FontWeight.Normal,
@@ -199,7 +192,10 @@ private fun RowScope.StyleItemRow(
 }
 
 @Composable
-private fun ChartItem(chartItem: @Composable () -> Unit, chartItemKey: MutableState<Int>) {
+private fun StyleAndChartChartItem(
+    chartItem: @Composable () -> Unit,
+    chartItemKey: MutableState<Int>
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -214,42 +210,41 @@ private fun ChartItem(chartItem: @Composable () -> Unit, chartItemKey: MutableSt
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-private fun Buttons(
+private fun StyleAndChartButtons(
     tableItemsVisible: Boolean,
     setTableItemsVisible: (Boolean) -> Unit,
     chartItemKey: MutableState<Int>,
-    outerPadding: Dp
+    onRefresh: () -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ) {
-        Button(
-            onClick = { setTableItemsVisible(!tableItemsVisible) },
-            modifier = Modifier.padding(
-                start = outerPadding,
-                end = outerPadding,
-                bottom = outerPadding
-            )
+        IconButton(
+            onClick = { setTableItemsVisible(!tableItemsVisible) }
         ) {
-            Text(
-                if (tableItemsVisible) stringResource(Res.string.hide_style) else stringResource(
-                    Res.string.show_style
-                )
+            Icon(
+                painter = painterResource(if (tableItemsVisible) Res.drawable.ic_visibility_on else Res.drawable.ic_visibility_off),
+                contentDescription = null
             )
         }
 
-        Button(
+        IconButton(
             onClick = {
                 chartItemKey.value = Random.nextInt()
-            },
-            modifier = Modifier.padding(
-                start = outerPadding,
-                end = outerPadding,
-                bottom = outerPadding
-            )
+            }
         ) {
-            Text(stringResource(Res.string.repeat))
+            Icon(
+                painter = painterResource(Res.drawable.ic_replay),
+                contentDescription = null
+            )
+        }
+
+        IconButton(onClick = onRefresh) {
+            Icon(
+                imageVector = Icons.Filled.Refresh,
+                contentDescription = null
+            )
         }
     }
 }

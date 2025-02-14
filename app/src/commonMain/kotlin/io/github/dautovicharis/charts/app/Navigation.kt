@@ -1,8 +1,18 @@
 package io.github.dautovicharis.charts.app
 
+import MainScreenContent
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import chartsproject.app.generated.resources.Res
 import chartsproject.app.generated.resources.bar_chart
 import chartsproject.app.generated.resources.bar_stacked_chart
+import chartsproject.app.generated.resources.chart_basic
+import chartsproject.app.generated.resources.chart_custom
 import chartsproject.app.generated.resources.ic_bar_chart
 import chartsproject.app.generated.resources.ic_line_chart
 import chartsproject.app.generated.resources.ic_multi_line_chart
@@ -11,14 +21,106 @@ import chartsproject.app.generated.resources.ic_stacked_bar_chart
 import chartsproject.app.generated.resources.line_chart
 import chartsproject.app.generated.resources.multi_line_chart
 import chartsproject.app.generated.resources.pie_chart
+import io.github.dautovicharis.charts.app.demo.bar.BarChartBasicDemo
+import io.github.dautovicharis.charts.app.demo.bar.BarChartCustomDemo
+import io.github.dautovicharis.charts.app.demo.line.LineChartBasicDemo
+import io.github.dautovicharis.charts.app.demo.line.LineChartCustomDemo
+import io.github.dautovicharis.charts.app.demo.multiline.MultiLineBasicDemo
+import io.github.dautovicharis.charts.app.demo.multiline.MultiLineCustomDemo
+import io.github.dautovicharis.charts.app.demo.pie.PieChartBasicDemo
+import io.github.dautovicharis.charts.app.demo.pie.PieChartCustomDemo
+import io.github.dautovicharis.charts.app.demo.stackedbar.StackedBarBasicDemo
+import io.github.dautovicharis.charts.app.demo.stackedbar.StackedBarCustomDemo
+import io.github.dautovicharis.charts.app.ui.theme.Theme
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.StringResource
 
-sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
+sealed class ChartSubmenuItem @OptIn(ExperimentalResourceApi::class) constructor(
     val route: String,
-    val icon: DrawableResource,
     val title: StringResource
+) {
+
+    // Pie Chart
+    @OptIn(ExperimentalResourceApi::class)
+    data object PieChartBasic :
+        ChartSubmenuItem(
+            route = "pieChartBasic",
+            title = Res.string.chart_basic
+        )
+
+    @OptIn(ExperimentalResourceApi::class)
+    data object PieChartCustom :
+        ChartSubmenuItem(
+            route = "pieChartCustom",
+            title = Res.string.chart_custom
+        )
+    // Line Chart
+    @OptIn(ExperimentalResourceApi::class)
+    data object LineChartBasic :
+        ChartSubmenuItem(
+            route = "lineChartBasic",
+            title = Res.string.chart_basic
+        )
+
+    @OptIn(ExperimentalResourceApi::class)
+    data object LineChartCustom :
+        ChartSubmenuItem(
+            route = "lineChartCustom",
+            title = Res.string.chart_custom
+        )
+
+    // Multi Line Chart
+    @OptIn(ExperimentalResourceApi::class)
+    data object MultiLineChartBasic :
+        ChartSubmenuItem(
+            route = "multiLineChartBasic",
+            title = Res.string.chart_basic
+        )
+
+    @OptIn(ExperimentalResourceApi::class)
+    data object MultiLineChartCustom :
+        ChartSubmenuItem(
+            route = "multiLineChartCustom",
+            title = Res.string.chart_custom
+        )
+
+    // Bar Chart
+    @OptIn(ExperimentalResourceApi::class)
+    data object BarChartBasic :
+        ChartSubmenuItem(
+            route = "barChartBasic",
+            title = Res.string.chart_basic
+        )
+
+    @OptIn(ExperimentalResourceApi::class)
+    data object BarChartCustom :
+        ChartSubmenuItem(
+            route = "barChartCustom",
+            title = Res.string.chart_custom
+        )
+
+    // Stacked Bar Chart
+    @OptIn(ExperimentalResourceApi::class)
+    data object StackedBarChartBasic :
+        ChartSubmenuItem(
+            route = "stackedBarChartBasic",
+            title = Res.string.chart_basic
+        )
+
+    @OptIn(ExperimentalResourceApi::class)
+    data object StackedBarChartCustom :
+        ChartSubmenuItem(
+            route = "stackedBarChartCustom",
+            title = Res.string.chart_custom
+        )
+
+}
+
+sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
+    val icon: DrawableResource,
+    val title: StringResource,
+    val submenus: List<ChartSubmenuItem> = emptyList()
 ) {
     object MainScreen {
         const val ROUTE = "main"
@@ -27,40 +129,115 @@ sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
     @OptIn(ExperimentalResourceApi::class)
     data object PieChartScreen :
         ChartScreen(
-            route = "pieChart",
             icon = Res.drawable.ic_pie_chart,
-            title = Res.string.pie_chart
+            title = Res.string.pie_chart,
+            submenus = listOf(
+                ChartSubmenuItem.PieChartBasic,
+                ChartSubmenuItem.PieChartCustom
+            )
         )
 
     @OptIn(ExperimentalResourceApi::class)
     data object LineChartScreen :
         ChartScreen(
-            route = "lineChart",
             icon = Res.drawable.ic_line_chart,
-            title = Res.string.line_chart
+            title = Res.string.line_chart,
+            submenus = listOf(
+                ChartSubmenuItem.LineChartBasic,
+                ChartSubmenuItem.LineChartCustom
+            )
         )
 
     @OptIn(ExperimentalResourceApi::class)
     data object MultiLineChartScreen :
         ChartScreen(
-            route = "multiLineChart",
             icon = Res.drawable.ic_multi_line_chart,
-            title = Res.string.multi_line_chart
+            title = Res.string.multi_line_chart,
+            submenus = listOf(
+                ChartSubmenuItem.MultiLineChartBasic,
+                ChartSubmenuItem.MultiLineChartCustom
+            )
         )
 
     @OptIn(ExperimentalResourceApi::class)
     data object BarChartScreen :
         ChartScreen(
-            route = "barChart",
             icon = Res.drawable.ic_bar_chart,
-            title = Res.string.bar_chart
+            title = Res.string.bar_chart,
+            submenus = listOf(
+                ChartSubmenuItem.BarChartBasic,
+                ChartSubmenuItem.BarChartCustom
+            )
         )
 
     @OptIn(ExperimentalResourceApi::class)
     data object StackedBarChartScreen :
         ChartScreen(
-            route = "stackedBarChart",
             icon = Res.drawable.ic_stacked_bar_chart,
-            title = Res.string.bar_stacked_chart
+            title = Res.string.bar_stacked_chart,
+            submenus = listOf(
+                ChartSubmenuItem.StackedBarChartBasic,
+                ChartSubmenuItem.StackedBarChartCustom
+            )
         )
+}
+
+@Composable
+fun Navigation(
+    navController: NavHostController,
+    selectedTheme: Theme,
+    onThemeSelected: (Theme) -> Unit
+) {
+    NavHost(
+        navController = navController,
+        startDestination = ChartScreen.MainScreen.ROUTE,
+        modifier = Modifier.padding(top = 45.dp)
+    ) {
+        composable(ChartScreen.MainScreen.ROUTE) {
+            MainScreenContent(
+                selectedTheme = selectedTheme,
+                onThemeSelected = onThemeSelected,
+                navController = navController
+            )
+        }
+        composable(ChartSubmenuItem.PieChartBasic.route) {
+            PieChartBasicDemo()
+        }
+
+        composable(ChartSubmenuItem.PieChartCustom.route) {
+            PieChartCustomDemo()
+        }
+
+        composable(ChartSubmenuItem.LineChartBasic.route) {
+            LineChartBasicDemo()
+        }
+
+        composable(ChartSubmenuItem.LineChartCustom.route) {
+            LineChartCustomDemo()
+        }
+
+        composable(ChartSubmenuItem.MultiLineChartBasic.route) {
+            MultiLineBasicDemo()
+        }
+
+        composable(ChartSubmenuItem.MultiLineChartCustom.route) {
+            MultiLineCustomDemo()
+        }
+
+        composable(ChartSubmenuItem.BarChartBasic.route) {
+            BarChartBasicDemo()
+        }
+
+        composable(ChartSubmenuItem.BarChartCustom.route) {
+            BarChartCustomDemo()
+        }
+
+        composable(ChartSubmenuItem.StackedBarChartBasic.route) {
+            StackedBarBasicDemo()
+        }
+
+        composable(ChartSubmenuItem.StackedBarChartCustom.route) {
+            StackedBarCustomDemo()
+        }
+    }
 }

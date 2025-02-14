@@ -1,3 +1,6 @@
+
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,19 +24,19 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import chartsproject.app.generated.resources.Res
@@ -44,17 +47,16 @@ import chartsproject.app.generated.resources.ic_github
 import chartsproject.app.generated.resources.themes_content_description
 import io.github.dautovicharis.charts.app.BuildConfig
 import io.github.dautovicharis.charts.app.ChartScreen
-import io.github.dautovicharis.charts.app.demo.bar.AddBarChartDemo
-import io.github.dautovicharis.charts.app.demo.line.AddLineChartDemo
-import io.github.dautovicharis.charts.app.demo.multiline.AddMultiLineChartDemo
-import io.github.dautovicharis.charts.app.demo.pie.AddPieChartDemo
-import io.github.dautovicharis.charts.app.demo.stackedbar.AddStackedBarChartDemo
+import io.github.dautovicharis.charts.app.ChartSubmenuItem
+import io.github.dautovicharis.charts.app.Navigation
 import io.github.dautovicharis.charts.app.ui.theme.AppTheme
 import io.github.dautovicharis.charts.app.ui.theme.Theme
 import io.github.dautovicharis.charts.app.ui.theme.ThemeManager
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.KoinContext
+import org.koin.compose.viewmodel.koinViewModel
 
 private val charts = listOf(
     ChartScreen.PieChartScreen,
@@ -66,82 +68,70 @@ private val charts = listOf(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainView() {
-    var selectedTheme by remember { mutableStateOf(ThemeManager.currentTheme) }
-    val navController = rememberNavController()
-    val currentBackStackEntry by navController.currentBackStackEntryAsState()
-    val canNavigateBack = currentBackStackEntry?.destination?.route != ChartScreen.MainScreen.ROUTE
+fun MainScreen(viewModel: MainViewModel = koinViewModel ()) {
+    KoinContext {
+        val selectedTheme  = viewModel.selectedTheme.collectAsStateWithLifecycle()
+        val navController = rememberNavController()
+        val currentBackStackEntry by navController.currentBackStackEntryAsState()
+        val canNavigateBack = currentBackStackEntry?.destination?.route != ChartScreen.MainScreen.ROUTE
 
-    AppTheme(theme = selectedTheme) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { },
-                    navigationIcon = {
-                        if (canNavigateBack) {
-                            IconButton(
-                                onClick = {
-                                    navController.popBackStack()
+        AppTheme(theme = selectedTheme.value) {
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        title = { },
+                        navigationIcon = {
+                            if (canNavigateBack) {
+                                IconButton(onClick = { navController.popBackStack() }
+                                ) {
+                                    Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                        contentDescription = null
+                                    )
                                 }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                    contentDescription = null
-                                )
                             }
                         }
-                    }
-                )
-            }
-        ) { paddingValues ->
-            NavHost(
-                navController = navController,
-                startDestination = ChartScreen.MainScreen.ROUTE,
-                modifier = Modifier.padding(paddingValues)
+                    )
+                }
             ) {
-                composable(ChartScreen.MainScreen.ROUTE) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background),
-                    ) {
-                        AddGithubIcon()
-
-                        AddThemes(
-                            currentTheme = selectedTheme,
-                            themes = ThemeManager.themes
-                        ) {
-                            selectedTheme = it
-                        }
-
-                        AddMenuItems { chartItem ->
-                            navController.navigate(chartItem.route)
-                        }
-                    }
-                }
-                composable(ChartScreen.PieChartScreen.route) {
-                    AddPieChartDemo()
-                }
-                composable(ChartScreen.LineChartScreen.route) {
-                    AddLineChartDemo()
-                }
-                composable(ChartScreen.BarChartScreen.route) {
-                    AddBarChartDemo()
-                }
-                composable(ChartScreen.StackedBarChartScreen.route) {
-                    AddStackedBarChartDemo()
-                }
-                composable(ChartScreen.MultiLineChartScreen.route) {
-                    AddMultiLineChartDemo()
-                }
+                Navigation(
+                    navController = navController,
+                    selectedTheme = selectedTheme.value,
+                    onThemeSelected = { viewModel.updateTheme(it) }
+                )
             }
         }
     }
 }
 
+@Composable
+fun MainScreenContent(
+    selectedTheme: Theme,
+    onThemeSelected: (Theme) -> Unit,
+    navController: NavHostController
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+    ) {
+        AddGithubIcon()
+
+        AddThemes(
+            currentTheme = selectedTheme,
+            themes = ThemeManager.themes
+        ) {
+            onThemeSelected(it)
+        }
+
+        AddMenuItems { chartItem ->
+            navController.navigate(chartItem.route)
+        }
+    }
+}
 
 @Composable
-private fun AddMenuItems(selectedItem: (selected: ChartScreen) -> Unit) {
+private fun AddMenuItems(selectedItem: (selected: ChartSubmenuItem) -> Unit) {
+    val expandedMenuStates = rememberSaveable { mutableStateOf<Map<Int, Boolean>>(emptyMap()) }
     Column(
         modifier = Modifier
             .background(Color.Transparent)
@@ -149,9 +139,34 @@ private fun AddMenuItems(selectedItem: (selected: ChartScreen) -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        View(items = charts) { chartItem ->
-            selectedItem(chartItem)
+        LazyColumn {
+            items(items = charts) { chartItem ->
+                val itemIndex = charts.indexOf(chartItem)
+                Column {
+                    ChartTypeItem(
+                        item = chartItem,
+                        onClick = {
+                            expandedMenuStates.value = expandedMenuStates.value.toMutableMap().apply {
+                                this[itemIndex] = !(this[itemIndex] ?: false)
+                            }
+                        }
+                    )
+                    androidx.compose.animation.AnimatedVisibility(
+                        visible = expandedMenuStates.value[itemIndex] == true,
+                        enter = expandVertically(),
+                        exit = shrinkVertically()
+                    ) {
+                        SubMenuItems(
+                            chartItem = chartItem,
+                            onSubmenuClick = {
+                                selectedItem(it)
+                            }
+                        )
+                    }
+                }
+            }
         }
+
         Text(
             modifier = Modifier
                 .padding(10.dp)
@@ -161,6 +176,30 @@ private fun AddMenuItems(selectedItem: (selected: ChartScreen) -> Unit) {
                     + "Charts: ${BuildConfig.CHARTS_VERSION}",
             color = MaterialTheme.colorScheme.onBackground
         )
+    }
+}
+
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+private fun SubMenuItems(chartItem: ChartScreen, onSubmenuClick: (ChartSubmenuItem) -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        chartItem.submenus.forEach { submenuItem ->
+            TextButton(
+                onClick = {
+                    onSubmenuClick(submenuItem)
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = stringResource(submenuItem.title),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+        }
     }
 }
 
@@ -255,18 +294,6 @@ private fun ChartTypeItem(item: ChartScreen, onClick: () -> Unit) {
                 modifier = Modifier.padding(start = 10.dp),
                 text = stringResource(item.title),
                 style = MaterialTheme.typography.titleLarge
-            )
-        }
-    }
-}
-
-@Composable
-private fun View(items: List<ChartScreen>, onItemClick: (ChartScreen) -> Unit) {
-    LazyColumn {
-        items(items = items) { chartItem ->
-            ChartTypeItem(
-                item = chartItem,
-                onClick = { onItemClick(chartItem) }
             )
         }
     }
