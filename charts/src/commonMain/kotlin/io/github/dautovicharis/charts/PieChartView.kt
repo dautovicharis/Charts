@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,18 +37,20 @@ fun PieChartView(
     dataSet: ChartDataSet,
     style: PieChartStyle = PieChartDefaults.style(),
 ) {
-    style.pieColors = style.pieColors.ifEmpty {
-        generateColorShades(style.pieColor, dataSet.data.item.points.size)
-    }
+    key(dataSet) {
+        style.pieColors = style.pieColors.ifEmpty {
+            generateColorShades(style.pieColor, dataSet.data.item.points.size)
+        }
 
-    val errors by remember {
-        mutableStateOf(validatePieData(dataSet = dataSet, style = style))
-    }
+        val errors by remember {
+            mutableStateOf(validatePieData(dataSet = dataSet, style = style))
+        }
 
-    if (errors.isNotEmpty()) {
-        ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
-    } else {
-        ChartContent(dataSet = dataSet, style = style)
+        if (errors.isNotEmpty()) {
+            ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
+        } else {
+            ChartContent(dataSet = dataSet, style = style)
+        }
     }
 }
 
@@ -108,16 +111,12 @@ private fun ChartContent(
             }
         }
 
-        AnimatedVisibility(
-            visible = selectedIndex != NO_SELECTION,
-            enter = expandVertically(),
-            exit = shrinkVertically()
-        ) {
-            LegendItem(
-                chartViewsStyle = style.chartViewStyle,
-                legend = dataSet.data.item.labels,
-                colors = pieChartColors
-            )
-        }
+      if (style.legendVisible) {
+          LegendItem(
+              chartViewsStyle = style.chartViewStyle,
+              legend = dataSet.data.item.labels,
+              colors = pieChartColors
+          )
+      }
     }
 }

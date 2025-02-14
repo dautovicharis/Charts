@@ -23,6 +23,7 @@ import io.github.dautovicharis.charts.internal.DONUT_MIN_PERCENTAGE
  * @property pieColor The color to be used for the pie chart if pieColors is empty.
  * @property borderColor The color of the border around the pie chart.
  * @property borderWidth The width of the border around the pie chart.
+ * @property legendVisible A boolean indicating whether the legend is visible.
  */
 @Immutable
 class PieChartStyle internal constructor(
@@ -32,7 +33,8 @@ class PieChartStyle internal constructor(
     var pieColors: List<Color>,
     val pieColor: Color,
     val borderColor: Color,
-    val borderWidth: Float
+    val borderWidth: Float,
+    val legendVisible: Boolean
 ) : Style {
     /**
      * Returns a list of the properties of the PieChartStyle.
@@ -43,7 +45,8 @@ class PieChartStyle internal constructor(
             PieChartStyle::pieColors.name to pieColors,
             PieChartStyle::pieColor.name to pieColor,
             PieChartStyle::borderColor.name to borderColor,
-            PieChartStyle::borderWidth.name to borderWidth
+            PieChartStyle::borderWidth.name to borderWidth,
+            PieChartStyle::legendVisible.name to legendVisible
         )
     }
 }
@@ -61,6 +64,7 @@ object PieChartDefaults {
      * @param innerPadding The inner padding of the pie chart. Defaults to 15.dp.
      * @param donutPercentage The percentage of the chart that should be a donut hole. Defaults to 0f.
      * @param borderWidth The width of the border around the pie chart. Defaults to 3f.
+     * @param legendVisible A boolean indicating whether the legend is visible. Defaults to false.
      * @param chartViewStyle The style to be applied to the chart view. Defaults to the default style of ChartViewDefaults.
      */
     @Composable
@@ -71,6 +75,7 @@ object PieChartDefaults {
         innerPadding: Dp = 15.dp,
         donutPercentage: Float = 0f,
         borderWidth: Float = 3f,
+        legendVisible: Boolean = false,
         chartViewStyle: ChartViewStyle = ChartViewDefaults.style()
     ): PieChartStyle {
         return PieChartStyle(
@@ -86,6 +91,7 @@ object PieChartDefaults {
             pieColor = pieColor,
             borderColor = borderColor,
             borderWidth = borderWidth,
+            legendVisible = legendVisible,
             chartViewStyle = chartViewStyle
         )
     }

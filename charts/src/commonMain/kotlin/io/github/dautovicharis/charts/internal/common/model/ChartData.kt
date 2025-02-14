@@ -12,25 +12,25 @@ internal fun List<Double>.toChartData(
     prefix: String = "",
     postfix: String = "",
     labels: List<String>? = null
-): ChartData = ChartData(this.mapIndexed {index,it -> (if (labels != null) labels[index] else "${prefix}${it}${postfix}") to it })
+): ChartData = ChartData(this.mapIndexed {index,it -> (if (!labels.isNullOrEmpty()) labels[index] else "${prefix}${it}${postfix}") to it })
 
 @JvmName("toFloatChartData")
 internal fun List<Float>.toChartData(
     prefix: String = "",
     postfix: String = "",
     labels: List<String>? = null
-): ChartData = ChartData(this.mapIndexed {index,it -> (if (labels != null) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })
+): ChartData = ChartData(this.mapIndexed {index,it -> (if (!labels.isNullOrEmpty()) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })
 
 @JvmName("toStringChartData")
 internal fun List<String>.toChartData(
     prefix: String = "",
     postfix: String = "",
     labels: List<String>? = null
-): ChartData = ChartData(this.mapIndexed {index,it -> (if (labels != null) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })
+): ChartData = ChartData(this.mapIndexed {index,it -> (if (!labels.isNullOrEmpty()) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })
 
 @JvmName("toIntChartData")
 internal fun List<Int>.toChartData(
     prefix: String = "",
     postfix: String = "",
     labels: List<String>? = null
-): ChartData = ChartData(this.mapIndexed {index,it -> (if (labels != null) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })
+): ChartData = ChartData(this.mapIndexed {index,it -> (if (!labels.isNullOrEmpty()) labels[index] else "${prefix}${it}${postfix}") to it.toDouble() })

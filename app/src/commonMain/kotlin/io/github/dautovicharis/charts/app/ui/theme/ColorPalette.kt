@@ -5,6 +5,28 @@ import androidx.compose.ui.graphics.Color
 // Source: https://www.heavy.ai/blog/12-color-palettes-for-telling-better-stories-with-your-data
 object ColorPalette {
 
+    val chartColors = listOf(
+        Color(0xFF006C8E), // Adjusted Navy Blue
+        Color(0xFF2F4B7C), // Dark Blue
+        Color(0xFF4C6E91), // Muted Steel Blue
+        Color(0xFF665191), // Deep Purple
+        Color(0xFFA05195), // Magenta
+        Color(0xFFD45087), // Dark Pink
+        Color(0xFFF95D6A), // Coral Red
+        Color(0xFFFF7C43), // Orange
+        Color(0xFFB88B4A), // Golden Yellow
+        Color(0xFFB68CB8), // Soft Lavender
+        Color(0xFF8F7C6D), // Warm Taupe
+        Color(0xFF6A8E7C), // Sage Green
+        Color(0xFF9E7C42), // Muted Caramel
+        Color(0xFF7A8C96), // Dusty Blue
+        Color(0xFF4C5D60), // Slate Green
+        Color(0xFF8E9A9B), // Soft Gray Blue
+        Color(0xFF517C5C), // Olive Green
+        Color(0xFF8D6E63), // Earthy Brown
+        Color(0xFF3C6E8F)  // Soft Teal
+    )
+
     object RetroMetro {
         val crimson = Color(0xFFEA5545)
         val pink = Color(0xFFF46A9B)
@@ -63,4 +85,12 @@ object ColorPalette {
         val orange = Color(0xFFFF7C43)
         val yellow = Color(0xFFFFA600)
     }
+}
+
+fun generateColors(size: Int, fromColors: List<Color>): List<Color> {
+    val colors = mutableListOf<Color>()
+    while (colors.size < size) {
+        colors.addAll(fromColors)
+    }
+    return colors.take(size)
 }

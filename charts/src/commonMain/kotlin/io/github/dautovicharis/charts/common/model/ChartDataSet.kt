@@ -8,7 +8,7 @@ import io.github.dautovicharis.charts.internal.common.model.toChartData
  *
  * @property data The data item that represents the data set.
  */
-class ChartDataSet private constructor(
+class ChartDataSet(
     items: ChartDataType,
     title: String,
     prefix: String = "",
@@ -45,17 +45,6 @@ class ChartDataSet private constructor(
     )
 
     /**
-     * @constructor Creates a new ChartDataSet with the provided items, title, prefix, and postfix.
-     *
-     * @param items The list of data items.
-     * @param title The title of the data set.
-     * @param prefix The prefix to be added to each data item. Defaults to an empty string.
-     * @param postfix The postfix to be added to each data item. Defaults to an empty string.
-     */
-    constructor(items: ChartDataType, title: String, prefix: String = "", postfix: String = "")
-            : this(items, title, prefix, postfix, null)
-
-    /**
      * @constructor Creates a new ChartDataSet with the provided items, title, and labels.
      *
      * @param items The list of data items.
@@ -63,5 +52,5 @@ class ChartDataSet private constructor(
      * @param labels The labels to be used for each data item..
      */
     constructor(items: ChartDataType, title: String, labels: List<String>)
-            : this(items, title, prefix = "", postfix = "", labels = labels)
+            : this(items = items, title = title, prefix = "", postfix = "", labels = labels)
 }

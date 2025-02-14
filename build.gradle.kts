@@ -15,10 +15,11 @@ sonar {
         property("sonar.host.url", "https://sonarcloud.io/")
         property(
             "sonar.coverage.jacoco.xmlReportPaths",
-            "${project.rootDir}/charts/build/reports/kover/report.xml," +
-                    "${project.rootDir}/app/build/reports/kover/report.xml"
+            "${project.rootDir}/charts/build/reports/kover/report.xml," //+
+                    //"${project.rootDir}/app/build/reports/kover/report.xml"
         )
         property("sonar.coverage.exclusions", "**/preview/**")
+        property("sonar.exclusions", "**/app/**")
     }
 }
 

@@ -133,6 +133,7 @@ internal object MockTest {
             donutPercentage = 0.5f,
             borderColor = Color.Black,
             borderWidth = 2f,
+            legendVisible = true,
             chartViewStyle = mockChartViewStyle()
         )
     }

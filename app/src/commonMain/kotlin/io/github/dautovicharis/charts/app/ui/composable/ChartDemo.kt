@@ -1,12 +1,11 @@
 package io.github.dautovicharis.charts.app.ui.composable
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import io.github.dautovicharis.charts.app.demo.bar.BarChartStyleItems
 import io.github.dautovicharis.charts.app.demo.line.LineChartStyleItems
 import io.github.dautovicharis.charts.app.demo.multiline.MultiLineStyleItems
@@ -31,41 +30,32 @@ sealed class ChartStyleType {
 }
 
 @Composable
-fun ChartDemo(type: ChartStyleType, chartItem: @Composable () -> Unit) {
-    StyleAndChart(
-        DemoStyleItems(type)
+fun ChartDemo(type: ChartStyleType, onRefresh: () -> Unit,
+              colors: List<Color> = emptyList(),
+              chartItem: @Composable () -> Unit) {
+    Column(
+        modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
-        chartItem()
+        StyleAndChartComponent(
+            tableItems = DemoStyleItems(type, colors),
+            onRefresh = onRefresh,
+            chartItem = chartItem
+        )
     }
 }
 
 @Composable
-fun ChartDemoItems(
-    items: List<@Composable () -> Unit>
-) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        items(items) { chartItem ->
-            chartItem()
-        }
-    }
-}
-
-@Composable
-private fun DemoStyleItems(type: ChartStyleType): StyleItems {
+private fun DemoStyleItems(type: ChartStyleType, colors: List<Color> = emptyList()): StyleItems {
     return when (type) {
         is ChartStyleType.PieChartDefault -> PieChartStyleItems.default()
-        is ChartStyleType.PieChartCustom -> PieChartStyleItems.custom()
+        is ChartStyleType.PieChartCustom -> PieChartStyleItems.custom(colors)
         is ChartStyleType.LineChartDefault -> LineChartStyleItems.default()
         is ChartStyleType.LineChartCustom -> LineChartStyleItems.custom()
         is ChartStyleType.MultiLineChartDefault -> MultiLineStyleItems.default()
-        is ChartStyleType.MultiLineChartCustom -> MultiLineStyleItems.custom()
+        is ChartStyleType.MultiLineChartCustom -> MultiLineStyleItems.custom(colors)
         is ChartStyleType.BarChartDefault -> BarChartStyleItems.default()
         is ChartStyleType.BarChartCustom -> BarChartStyleItems.custom()
         is ChartStyleType.StackedBarChartDefault -> StackedBarChartStyleItems.default()
-        is ChartStyleType.StackedBarChartCustom -> StackedBarChartStyleItems.custom()
+        is ChartStyleType.StackedBarChartCustom -> StackedBarChartStyleItems.custom(colors)
     }
 }
