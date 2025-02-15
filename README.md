@@ -29,7 +29,7 @@ Public API: https://dautovicharis.github.io/Charts/2.0.0-SNAPSHOT/
 - M3 theme support
 - Customizable chart styles
 - Various data set support
-- Multiplatform: Android, iOS, Desktop, Web.
+- Multiplatform: Android, iOS, Desktop, [Web](https://dautovicharis.github.io/Charts/jsDemo/).
 
 # Dependency
 ```kotlin
