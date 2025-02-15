@@ -3,16 +3,17 @@
 java = "17"
 
 # Android gradle plugin version
-agp = "8.8.0"
+agp = "8.8.1"
 
 androidx-navigation = "2.7.0-alpha06"
 androidx-lifecycle = "2.8.0"
 
 # Kotlin compatibility
 # https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#kotlin-compatibility
-compose = "1.6.7"
-compose-plugin = "1.6.1"
-kotlin-multiplatform = "1.9.23"
+compose = "1.7.6"
+compose-plugin = "1.7.3"
+# https://plugins.gradle.org/plugin/org.jetbrains.kotlin.multiplatform
+kotlin-multiplatform = "2.1.10"
 
 # Documentation: https://kotlin.github.io/dokka/
 dokka = "1.9.20"
