@@ -54,9 +54,9 @@ tasks.register("generateJsDemo") {
     group = "Charts"
     description = "Builds the JS app and copies necessary files to docs/jsDemo"
 
-    dependsOn(getTasksByName("jsBrowserProductionWebpack", true))
+    dependsOn(getTasksByName("jsBrowserDistribution", true))
     doLast {
-        val buildDir = file("build/js/packages/ChartsProject-app/kotlin")
+        val buildDir = file("app/build/dist/js/productionExecutable")
         val destinationDir = file("docs/jsDemo")
 
         if (!destinationDir.exists()) {
