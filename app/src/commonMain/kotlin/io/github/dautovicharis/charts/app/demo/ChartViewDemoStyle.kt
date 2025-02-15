@@ -9,7 +9,9 @@ object ChartViewDemoStyle {
 
     // We are changing the default ChartView style just for demo purposes
     @Composable
-    fun custom(width: Dp = Dp.Infinity): ChartViewStyle {
+    fun custom(width: Dp = chartWidth()): ChartViewStyle {
         return ChartViewDefaults.style(width = width)
     }
 }
+
+expect fun chartWidth(): Dp
