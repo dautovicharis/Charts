@@ -5,9 +5,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 
-class MainViewModel() : ViewModel() {
+class MainViewModel : ViewModel() {
     private val _selectedTheme = MutableStateFlow(ThemeManager.currentTheme)
     val selectedTheme: StateFlow<Theme> = _selectedTheme
+
+    private val _availableThemes = MutableStateFlow(ThemeManager.themes)
+    val availableThemes: StateFlow<List<Theme>> = _availableThemes
 
     fun updateTheme(newTheme: Theme) {
         _selectedTheme.value = newTheme

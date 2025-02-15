@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -51,7 +52,6 @@ import io.github.dautovicharis.charts.app.ChartSubmenuItem
 import io.github.dautovicharis.charts.app.Navigation
 import io.github.dautovicharis.charts.app.ui.theme.AppTheme
 import io.github.dautovicharis.charts.app.ui.theme.Theme
-import io.github.dautovicharis.charts.app.ui.theme.ThemeManager
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -71,6 +71,7 @@ private val charts = listOf(
 fun MainScreen(viewModel: MainViewModel = koinViewModel ()) {
     KoinContext {
         val selectedTheme  = viewModel.selectedTheme.collectAsStateWithLifecycle()
+        val availableThemes = viewModel.availableThemes.collectAsStateWithLifecycle()
         val navController = rememberNavController()
         val currentBackStackEntry by navController.currentBackStackEntryAsState()
         val canNavigateBack = currentBackStackEntry?.destination?.route != ChartScreen.MainScreen.ROUTE
@@ -95,7 +96,8 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel ()) {
             ) {
                 Navigation(
                     navController = navController,
-                    selectedTheme = selectedTheme.value,
+                    selectedTheme = selectedTheme,
+                    availableThemes = availableThemes,
                     onThemeSelected = { viewModel.updateTheme(it) }
                 )
             }
@@ -105,7 +107,8 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel ()) {
 
 @Composable
 fun MainScreenContent(
-    selectedTheme: Theme,
+    selectedTheme: State<Theme>,
+    availableThemes: State<List<Theme>>,
     onThemeSelected: (Theme) -> Unit,
     navController: NavHostController
 ) {
@@ -117,8 +120,8 @@ fun MainScreenContent(
         AddGithubIcon()
 
         AddThemes(
-            currentTheme = selectedTheme,
-            themes = ThemeManager.themes
+            selectedTheme = selectedTheme,
+            availableThemes = availableThemes
         ) {
             onThemeSelected(it)
         }
@@ -235,9 +238,9 @@ private fun AddGithubIcon() {
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun AddThemes(
-    currentTheme: Theme,
-    themes: List<Theme>,
-    selectedTheme: (selected: Theme) -> Unit
+    selectedTheme: State<Theme>,
+    availableThemes: State<List<Theme>>,
+    onThemeSelected: (selected: Theme) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -247,19 +250,20 @@ private fun AddThemes(
     ) {
         Row {
             LazyRow {
-                items(items = themes) { theme ->
-                    val isSelectedTheme = currentTheme == theme
+                items(items = availableThemes.value) { theme ->
+                    val isSelectedTheme = selectedTheme.value == theme
                     FilledIconToggleButton(
                         checked = isSelectedTheme,
                         onCheckedChange = {
-                            selectedTheme(theme)
+                            onThemeSelected(theme)
                         },
                         modifier = Modifier.padding(10.dp),
                         content = {
                             if (isSelectedTheme) {
                                 Icon(
                                     painter = painterResource(Res.drawable.ic_check),
-                                    contentDescription = stringResource(Res.string.themes_content_description)
+                                    contentDescription = stringResource(Res.string.themes_content_description),
+                                    tint = MaterialTheme.colorScheme.onPrimary
                                 )
                             }
                         },

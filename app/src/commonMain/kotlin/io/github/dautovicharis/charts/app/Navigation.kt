@@ -3,6 +3,7 @@ package io.github.dautovicharis.charts.app
 import MainScreenContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -185,7 +186,8 @@ sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
 @Composable
 fun Navigation(
     navController: NavHostController,
-    selectedTheme: Theme,
+    selectedTheme: State<Theme>,
+    availableThemes: State<List<Theme>>,
     onThemeSelected: (Theme) -> Unit
 ) {
     NavHost(
@@ -196,6 +198,7 @@ fun Navigation(
         composable(ChartScreen.MainScreen.ROUTE) {
             MainScreenContent(
                 selectedTheme = selectedTheme,
+                availableThemes = availableThemes,
                 onThemeSelected = onThemeSelected,
                 navController = navController
             )
