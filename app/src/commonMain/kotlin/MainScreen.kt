@@ -1,14 +1,17 @@
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -27,12 +30,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -51,31 +54,25 @@ import io.github.dautovicharis.charts.app.ChartSubmenuItem
 import io.github.dautovicharis.charts.app.Navigation
 import io.github.dautovicharis.charts.app.ui.theme.AppTheme
 import io.github.dautovicharis.charts.app.ui.theme.Theme
-import io.github.dautovicharis.charts.app.ui.theme.ThemeManager
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 
-private val charts = listOf(
-    ChartScreen.PieChartScreen,
-    ChartScreen.LineChartScreen,
-    ChartScreen.MultiLineChartScreen,
-    ChartScreen.BarChartScreen,
-    ChartScreen.StackedBarChartScreen,
-)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(viewModel: MainViewModel = koinViewModel ()) {
+fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
     KoinContext {
-        val selectedTheme  = viewModel.selectedTheme.collectAsStateWithLifecycle()
+        val selectedThemeState = viewModel.selectedTheme.collectAsStateWithLifecycle()
+        val themesState = viewModel.availableThemes.collectAsStateWithLifecycle()
+        val menuState = viewModel.menuItems.collectAsStateWithLifecycle()
         val navController = rememberNavController()
         val currentBackStackEntry by navController.currentBackStackEntryAsState()
-        val canNavigateBack = currentBackStackEntry?.destination?.route != ChartScreen.MainScreen.ROUTE
+        val canNavigateBack =
+            currentBackStackEntry?.destination?.route != ChartScreen.MainScreen.ROUTE
 
-        AppTheme(theme = selectedTheme.value) {
+        AppTheme(theme = selectedThemeState.value) {
             Scaffold(
                 topBar = {
                     TopAppBar(
@@ -84,7 +81,8 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel ()) {
                             if (canNavigateBack) {
                                 IconButton(onClick = { navController.popBackStack() }
                                 ) {
-                                    Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                         contentDescription = null
                                     )
                                 }
@@ -95,7 +93,9 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel ()) {
             ) {
                 Navigation(
                     navController = navController,
-                    selectedTheme = selectedTheme.value,
+                    selectedThemeState = selectedThemeState,
+                    themesState = themesState,
+                    menuState = menuState,
                     onThemeSelected = { viewModel.updateTheme(it) }
                 )
             }
@@ -105,7 +105,9 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel ()) {
 
 @Composable
 fun MainScreenContent(
-    selectedTheme: Theme,
+    selectedThemeState: State<Theme>,
+    themesState: State<List<Theme>>,
+    menuState: State<MenuState>,
     onThemeSelected: (Theme) -> Unit,
     navController: NavHostController
 ) {
@@ -117,75 +119,72 @@ fun MainScreenContent(
         AddGithubIcon()
 
         AddThemes(
-            currentTheme = selectedTheme,
-            themes = ThemeManager.themes
+            selectedThemeState = selectedThemeState,
+            themesState = themesState
         ) {
             onThemeSelected(it)
         }
 
-        AddMenuItems { chartItem ->
+        AddMenuItems(menuState) { chartItem ->
             navController.navigate(chartItem.route)
         }
     }
 }
 
 @Composable
-private fun AddMenuItems(selectedItem: (selected: ChartSubmenuItem) -> Unit) {
+private fun AddMenuItems(menuState: State<MenuState>,
+                         selectedItem: (selected: ChartSubmenuItem) -> Unit) {
     val expandedMenuStates = rememberSaveable { mutableStateOf<Map<Int, Boolean>>(emptyMap()) }
-    Column(
-        modifier = Modifier
-            .background(Color.Transparent)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
     ) {
-        LazyColumn {
-            items(items = charts) { chartItem ->
-                val itemIndex = charts.indexOf(chartItem)
-                Column {
-                    ChartTypeItem(
-                        item = chartItem,
-                        onClick = {
-                            expandedMenuStates.value = expandedMenuStates.value.toMutableMap().apply {
-                                this[itemIndex] = !(this[itemIndex] ?: false)
-                            }
+        LazyColumn(modifier = Modifier.widthIn(min = 150.dp, max = 300.dp)) {
+            items(items = menuState.value.menuItems) { chartItem ->
+                val itemIndex = menuState.value.menuItems.indexOf(chartItem)
+                ChartTypeItem(
+                    item = chartItem,
+                    onClick = {
+                        expandedMenuStates.value = expandedMenuStates.value.toMutableMap().apply {
+                            this[itemIndex] = !(this[itemIndex] ?: false)
+                        }
+                    }
+                )
+                AnimatedVisibility(
+                    visible = expandedMenuStates.value[itemIndex] == true,
+                    enter = expandVertically(),
+                    exit = shrinkVertically()
+                ) {
+                    SubMenuItems(
+                        chartItem = chartItem,
+                        onSubmenuClick = {
+                            selectedItem(it)
                         }
                     )
-                    androidx.compose.animation.AnimatedVisibility(
-                        visible = expandedMenuStates.value[itemIndex] == true,
-                        enter = expandVertically(),
-                        exit = shrinkVertically()
-                    ) {
-                        SubMenuItems(
-                            chartItem = chartItem,
-                            onSubmenuClick = {
-                                selectedItem(it)
-                            }
-                        )
-                    }
+                }
+            }
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Version: ${BuildConfig.DEMO_VERSION_NAME}\n" +
+                                "Build: ${BuildConfig.DEMO_VERSION_CODE}\n" +
+                                "Charts: ${BuildConfig.CHARTS_VERSION}",
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
                 }
             }
         }
-
-        Text(
-            modifier = Modifier
-                .padding(10.dp)
-                .align(Alignment.CenterHorizontally),
-            text = "Version: ${BuildConfig.DEMO_VERSION_NAME}\n"
-                    + "Build: ${BuildConfig.DEMO_VERSION_CODE}\n"
-                    + "Charts: ${BuildConfig.CHARTS_VERSION}",
-            color = MaterialTheme.colorScheme.onBackground
-        )
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun SubMenuItems(chartItem: ChartScreen, onSubmenuClick: (ChartSubmenuItem) -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
+    Column(modifier = Modifier.padding(15.dp)) {
         chartItem.submenus.forEach { submenuItem ->
             TextButton(
                 onClick = {
@@ -203,7 +202,6 @@ private fun SubMenuItems(chartItem: ChartScreen, onSubmenuClick: (ChartSubmenuIt
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun AddGithubIcon() {
     val githubUrl = stringResource(Res.string.github_url)
@@ -232,56 +230,47 @@ private fun AddGithubIcon() {
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun AddThemes(
-    currentTheme: Theme,
-    themes: List<Theme>,
-    selectedTheme: (selected: Theme) -> Unit
+    selectedThemeState: State<Theme>,
+    themesState: State<List<Theme>>,
+    onThemeSelected: (selected: Theme) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row {
-            LazyRow {
-                items(items = themes) { theme ->
-                    val isSelectedTheme = currentTheme == theme
-                    FilledIconToggleButton(
-                        checked = isSelectedTheme,
-                        onCheckedChange = {
-                            selectedTheme(theme)
-                        },
-                        modifier = Modifier.padding(10.dp),
-                        content = {
-                            if (isSelectedTheme) {
-                                Icon(
-                                    painter = painterResource(Res.drawable.ic_check),
-                                    contentDescription = stringResource(Res.string.themes_content_description)
-                                )
-                            }
-                        },
-                        colors = IconButtonDefaults.filledIconToggleButtonColors(
-                            containerColor = theme.colors.md_theme_light_primary
-                        ),
-                        shape = CircleShape
-                    )
-                }
-            }
+    LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+        items(items = themesState.value) { theme ->
+            val isSelectedTheme = selectedThemeState.value == theme
+            FilledIconToggleButton(
+                checked = isSelectedTheme,
+                onCheckedChange = {
+                    onThemeSelected(theme)
+                },
+                modifier = Modifier.padding(10.dp),
+                content = {
+                    if (isSelectedTheme) {
+                        Icon(
+                            painter = painterResource(Res.drawable.ic_check),
+                            contentDescription = stringResource(Res.string.themes_content_description),
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
+                },
+                colors = IconButtonDefaults.filledIconToggleButtonColors(
+                    containerColor = theme.colors.md_theme_light_primary
+                ),
+                shape = CircleShape
+            )
         }
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun ChartTypeItem(item: ChartScreen, onClick: () -> Unit) {
-    Button(modifier = Modifier
-        .fillMaxWidth()
-        .padding(10.dp), onClick = {
-        onClick()
-    }) {
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+        onClick = onClick
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically

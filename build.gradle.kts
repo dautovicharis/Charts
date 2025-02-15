@@ -49,3 +49,23 @@ tasks.register("chartsCheck") {
     tasks.findByName("charts:koverXmlReport")?.mustRunAfter("chartsTest")
     tasks.findByName("sonar")?.mustRunAfter("charts:koverXmlReport")
 }
+
+tasks.register("generateJsDemo") {
+    group = "Charts"
+    description = "Builds the JS app and copies necessary files to docs/jsDemo"
+
+    dependsOn(getTasksByName("jsBrowserDistribution", true))
+    doLast {
+        val buildDir = file("app/build/dist/js/productionExecutable")
+        val destinationDir = file("docs/jsDemo")
+
+        if (!destinationDir.exists()) {
+            destinationDir.mkdirs()
+        }
+
+        copy {
+            from(buildDir)
+            into(destinationDir)
+        }
+    }
+}
