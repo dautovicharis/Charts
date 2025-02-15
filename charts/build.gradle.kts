@@ -11,6 +11,7 @@ plugins {
     signing
     alias(libs.plugins.mavenPublish)
     alias(libs.plugins.kover)
+    alias(libs.plugins.compose.compiler)
 }
 
 buildscript {
@@ -74,10 +75,6 @@ android {
         compose = true
     }
 
-    compose {
-        kotlinCompilerPlugin.set(libs.versions.kotlinCompilerPlugin.get())
-    }
-
     kotlin {
         jvmToolchain(libs.versions.java.get().toInt())
     }
@@ -85,10 +82,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.toVersion(libs.versions.java.get())
         targetCompatibility = JavaVersion.toVersion(libs.versions.java.get())
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 }
 

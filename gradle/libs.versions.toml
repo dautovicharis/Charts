@@ -3,18 +3,17 @@
 java = "17"
 
 # Android gradle plugin version
-agp = "8.8.0"
+agp = "8.8.1"
 
 androidx-navigation = "2.7.0-alpha06"
 androidx-lifecycle = "2.8.0"
 
 # Kotlin compatibility
 # https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#kotlin-compatibility
-compose = "1.6.7"
-compose-plugin = "1.6.1"
-kotlinCompilerPlugin = "1.5.10.1"
-kotlin-multiplatform = "1.9.23"
-kotlinCompilerExtensionVersion = "1.5.9"
+compose = "1.7.6"
+compose-plugin = "1.7.3"
+# https://plugins.gradle.org/plugin/org.jetbrains.kotlin.multiplatform
+kotlin-multiplatform = "2.1.10"
 
 # Documentation: https://kotlin.github.io/dokka/
 dokka = "1.9.20"
@@ -27,7 +26,8 @@ sonarqube = "5.0.0.4638"
 # https://github.com/Kotlin/kotlinx-kover
 kover = "0.8.1"
 # https://insert-koin.io
-koin = "4.0.2"
+# https://mvnrepository.com/artifact/io.insert-koin/koin-bom
+koin-bom = "4.0.2"
 
 [libraries]
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
@@ -36,9 +36,10 @@ androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycl
 androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 dokka-doc = { group = "org.jetbrains.dokka", name="android-documentation-plugin", version.ref = "dokka" }
-dokka-versions = {group = "org.jetbrains.dokka", name = "versioning-plugin", version.ref = "dokka"}
-koin-android = {module = "io.insert-koin:koin-android", version.ref = "koin"}
-koin-compose-viewmodel = {module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin"}
+dokka-versions = {group = "org.jetbrains.dokka", name = "versioning-plugin", version.ref = "dokka" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-bom" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-bom" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin-bom" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -50,3 +51,5 @@ mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublis
 build-config = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+# https://developer.android.com/develop/ui/compose/compiler
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin-multiplatform" }

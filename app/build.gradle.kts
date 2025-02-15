@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.build.config)
     alias(libs.plugins.kover)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -53,6 +54,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
         }
 
@@ -94,10 +96,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    compose {
-        kotlinCompilerPlugin.set(libs.versions.kotlinCompilerPlugin.get())
-    }
-
     kotlin {
         jvmToolchain(libs.versions.java.get().toInt())
     }
@@ -105,10 +103,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.toVersion(libs.versions.java.get())
         targetCompatibility = JavaVersion.toVersion(libs.versions.java.get())
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtensionVersion.get()
     }
 
     buildFeatures {
