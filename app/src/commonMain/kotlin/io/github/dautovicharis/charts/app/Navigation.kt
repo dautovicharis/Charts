@@ -34,37 +34,32 @@ import io.github.dautovicharis.charts.app.demo.stackedbar.StackedBarBasicDemo
 import io.github.dautovicharis.charts.app.demo.stackedbar.StackedBarCustomDemo
 import io.github.dautovicharis.charts.app.ui.theme.Theme
 import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.StringResource
 
-sealed class ChartSubmenuItem @OptIn(ExperimentalResourceApi::class) constructor(
+sealed class ChartSubmenuItem(
     val route: String,
     val title: StringResource
 ) {
 
     // Pie Chart
-    @OptIn(ExperimentalResourceApi::class)
     data object PieChartBasic :
         ChartSubmenuItem(
             route = "pieChartBasic",
             title = Res.string.chart_basic
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object PieChartCustom :
         ChartSubmenuItem(
             route = "pieChartCustom",
             title = Res.string.chart_custom
         )
     // Line Chart
-    @OptIn(ExperimentalResourceApi::class)
     data object LineChartBasic :
         ChartSubmenuItem(
             route = "lineChartBasic",
             title = Res.string.chart_basic
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object LineChartCustom :
         ChartSubmenuItem(
             route = "lineChartCustom",
@@ -72,14 +67,12 @@ sealed class ChartSubmenuItem @OptIn(ExperimentalResourceApi::class) constructor
         )
 
     // Multi Line Chart
-    @OptIn(ExperimentalResourceApi::class)
     data object MultiLineChartBasic :
         ChartSubmenuItem(
             route = "multiLineChartBasic",
             title = Res.string.chart_basic
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object MultiLineChartCustom :
         ChartSubmenuItem(
             route = "multiLineChartCustom",
@@ -87,14 +80,12 @@ sealed class ChartSubmenuItem @OptIn(ExperimentalResourceApi::class) constructor
         )
 
     // Bar Chart
-    @OptIn(ExperimentalResourceApi::class)
     data object BarChartBasic :
         ChartSubmenuItem(
             route = "barChartBasic",
             title = Res.string.chart_basic
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object BarChartCustom :
         ChartSubmenuItem(
             route = "barChartCustom",
@@ -102,14 +93,12 @@ sealed class ChartSubmenuItem @OptIn(ExperimentalResourceApi::class) constructor
         )
 
     // Stacked Bar Chart
-    @OptIn(ExperimentalResourceApi::class)
     data object StackedBarChartBasic :
         ChartSubmenuItem(
             route = "stackedBarChartBasic",
             title = Res.string.chart_basic
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object StackedBarChartCustom :
         ChartSubmenuItem(
             route = "stackedBarChartCustom",
@@ -118,7 +107,7 @@ sealed class ChartSubmenuItem @OptIn(ExperimentalResourceApi::class) constructor
 
 }
 
-sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
+sealed class ChartScreen(
     val icon: DrawableResource,
     val title: StringResource,
     val submenus: List<ChartSubmenuItem> = emptyList()
@@ -127,7 +116,6 @@ sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
         const val ROUTE = "main"
     }
 
-    @OptIn(ExperimentalResourceApi::class)
     data object PieChartScreen :
         ChartScreen(
             icon = Res.drawable.ic_pie_chart,
@@ -138,7 +126,6 @@ sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
             )
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object LineChartScreen :
         ChartScreen(
             icon = Res.drawable.ic_line_chart,
@@ -149,7 +136,6 @@ sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
             )
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object MultiLineChartScreen :
         ChartScreen(
             icon = Res.drawable.ic_multi_line_chart,
@@ -160,7 +146,6 @@ sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
             )
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object BarChartScreen :
         ChartScreen(
             icon = Res.drawable.ic_bar_chart,
@@ -171,7 +156,6 @@ sealed class ChartScreen @OptIn(ExperimentalResourceApi::class) constructor(
             )
         )
 
-    @OptIn(ExperimentalResourceApi::class)
     data object StackedBarChartScreen :
         ChartScreen(
             icon = Res.drawable.ic_stacked_bar_chart,

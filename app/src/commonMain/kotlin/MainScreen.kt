@@ -52,7 +52,6 @@ import io.github.dautovicharis.charts.app.ChartSubmenuItem
 import io.github.dautovicharis.charts.app.Navigation
 import io.github.dautovicharis.charts.app.ui.theme.AppTheme
 import io.github.dautovicharis.charts.app.ui.theme.Theme
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.KoinContext
@@ -182,7 +181,6 @@ private fun AddMenuItems(selectedItem: (selected: ChartSubmenuItem) -> Unit) {
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun SubMenuItems(chartItem: ChartScreen, onSubmenuClick: (ChartSubmenuItem) -> Unit) {
     Column(
@@ -206,7 +204,6 @@ private fun SubMenuItems(chartItem: ChartScreen, onSubmenuClick: (ChartSubmenuIt
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun AddGithubIcon() {
     val githubUrl = stringResource(Res.string.github_url)
@@ -235,7 +232,6 @@ private fun AddGithubIcon() {
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun AddThemes(
     selectedTheme: State<Theme>,
@@ -278,7 +274,6 @@ private fun AddThemes(
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun ChartTypeItem(item: ChartScreen, onClick: () -> Unit) {
     Button(modifier = Modifier
