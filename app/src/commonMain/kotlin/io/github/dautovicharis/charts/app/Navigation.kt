@@ -1,6 +1,7 @@
 package io.github.dautovicharis.charts.app
 
 import MainScreenContent
+import MenuState
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -170,8 +171,9 @@ sealed class ChartScreen(
 @Composable
 fun Navigation(
     navController: NavHostController,
-    selectedTheme: State<Theme>,
-    availableThemes: State<List<Theme>>,
+    selectedThemeState: State<Theme>,
+    themesState: State<List<Theme>>,
+    menuState: State<MenuState>,
     onThemeSelected: (Theme) -> Unit
 ) {
     NavHost(
@@ -181,10 +183,11 @@ fun Navigation(
     ) {
         composable(ChartScreen.MainScreen.ROUTE) {
             MainScreenContent(
-                selectedTheme = selectedTheme,
-                availableThemes = availableThemes,
+                selectedThemeState = selectedThemeState,
+                themesState = themesState,
                 onThemeSelected = onThemeSelected,
-                navController = navController
+                navController = navController,
+                menuState = menuState
             )
         }
         composable(ChartSubmenuItem.PieChartBasic.route) {

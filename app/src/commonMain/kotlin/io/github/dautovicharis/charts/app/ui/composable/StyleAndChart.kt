@@ -44,7 +44,6 @@ import chartsproject.app.generated.resources.Res
 import chartsproject.app.generated.resources.ic_replay
 import chartsproject.app.generated.resources.ic_visibility_off
 import chartsproject.app.generated.resources.ic_visibility_on
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import kotlin.random.Random
 
@@ -208,7 +207,6 @@ private fun StyleAndChartChartItem(
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun StyleAndChartButtons(
     tableItemsVisible: Boolean,
@@ -224,7 +222,8 @@ private fun StyleAndChartButtons(
             onClick = { setTableItemsVisible(!tableItemsVisible) }
         ) {
             Icon(
-                painter = painterResource(if (tableItemsVisible) Res.drawable.ic_visibility_on else Res.drawable.ic_visibility_off),
+                painter = painterResource(
+                    if (tableItemsVisible) Res.drawable.ic_visibility_on else Res.drawable.ic_visibility_off),
                 contentDescription = null
             )
         }
