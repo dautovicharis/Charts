@@ -12,9 +12,7 @@ androidx-lifecycle = "2.8.0"
 # https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#kotlin-compatibility
 compose = "1.6.7"
 compose-plugin = "1.6.1"
-kotlinCompilerPlugin = "1.5.10.1"
 kotlin-multiplatform = "1.9.23"
-kotlinCompilerExtensionVersion = "1.5.9"
 
 # Documentation: https://kotlin.github.io/dokka/
 dokka = "1.9.20"
@@ -50,3 +48,5 @@ mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublis
 build-config = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+# https://developer.android.com/develop/ui/compose/compiler
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin-multiplatform" }

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.build.config) apply false
     alias(libs.plugins.sonarqube) apply true
     alias(libs.plugins.kover) apply true
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 sonar {
