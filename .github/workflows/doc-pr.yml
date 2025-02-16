@@ -2,8 +2,7 @@ name: Run Gradle Task and Create PR
 
 on:
   push:
-    branches:
-      - main, feature/doc-pr
+    branches: ["main","feature/doc-pr"]
 
 jobs:
   build-and-pr:
