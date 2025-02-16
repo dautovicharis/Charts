@@ -2,7 +2,7 @@ name: Generate Documentation and Create PR
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main","bugfix/doc-pr"]
 
 permissions:
   contents: write
