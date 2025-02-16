@@ -26,25 +26,30 @@ jobs:
       run: ./gradlew dokkaHtml
 
     - name: Check for Changes
+      id: check_changes
       run: |
+        git diff --exit-code || echo "Changes detected"
         if [[ -n "$(git status --porcelain)" ]]; then
-          echo "## Changes detected"
+          echo "changed=true" >> $GITHUB_ENV
         else
-          echo "## No changes to commit"
-          exit 0
+          echo "changed=false" >> $GITHUB_ENV
         fi
+      continue-on-error: true 
 
     - name: Configure Git
+      if: env.changed == 'true'
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
     - name: Create Commit
+      if: env.changed == 'true'
       run: |
         git add .
         git commit -m "Update docs"
 
     - name: Create Branch
+      if: env.changed == 'true'
       run: |
         BRANCH_NAME="update/doc-$(date +%Y%m%d%H%M%S)"
         git checkout -b $BRANCH_NAME
@@ -54,6 +59,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create Pull Request
+      if: env.changed == 'true'
       uses: repo-sync/pull-request@v2
       with:
         destination_branch: main
