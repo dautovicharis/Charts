@@ -7,7 +7,7 @@ import org.jetbrains.skiko.wasm.onWasmReady
 fun main () {
     initKoin()
     onWasmReady {
-        CanvasBasedWindow("Kmp app") {
+        CanvasBasedWindow("Charts") {
             MainScreen()
         }
     }
