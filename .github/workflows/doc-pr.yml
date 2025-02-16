@@ -1,4 +1,4 @@
-name: Run Gradle Task and Create PR
+name: Generate Documentation and Create PR
 
 on:
   push:
