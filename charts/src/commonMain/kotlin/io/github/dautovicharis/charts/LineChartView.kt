@@ -10,7 +10,7 @@ import io.github.dautovicharis.charts.style.LineChartDefaults
 import io.github.dautovicharis.charts.style.LineChartStyle
 
 /**
- * A composable function that displays a Line Chart for a single data set.
+ * A composable function that displays a Line Chart with a single data set.
  *
  * @param dataSet The data set to be displayed in the chart.
  * @param style The style to be applied to the chart. If not provided, the default style will be used.
@@ -32,7 +32,7 @@ fun LineChartView(
 }
 
 /**
- * A composable function that displays a Line Chart for multiple data sets.
+ * A composable function that displays a Line Chart with multiple data sets.
  *
  * @param dataSet The data sets to be displayed in the chart.
  * @param style The style to be applied to the chart. If not provided, the default style will be used.
