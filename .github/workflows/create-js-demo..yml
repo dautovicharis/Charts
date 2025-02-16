@@ -1,0 +1,69 @@
+name: Create JS Demo
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-and-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        distribution: 'zulu'
+
+    - name: Generate JS Demo
+      run: ./gradlew generateJsDemo
+
+    - name: Check for Changes
+      id: check_changes
+      run: |
+        git diff --exit-code || echo "Changes detected"
+        if [[ -n "$(git status --porcelain)" ]]; then
+          echo "changed=true" >> $GITHUB_ENV
+        else
+          echo "changed=false" >> $GITHUB_ENV
+        fi
+      continue-on-error: true 
+
+    - name: Configure Git
+      if: env.changed == 'true'
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Create Commit
+      if: env.changed == 'true'
+      run: |
+        git add .
+        git commit -m "Update JS demo"
+
+    - name: Create Branch
+      if: env.changed == 'true'
+      run: |
+        BRANCH_NAME="update/doc-$(date +%Y%m%d%H%M%S)"
+        git checkout -b $BRANCH_NAME
+        git push origin $BRANCH_NAME
+        echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create Pull Request
+      if: env.changed == 'true'
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: main
+        pr_title: "🤖 Update JS demo"
+        pr_body: "This PR contains the result of running the ./gradlew generateJsDemo task."
+        source_branch: ${{ env.BRANCH_NAME }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
