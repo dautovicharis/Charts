@@ -22,7 +22,7 @@ jobs:
         java-version: 17
         distribution: 'zulu'
 
-    - name: Run Gradle Task
+    - name: Generate documentation
       run: ./gradlew dokkaHtml
 
     - name: Check for Changes
@@ -57,7 +57,7 @@ jobs:
       uses: repo-sync/pull-request@v2
       with:
         destination_branch: main
-        pr_title: "Automated PR: Update docs"
+        pr_title: "🤖: Update docs"
         pr_body: "This PR contains the result of running the ./gradlew dokkaHtml task."
         source_branch: ${{ env.BRANCH_NAME }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
