@@ -2,7 +2,7 @@ name: Generate Documentation and Create PR
 
 on:
   push:
-    branches: ["main","feature/doc-pr"]
+    branches: ["main"]
 
 permissions:
   contents: write
@@ -57,7 +57,7 @@ jobs:
       uses: repo-sync/pull-request@v2
       with:
         destination_branch: main
-        pr_title: "🤖: Update docs"
+        pr_title: "🤖 Update docs"
         pr_body: "This PR contains the result of running the ./gradlew dokkaHtml task."
         source_branch: ${{ env.BRANCH_NAME }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
