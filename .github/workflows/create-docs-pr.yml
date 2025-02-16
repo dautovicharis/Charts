@@ -1,4 +1,4 @@
-name: Generate Documentation and Create PR
+name: Create Documentation and PR
 
 on:
   push:
