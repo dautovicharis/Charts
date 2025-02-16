@@ -1,10 +1,10 @@
-![logo-no-background](https://github.com/dautovicharis/Charts/assets/7049715/4150f102-1b05-4fd7-ab01-63480d2e6d50)
-
 ⚠️ ⚠️ ⚠️
 - I will continue supporting this library as much as I can.
 - For all new contributions, you can create a PR directly to the main branch.
 - If you want to test how it looks, please use the latest snapshot.
-- The demo app link is broken. I'm currently working on resolving some issues with the Google Play Console.
+- The demo Android app link is broken. I'm currently working on resolving some issues with the Google Play Console.
+
+![logo-no-background](https://github.com/dautovicharis/Charts/assets/7049715/4150f102-1b05-4fd7-ab01-63480d2e6d50)
 
 
 [![Release](https://img.shields.io/maven-central/v/io.github.dautovicharis/charts.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.dautovicharis/charts/overview)
@@ -23,6 +23,9 @@ Inspired by: https://github.com/AppPear/ChartView
 
 # Documentation
 Public API: https://dautovicharis.github.io/Charts/2.0.0-SNAPSHOT/
+
+# JS Demo
+https://dautovicharis.github.io/Charts/jsDemo/
 
 # Features
 - Animations
