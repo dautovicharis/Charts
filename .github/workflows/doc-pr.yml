@@ -1,0 +1,58 @@
+name: Run Gradle Task and Create PR
+
+on:
+  push:
+    branches:
+      - main, feature/doc-pr
+
+jobs:
+  build-and-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+
+    - name: Run Gradle Task
+      run: ./gradlew dokkaHtml
+
+    - name: Check for Changes
+      run: |
+        if [[ -n "$(git status --porcelain)" ]]; then
+          echo "## Changes detected"
+        else
+          echo "## No changes to commit"
+          exit 0
+        fi
+
+    - name: Configure Git
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Create Commit
+      run: |
+        git add .
+        git commit -m "Update docs"
+
+    - name: Create Branch
+      run: |
+        BRANCH_NAME="update/doc-$(date +%Y%m%d%H%M%S)"
+        git checkout -b $BRANCH_NAME
+        git push origin $BRANCH_NAME
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create Pull Request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: main
+        pr_title: "Automated PR: Update docs"
+        pr_body: "This PR contains the result of running the ./gradlew dokkaHtml task."
+        source_branch: ${{ steps.create-branch.outputs.BRANCH_NAME }}
+        token: ${{ secrets.GITHUB_TOKEN }}
