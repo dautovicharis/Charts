@@ -51,7 +51,7 @@ jobs:
     - name: Create Branch
       if: env.changed == 'true'
       run: |
-        BRANCH_NAME="update/doc-$(date +%Y%m%d%H%M%S)"
+        BRANCH_NAME="update/js-demo-$(date +%Y%m%d%H%M%S)"
         git checkout -b $BRANCH_NAME
         git push origin $BRANCH_NAME
         echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
