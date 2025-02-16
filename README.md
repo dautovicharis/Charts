@@ -6,7 +6,6 @@
 - If you want to test how it looks, please use the latest snapshot.
 - The demo app link is broken. I'm currently working on resolving some issues with the Google Play Console.
 
-
 [![Release](https://img.shields.io/maven-central/v/io.github.dautovicharis/charts.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.dautovicharis/charts/overview)
 [![Snapshot](https://img.shields.io/nexus/s/io.github.dautovicharis/charts?server=https%3A%2F%2Fs01.oss.sonatype.org)](https://s01.oss.sonatype.org/content/repositories/snapshots/io/github/dautovicharis/charts/)
 [![Build Status](https://app.bitrise.io/app/23ce18a5-812b-463b-a463-ee85e65c726b/status.svg?token=X08KrAmKwbHjF0NvT05WdA&branch=main)](https://app.bitrise.io/app/23ce18a5-812b-463b-a463-ee85e65c726b)
@@ -23,6 +22,9 @@ Inspired by: https://github.com/AppPear/ChartView
 
 # Documentation
 Public API: https://dautovicharis.github.io/Charts/2.0.0-SNAPSHOT/
+
+# JS Demo
+https://dautovicharis.github.io/Charts/jsDemo/
 
 # Features
 - Animations
