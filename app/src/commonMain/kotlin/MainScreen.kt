@@ -1,4 +1,3 @@
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
@@ -19,6 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconToggleButton
 import androidx.compose.material3.Icon
@@ -30,16 +30,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import chartsproject.app.generated.resources.Res
@@ -64,15 +62,14 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
     KoinContext {
-        val selectedThemeState = viewModel.selectedTheme.collectAsStateWithLifecycle()
-        val themesState = viewModel.availableThemes.collectAsStateWithLifecycle()
-        val menuState = viewModel.menuItems.collectAsStateWithLifecycle()
+        val themeState = viewModel.themeState.collectAsStateWithLifecycle()
+        val menuState = viewModel.menuState.collectAsStateWithLifecycle()
         val navController = rememberNavController()
         val currentBackStackEntry by navController.currentBackStackEntryAsState()
         val canNavigateBack =
             currentBackStackEntry?.destination?.route != ChartScreen.MainScreen.ROUTE
 
-        AppTheme(theme = selectedThemeState.value) {
+        AppTheme(theme = themeState.value.selectedTheme) {
             Scaffold(
                 topBar = {
                     TopAppBar(
@@ -93,11 +90,18 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
             ) {
                 Navigation(
                     navController = navController,
-                    selectedThemeState = selectedThemeState,
-                    themesState = themesState,
+                    themeState = themeState,
                     menuState = menuState,
-                    onThemeSelected = { viewModel.updateTheme(it) }
+                    onThemeSelected = { viewModel.onThemeSelected(it) },
+                    onSubmenuSelected = { viewModel.onSubmenuSelected(it) },
+                    onMenuToggle = { viewModel.onMenuToggle(it) }
                 )
+            }
+        }
+
+        LaunchedEffect(menuState.value.selectedSubmenu) {
+            menuState.value.selectedSubmenu?.let {
+                navController.navigate(it.route)
             }
         }
     }
@@ -105,11 +109,11 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
 
 @Composable
 fun MainScreenContent(
-    selectedThemeState: State<Theme>,
-    themesState: State<List<Theme>>,
+    themeState: State<ThemesState>,
     menuState: State<MenuState>,
     onThemeSelected: (Theme) -> Unit,
-    navController: NavHostController
+    onSubmenuSelected: (selected: ChartSubmenuItem) -> Unit,
+    onMenuToggle: (index: Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -119,22 +123,25 @@ fun MainScreenContent(
         AddGithubIcon()
 
         AddThemes(
-            selectedThemeState = selectedThemeState,
-            themesState = themesState
+            themeState = themeState
         ) {
             onThemeSelected(it)
         }
 
-        AddMenuItems(menuState) { chartItem ->
-            navController.navigate(chartItem.route)
-        }
+        AddMenuItems(
+            menuState = menuState,
+            onSubmenuSelected = onSubmenuSelected,
+            onMenuToggle = onMenuToggle
+        )
     }
 }
 
 @Composable
-private fun AddMenuItems(menuState: State<MenuState>,
-                         selectedItem: (selected: ChartSubmenuItem) -> Unit) {
-    val expandedMenuStates = rememberSaveable { mutableStateOf<Map<Int, Boolean>>(emptyMap()) }
+fun AddMenuItems(
+    menuState: State<MenuState>,
+    onSubmenuSelected: (selected: ChartSubmenuItem) -> Unit,
+    onMenuToggle: (index: Int) -> Unit
+) {
     Box(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.Center
@@ -145,20 +152,19 @@ private fun AddMenuItems(menuState: State<MenuState>,
                 ChartTypeItem(
                     item = chartItem,
                     onClick = {
-                        expandedMenuStates.value = expandedMenuStates.value.toMutableMap().apply {
-                            this[itemIndex] = !(this[itemIndex] ?: false)
-                        }
+                        onMenuToggle(itemIndex)
                     }
                 )
                 AnimatedVisibility(
-                    visible = expandedMenuStates.value[itemIndex] == true,
+                    visible = menuState.value.expandedMenuStates[itemIndex] == true,
                     enter = expandVertically(),
                     exit = shrinkVertically()
                 ) {
                     SubMenuItems(
                         chartItem = chartItem,
+                        menuState = menuState,
                         onSubmenuClick = {
-                            selectedItem(it)
+                            onSubmenuSelected(it)
                         }
                     )
                 }
@@ -166,8 +172,7 @@ private fun AddMenuItems(menuState: State<MenuState>,
 
             item {
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -182,28 +187,45 @@ private fun AddMenuItems(menuState: State<MenuState>,
     }
 }
 
+
 @Composable
-private fun SubMenuItems(chartItem: ChartScreen, onSubmenuClick: (ChartSubmenuItem) -> Unit) {
+private fun SubMenuItems(
+    chartItem: ChartScreen,
+    menuState: State<MenuState>,
+    onSubmenuClick: (ChartSubmenuItem) -> Unit
+) {
     Column(modifier = Modifier.padding(15.dp)) {
         chartItem.submenus.forEach { submenuItem ->
+            val isSelected = submenuItem == menuState.value.selectedSubmenu
+
             TextButton(
                 onClick = {
                     onSubmenuClick(submenuItem)
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = when (isSelected) {
+                        true -> MaterialTheme.colorScheme.primary
+                        false -> MaterialTheme.colorScheme.onSurface
+                    }
+                )
             ) {
                 Text(
                     text = stringResource(submenuItem.title),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary
+                    color = when (isSelected) {
+                        true -> MaterialTheme.colorScheme.primary
+                        false -> MaterialTheme.colorScheme.onSurface
+                    }
                 )
             }
         }
     }
 }
 
+
 @Composable
-private fun AddGithubIcon() {
+fun AddGithubIcon() {
     val githubUrl = stringResource(Res.string.github_url)
     val uriHandler = LocalUriHandler.current
     Column(
@@ -231,14 +253,13 @@ private fun AddGithubIcon() {
 }
 
 @Composable
-private fun AddThemes(
-    selectedThemeState: State<Theme>,
-    themesState: State<List<Theme>>,
+fun AddThemes(
+    themeState: State<ThemesState>,
     onThemeSelected: (selected: Theme) -> Unit
 ) {
     LazyRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-        items(items = themesState.value) { theme ->
-            val isSelectedTheme = selectedThemeState.value == theme
+        items(items = themeState.value.themes) { theme ->
+            val isSelectedTheme = themeState.value.selectedTheme == theme
             FilledIconToggleButton(
                 checked = isSelectedTheme,
                 onCheckedChange = {
@@ -264,7 +285,7 @@ private fun AddThemes(
 }
 
 @Composable
-private fun ChartTypeItem(item: ChartScreen, onClick: () -> Unit) {
+fun ChartTypeItem(item: ChartScreen, onClick: () -> Unit) {
     Button(
         modifier = Modifier
             .fillMaxWidth()
