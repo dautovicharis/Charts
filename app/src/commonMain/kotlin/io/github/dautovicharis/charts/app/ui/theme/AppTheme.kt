@@ -71,7 +71,7 @@ internal fun darkColors(colors: ThemeColors) = darkColorScheme(
 
 @Composable
 expect fun AppTheme(
-    theme: Theme = ThemeManager.currentTheme,
+    theme: Theme,
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
