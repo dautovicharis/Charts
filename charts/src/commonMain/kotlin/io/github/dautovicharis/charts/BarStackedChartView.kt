@@ -2,6 +2,7 @@ package io.github.dautovicharis.charts
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
@@ -54,13 +55,11 @@ private fun ChartContent(dataSet: MultiChartDataSet, style: StackedBarChartStyle
     var title by remember { mutableStateOf(dataSet.data.title) }
     var labels by remember { mutableStateOf(listOf<String>()) }
 
-    val colors by remember {
-        mutableStateOf(
-            style.barColors.ifEmpty {
-                generateColorShades(style.barColor, dataSet.data.getFirstPointsSize())
-            }
-        )
-    }
+    val colors = derivedStateOf {
+        style.barColors.ifEmpty {
+            generateColorShades(style.barColor, dataSet.data.getFirstPointsSize())
+        }
+    }.value
 
     ChartView(chartViewsStyle = style.chartViewStyle) {
         Text(

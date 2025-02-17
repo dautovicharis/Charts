@@ -2,6 +2,7 @@ package io.github.dautovicharis.charts.internal.linechart
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,17 +37,16 @@ internal fun LineChartViewImpl(
         var title by remember { mutableStateOf(data.title) }
         var labels by remember { mutableStateOf(listOf<String>()) }
 
-        val lineColors by remember {
-            mutableStateOf(
-                if (data.hasSingleItem()) {
-                    listOf(style.lineColor)
-                } else if (style.lineColors.isEmpty()) {
-                    generateColorShades(style.lineColor, data.items.size)
-                } else {
-                    style.lineColors
-                }
-            )
-        }
+        val lineColors = derivedStateOf {
+            if (data.hasSingleItem()) {
+                listOf(style.lineColor)
+            } else if (style.lineColors.isEmpty()) {
+                generateColorShades(style.lineColor, data.items.size)
+            } else {
+                style.lineColors
+            }
+        }.value
+
         ChartView(chartViewsStyle = style.chartViewStyle) {
             Text(
                 modifier = style.chartViewStyle.modifierTopTitle
