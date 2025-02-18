@@ -101,6 +101,7 @@ fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
 
         LaunchedEffect(menuState.value.selectedSubmenu) {
             menuState.value.selectedSubmenu?.let {
+                viewModel.onSubmenuUnselected()
                 navController.navigate(it.route)
             }
         }
