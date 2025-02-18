@@ -34,12 +34,13 @@ object PieChartDemoStyle {
 }
 
 @Composable
-fun PieChartBasicDemo(pieChartViewModel: PieChartViewModel = koinViewModel()) {
-    val dataSet by pieChartViewModel.dataSet.collectAsStateWithLifecycle()
+fun PieChartBasicDemo(viewModel: PieChartViewModel = koinViewModel()) {
+    val dataSet by viewModel.dataSet.collectAsStateWithLifecycle()
 
     ChartDemo(
         type = ChartStyleType.PieChartDefault,
-        onRefresh = { pieChartViewModel.regenerateDefaultDataSet() }) {
+        onRefresh = viewModel::regenerateDefaultDataSet
+    ) {
         PieChartView(
             dataSet = dataSet.dataSet,
             style = PieChartDemoStyle.default()
@@ -48,15 +49,17 @@ fun PieChartBasicDemo(pieChartViewModel: PieChartViewModel = koinViewModel()) {
 }
 
 @Composable
-fun PieChartCustomDemo(pieChartViewModel: PieChartViewModel = koinViewModel()) {
-    val dataSet by pieChartViewModel.dataSet.collectAsStateWithLifecycle()
+fun PieChartCustomDemo(viewModel: PieChartViewModel = koinViewModel()) {
+    val dataSet by viewModel.dataSet.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
-        pieChartViewModel.regenerateCustomDataSet()
+        viewModel.regenerateCustomDataSet()
     }
 
-    ChartDemo(type = ChartStyleType.PieChartCustom,
+    ChartDemo(
+        type = ChartStyleType.PieChartCustom,
         colors = dataSet.pieColors,
-        onRefresh = { pieChartViewModel.regenerateCustomDataSet() }) {
+        onRefresh = viewModel::regenerateCustomDataSet
+    ) {
         PieChartView(
             dataSet = dataSet.dataSet,
             style = PieChartDemoStyle.custom(dataSet.pieColors)

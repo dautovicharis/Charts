@@ -39,7 +39,8 @@ fun MultiLineBasicDemo(viewModel: MultiLineChartViewModel = koinViewModel()) {
 
     ChartDemo(
         type = ChartStyleType.MultiLineChartDefault,
-        onRefresh = { viewModel.regenerateDataSet() }) {
+        onRefresh = viewModel::regenerateDataSet
+    ) {
         LineChartView(
             dataSet = dataSet.dataSet, style = MultiLineDemoStyle.default()
         )
@@ -57,7 +58,8 @@ fun MultiLineCustomDemo(viewModel: MultiLineChartViewModel = koinViewModel()) {
     ChartDemo(
         type = ChartStyleType.MultiLineChartCustom,
         colors = dataSet.lineColors,
-        onRefresh = { viewModel.regenerateDataSet() }) {
+        onRefresh = viewModel::regenerateDataSet
+    ) {
         LineChartView(
             dataSet = dataSet.dataSet,
             style = MultiLineDemoStyle.custom(lineColors = dataSet.lineColors)
