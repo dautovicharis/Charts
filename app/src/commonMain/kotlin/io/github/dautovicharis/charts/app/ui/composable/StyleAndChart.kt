@@ -224,6 +224,7 @@ private fun StyleAndChartButtons(
             Icon(
                 painter = painterResource(
                     if (tableItemsVisible) Res.drawable.ic_visibility_on else Res.drawable.ic_visibility_off),
+                tint = MaterialTheme.colorScheme.onSurface,
                 contentDescription = null
             )
         }
@@ -235,6 +236,7 @@ private fun StyleAndChartButtons(
         ) {
             Icon(
                 painter = painterResource(Res.drawable.ic_replay),
+                tint = MaterialTheme.colorScheme.onSurface,
                 contentDescription = null
             )
         }
@@ -242,6 +244,7 @@ private fun StyleAndChartButtons(
         IconButton(onClick = onRefresh) {
             Icon(
                 imageVector = Icons.Filled.Refresh,
+                tint = MaterialTheme.colorScheme.onSurface,
                 contentDescription = null
             )
         }
