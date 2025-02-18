@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.update
 data class MenuState(
     val menuItems: List<ChartScreen>,
     val selectedSubmenu: ChartSubmenuItem? = null,
-    val expandedMenuStates: Map<Int, Boolean> = emptyMap()
+    val expandedMenuIndex: Int? = null
 )
 
 data class SubmenuState(val subMenuItems: List<ChartSubmenuItem>)
@@ -61,10 +61,17 @@ class MainViewModel : ViewModel() {
 
     fun onMenuToggle(index: Int) {
         _menuState.update { state ->
-            val newStates = state.expandedMenuStates.toMutableMap().apply {
-                this[index] = !(this[index] ?: false)
+            val newExpandedMenuIndex = if (state.expandedMenuIndex == index) {
+                null
+            } else {
+                index
             }
-            state.copy(expandedMenuStates = newStates)
+            state.copy(expandedMenuIndex = newExpandedMenuIndex)
         }
+    }
+
+    fun setDefaultState() {
+        onMenuToggle(0)
+        onSubmenuSelected(ChartSubmenuItem.PieChartBasic)
     }
 }

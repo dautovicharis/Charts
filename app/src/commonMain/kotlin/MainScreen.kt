@@ -156,7 +156,7 @@ fun AddMenuItems(
                     }
                 )
                 AnimatedVisibility(
-                    visible = menuState.value.expandedMenuStates[itemIndex] == true,
+                    visible = menuState.value.expandedMenuIndex == itemIndex,
                     enter = expandVertically(),
                     exit = shrinkVertically()
                 ) {
