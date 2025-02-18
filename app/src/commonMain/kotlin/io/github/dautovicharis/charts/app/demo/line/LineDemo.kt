@@ -40,7 +40,8 @@ fun LineChartBasicDemo(viewModel: LineChartViewModel = koinViewModel()) {
     val dataSet by viewModel.dataSet.collectAsStateWithLifecycle()
     ChartDemo(
         type = ChartStyleType.LineChartDefault,
-        onRefresh = { viewModel.regenerateDataSet() }) {
+        onRefresh = viewModel::regenerateDataSet
+    ) {
         LineChartView(
             dataSet = dataSet,
             style = LineDemoStyle.default()
@@ -54,7 +55,8 @@ fun LineChartCustomDemo(viewModel: LineChartViewModel = koinViewModel()) {
 
     ChartDemo(
         type = ChartStyleType.LineChartCustom,
-        onRefresh = { viewModel.regenerateDataSet() }) {
+        onRefresh = viewModel::regenerateDataSet
+    ) {
         LineChartView(
             dataSet = dataSet,
             style = LineDemoStyle.custom()

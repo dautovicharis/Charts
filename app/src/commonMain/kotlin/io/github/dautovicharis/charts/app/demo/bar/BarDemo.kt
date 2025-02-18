@@ -37,7 +37,8 @@ fun BarChartBasicDemo(viewModel: BarChartViewModel = koinViewModel()) {
     val dataSet by viewModel.dataSet.collectAsStateWithLifecycle()
     ChartDemo(
         type = ChartStyleType.BarChartDefault,
-        onRefresh = { viewModel.regenerateDataSet() }) {
+        onRefresh = viewModel::regenerateDataSet
+    ) {
         BarChartView(
             dataSet,
             style = BarDemoStyle.default()
@@ -51,7 +52,8 @@ fun BarChartCustomDemo(viewModel: BarChartViewModel = koinViewModel()) {
 
     ChartDemo(
         type = ChartStyleType.BarChartCustom,
-        onRefresh = {viewModel.regenerateDataSet()}) {
+        onRefresh = viewModel::regenerateDataSet
+    ) {
         BarChartView(
             dataSet = dataSet,
             style = BarDemoStyle.custom()

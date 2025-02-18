@@ -37,7 +37,8 @@ fun StackedBarBasicDemo(viewModel: StackedBarChartViewModel = koinViewModel()) {
 
     ChartDemo(
         type = ChartStyleType.StackedBarChartDefault,
-        onRefresh = { viewModel.regenerateDataSet() }) {
+        onRefresh = viewModel::regenerateDataSet
+    ) {
         StackedBarChartView(
             dataSet = dataSet.dataSet,
             style = StackedBarDemoStyle.default()
@@ -56,7 +57,8 @@ fun StackedBarCustomDemo(viewModel: StackedBarChartViewModel = koinViewModel()) 
     ChartDemo(
         type = ChartStyleType.StackedBarChartCustom,
         colors = dataSet.barColors,
-        onRefresh = { viewModel.regenerateDataSet() }) {
+        onRefresh = viewModel::regenerateDataSet
+    ) {
 
         StackedBarChartView(
             dataSet = dataSet.dataSet,
