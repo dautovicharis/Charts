@@ -59,6 +59,12 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun onSubmenuUnselected() {
+        _menuState.update {
+            it.copy(selectedSubmenu = null)
+        }
+    }
+
     fun onMenuToggle(index: Int) {
         _menuState.update { state ->
             val newExpandedMenuIndex = if (state.expandedMenuIndex == index) {
