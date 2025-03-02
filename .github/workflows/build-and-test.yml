@@ -1,10 +1,7 @@
 name: Build and Test
 on:
   push:
-    branches:
-      - main
-      - develop
-      - feature/sonar-ci
+    branches: ["main"]
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
