@@ -102,14 +102,7 @@ private fun AddDefaultPieChart() {
 @Composable
 private fun AddCustomPieChart() {
     val pieColors = listOf(
-        ColorPalette.DataColor.navyBlue,
-        ColorPalette.DataColor.darkBlue,
-        ColorPalette.DataColor.deepPurple,
-        ColorPalette.DataColor.magenta,
-        ColorPalette.DataColor.darkPink,
-        ColorPalette.DataColor.coral,
-        ColorPalette.DataColor.orange,
-        ColorPalette.DataColor.yellow
+        navyBlue, darkBlue, deepPurple, magenta, darkPink, coral, orange, yellow
     )
 
     val style = PieChartDefaults.style(
@@ -120,10 +113,11 @@ private fun AddCustomPieChart() {
         chartViewStyle = ChartViewDemoStyle.custom(width = 200.dp)
     )
 
-    val dataSet = listOf(8, 23, 54, 32, 12, 37, 7, 23, 43).toChartDataSet(
-        title = stringResource(id = R.string.pie_chart),
-        postfix = " °C"
-    )
+    val dataSet = listOf(8, 23, 54, 32, 12, 37, 7, 23, 43)
+        .toChartDataSet(
+            title = "Pie Chart",
+            postfix = " °C"
+        )
 
     PieChart(dataSet = dataSet, style = style)
 }
@@ -220,17 +214,14 @@ private fun AddDefaultMultiLineChart() {
 @Composable
 private fun AddCustomMultiLineChart() {
     val lineColors = listOf(
-        ColorPalette.DataColor.navyBlue,
-        ColorPalette.DataColor.darkBlue,
-        ColorPalette.DataColor.deepPurple,
-        ColorPalette.DataColor.magenta
+        navyBlue, darkBlue, deepPurple, magenta
     )
     val style = LineChartDefaults.style(
         lineColors = lineColors,
         dragPointVisible = false,
         pointVisible = true,
         pointColor = ColorPalette.DataColor.magenta,
-        dragPointColor = ColorPalette.DataColor.deepPurple,
+        dragPointColor = deepPurple,
         chartViewStyle = ChartViewDemoStyle.custom()
     )
 
@@ -334,9 +325,7 @@ private fun AddDefaultStackedBarChart() {
 ```kotlin
 @Composable
 private fun AddCustomStackedBarChart() {
-    val colors = listOf(
-        ColorPalette.DataColor.navyBlue,ColorPalette.DataColor.darkBlue,ColorPalette.DataColor.deepPurple
-    )
+    val colors = listOf(navyBlue, darkBlue, deepPurple)
     val style =  StackedBarChartDefaults.style(
         barColors = colors,
         chartViewStyle = ChartViewDemoStyle.custom(width = 240.dp)
