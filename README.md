@@ -86,12 +86,11 @@ https://central.sonatype.com/search?q=io.github.dautovicharis.charts
 ```kotlin
 @Composable
 private fun AddDefaultPieChart() {
-    val dataSet = ChartDataSet(
-        items = ChartDataType.FloatData(listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f)),
-        title = stringResource(id = R.string.pie_chart),
-        postfix = " °C"
-    )
-
+    val dataSet = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f)
+        .toChartDataSet(
+            title = stringResource(id = R.string.pie_chart),
+            postfix = " °C"
+        )
     PieChart(dataSet = dataSet)
 }
 ```
@@ -121,8 +120,7 @@ private fun AddCustomPieChart() {
         chartViewStyle = ChartViewDemoStyle.custom(width = 200.dp)
     )
 
-    val dataSet = ChartDataSet(
-        items = ChartDataType.FloatData(listOf(60.0f, 25f, 15f, 14f, 30f, 30f, 20f, 30f)),
+    val dataSet = listOf(8, 23, 54, 32, 12, 37, 7, 23, 43).toChartDataSet(
         title = stringResource(id = R.string.pie_chart),
         postfix = " °C"
     )
@@ -146,10 +144,9 @@ private fun AddCustomPieChart() {
 ```kotlin
 @Composable
 private fun AddDefaultLineChart() {
-    val dataSet = ChartDataSet(
-        items = ChartDataType.FloatData(listOf(
-            8f, 23f, 54f, 32f, 12f, 37f, 7f, 23f, 43f
-        )),
+    val dataSet = listOf(
+        8f, 23f, 54f, 32f, 12f, 37f, 7f, 23f, 43f
+    ).toChartDataSet(
         title = stringResource(id = R.string.line_chart)
     )
     LineChart(dataSet = dataSet)
@@ -174,10 +171,10 @@ private fun AddCustomLineChart() {
         chartViewStyle = ChartViewDemoStyle.custom(width = 200.dp)
     )
 
-    val dataSet = ChartDataSet(
-        items = ChartDataType.FloatData(listOf(10f, 100f, 20f, 50f, 150f, 70f, 10f, 20f, 40f)),
-        title = stringResource(id = R.string.line_chart)
-    )
+    val dataSet = listOf("10", "100", "20", "50", "150", "70", "10", "20", "40")
+        .toChartDataSet(
+            title = stringResource(id = R.string.line_chart)
+        )
 
     LineChart(dataSet = dataSet, style = style)
 }
@@ -199,24 +196,22 @@ private fun AddCustomLineChart() {
 @Composable
 private fun AddDefaultMultiLineChart() {
     val items = listOf(
-        "Cherry St." to ChartDataType.FloatData(listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f)),
-        "Strawberry Mall" to ChartDataType.FloatData(listOf(15261.68f, 17810.34f, 40000.57f, 85000f)),
-        "Lime Av." to ChartDataType.FloatData(listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f)),
-        "Apple Rd." to ChartDataType.FloatData(listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f))
+        "Cherry St." to listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f),
+        "Strawberry Mall" to listOf(15261.68f, 17810.34f, 40000.57f, 85000f),
+        "Lime Av." to listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f),
+        "Apple Rd." to listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f)
     )
 
-    val dataSet = MultiChartDataSet(
-        items = items,
+    val dataSet = items.toMultiChartDataSet(
+        title = stringResource(id = R.string.line_chart),
         prefix = "$",
-        categories = listOf("Jan", "Feb", "Mar", "Apr"),
-        title = stringResource(id = R.string.line_chart)
+        categories = listOf("Jan", "Feb", "Mar", "Apr")
     )
 
     LineChart(
         dataSet = dataSet, style = MultiLineDemoStyle.default()
     )
 }
-
 `````
 
 
@@ -226,7 +221,12 @@ private fun AddDefaultMultiLineChart() {
 ```kotlin
 @Composable
 private fun AddCustomMultiLineChart() {
-    val lineColors = listOf(ColorPalette.DataColor.navyBlue, ColorPalette.DataColor.darkBlue, ColorPalette.DataColor.deepPurple, ColorPalette.DataColor.magenta)
+    val lineColors = listOf(
+        ColorPalette.DataColor.navyBlue,
+        ColorPalette.DataColor.darkBlue,
+        ColorPalette.DataColor.deepPurple,
+        ColorPalette.DataColor.magenta
+    )
     val style = LineChartDefaults.style(
         lineColors = lineColors,
         dragPointVisible = false,
@@ -235,19 +235,18 @@ private fun AddCustomMultiLineChart() {
         dragPointColor = ColorPalette.DataColor.deepPurple,
         chartViewStyle = ChartViewDemoStyle.custom()
     )
-    
+
     val items = listOf(
-        "Cherry St." to ChartDataType.FloatData(listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f)),
-        "Strawberry Mall" to ChartDataType.FloatData(listOf(15261.68f, 17810.34f, 40000.57f, 85000f)),
-        "Lime Av." to ChartDataType.FloatData(listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f)),
-        "Apple Rd." to ChartDataType.FloatData(listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f))
+        "Cherry St." to listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f),
+        "Strawberry Mall" to listOf(15261.68f, 17810.34f, 40000.57f, 85000f),
+        "Lime Av." to listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f),
+        "Apple Rd." to listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f)
     )
 
-    val dataSet = MultiChartDataSet(
-        items = items,
+    val dataSet = items.toMultiChartDataSet(
+        title = stringResource(id = R.string.line_chart),
         prefix = "$",
-        categories = listOf("Jan", "Feb", "Mar", "Apr"),
-        title = stringResource(id = R.string.line_chart)
+        categories = listOf("Jan", "Feb", "Mar", "Apr")
     )
 
     LineChart(dataSet = dataSet, style = style)
@@ -270,9 +269,9 @@ private fun AddCustomMultiLineChart() {
 @Composable
 private fun AddDefaultBarChart() {
     BarChart(
-        dataSet = ChartDataSet(
-            items = ChartDataType.FloatData(listOf(100f, 50f, 5f, 60f, -50f, 50f, 60f)),
-            title = stringResource(id = R.string.bar_chart)
+        dataSet = listOf(100f, 50f, 5f, 60f, -50f, 50f, 60f).toChartDataSet(
+            title = "Bar Chart",
+            prefix = "$"
         )
     )
 }
@@ -292,10 +291,8 @@ private fun AddCustomBarChart() {
     )
 
     BarChart(
-        dataSet = ChartDataSet(
-            items = ChartDataType.FloatData(listOf(100f, 50f, 5f, 60f, 1f, 30f, 50f, 35f, 50f, -100f)),
-            title = stringResource(id = R.string.bar_chart)
-        ),
+        dataSet = listOf(100f, 50f, 5f, 60f, 1f, 30f, 50f, 35f, 50f, -100f)
+            .toChartDataSet(title = "Bar Chart"),
         style = style
     )
 }
@@ -317,17 +314,16 @@ private fun AddCustomBarChart() {
 @Composable
 private fun AddDefaultStackedBarChart() {
     val items = listOf(
-        "Cherry St." to ChartDataType.FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
-        "Strawberry Mall" to ChartDataType.FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
-        "Lime Av." to ChartDataType.FloatData(listOf(1500.87f, 2765.58f, 33245.81f)),
-        "Apple Rd." to ChartDataType.FloatData(listOf(5444.87f, 233.58f, 67544.81f))
+        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
+        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
+        "Lime Av." to listOf(1500.87f, 2765.58f, 33245.81f),
+        "Apple Rd." to listOf(5444.87f, 233.58f, 67544.81f)
     )
 
-    val dataSet = MultiChartDataSet(
-        items = items,
+    val dataSet = items.toMultiChartDataSet(
+        title = "Bar Chart",
         prefix = "$",
-        categories = listOf("Jan", "Feb", "Mar"),
-        title = stringResource(id = R.string.bar_stacked_chart)
+        categories = listOf("Jan", "Feb", "Mar")
     )
 
     StackedBarChart(dataSet = dataSet)
@@ -347,23 +343,23 @@ private fun AddCustomStackedBarChart() {
         barColors = colors,
         chartViewStyle = ChartViewDemoStyle.custom(width = 240.dp)
     )
-    
+
     val items = listOf(
-        "Cherry St." to ChartDataType.FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
-        "Strawberry Mall" to ChartDataType.FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
-        "Lime Av." to ChartDataType.FloatData(listOf(1500.87f, 2765.58f, 33245.81f)),
-        "Apple Rd." to ChartDataType.FloatData(listOf(5444.87f, 233.58f, 67544.81f))
+        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
+        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
+        "Lime Av." to listOf(1500.87f, 2765.58f, 33245.81f),
+        "Apple Rd." to listOf(5444.87f, 233.58f, 67544.81f)
     )
 
-    val dataSet = MultiChartDataSet(
-        items = items,
+    val dataSet = items.toMultiChartDataSet(
+        title = "Stacked Bar Chart",
         prefix = "$",
-        categories = listOf("Jan", "Feb", "Mar"),
-        title = stringResource(id = R.string.bar_stacked_chart)
+        categories = listOf("Jan", "Feb", "Mar")
     )
 
     StackedBarChart(dataSet = dataSet, style = style)
 }
+
 ```
 
 # Examples
@@ -381,7 +377,7 @@ private fun AddCustomStackedBarChart() {
 # Gradlew tasks
 ```bash
 # Run tests
-./gradlew chartsTest
+./gradlew chartsTest -x jsBrowserTest -x testDebugUnitTest -x testReleaseUnitTest --info
 
 # Build, tests, coverage report and sonar analysis
 ./gradlew chartsCheck -x jsBrowserTest -x testDebugUnitTest -x testReleaseUnitTest --info

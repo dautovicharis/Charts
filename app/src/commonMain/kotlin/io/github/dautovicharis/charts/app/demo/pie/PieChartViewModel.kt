@@ -4,8 +4,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import io.github.dautovicharis.charts.app.ui.theme.ColorPalette
 import io.github.dautovicharis.charts.app.ui.theme.generateColors
-import io.github.dautovicharis.charts.common.model.ChartDataSet
-import io.github.dautovicharis.charts.common.model.ChartDataType
+import io.github.dautovicharis.charts.model.ChartDataSet
+import io.github.dautovicharis.charts.model.toChartDataSet
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,8 +25,7 @@ class PieChartViewModel : ViewModel() {
 
     private val _dataSet = MutableStateFlow(
         PieChartState(
-            dataSet = ChartDataSet(
-                items = ChartDataType.IntData(listOf(8, 23, 54, 32, 12, 37, 7, 23, 43)),
+            dataSet = listOf(8, 23, 54, 32, 12, 37, 7, 23, 43).toChartDataSet(
                 title = CHART_TITLE,
                 postfix = POSTFIX
             )
@@ -65,12 +64,8 @@ class PieChartViewModel : ViewModel() {
         }
 
         val newData = List(numberOfPoints) { range.random() }
-        val newDataSet = ChartDataSet(
-            items = ChartDataType.IntData(newData),
-            title = CHART_TITLE,
-            postfix = POSTFIX,
-            labels = labels
-        )
+        val newDataSet =
+            newData.toChartDataSet(title = CHART_TITLE, postfix = POSTFIX, labels = labels)
 
         val newColors = generateColors(numberOfPoints, fromColors = ColorPalette.chartColors)
         _dataSet.update {

@@ -1,6 +1,6 @@
 package io.github.dautovicharis.charts.internal
 
-import io.github.dautovicharis.charts.common.model.ChartDataSet
+import io.github.dautovicharis.charts.model.ChartDataSet
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_BAR
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_LINE
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_PIE

@@ -1,8 +1,10 @@
-package io.github.dautovicharis.charts.common.model
+package io.github.dautovicharis.charts.model
 
 import io.github.dautovicharis.charts.internal.common.model.ChartDataItem
+import io.github.dautovicharis.charts.internal.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.internal.common.model.toChartData
+import kotlin.jvm.JvmName
 
 /**
  * A class that represents a data set for a chart.
@@ -16,7 +18,7 @@ import io.github.dautovicharis.charts.internal.common.model.toChartData
  * @param prefix The prefix to be added to each data item. Defaults to an empty string.
  * @param postfix The postfix to be added to each data item. Defaults to an empty string.
  */
-class MultiChartDataSet(
+class MultiChartDataSet internal constructor(
     items: List<Pair<String, ChartDataType>>,
     categories: List<String> = emptyList(),
     title: String,
@@ -59,4 +61,56 @@ class MultiChartDataSet(
             categories = categories
         )
     }
+}
+
+@JvmName("toFloatMultiChartDataSet")
+fun List<Pair<String, List<Float>>>.toMultiChartDataSet(
+    title: String,
+    categories: List<String> = emptyList(),
+    prefix: String = "",
+    postfix: String = ""
+): MultiChartDataSet {
+    val items = this.map { (label, values) ->
+        label to ChartDataType.FloatData(values)
+    }
+    return MultiChartDataSet(items, categories, title, prefix, postfix)
+}
+
+@JvmName("toDoubleMultiChartDataSet")
+fun List<Pair<String, List<Double>>>.toMultiChartDataSet(
+    title: String,
+    categories: List<String> = emptyList(),
+    prefix: String = "",
+    postfix: String = ""
+): MultiChartDataSet {
+    val items = this.map { (label, values) ->
+        label to ChartDataType.DoubleData(values)
+    }
+    return MultiChartDataSet(items, categories, title, prefix, postfix)
+}
+
+@JvmName("toIntMultiChartDataSet")
+fun List<Pair<String, List<Int>>>.toMultiChartDataSet(
+    title: String,
+    categories: List<String> = emptyList(),
+    prefix: String = "",
+    postfix: String = ""
+): MultiChartDataSet {
+    val items = this.map { (label, values) ->
+        label to ChartDataType.IntData(values)
+    }
+    return MultiChartDataSet(items, categories, title, prefix, postfix)
+}
+
+@JvmName("toStringMultiChartDataSet")
+fun List<Pair<String, List<String>>>.toMultiChartDataSet(
+    title: String,
+    categories: List<String> = emptyList(),
+    prefix: String = "",
+    postfix: String = ""
+): MultiChartDataSet {
+    val items = this.map { (label, values) ->
+        label to ChartDataType.StringData(values)
+    }
+    return MultiChartDataSet(items, categories, title, prefix, postfix)
 }
