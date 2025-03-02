@@ -13,7 +13,7 @@ import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.barchart.BarChart
 import io.github.dautovicharis.charts.internal.common.composable.ChartErrors
-import io.github.dautovicharis.charts.internal.common.composable.ChartView
+import io.github.dautovicharis.charts.internal.common.composable.Chart
 import io.github.dautovicharis.charts.internal.validateBarData
 import io.github.dautovicharis.charts.style.BarChartDefaults
 import io.github.dautovicharis.charts.style.BarChartStyle
@@ -25,7 +25,7 @@ import io.github.dautovicharis.charts.style.BarChartStyle
  * @param style The style to be applied to the chart. If not provided, the default style will be used.
  */
 @Composable
-fun BarChartView(
+fun BarChart(
     dataSet: ChartDataSet,
     style: BarChartStyle = BarChartDefaults.style()
 ) {
@@ -39,7 +39,7 @@ fun BarChartView(
         }
 
         if (errors.isEmpty()) {
-            ChartContent(dataSet = dataSet, style = style)
+            BarChartContent(dataSet = dataSet, style = style)
         } else {
             ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
         }
@@ -47,12 +47,12 @@ fun BarChartView(
 }
 
 @Composable
-private fun ChartContent(
+private fun BarChartContent(
     dataSet: ChartDataSet,
     style: BarChartStyle
 ) {
     var title by remember { mutableStateOf(dataSet.data.label) }
-    ChartView(chartViewsStyle = style.chartViewStyle) {
+    Chart(chartViewsStyle = style.chartViewStyle) {
         Text(
             modifier = style.chartViewStyle.modifierTopTitle
                 .testTag(TestTags.CHART_TITLE),

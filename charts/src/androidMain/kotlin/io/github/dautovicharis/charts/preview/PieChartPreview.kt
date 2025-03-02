@@ -4,7 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.dautovicharis.charts.PieChartView
+import io.github.dautovicharis.charts.PieChart
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
 import io.github.dautovicharis.charts.preview.mock.Mock
 import io.github.dautovicharis.charts.style.ChartViewDefaults
@@ -29,7 +29,7 @@ private fun PieChartPreview() {
         )
     )
 
-    PieChartView(
+    PieChart(
         dataSet = Mock.pieChart(),
         style = style
     )
@@ -63,7 +63,7 @@ private fun PieChartDynamic() {
 @Composable
 private fun PieChartError() {
     ChartsDefaultTheme {
-        PieChartView(
+        PieChart(
             dataSet = Mock.pieChart(1),
             style = PieChartDefaults.style()
         )

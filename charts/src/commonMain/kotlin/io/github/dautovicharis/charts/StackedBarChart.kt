@@ -12,11 +12,11 @@ import androidx.compose.ui.platform.testTag
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
-import io.github.dautovicharis.charts.internal.barstackedchart.LegendItem
 import io.github.dautovicharis.charts.internal.barstackedchart.StackedBarChart
 import io.github.dautovicharis.charts.internal.barstackedchart.generateColorShades
+import io.github.dautovicharis.charts.internal.common.composable.Chart
 import io.github.dautovicharis.charts.internal.common.composable.ChartErrors
-import io.github.dautovicharis.charts.internal.common.composable.ChartView
+import io.github.dautovicharis.charts.internal.common.composable.Legend
 import io.github.dautovicharis.charts.internal.validateBarData
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
 import io.github.dautovicharis.charts.style.StackedBarChartStyle
@@ -28,7 +28,7 @@ import io.github.dautovicharis.charts.style.StackedBarChartStyle
  * @param style The style to be applied to the chart. If not provided, the default style will be used.
  */
 @Composable
-fun StackedBarChartView(
+fun StackedBarChart(
     dataSet: MultiChartDataSet,
     style: StackedBarChartStyle = StackedBarChartDefaults.style()
 ) {
@@ -43,7 +43,7 @@ fun StackedBarChartView(
         }
 
         if (errors.isEmpty()) {
-            ChartContent(dataSet = dataSet, style = style)
+            StackedBarChartContent(dataSet = dataSet, style = style)
         } else {
             ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
         }
@@ -51,7 +51,7 @@ fun StackedBarChartView(
 }
 
 @Composable
-private fun ChartContent(dataSet: MultiChartDataSet, style: StackedBarChartStyle) {
+private fun StackedBarChartContent(dataSet: MultiChartDataSet, style: StackedBarChartStyle) {
     var title by remember { mutableStateOf(dataSet.data.title) }
     var labels by remember { mutableStateOf(listOf<String>()) }
 
@@ -61,7 +61,7 @@ private fun ChartContent(dataSet: MultiChartDataSet, style: StackedBarChartStyle
         }
     }.value
 
-    ChartView(chartViewsStyle = style.chartViewStyle) {
+    Chart(chartViewsStyle = style.chartViewStyle) {
         Text(
             modifier = style.chartViewStyle.modifierTopTitle
                 .testTag(TestTags.CHART_TITLE),
@@ -90,7 +90,7 @@ private fun ChartContent(dataSet: MultiChartDataSet, style: StackedBarChartStyle
         }
 
         if (dataSet.data.hasCategories()) {
-            LegendItem(
+            Legend(
                 chartViewsStyle = style.chartViewStyle,
                 colors = colors,
                 legend = dataSet.data.categories,

@@ -1,4 +1,4 @@
-package io.github.dautovicharis.charts.internal.barstackedchart
+package io.github.dautovicharis.charts.internal.common.composable
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -20,7 +20,7 @@ import io.github.dautovicharis.charts.style.ChartViewStyle
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun LegendItem(
+internal fun Legend(
     chartViewsStyle: ChartViewStyle,
     legend: List<String>,
     colors: List<Color>,

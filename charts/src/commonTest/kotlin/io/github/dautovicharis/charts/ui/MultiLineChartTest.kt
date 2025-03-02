@@ -6,7 +6,7 @@ import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
-import io.github.dautovicharis.charts.LineChartView
+import io.github.dautovicharis.charts.LineChart
 import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.ValidationErrors.RULE_COLORS_SIZE_MISMATCH
 import io.github.dautovicharis.charts.internal.ValidationErrors.RULE_ITEM_POINTS_SIZE
@@ -27,7 +27,7 @@ class MultiLineChartTest {
 
         // Act
         setContent {
-            LineChartView(multiDataSet)
+            LineChart(multiDataSet)
         }
 
         // Assert
@@ -62,7 +62,7 @@ class MultiLineChartTest {
             val style = LineChartDefaults.style(
                 lineColors = colors
             )
-            LineChartView(
+            LineChart(
                 dataSet = dataSet,
                 style = style
             )

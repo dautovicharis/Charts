@@ -4,7 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.dautovicharis.charts.LineChartView
+import io.github.dautovicharis.charts.LineChart
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
 import io.github.dautovicharis.charts.preview.mock.Mock
 import io.github.dautovicharis.charts.style.ChartViewDefaults
@@ -25,7 +25,7 @@ private fun LineChartViewPreview() {
         chartViewStyle = ChartViewDefaults.style(width = 300.dp)
     )
 
-    LineChartView(
+    LineChart(
         dataSet = Mock.lineChartSimple(),
         style = style
     )
@@ -59,7 +59,7 @@ private fun LineChartDynamic() {
 @Composable
 private fun LineChartError() {
     ChartsDefaultTheme {
-        LineChartView(
+        LineChart(
             dataSet = Mock.lineChartSimple(1),
             style = LineChartDefaults.style()
         )

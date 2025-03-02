@@ -6,7 +6,7 @@ import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
-import io.github.dautovicharis.charts.BarChartView
+import io.github.dautovicharis.charts.BarChart
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.TestTags
@@ -27,7 +27,7 @@ class BarChartTest {
 
         // Act
         setContent {
-            BarChartView(dataSet)
+            BarChart(dataSet)
         }
 
         // Assert
@@ -46,7 +46,7 @@ class BarChartTest {
         val expectedError = RULE_DATA_POINTS_LESS_THAN_MIN.format(MIN_REQUIRED_LINE)
 
         setContent {
-            BarChartView(dataSet)
+            BarChart(dataSet)
         }
 
         onNodeWithTag(TestTags.CHART_ERROR).isDisplayed()

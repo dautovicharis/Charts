@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.github.dautovicharis.charts.PieChartView
+import io.github.dautovicharis.charts.PieChart
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
@@ -41,7 +41,7 @@ fun PieChartBasicDemo(viewModel: PieChartViewModel = koinViewModel()) {
         type = ChartStyleType.PieChartDefault,
         onRefresh = viewModel::regenerateDefaultDataSet
     ) {
-        PieChartView(
+        PieChart(
             dataSet = dataSet.dataSet,
             style = PieChartDemoStyle.default()
         )
@@ -60,7 +60,7 @@ fun PieChartCustomDemo(viewModel: PieChartViewModel = koinViewModel()) {
         colors = dataSet.pieColors,
         onRefresh = viewModel::regenerateCustomDataSet
     ) {
-        PieChartView(
+        PieChart(
             dataSet = dataSet.dataSet,
             style = PieChartDemoStyle.custom(dataSet.pieColors)
         )

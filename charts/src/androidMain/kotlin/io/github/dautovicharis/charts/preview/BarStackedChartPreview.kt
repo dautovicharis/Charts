@@ -3,14 +3,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.dautovicharis.charts.StackedBarChartView
+import io.github.dautovicharis.charts.StackedBarChart
 import io.github.dautovicharis.charts.internal.common.theme.ChartsDefaultTheme
 import io.github.dautovicharis.charts.preview.mock.Mock
 import io.github.dautovicharis.charts.style.StackedBarChartDefaults
 
 @Composable
 private fun StackedBarChartPreview() {
-    StackedBarChartView(
+    StackedBarChart(
         dataSet = Mock.stackedBarChart(),
         style = StackedBarChartDefaults.style()
     )
@@ -50,7 +50,7 @@ private fun StackedBarChartError() {
     )
 
     ChartsDefaultTheme {
-        StackedBarChartView(
+        StackedBarChart(
             dataSet = Mock.stackedBarChartInvalid(),
             style = style
         )

@@ -3,7 +3,7 @@ package io.github.dautovicharis.charts.app.demo.line
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.github.dautovicharis.charts.LineChartView
+import io.github.dautovicharis.charts.LineChart
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
@@ -42,7 +42,7 @@ fun LineChartBasicDemo(viewModel: LineChartViewModel = koinViewModel()) {
         type = ChartStyleType.LineChartDefault,
         onRefresh = viewModel::regenerateDataSet
     ) {
-        LineChartView(
+        LineChart(
             dataSet = dataSet,
             style = LineDemoStyle.default()
         )
@@ -57,7 +57,7 @@ fun LineChartCustomDemo(viewModel: LineChartViewModel = koinViewModel()) {
         type = ChartStyleType.LineChartCustom,
         onRefresh = viewModel::regenerateDataSet
     ) {
-        LineChartView(
+        LineChart(
             dataSet = dataSet,
             style = LineDemoStyle.custom()
         )

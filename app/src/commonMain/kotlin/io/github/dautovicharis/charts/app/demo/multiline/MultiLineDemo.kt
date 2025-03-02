@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.github.dautovicharis.charts.LineChartView
+import io.github.dautovicharis.charts.LineChart
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
@@ -41,7 +41,7 @@ fun MultiLineBasicDemo(viewModel: MultiLineChartViewModel = koinViewModel()) {
         type = ChartStyleType.MultiLineChartDefault,
         onRefresh = viewModel::regenerateDataSet
     ) {
-        LineChartView(
+        LineChart(
             dataSet = dataSet.dataSet, style = MultiLineDemoStyle.default()
         )
     }
@@ -60,7 +60,7 @@ fun MultiLineCustomDemo(viewModel: MultiLineChartViewModel = koinViewModel()) {
         colors = dataSet.lineColors,
         onRefresh = viewModel::regenerateDataSet
     ) {
-        LineChartView(
+        LineChart(
             dataSet = dataSet.dataSet,
             style = MultiLineDemoStyle.custom(lineColors = dataSet.lineColors)
         )

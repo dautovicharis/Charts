@@ -5,7 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.github.dautovicharis.charts.StackedBarChartView
+import io.github.dautovicharis.charts.StackedBarChart
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
@@ -39,7 +39,7 @@ fun StackedBarBasicDemo(viewModel: StackedBarChartViewModel = koinViewModel()) {
         type = ChartStyleType.StackedBarChartDefault,
         onRefresh = viewModel::regenerateDataSet
     ) {
-        StackedBarChartView(
+        StackedBarChart(
             dataSet = dataSet.dataSet,
             style = StackedBarDemoStyle.default()
         )
@@ -60,7 +60,7 @@ fun StackedBarCustomDemo(viewModel: StackedBarChartViewModel = koinViewModel()) 
         onRefresh = viewModel::regenerateDataSet
     ) {
 
-        StackedBarChartView(
+        StackedBarChart(
             dataSet = dataSet.dataSet,
             style = StackedBarDemoStyle.custom(dataSet.barColors)
         )
