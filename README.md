@@ -1,8 +1,3 @@
-⚠️ ⚠️ ⚠️
-- I will continue supporting this library as much as I can.
-- For all new contributions, you can create a PR directly to the main branch.
-- If you want to test how it looks, please check [JS Demo](https://dautovicharis.github.io/Charts/jsDemo/).
-
 ![logo-no-background](https://github.com/dautovicharis/Charts/assets/7049715/4150f102-1b05-4fd7-ab01-63480d2e6d50)
 
 
