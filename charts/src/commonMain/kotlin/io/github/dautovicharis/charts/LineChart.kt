@@ -5,7 +5,7 @@ import androidx.compose.runtime.key
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.common.model.MultiChartDataSet
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
-import io.github.dautovicharis.charts.internal.linechart.LineChartViewImpl
+import io.github.dautovicharis.charts.internal.linechart.LineChartImpl
 import io.github.dautovicharis.charts.style.LineChartDefaults
 import io.github.dautovicharis.charts.style.LineChartStyle
 
@@ -16,12 +16,12 @@ import io.github.dautovicharis.charts.style.LineChartStyle
  * @param style The style to be applied to the chart. If not provided, the default style will be used.
  */
 @Composable
-fun LineChartView(
+fun LineChart(
     dataSet: ChartDataSet,
     style: LineChartStyle = LineChartDefaults.style()
 ) {
     key(dataSet) {
-        LineChartViewImpl(
+        LineChartImpl(
             data = MultiChartData(
                 items = listOf(dataSet.data),
                 title = dataSet.data.label
@@ -38,12 +38,12 @@ fun LineChartView(
  * @param style The style to be applied to the chart. If not provided, the default style will be used.
  */
 @Composable
-fun LineChartView(
+fun LineChart(
     dataSet: MultiChartDataSet,
     style: LineChartStyle = LineChartDefaults.style()
 ) {
     key(dataSet) {
-        LineChartViewImpl(
+        LineChartImpl(
             data = dataSet.data,
             style = style
         )

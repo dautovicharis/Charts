@@ -8,7 +8,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.runComposeUiTest
-import io.github.dautovicharis.charts.PieChartView
+import io.github.dautovicharis.charts.PieChart
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.TestTags
@@ -35,7 +35,7 @@ class PieChartTest {
 
         // Act
         setContent {
-            PieChartView(dataSet, PieChartDefaults.style())
+            PieChart(dataSet, PieChartDefaults.style())
         }
 
         // Assert
@@ -52,7 +52,7 @@ class PieChartTest {
 
         // Act
         setContent {
-            PieChartView(dataSet, PieChartDefaults.style())
+            PieChart(dataSet, PieChartDefaults.style())
         }
 
         // Assert
@@ -86,7 +86,7 @@ class PieChartTest {
 
         // Act
         setContent {
-            PieChartView(dataSet, PieChartDefaults.style())
+            PieChart(dataSet, PieChartDefaults.style())
         }
 
         // Assert
@@ -107,7 +107,7 @@ class PieChartTest {
 
         // Act
         setContent {
-            PieChartView(
+            PieChart(
                 dataSet,
                 pieChartStyle
             )
@@ -127,7 +127,7 @@ class PieChartTest {
 
         // Act
         setContent {
-            PieChartView(dataSet, PieChartDefaults.style(donutPercentage = 0.5f))
+            PieChart(dataSet, PieChartDefaults.style(donutPercentage = 0.5f))
         }
 
         // Assert

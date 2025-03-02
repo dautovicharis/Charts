@@ -16,10 +16,10 @@ import androidx.compose.ui.text.style.TextAlign
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
-import io.github.dautovicharis.charts.internal.barstackedchart.LegendItem
+import io.github.dautovicharis.charts.internal.common.composable.Legend
 import io.github.dautovicharis.charts.internal.barstackedchart.generateColorShades
 import io.github.dautovicharis.charts.internal.common.composable.ChartErrors
-import io.github.dautovicharis.charts.internal.common.composable.ChartView
+import io.github.dautovicharis.charts.internal.common.composable.Chart
 import io.github.dautovicharis.charts.internal.piechart.PieChart
 import io.github.dautovicharis.charts.internal.piechart.calculatePercentages
 import io.github.dautovicharis.charts.internal.validatePieData
@@ -33,7 +33,7 @@ import io.github.dautovicharis.charts.style.PieChartStyle
  * @param style The style to be applied to the chart. If not provided, the default style will be used.
  */
 @Composable
-fun PieChartView(
+fun PieChart(
     dataSet: ChartDataSet,
     style: PieChartStyle = PieChartDefaults.style(),
 ) {
@@ -49,13 +49,13 @@ fun PieChartView(
         if (errors.isNotEmpty()) {
             ChartErrors(chartViewStyle = style.chartViewStyle, errors = errors)
         } else {
-            ChartContent(dataSet = dataSet, style = style)
+            PieChartContent(dataSet = dataSet, style = style)
         }
     }
 }
 
 @Composable
-private fun ChartContent(
+private fun PieChartContent(
     dataSet: ChartDataSet,
     style: PieChartStyle
 ) {
@@ -75,7 +75,7 @@ private fun ChartContent(
     }
     var selectedIndex by remember { mutableStateOf(NO_SELECTION) }
 
-    ChartView(chartViewsStyle = style.chartViewStyle) {
+    Chart(chartViewsStyle = style.chartViewStyle) {
         Text(
             modifier = style.chartViewStyle.modifierTopTitle
                 .testTag(TestTags.CHART_TITLE),
@@ -112,7 +112,7 @@ private fun ChartContent(
         }
 
       if (style.legendVisible) {
-          LegendItem(
+          Legend(
               chartViewsStyle = style.chartViewStyle,
               legend = dataSet.data.item.labels,
               colors = pieChartColors

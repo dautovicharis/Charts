@@ -6,7 +6,7 @@ import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
-import io.github.dautovicharis.charts.LineChartView
+import io.github.dautovicharis.charts.LineChart
 import io.github.dautovicharis.charts.common.model.ChartDataSet
 import io.github.dautovicharis.charts.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.TestTags
@@ -27,7 +27,7 @@ class LineChartTest {
 
         // Act
         setContent {
-            LineChartView(dataSet)
+            LineChart(dataSet)
         }
 
         // Assert
@@ -47,7 +47,7 @@ class LineChartTest {
         val expectedError = RULE_DATA_POINTS_LESS_THAN_MIN.format(MIN_REQUIRED_LINE)
 
         setContent {
-            LineChartView(dataSet)
+            LineChart(dataSet)
         }
 
         onNodeWithTag(TestTags.CHART_ERROR).isDisplayed()

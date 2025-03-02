@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.github.dautovicharis.charts.BarChartView
+import io.github.dautovicharis.charts.BarChart
 import io.github.dautovicharis.charts.app.demo.ChartViewDemoStyle
 import io.github.dautovicharis.charts.app.ui.composable.ChartDemo
 import io.github.dautovicharis.charts.app.ui.composable.ChartStyleType
@@ -39,7 +39,7 @@ fun BarChartBasicDemo(viewModel: BarChartViewModel = koinViewModel()) {
         type = ChartStyleType.BarChartDefault,
         onRefresh = viewModel::regenerateDataSet
     ) {
-        BarChartView(
+        BarChart(
             dataSet,
             style = BarDemoStyle.default()
         )
@@ -54,7 +54,7 @@ fun BarChartCustomDemo(viewModel: BarChartViewModel = koinViewModel()) {
         type = ChartStyleType.BarChartCustom,
         onRefresh = viewModel::regenerateDataSet
     ) {
-        BarChartView(
+        BarChart(
             dataSet = dataSet,
             style = BarDemoStyle.custom()
         )

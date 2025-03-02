@@ -6,7 +6,7 @@ import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.runComposeUiTest
-import io.github.dautovicharis.charts.StackedBarChartView
+import io.github.dautovicharis.charts.StackedBarChart
 import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.ValidationErrors.RULE_COLORS_SIZE_MISMATCH
 import io.github.dautovicharis.charts.internal.ValidationErrors.RULE_ITEM_POINTS_SIZE
@@ -27,7 +27,7 @@ class StackedBarChartTest {
 
         // Act
         setContent {
-            StackedBarChartView(multiDataSet)
+            StackedBarChart(multiDataSet)
         }
 
         // Assert
@@ -55,7 +55,7 @@ class StackedBarChartTest {
         // Act
         setContent {
             val style = StackedBarChartDefaults.style()
-            StackedBarChartView(
+            StackedBarChart(
                 dataSet = dataSet,
                 style = style
             )
@@ -81,7 +81,7 @@ class StackedBarChartTest {
         // Act
         setContent {
             val style = StackedBarChartDefaults.style(barColors = colors)
-            StackedBarChartView(
+            StackedBarChart(
                 dataSet = dataSet,
                 style = style
             )

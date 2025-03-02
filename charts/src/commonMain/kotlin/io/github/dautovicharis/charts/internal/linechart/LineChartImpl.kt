@@ -10,17 +10,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.testTag
 import io.github.dautovicharis.charts.internal.NO_SELECTION
 import io.github.dautovicharis.charts.internal.TestTags
-import io.github.dautovicharis.charts.internal.barstackedchart.LegendItem
+import io.github.dautovicharis.charts.internal.common.composable.Legend
 import io.github.dautovicharis.charts.internal.barstackedchart.generateColorShades
+import io.github.dautovicharis.charts.internal.common.composable.Chart
 import io.github.dautovicharis.charts.internal.common.composable.ChartErrors
-import io.github.dautovicharis.charts.internal.common.composable.ChartView
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.internal.validateLineData
 import io.github.dautovicharis.charts.style.LineChartDefaults
 import io.github.dautovicharis.charts.style.LineChartStyle
 
 @Composable
-internal fun LineChartViewImpl(
+internal fun LineChartImpl(
     data: MultiChartData,
     style: LineChartStyle = LineChartDefaults.style(),
 ) {
@@ -47,7 +47,7 @@ internal fun LineChartViewImpl(
             }
         }.value
 
-        ChartView(chartViewsStyle = style.chartViewStyle) {
+        Chart(chartViewsStyle = style.chartViewStyle) {
             Text(
                 modifier = style.chartViewStyle.modifierTopTitle
                     .testTag(TestTags.CHART_TITLE),
@@ -71,7 +71,7 @@ internal fun LineChartViewImpl(
             }
 
             if (data.hasCategories()) {
-                LegendItem(
+                Legend(
                     chartViewsStyle = style.chartViewStyle,
                     legend = data.items.map { it.label },
                     colors = lineColors,
