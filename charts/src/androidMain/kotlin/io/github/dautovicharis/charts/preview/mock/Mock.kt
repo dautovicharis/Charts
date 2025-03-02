@@ -1,8 +1,8 @@
 package io.github.dautovicharis.charts.preview.mock
 
-import io.github.dautovicharis.charts.common.model.ChartDataSet
-import io.github.dautovicharis.charts.common.model.ChartDataType.FloatData
-import io.github.dautovicharis.charts.common.model.MultiChartDataSet
+import io.github.dautovicharis.charts.model.ChartDataSet
+import io.github.dautovicharis.charts.internal.common.model.ChartDataType.FloatData
+import io.github.dautovicharis.charts.model.MultiChartDataSet
 import kotlin.random.Random
 
 internal object Mock {

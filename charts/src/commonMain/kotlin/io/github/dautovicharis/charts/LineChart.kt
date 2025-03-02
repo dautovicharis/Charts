@@ -2,8 +2,8 @@ package io.github.dautovicharis.charts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
-import io.github.dautovicharis.charts.common.model.ChartDataSet
-import io.github.dautovicharis.charts.common.model.MultiChartDataSet
+import io.github.dautovicharis.charts.model.ChartDataSet
+import io.github.dautovicharis.charts.model.MultiChartDataSet
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.internal.linechart.LineChartImpl
 import io.github.dautovicharis.charts.style.LineChartDefaults

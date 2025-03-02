@@ -5,9 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import io.github.dautovicharis.charts.common.model.ChartDataSet
-import io.github.dautovicharis.charts.common.model.ChartDataType.FloatData
-import io.github.dautovicharis.charts.common.model.MultiChartDataSet
+import io.github.dautovicharis.charts.model.ChartDataSet
+import io.github.dautovicharis.charts.internal.common.model.ChartDataType.FloatData
+import io.github.dautovicharis.charts.model.MultiChartDataSet
 import io.github.dautovicharis.charts.style.ChartViewStyle
 import io.github.dautovicharis.charts.style.LineChartStyle
 import io.github.dautovicharis.charts.style.PieChartStyle

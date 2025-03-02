@@ -9,8 +9,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.runComposeUiTest
 import io.github.dautovicharis.charts.PieChart
-import io.github.dautovicharis.charts.common.model.ChartDataSet
-import io.github.dautovicharis.charts.common.model.ChartDataType
+import io.github.dautovicharis.charts.model.ChartDataSet
+import io.github.dautovicharis.charts.internal.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.TestTags
 import io.github.dautovicharis.charts.internal.ValidationErrors.MIN_REQUIRED_PIE
 import io.github.dautovicharis.charts.internal.ValidationErrors.RULE_COLORS_SIZE_MISMATCH

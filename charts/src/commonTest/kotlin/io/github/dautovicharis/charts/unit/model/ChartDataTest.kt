@@ -1,7 +1,7 @@
 package io.github.dautovicharis.charts.unit.model
 
-import io.github.dautovicharis.charts.common.model.ChartDataSet
-import io.github.dautovicharis.charts.common.model.ChartDataType
+import io.github.dautovicharis.charts.model.ChartDataSet
+import io.github.dautovicharis.charts.internal.common.model.ChartDataType
 import io.github.dautovicharis.charts.internal.common.model.ChartData
 import io.github.dautovicharis.charts.mock.MockTest
 import kotlin.test.Test

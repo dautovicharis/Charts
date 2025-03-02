@@ -1,7 +1,7 @@
 package io.github.dautovicharis.charts.unit.model
 
-import io.github.dautovicharis.charts.common.model.ChartDataType
-import io.github.dautovicharis.charts.common.model.MultiChartDataSet
+import io.github.dautovicharis.charts.internal.common.model.ChartDataType
+import io.github.dautovicharis.charts.model.MultiChartDataSet
 import io.github.dautovicharis.charts.internal.common.model.ChartDataItem
 import io.github.dautovicharis.charts.internal.common.model.MultiChartData
 import io.github.dautovicharis.charts.internal.common.model.minMax
