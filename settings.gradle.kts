@@ -10,6 +10,12 @@ pluginManagement {
     }
 }
 
+plugins {
+    // https://github.com/gradle/foojay-toolchains
+    // Automatically download required JDK
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+}
+
 dependencyResolutionManagement {
     repositories {
         google()
