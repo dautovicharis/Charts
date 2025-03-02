@@ -91,7 +91,7 @@ private fun AddDefaultPieChart() {
             title = stringResource(id = R.string.pie_chart),
             postfix = " °C"
         )
-    PieChart(dataSet = dataSet)
+    PieChart(dataSet)
 }
 ```
 
@@ -149,7 +149,7 @@ private fun AddDefaultLineChart() {
     ).toChartDataSet(
         title = stringResource(id = R.string.line_chart)
     )
-    LineChart(dataSet = dataSet)
+    LineChart(dataSet)
 }
 ````
 
@@ -208,9 +208,7 @@ private fun AddDefaultMultiLineChart() {
         categories = listOf("Jan", "Feb", "Mar", "Apr")
     )
 
-    LineChart(
-        dataSet = dataSet, style = MultiLineDemoStyle.default()
-    )
+    LineChart(dataSet)
 }
 `````
 
@@ -326,7 +324,7 @@ private fun AddDefaultStackedBarChart() {
         categories = listOf("Jan", "Feb", "Mar")
     )
 
-    StackedBarChart(dataSet = dataSet)
+    StackedBarChart(dataSet)
 }
 ```
 
