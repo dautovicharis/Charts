@@ -1,26 +1,20 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:io.github.dautovicharis.charts.common.model////PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/index.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataSet///PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-set/index.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataSet/ChartDataSet/#io.github.dautovicharis.charts.common.model.ChartDataType#kotlin.String#kotlin.String#kotlin.String#kotlin.collections.List[kotlin.String]?/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-set/-chart-data-set.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataSet/ChartDataSet/#io.github.dautovicharis.charts.common.model.ChartDataType#kotlin.String#kotlin.collections.List[kotlin.String]/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-set/-chart-data-set.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.DoubleData///PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-double-data/index.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.DoubleData/DoubleData/#kotlin.collections.List[kotlin.Double]/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-double-data/-double-data.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.DoubleData/values/#/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-double-data/values.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.FloatData///PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-float-data/index.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.FloatData/FloatData/#kotlin.collections.List[kotlin.Float]/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-float-data/-float-data.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.FloatData/values/#/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-float-data/values.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.IntData///PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-int-data/index.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.IntData/IntData/#kotlin.collections.List[kotlin.Int]/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-int-data/-int-data.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.IntData/values/#/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-int-data/values.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.StringData///PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-string-data/index.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.StringData/StringData/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-string-data/-string-data.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType.StringData/values/#/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/-string-data/values.html
-$dokka.location:io.github.dautovicharis.charts.common.model/ChartDataType///PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-chart-data-type/index.html
-$dokka.location:io.github.dautovicharis.charts.common.model/MultiChartDataSet///PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-multi-chart-data-set/index.html
-$dokka.location:io.github.dautovicharis.charts.common.model/MultiChartDataSet/MultiChartDataSet/#kotlin.collections.List[kotlin.Pair[kotlin.String,io.github.dautovicharis.charts.common.model.ChartDataType]]#kotlin.collections.List[kotlin.String]#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/charts/io.github.dautovicharis.charts.common.model/-multi-chart-data-set/-multi-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.internal.common.model////PointingToDeclaration/charts/io.github.dautovicharis.charts.internal.common.model/index.html
+$dokka.location:io.github.dautovicharis.charts.internal.common.model/ChartDataType///PointingToDeclaration/charts/io.github.dautovicharis.charts.internal.common.model/-chart-data-type/index.html
 $dokka.location:io.github.dautovicharis.charts.internal.common.theme////PointingToDeclaration/charts/io.github.dautovicharis.charts.internal.common.theme/index.html
 $dokka.location:io.github.dautovicharis.charts.internal.common.theme//ChartsDefaultTheme/#kotlin.Boolean#kotlin.Boolean#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/charts/io.github.dautovicharis.charts.internal.common.theme/-charts-default-theme.html
+$dokka.location:io.github.dautovicharis.charts.model////PointingToDeclaration/charts/io.github.dautovicharis.charts.model/index.html
+$dokka.location:io.github.dautovicharis.charts.model//toChartDataSet/kotlin.collections.List[kotlin.Double]#kotlin.String#kotlin.String#kotlin.String#kotlin.collections.List[kotlin.String]?/PointingToDeclaration/charts/io.github.dautovicharis.charts.model/to-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.model//toChartDataSet/kotlin.collections.List[kotlin.Float]#kotlin.String#kotlin.String#kotlin.String#kotlin.collections.List[kotlin.String]?/PointingToDeclaration/charts/io.github.dautovicharis.charts.model/to-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.model//toChartDataSet/kotlin.collections.List[kotlin.Int]#kotlin.String#kotlin.String#kotlin.String#kotlin.collections.List[kotlin.String]?/PointingToDeclaration/charts/io.github.dautovicharis.charts.model/to-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.model//toChartDataSet/kotlin.collections.List[kotlin.String]#kotlin.String#kotlin.String#kotlin.String#kotlin.collections.List[kotlin.String]?/PointingToDeclaration/charts/io.github.dautovicharis.charts.model/to-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.model//toMultiChartDataSet/kotlin.collections.List[kotlin.Pair[kotlin.String,kotlin.collections.List[kotlin.Double]]]#kotlin.String#kotlin.collections.List[kotlin.String]#kotlin.String#kotlin.String/PointingToDeclaration/charts/io.github.dautovicharis.charts.model/to-multi-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.model//toMultiChartDataSet/kotlin.collections.List[kotlin.Pair[kotlin.String,kotlin.collections.List[kotlin.Float]]]#kotlin.String#kotlin.collections.List[kotlin.String]#kotlin.String#kotlin.String/PointingToDeclaration/charts/io.github.dautovicharis.charts.model/to-multi-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.model//toMultiChartDataSet/kotlin.collections.List[kotlin.Pair[kotlin.String,kotlin.collections.List[kotlin.Int]]]#kotlin.String#kotlin.collections.List[kotlin.String]#kotlin.String#kotlin.String/PointingToDeclaration/charts/io.github.dautovicharis.charts.model/to-multi-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.model//toMultiChartDataSet/kotlin.collections.List[kotlin.Pair[kotlin.String,kotlin.collections.List[kotlin.String]]]#kotlin.String#kotlin.collections.List[kotlin.String]#kotlin.String#kotlin.String/PointingToDeclaration/charts/io.github.dautovicharis.charts.model/to-multi-chart-data-set.html
+$dokka.location:io.github.dautovicharis.charts.model/ChartDataSet///PointingToDeclaration/charts/io.github.dautovicharis.charts.model/-chart-data-set/index.html
+$dokka.location:io.github.dautovicharis.charts.model/MultiChartDataSet///PointingToDeclaration/charts/io.github.dautovicharis.charts.model/-multi-chart-data-set/index.html
 $dokka.location:io.github.dautovicharis.charts.style////PointingToDeclaration/charts/io.github.dautovicharis.charts.style/index.html
 $dokka.location:io.github.dautovicharis.charts.style/BarChartDefaults///PointingToDeclaration/charts/io.github.dautovicharis.charts.style/-bar-chart-defaults/index.html
 $dokka.location:io.github.dautovicharis.charts.style/BarChartDefaults/style/#androidx.compose.ui.graphics.Color#androidx.compose.ui.unit.Dp#io.github.dautovicharis.charts.style.ChartViewStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts.style/-bar-chart-defaults/style.html
@@ -72,13 +66,14 @@ $dokka.location:io.github.dautovicharis.charts.style/StackedBarChartStyle/space/
 $dokka.location:io.github.dautovicharis.charts.style/Style///PointingToDeclaration/charts/io.github.dautovicharis.charts.style/-style/index.html
 $dokka.location:io.github.dautovicharis.charts.style/Style/getProperties/#/PointingToDeclaration/charts/io.github.dautovicharis.charts.style/-style/get-properties.html
 $dokka.location:io.github.dautovicharis.charts////PointingToDeclaration/charts/io.github.dautovicharis.charts/index.html
-$dokka.location:io.github.dautovicharis.charts//BarChart/#io.github.dautovicharis.charts.common.model.ChartDataSet#io.github.dautovicharis.charts.style.BarChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-bar-chart.html
-$dokka.location:io.github.dautovicharis.charts//LineChart/#io.github.dautovicharis.charts.common.model.ChartDataSet#io.github.dautovicharis.charts.style.LineChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-line-chart.html
-$dokka.location:io.github.dautovicharis.charts//LineChart/#io.github.dautovicharis.charts.common.model.MultiChartDataSet#io.github.dautovicharis.charts.style.LineChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-line-chart.html
-$dokka.location:io.github.dautovicharis.charts//PieChart/#io.github.dautovicharis.charts.common.model.ChartDataSet#io.github.dautovicharis.charts.style.PieChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-pie-chart.html
-$dokka.location:io.github.dautovicharis.charts//StackedBarChart/#io.github.dautovicharis.charts.common.model.MultiChartDataSet#io.github.dautovicharis.charts.style.StackedBarChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-stacked-bar-chart.html
+$dokka.location:io.github.dautovicharis.charts//BarChart/#io.github.dautovicharis.charts.model.ChartDataSet#io.github.dautovicharis.charts.style.BarChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-bar-chart.html
+$dokka.location:io.github.dautovicharis.charts//LineChart/#io.github.dautovicharis.charts.model.ChartDataSet#io.github.dautovicharis.charts.style.LineChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-line-chart.html
+$dokka.location:io.github.dautovicharis.charts//LineChart/#io.github.dautovicharis.charts.model.MultiChartDataSet#io.github.dautovicharis.charts.style.LineChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-line-chart.html
+$dokka.location:io.github.dautovicharis.charts//PieChart/#io.github.dautovicharis.charts.model.ChartDataSet#io.github.dautovicharis.charts.style.PieChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-pie-chart.html
+$dokka.location:io.github.dautovicharis.charts//StackedBarChart/#io.github.dautovicharis.charts.model.MultiChartDataSet#io.github.dautovicharis.charts.style.StackedBarChartStyle/PointingToDeclaration/charts/io.github.dautovicharis.charts/-stacked-bar-chart.html
 io.github.dautovicharis.charts
-io.github.dautovicharis.charts.common.model
+io.github.dautovicharis.charts.internal.common.model
 io.github.dautovicharis.charts.internal.common.theme
+io.github.dautovicharis.charts.model
 io.github.dautovicharis.charts.style
 
