@@ -1,8 +1,7 @@
 ⚠️ ⚠️ ⚠️
 - I will continue supporting this library as much as I can.
 - For all new contributions, you can create a PR directly to the main branch.
-- If you want to test how it looks, please use the latest snapshot.
-- The demo Android app link is broken. I'm currently working on resolving some issues with the Google Play Console.
+- If you want to test how it looks, please check [JS Demo](https://dautovicharis.github.io/Charts/jsDemo/).
 
 ![logo-no-background](https://github.com/dautovicharis/Charts/assets/7049715/4150f102-1b05-4fd7-ab01-63480d2e6d50)
 
@@ -88,12 +87,12 @@ https://central.sonatype.com/search?q=io.github.dautovicharis.charts
 @Composable
 private fun AddDefaultPieChart() {
     val dataSet = ChartDataSet(
-        items = listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f),
+        items = ChartDataType.FloatData(listOf(8.0f, 23.0f, 54.0f, 32.0f, 12.0f, 37.0f, 7.0f, 23.0f, 43.0f)),
         title = stringResource(id = R.string.pie_chart),
         postfix = " °C"
     )
 
-    PieChartView(dataSet = dataSet)
+    PieChart(dataSet = dataSet)
 }
 ```
 
@@ -121,14 +120,14 @@ private fun AddCustomPieChart() {
         pieColors = pieColors,
         chartViewStyle = ChartViewDemoStyle.custom(width = 200.dp)
     )
-    
+
     val dataSet = ChartDataSet(
-        items = listOf(60.0f, 25f, 15f, 14f, 30f, 30f, 20f, 30f),
+        items = ChartDataType.FloatData(listOf(60.0f, 25f, 15f, 14f, 30f, 30f, 20f, 30f)),
         title = stringResource(id = R.string.pie_chart),
         postfix = " °C"
     )
 
-    PieChartView(dataSet = dataSet, style = style)
+    PieChart(dataSet = dataSet, style = style)
 }
 ```
 
@@ -148,12 +147,12 @@ private fun AddCustomPieChart() {
 @Composable
 private fun AddDefaultLineChart() {
     val dataSet = ChartDataSet(
-        items = listOf(
+        items = ChartDataType.FloatData(listOf(
             8f, 23f, 54f, 32f, 12f, 37f, 7f, 23f, 43f
-        ),
+        )),
         title = stringResource(id = R.string.line_chart)
     )
-    LineChartView(dataSet = dataSet)
+    LineChart(dataSet = dataSet)
 }
 ````
 
@@ -174,13 +173,13 @@ private fun AddCustomLineChart() {
         dragActivePointSize = 15f,
         chartViewStyle = ChartViewDemoStyle.custom(width = 200.dp)
     )
-    
+
     val dataSet = ChartDataSet(
-        items = listOf(10f, 100f, 20f, 50f, 150f, 70f, 10f, 20f, 40f),
+        items = ChartDataType.FloatData(listOf(10f, 100f, 20f, 50f, 150f, 70f, 10f, 20f, 40f)),
         title = stringResource(id = R.string.line_chart)
     )
 
-    LineChartView(dataSet = dataSet, style = style)
+    LineChart(dataSet = dataSet, style = style)
 }
 ````
 
@@ -200,10 +199,10 @@ private fun AddCustomLineChart() {
 @Composable
 private fun AddDefaultMultiLineChart() {
     val items = listOf(
-        "Cherry St." to listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f),
-        "Strawberry Mall" to listOf(15261.68f, 17810.34f, 40000.57f, 85000f),
-        "Lime Av." to listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f),
-        "Apple Rd." to listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f)
+        "Cherry St." to ChartDataType.FloatData(listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f)),
+        "Strawberry Mall" to ChartDataType.FloatData(listOf(15261.68f, 17810.34f, 40000.57f, 85000f)),
+        "Lime Av." to ChartDataType.FloatData(listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f)),
+        "Apple Rd." to ChartDataType.FloatData(listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f))
     )
 
     val dataSet = MultiChartDataSet(
@@ -213,10 +212,11 @@ private fun AddDefaultMultiLineChart() {
         title = stringResource(id = R.string.line_chart)
     )
 
-    LineChartView(
+    LineChart(
         dataSet = dataSet, style = MultiLineDemoStyle.default()
     )
 }
+
 `````
 
 
@@ -237,10 +237,10 @@ private fun AddCustomMultiLineChart() {
     )
     
     val items = listOf(
-        "Cherry St." to listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f),
-        "Strawberry Mall" to listOf(15261.68f, 17810.34f, 40000.57f, 85000f),
-        "Lime Av." to listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f),
-        "Apple Rd." to listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f)
+        "Cherry St." to ChartDataType.FloatData(listOf(26000.68f, 28000.34f, 32000.57f, 45000.57f)),
+        "Strawberry Mall" to ChartDataType.FloatData(listOf(15261.68f, 17810.34f, 40000.57f, 85000f)),
+        "Lime Av." to ChartDataType.FloatData(listOf(4000.87f, 5000.58f, 30245.81f, 135000.58f)),
+        "Apple Rd." to ChartDataType.FloatData(listOf(1000.87f, 9000.58f, 16544.81f, 100444.87f))
     )
 
     val dataSet = MultiChartDataSet(
@@ -250,7 +250,7 @@ private fun AddCustomMultiLineChart() {
         title = stringResource(id = R.string.line_chart)
     )
 
-    LineChartView(dataSet = dataSet, style = style)
+    LineChart(dataSet = dataSet, style = style)
 }
 ````
 
@@ -269,9 +269,9 @@ private fun AddCustomMultiLineChart() {
 ```kotlin
 @Composable
 private fun AddDefaultBarChart() {
-    BarChartView(
+    BarChart(
         dataSet = ChartDataSet(
-            items = listOf(100f, 50f, 5f, 60f, -50f, 50f, 60f),
+            items = ChartDataType.FloatData(listOf(100f, 50f, 5f, 60f, -50f, 50f, 60f)),
             title = stringResource(id = R.string.bar_chart)
         )
     )
@@ -291,9 +291,9 @@ private fun AddCustomBarChart() {
         chartViewStyle = ChartViewDemoStyle.custom(width = 200.dp)
     )
 
-    BarChartView(
+    BarChart(
         dataSet = ChartDataSet(
-            items = listOf(100f, 50f, 5f, 60f, 1f, 30f, 50f, 35f, 50f, -100f),
+            items = ChartDataType.FloatData(listOf(100f, 50f, 5f, 60f, 1f, 30f, 50f, 35f, 50f, -100f)),
             title = stringResource(id = R.string.bar_chart)
         ),
         style = style
@@ -317,10 +317,10 @@ private fun AddCustomBarChart() {
 @Composable
 private fun AddDefaultStackedBarChart() {
     val items = listOf(
-        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Lime Av." to listOf(1500.87f, 2765.58f, 33245.81f),
-        "Apple Rd." to listOf(5444.87f, 233.58f, 67544.81f)
+        "Cherry St." to ChartDataType.FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
+        "Strawberry Mall" to ChartDataType.FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
+        "Lime Av." to ChartDataType.FloatData(listOf(1500.87f, 2765.58f, 33245.81f)),
+        "Apple Rd." to ChartDataType.FloatData(listOf(5444.87f, 233.58f, 67544.81f))
     )
 
     val dataSet = MultiChartDataSet(
@@ -330,7 +330,7 @@ private fun AddDefaultStackedBarChart() {
         title = stringResource(id = R.string.bar_stacked_chart)
     )
 
-    StackedBarChartView(dataSet = dataSet)
+    StackedBarChart(dataSet = dataSet)
 }
 ```
 
@@ -349,10 +349,10 @@ private fun AddCustomStackedBarChart() {
     )
     
     val items = listOf(
-        "Cherry St." to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Strawberry Mall" to listOf(8261.68f, 8810.34f, 30000.57f),
-        "Lime Av." to listOf(1500.87f, 2765.58f, 33245.81f),
-        "Apple Rd." to listOf(5444.87f, 233.58f, 67544.81f)
+        "Cherry St." to ChartDataType.FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
+        "Strawberry Mall" to ChartDataType.FloatData(listOf(8261.68f, 8810.34f, 30000.57f)),
+        "Lime Av." to ChartDataType.FloatData(listOf(1500.87f, 2765.58f, 33245.81f)),
+        "Apple Rd." to ChartDataType.FloatData(listOf(5444.87f, 233.58f, 67544.81f))
     )
 
     val dataSet = MultiChartDataSet(
@@ -362,7 +362,7 @@ private fun AddCustomStackedBarChart() {
         title = stringResource(id = R.string.bar_stacked_chart)
     )
 
-    StackedBarChartView(dataSet = dataSet, style = style)
+    StackedBarChart(dataSet = dataSet, style = style)
 }
 ```
 
@@ -373,10 +373,22 @@ private fun AddCustomStackedBarChart() {
 - [Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/bar/BarDemo.kt)
 - [Stacked Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/stackedbar/StackedBarDemo.kt)
 
-# Demo app
-[![Demo app](https://github.com/dautovicharis/Charts/assets/7049715/b48464c9-5886-4f89-b740-e4d24b6be3c7)](https://play.google.com/store/apps/details?id=com.hd.charts.app)
-
 # Contributions
 🌟 Thank you for your time! Before you start working on code, please create a [new issue](https://github.com/dautovicharis/Charts/issues).
 
 [Contributing guidelines](CONTRIBUTING.md)
+
+# Gradlew tasks
+```bash
+# Run tests
+./gradlew chartsTest
+
+# Build, tests, coverage report and sonar analysis
+./gradlew chartsCheck -x jsBrowserTest -x testDebugUnitTest -x testReleaseUnitTest --info
+
+# Builds the JS app and copies necessary files to docs/jsDemo
+./gradlew generateJsDemo
+
+# Generate the documentation
+./gradlew dokkaHtml
+```
