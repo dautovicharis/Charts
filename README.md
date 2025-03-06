@@ -16,7 +16,10 @@ Inspired by: https://github.com/AppPear/ChartView
 </p>
 
 # Documentation
-Public API: https://dautovicharis.github.io/Charts/2.0.0-SNAPSHOT/
+Public API: 
+- https://dautovicharis.github.io/Charts/2.0.0-SNAPSHOT/
+- https://dautovicharis.github.io/Charts/2.0.0-SNAPSHOT-v6/
+
 
 # JS Demo
 https://dautovicharis.github.io/Charts/jsDemo/
