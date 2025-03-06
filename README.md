@@ -351,22 +351,44 @@ private fun AddCustomStackedBarChart() {
 - [Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/bar/BarDemo.kt)
 - [Stacked Bar Chart](https://github.com/dautovicharis/Charts/blob/main/app/src/commonMain/kotlin/io/github/dautovicharis/charts/app/demo/stackedbar/StackedBarDemo.kt)
 
+# Setup multiplatform env
+https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html
+
 # Contributions
 🌟 Thank you for your time! Before you start working on code, please create a [new issue](https://github.com/dautovicharis/Charts/issues).
-
 [Contributing guidelines](CONTRIBUTING.md)
 
 # Gradlew tasks
+#### Run tests
 ```bash
-# Run tests
 ./gradlew chartsTest -x jsBrowserTest -x testDebugUnitTest -x testReleaseUnitTest --info
+```
 
-# Build, tests, coverage report and sonar analysis
+#### Build, tests, coverage report and sonar analysis
+```bash
 ./gradlew chartsCheck -x jsBrowserTest -x testDebugUnitTest -x testReleaseUnitTest --info
+```
 
-# Builds the JS app and copies necessary files to docs/jsDemo
+#### Builds the JS app and copies necessary files to docs/jsDemo
+```bash
 ./gradlew generateJsDemo
+```
 
-# Generate the documentation
+#### Generate the documentation
+```bash
 ./gradlew dokkaHtml
+```
+
+# Demo app local test
+#### Build all platforms
+```bash
+./gradlew clean build
+```
+#### JS
+```bash
+./gradlew app:jsBrowserDevelopmentRun
+```
+#### Jvm
+```bash
+./gradlew app:run
 ```
