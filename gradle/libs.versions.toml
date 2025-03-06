@@ -14,6 +14,8 @@ compose = "1.7.6"
 compose-plugin = "1.7.3"
 # https://plugins.gradle.org/plugin/org.jetbrains.kotlin.multiplatform
 kotlin-multiplatform = "2.1.10"
+# Coroutines version
+kotlinx-coroutines = "1.8.0"
 
 # Documentation: https://kotlin.github.io/dokka/
 dokka = "1.9.20"
@@ -40,6 +42,7 @@ dokka-versions = {group = "org.jetbrains.dokka", name = "versioning-plugin", ver
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-bom" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-bom" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin-bom" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
