@@ -1,3 +1,6 @@
+# When 2.0.0 :)
+In the next few days, I'll release version 2.0.0. I had planned a lot more for 2.0.0, but since the snapshot is the most relevant version to use and changes frequently (which causes breaking changes 😬), it makes sense to release the current progress and continue with new  snapshot for future releases (2.0.1, 2.0.2 etc).
+  
 ![logo-no-background](https://github.com/dautovicharis/Charts/assets/7049715/4150f102-1b05-4fd7-ab01-63480d2e6d50)
 
 
