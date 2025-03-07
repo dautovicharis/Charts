@@ -15,7 +15,7 @@ compose-plugin = "1.7.3"
 # https://plugins.gradle.org/plugin/org.jetbrains.kotlin.multiplatform
 kotlin-multiplatform = "2.1.10"
 # Coroutines version
-kotlinx-coroutines = "1.8.0"
+kotlinx-coroutines = "1.10.1"
 
 # Documentation: https://kotlin.github.io/dokka/
 dokka = "1.9.20"
