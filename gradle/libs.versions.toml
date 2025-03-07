@@ -3,7 +3,7 @@
 java = "17"
 
 # Android gradle plugin version
-agp = "8.8.1"
+agp = "8.9.0"
 
 androidx-navigation = "2.7.0-alpha06"
 androidx-lifecycle = "2.8.0"
@@ -15,7 +15,7 @@ compose-plugin = "1.7.3"
 # https://plugins.gradle.org/plugin/org.jetbrains.kotlin.multiplatform
 kotlin-multiplatform = "2.1.10"
 # Coroutines version
-kotlinx-coroutines = "1.8.0"
+kotlinx-coroutines = "1.10.1"
 
 # Documentation: https://kotlin.github.io/dokka/
 dokka = "1.9.20"
